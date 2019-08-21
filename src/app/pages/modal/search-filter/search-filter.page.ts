@@ -7,6 +7,9 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./search-filter.page.scss'],
 })
 export class SearchFilterPage implements OnInit {
+  organizeby:any;
+  dishtype:any;
+  dishnationality:any;
   public radiusmiles = 1;
   public minmaxprice = {
     upper: 500,
