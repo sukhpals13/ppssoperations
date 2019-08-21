@@ -1,0 +1,51 @@
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h4 no-margin>
+        <ion-text color="light" class="fw700">
+          CheeseBurgerTech Login
+        </ion-text>
+      </h4>
+    </div>
+
+    <!-- Login form -->
+    <form [formGroup]="onLoginForm" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Email
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required') || submitForm">
+        <ion-text color="warning">
+          Required Field
+        </ion-text>
+      </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="(onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')) || submitForm">
+        <ion-text color="warning">
+          Required Field
+        </ion-text>
+      </p>
+      <p>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()"  tappable>
+          <ion-icon name="log-in"></ion-icon>
+          Signin
+        </ion-button>
+      </p>
+    </form>
+
+
+  </div>
+</ion-content>
