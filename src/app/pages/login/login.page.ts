@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,14 @@ export class LoginPage implements OnInit {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginService: LoginService
   ) {  }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
   }
-
+  
   ngOnInit() {
     this.submitForm = false;
     this.onLoginForm = this.formBuilder.group({
@@ -87,25 +89,60 @@ export class LoginPage implements OnInit {
   // }
 
   /*************** CHECK ON LOGIN ****************/
-  async goToHome() {
-    if(this.onLoginForm.get('email').value=="admin"&&this.onLoginForm.get('password').value=="admin"){
-      this.navCtrl.navigateRoot('/home-results');
+  async alertPopup(title,msg){
+    const alert = await this.alertCtrl.create({
+      header: title,
+      message: msg,
+      buttons: [{
+        text: 'Okay',
+        handler: () => {
+          this.submitForm = true;
+        }
+      }]
+    });
+    await alert.present();
+  }
+  goToHome() {
+    console.log(this.onLoginForm);
+    if(this.onLoginForm.status=='VALID'){
+      let obj = {
+        email: this.onLoginForm.get('email').value,
+        password: this.onLoginForm.get('password').value
+      }
+      this.loginService.login(obj)
+      .subscribe(res=>{
+        console.log(res)
+        this.navCtrl.navigateRoot('/home-results');
+      },err=>{
+        console.log(err)
+        this.alertPopup('Incorrect!!!','Incorrect email or password')
+        // this.navCtrl.navigateRoot('/home-results');
+      })
+    }else{
+      this.alertPopup('Required','Email and password are required')
     }
-    else{
-      const alert = await this.alertCtrl.create({
-        header: 'Alert',
-        subHeader: 'Incorrect input',
-        message: 'Email or password is incorrect.',
-        buttons: [{
-          text: 'Okay',
-          handler: () => {
-            this.submitForm = true;
-          }
-        }]
-      });
+    // let obj = {email:'',password:''};
+    // obj.email = this.onLoginForm.get('email').value;
+    // obj.password = this.onLoginForm.get('password').value;
+    // console.log(obj);
+    // if(this.onLoginForm.get('email').value=="admin"&&this.onLoginForm.get('password').value=="admin"){
+    //   this.navCtrl.navigateRoot('/home-results');
+    // }
+    // else{
+    //   const alert = await this.alertCtrl.create({
+    //     header: 'Alert',
+    //     subHeader: 'Incorrect input',
+    //     message: 'Email or password is incorrect.',
+    //     buttons: [{
+    //       text: 'Okay',
+    //       handler: () => {
+    //         this.submitForm = true;
+    //       }
+    //     }]
+    //   });
 
-      await alert.present();
-    }
+    //   await alert.present();
+    // }
 
   }
 

@@ -20,6 +20,8 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+// Services
+import { LoginService } from './services/login/login.service';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
@@ -37,7 +39,8 @@ import { environment } from '../environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
