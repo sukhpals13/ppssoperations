@@ -21,7 +21,7 @@
         </ion-label>
         <ion-input color="secondary" type="email" formControlName="email"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required') || submitForm">
+      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
         <ion-text color="warning">
           Required Field
         </ion-text>
@@ -33,7 +33,7 @@
         </ion-label>
         <ion-input color="secondary" type="password" formControlName="password"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="(onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')) || submitForm">
+      <p ion-text class="text08" *ngIf="(onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required'))">
         <ion-text color="warning">
           Required Field
         </ion-text>

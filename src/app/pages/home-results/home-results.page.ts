@@ -21,7 +21,7 @@ import { NotificationsComponent } from './../../components/notifications/notific
 export class HomeResultsPage {
   searchKey = '';
   yourLocation = '123 Test Street';
-  themeCover = 'assets/img/cheeseburger-cover.png';
+  themeCover = 'assets/img/pittsburgh_logo.png';
 
   constructor(
     public navCtrl: NavController,

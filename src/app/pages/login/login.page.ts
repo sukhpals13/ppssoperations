@@ -121,28 +121,6 @@ export class LoginPage implements OnInit {
     }else{
       this.alertPopup('Required','Email and password are required')
     }
-    // let obj = {email:'',password:''};
-    // obj.email = this.onLoginForm.get('email').value;
-    // obj.password = this.onLoginForm.get('password').value;
-    // console.log(obj);
-    // if(this.onLoginForm.get('email').value=="admin"&&this.onLoginForm.get('password').value=="admin"){
-    //   this.navCtrl.navigateRoot('/home-results');
-    // }
-    // else{
-    //   const alert = await this.alertCtrl.create({
-    //     header: 'Alert',
-    //     subHeader: 'Incorrect input',
-    //     message: 'Email or password is incorrect.',
-    //     buttons: [{
-    //       text: 'Okay',
-    //       handler: () => {
-    //         this.submitForm = true;
-    //       }
-    //     }]
-    //   });
-
-    //   await alert.present();
-    // }
 
   }
 
