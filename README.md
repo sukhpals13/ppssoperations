@@ -75,8 +75,11 @@ $ ionic cordova prepare ios
 $ ionic cordova run ios -l --address=0.0.0.0
 For running on xcode which should be installed in your mac, with a running apple device simulator
 
+```
+___
 
-Backend Configuration for Express
+
+Backend Configuration Express
 ------------
 
 ```
@@ -113,7 +116,6 @@ app.get('/', cors(corsOptions), (req, res, next) => {
 app.listen(3000, () => {
   console.log('CORS-enabled web server listening on port 3000');
 });
-
 
 ```
 ___
