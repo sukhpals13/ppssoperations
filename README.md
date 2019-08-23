@@ -10,8 +10,6 @@ CheeseBurgerTech Test
 * 2 Page modals
 * 2 Components
 
-<br><br><br><br><br><br><br>
-
 ---
 
 Requirements

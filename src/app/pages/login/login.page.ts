@@ -24,6 +24,12 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+    
+    document.querySelectorAll('.list-form ion-item').forEach((val)=>{
+      var style = document.createElement( 'style' )
+      style.innerHTML = '.item-native { background: transparent !important; }'
+      val.shadowRoot.appendChild(style)
+    })
   }
   
   ngOnInit() {
