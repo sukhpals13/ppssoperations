@@ -73,6 +73,8 @@ $ ionic cordova prepare ios
 $ ionic cordova run ios -l --address=0.0.0.0
 For running on xcode which should be installed in your mac, with a running apple device simulator
 
+Refer to "https://ionicframework.com/docs/v3/intro/deploying/" for more details on how to test in apple device
+
 ```
 ___
 

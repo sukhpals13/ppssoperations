@@ -121,7 +121,7 @@ export class LoginPage implements OnInit {
         this.navCtrl.navigateRoot('/home-results');
       },err=>{
         console.log(err)
-        this.alertPopup('Incorrect!!!','Incorrect email or password')
+        this.alertPopup('500!!!','Internal Server error!!')
         // this.navCtrl.navigateRoot('/home-results');
       })
     }else{
