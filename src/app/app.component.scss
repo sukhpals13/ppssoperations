@@ -1,6 +1,15 @@
 :host {
     ion-content {
         --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
+        .sub-item {
+            ion-icon {
+                padding-left: 20px;
+                font-size: small;
+            }
+            ion-label {
+                font-size: small;
+            }
+        }
     }
 
     ion-list {

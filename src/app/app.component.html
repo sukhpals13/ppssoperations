@@ -43,14 +43,36 @@
             <ion-label>Menu</ion-label>
           </ion-list-header>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerLink]="[p.url]" color="primary">
-              <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
-              <ion-label>
-                {{p.title}}
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+          <div auto-hide="false" *ngFor="let p of appPages">
+            <ion-menu-toggle *ngIf="p.url; else submenu" auto-hide="false">
+              <ion-item [routerLink]="[p.url]" color="primary">
+                <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ng-template #submenu>
+              <ion-item color="primary" (click)="p.open = !p.open">
+                <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+                <!-- <ion-icon slot="end" name="arrow-forward" *ngIf="!p.open" color="light"></ion-icon>
+                <ion-icon slot="end" name="arrow-down" *ngIf="p.open" color="light"></ion-icon> -->
+              </ion-item>
+              <ion-list *ngIf="p.open">
+                <ion-menu-toggle>
+                  <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="[sub.url]" color="primary">
+                    <ion-icon [name]="sub.icon" slot="start" color="light"></ion-icon>
+                    <ion-label>
+                      {{ sub.title }}
+                    </ion-label>
+                  </ion-item>
+                </ion-menu-toggle>
+              </ion-list>
+            </ng-template>
+          </div>
         </ion-list>
       </ion-content>
     </ion-menu>

@@ -13,6 +13,8 @@ import { ImagePage } from './../modal/image/image.page';
 // Call notifications test by Popover and Custom Component.
 import { NotificationsComponent } from './../../components/notifications/notifications.component';
 
+// import { GetDetailsService } from '../../services/getDetails/get-details.service';
+
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
@@ -29,7 +31,8 @@ export class HomeResultsPage {
     public popoverCtrl: PopoverController,
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    // private getDetails: GetDetailsService
   ) {
 
   }
@@ -37,6 +40,15 @@ export class HomeResultsPage {
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
+
+  // ionViewDidEnter() {
+  //   this.getDetails.getListNeedingPicked()
+  //   .subscribe(res=>{
+  //     console.log(res);
+  //   },err=>{
+  //     console.log(err);
+  //   })
+  // }
 
   settings() {
     this.navCtrl.navigateForward('settings');

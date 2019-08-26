@@ -23,6 +23,10 @@ import { environment } from '../environments/environment';
 // Services
 import { LoginService } from './services/login/login.service';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Intercept } from './interceptors/interceptors';
+
+
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
@@ -40,7 +44,8 @@ import { LoginService } from './services/login/login.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    LoginService
+    LoginService,
+    { provide: HTTP_INTERCEPTORS, useClass: Intercept, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Pages } from './interfaces/pages';
+
+import { LoginService } from './services/login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,9 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    private loginService: LoginService
   ) {
     this.appPages = [
       {
@@ -34,13 +38,27 @@ export class AppComponent {
         direct: 'forward',
         icon: 'information-circle-outline'
       },
-
+      {
+        title: 'Picking',
+        // url: '/picking',
+        direct: 'forward',
+        icon: 'briefcase',
+        open: false,
+        children: [
+          {
+            title: 'Orders to Pick',
+            url: '/orders-to-pick',
+            direct: 'forward',
+            icon: 'walk',
+          }
+        ]
+      },
       {
         title: 'App Settings',
         url: '/settings',
         direct: 'forward',
         icon: 'cog'
-      }
+      },
     ];
 
     this.initializeApp();
@@ -58,6 +76,25 @@ export class AppComponent {
   }
 
   logout() {
-    this.navCtrl.navigateRoot('/');
+    this.loginService.logout()
+    .subscribe(res=>{
+      this.alertPopup('Success', 'Logged out successfully.')
+      this.navCtrl.navigateRoot('/');
+    },err=>{
+      this.alertPopup('Error', 'Error logging out!!!')
+    })
+  }
+  async alertPopup(title,msg){
+    const alert = await this.alertCtrl.create({
+      header: title,
+      message: msg,
+      buttons: [{
+        text: 'Okay',
+        // handler: () => {
+        //   this.submitForm = true;
+        // }
+      }]
+    });
+    await alert.present();
   }
 }

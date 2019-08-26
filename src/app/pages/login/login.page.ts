@@ -24,7 +24,11 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
-    
+    if(localStorage.getItem('email')){
+      this.onLoginForm.controls['email'].setValue(localStorage.getItem('email'))
+      this.onLoginForm.controls['password'].setValue(localStorage.getItem('password'))
+      this.onLoginForm.controls['rememberMe'].setValue(Boolean(localStorage.getItem('rememberMe')))
+    }
     document.querySelectorAll('.list-form ion-item').forEach((val)=>{
       var style = document.createElement( 'style' )
       style.innerHTML = '.item-native { background: transparent !important; }'
@@ -40,7 +44,8 @@ export class LoginPage implements OnInit {
       ])],
       'password': [null, Validators.compose([
         Validators.required
-      ])]
+      ])],
+      'rememberMe': [null,null]
     });
   }
   // NO NEED FOR THESE FUNCTIONS FOR NOW
@@ -118,6 +123,16 @@ export class LoginPage implements OnInit {
       this.loginService.login(obj)
       .subscribe(res=>{
         console.log(res)
+        console.log(this.onLoginForm.get('rememberMe').value)
+        if(this.onLoginForm.get('rememberMe').value){
+          localStorage.setItem('email',obj.email);
+          localStorage.setItem('password',obj.password);
+          localStorage.setItem('rememberMe',this.onLoginForm.get('rememberMe').value);
+        }else{
+          localStorage.removeItem('email');
+          localStorage.removeItem('password');
+          localStorage.removeItem('rememberMe');
+        }
         this.navCtrl.navigateRoot('/home-results');
       },err=>{
         console.log(err)
