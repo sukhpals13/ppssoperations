@@ -20,3 +20,8 @@ export interface Order {
     orderStatus: string;
     orderSubstatus: string;
 }
+
+export interface Response {
+    status: object;
+    orders: Array<Order>;
+}
