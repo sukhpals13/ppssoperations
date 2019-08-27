@@ -10,7 +10,7 @@ import { LoginService } from '../../services/login/login.service';
 })
 export class LoginPage implements OnInit {
   public onLoginForm: FormGroup;
-  public submitForm: boolean;
+  public loginSubmit: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -23,7 +23,10 @@ export class LoginPage implements OnInit {
   ) {  }
 
   ionViewWillEnter() {
+    this.loginSubmit = false;
+    console.log(this.loginSubmit);
     this.menuCtrl.enable(false);
+    // Check if the localstorage value of the users are saved for auto save
     if(localStorage.getItem('email')){
       this.onLoginForm.controls['email'].setValue(localStorage.getItem('email'))
       this.onLoginForm.controls['password'].setValue(localStorage.getItem('password'))
@@ -37,7 +40,6 @@ export class LoginPage implements OnInit {
   }
   
   ngOnInit() {
-    this.submitForm = false;
     this.onLoginForm = this.formBuilder.group({
       'email': [null, Validators.compose([
         Validators.required
@@ -105,25 +107,27 @@ export class LoginPage implements OnInit {
       header: title,
       message: msg,
       buttons: [{
-        text: 'Okay',
-        handler: () => {
-          this.submitForm = true;
-        }
+        text: 'Okay'
       }]
     });
     await alert.present();
   }
   goToHome() {
-    console.log(this.onLoginForm);
+
     if(this.onLoginForm.status=='VALID'){
       let obj = {
         email: this.onLoginForm.get('email').value,
         password: this.onLoginForm.get('password').value
       }
+      // For the loader icon
+      this.loginSubmit = true;
+
+      // Login service called
       this.loginService.login(obj)
       .subscribe(res=>{
-        console.log(res)
-        console.log(this.onLoginForm.get('rememberMe').value)
+        this.loginSubmit = false;
+        
+        // For auto save if the user has clicked on remember me
         if(this.onLoginForm.get('rememberMe').value){
           localStorage.setItem('email',obj.email);
           localStorage.setItem('password',obj.password);
@@ -136,8 +140,8 @@ export class LoginPage implements OnInit {
         this.navCtrl.navigateRoot('/home-results');
       },err=>{
         console.log(err)
-        this.alertPopup('500!!!','Internal Server error!!')
-        // this.navCtrl.navigateRoot('/home-results');
+        this.loginSubmit = false;
+        this.alertPopup('500!!!',JSON.stringify(err))
       })
     }else{
       this.alertPopup('Required','Email and password are required')

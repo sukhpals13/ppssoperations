@@ -52,17 +52,17 @@
                 </ion-label>
               </ion-item>
             </ion-menu-toggle>
+            <!-- For Submenu -->
             <ng-template #submenu>
-              <ion-item color="primary" (click)="p.open = !p.open">
+              <ion-item color="primary" (click)="openCollapseSub(p)">
                 <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
                 <ion-label>
                   {{p.title}}
                 </ion-label>
-                <!-- <ion-icon slot="end" name="arrow-forward" *ngIf="!p.open" color="light"></ion-icon>
-                <ion-icon slot="end" name="arrow-down" *ngIf="p.open" color="light"></ion-icon> -->
               </ion-item>
+              <!-- Submenu -->
               <ion-list *ngIf="p.open">
-                <ion-menu-toggle>
+                <ion-menu-toggle auto-hide="false">
                   <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="[sub.url]" color="primary">
                     <ion-icon [name]="sub.icon" slot="start" color="light"></ion-icon>
                     <ion-label>

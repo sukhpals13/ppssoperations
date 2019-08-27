@@ -9,12 +9,13 @@ import { Injectable } from '@angular/core';
 export class LoginService {
 
   constructor(private http: HttpClient) { }
+  
+  // Login
   login(user) {
-    // var headers = new Headers();
-    //   headers.append('Content-Type', 'application/json');
-    //   let options = new RequestOptions({ headers: headers, withCredentials: true });
     return this.http.post('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth',user)
   }
+
+  // Logout
   logout() {
     return this.http.post('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/logout',{})
   }

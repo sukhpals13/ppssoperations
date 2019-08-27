@@ -23,9 +23,9 @@ import { environment } from '../environments/environment';
 // Services
 import { LoginService } from './services/login/login.service';
 
+// Interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Intercept } from './interceptors/interceptors';
-
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
@@ -37,7 +37,7 @@ import { Intercept } from './interceptors/interceptors';
     HttpClientModule,
     ImagePageModule,
     SearchFilterPageModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [NotificationsComponent],
   providers: [

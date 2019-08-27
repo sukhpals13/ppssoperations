@@ -39,9 +39,15 @@
         </ion-text>
       </p>
       <p>
-        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()"  tappable>
-          <ion-icon name="log-in"></ion-icon>
-          Signin
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()"  tappable [disabled]='loginSubmit'>
+          <!-- Loader icon -->
+          <div *ngIf="loginSubmit;else submitYourLogin">
+            <ion-spinner></ion-spinner>
+          </div>
+          <ng-template #submitYourLogin>
+            <ion-icon name="log-in"></ion-icon>
+            <span>Signin</span>
+          </ng-template>
         </ion-button>
       </p>
       <ion-item>

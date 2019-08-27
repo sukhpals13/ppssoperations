@@ -75,6 +75,7 @@ export class AppComponent {
     this.navCtrl.navigateForward('edit-profile');
   }
 
+  // Logout Functionality
   logout() {
     this.loginService.logout()
     .subscribe(res=>{
@@ -84,6 +85,15 @@ export class AppComponent {
       this.alertPopup('Error', 'Error logging out!!!')
     })
   }
+
+  // For submenu dropdown
+  openCollapseSub(p) {
+    console.log(p)
+    p.open = !p.open;
+    console.log(this.appPages)
+  }
+
+  // For alerts
   async alertPopup(title,msg){
     const alert = await this.alertCtrl.create({
       header: title,
