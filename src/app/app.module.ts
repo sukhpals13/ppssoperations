@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -38,6 +40,7 @@ import { Intercept } from './interceptors/interceptors';
     ImagePageModule,
     SearchFilterPageModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FormsModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [
@@ -45,7 +48,8 @@ import { Intercept } from './interceptors/interceptors';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LoginService,
-    { provide: HTTP_INTERCEPTORS, useClass: Intercept, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: Intercept, multi: true },
+    BarcodeScanner,
   ],
   bootstrap: [AppComponent]
 })

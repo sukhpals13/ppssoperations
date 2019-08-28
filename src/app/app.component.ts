@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform, NavController, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Pages } from './interfaces/pages';
 
 import { LoginService } from './services/login/login.service';
+import { GetSetService } from './services/getSet/get-set.service';
+import { User } from './interfaces/user'
 
 @Component({
   selector: 'app-root',
@@ -16,14 +18,17 @@ import { LoginService } from './services/login/login.service';
 export class AppComponent {
 
   public appPages: Array<Pages>;
+  public user: User;
+  public loggedIn: boolean;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private loginService: LoginService,
+    private getSet: GetSetService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
-    private loginService: LoginService
   ) {
     this.appPages = [
       {
@@ -37,6 +42,12 @@ export class AppComponent {
         url: '/about',
         direct: 'forward',
         icon: 'information-circle-outline'
+      },
+      {
+        title: 'Barcode Scanner',
+        url: '/bar-code-scanner',
+        direct: 'forward',
+        icon: 'barcode'
       },
       {
         title: 'Picking',
@@ -64,6 +75,11 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  ngOnInit(){
+    this.loggedIn = false;
+    this.checkSession();
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -79,6 +95,7 @@ export class AppComponent {
   logout() {
     this.loginService.logout()
     .subscribe(res=>{
+      this.getSet.removeItem('user');
       this.alertPopup('Success', 'Logged out successfully.')
       this.navCtrl.navigateRoot('/');
     },err=>{
@@ -100,11 +117,37 @@ export class AppComponent {
       message: msg,
       buttons: [{
         text: 'Okay',
-        // handler: () => {
-        //   this.submitForm = true;
-        // }
       }]
     });
     await alert.present();
+  }
+
+  // Check if there's already a session of the user
+  checkSession() {
+    if(this.getSet.getItem('user')){
+      this.user = this.getSet.getUser();
+      this.loginService.sessionCheck()
+      .subscribe(res=>{
+        this.loggedIn = true;
+        this.getSet.setItem('user',res.user);
+        this.navCtrl.navigateRoot('/home-results');
+      },err=>{
+        this.loggedIn = false;
+        this.user = this.getSet.unsetUser();
+        this.getSet.removeItem('user');
+        this.navCtrl.navigateRoot('/');
+      })
+    }else{
+      this.loggedIn = false;
+      this.user = this.getSet.unsetUser();
+      this.navCtrl.navigateRoot('/');
+    }
+  }
+  componentAdded(e){
+    if(this.getSet.getUser()){
+      this.user = this.getSet.getUser()
+    }else{
+      this.user = this.getSet.unsetUser()
+    }
   }
 }

@@ -8,7 +8,7 @@ export interface Order {
     orderSubstatus: string;
 }
 
-export interface Response {
+export interface orderResponse {
     status: object;
     orders: Array<Order>;
 }

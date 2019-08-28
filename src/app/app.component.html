@@ -10,11 +10,14 @@
             </ion-avatar>
             <ion-label>
               <ion-text color="medium">
-                <h1><strong>João Firmino</strong></h1>
+                <h1><strong>{{user.firstName}} {{user.lastName}}</strong></h1>
               </ion-text>
               <ion-text color="secondary">
-                <h3>
+                <!-- <h3>
                   São Paulo, Brazil
+                </h3> -->
+                <h3>
+                  {{user.email}}
                 </h3>
               </ion-text>
               <ion-menu-toggle class="mto" auto-hide="false">
@@ -54,7 +57,7 @@
             </ion-menu-toggle>
             <!-- For Submenu -->
             <ng-template #submenu>
-              <ion-item color="primary" (click)="openCollapseSub(p)">
+              <ion-item *ngIf="user.roles.includes('ORDER_PICKER')" color="primary" (click)="openCollapseSub(p)">
                 <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
                 <ion-label>
                   {{p.title}}
@@ -76,6 +79,6 @@
         </ion-list>
       </ion-content>
     </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet main (activate)="componentAdded($event)"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

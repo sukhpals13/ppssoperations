@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { LoginService } from '../../services/login/login.service';
+import { GetSetService } from '../../services/getSet/get-set.service';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +20,13 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private getSet: GetSetService
   ) {  }
 
   ionViewWillEnter() {
     this.loginSubmit = false;
-    console.log(this.loginSubmit);
+    // console.log(this.loginSubmit);
     this.menuCtrl.enable(false);
     // Check if the localstorage value of the users are saved for auto save
     if(localStorage.getItem('email')){
@@ -126,16 +128,17 @@ export class LoginPage implements OnInit {
       this.loginService.login(obj)
       .subscribe(res=>{
         this.loginSubmit = false;
-        
+        console.log(res)
+        this.getSet.setItem('user',res.user);
         // For auto save if the user has clicked on remember me
         if(this.onLoginForm.get('rememberMe').value){
-          localStorage.setItem('email',obj.email);
-          localStorage.setItem('password',obj.password);
-          localStorage.setItem('rememberMe',this.onLoginForm.get('rememberMe').value);
+          this.getSet.setItem('email',obj.email);
+          this.getSet.setItem('password',obj.password);
+          this.getSet.setItem('rememberMe',this.onLoginForm.get('rememberMe').value);
         }else{
-          localStorage.removeItem('email');
-          localStorage.removeItem('password');
-          localStorage.removeItem('rememberMe');
+          this.getSet.removeItem('email');
+          this.getSet.removeItem('password');
+          this.getSet.removeItem('rememberMe');
         }
         this.navCtrl.navigateRoot('/home-results');
       },err=>{
