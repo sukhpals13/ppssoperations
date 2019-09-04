@@ -1,0 +1,169 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Order Information</ion-card-subtitle>
+      <!-- <ion-card-title>Order Information</ion-card-title> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              Organization
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="order.orgName"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Order #
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="order.orderNumber"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Order Date
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="order.date"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Order Type
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="order.orderType"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Status
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="order.orderStatus"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Customer Information</ion-card-subtitle>
+      <!-- <ion-card-title>Customer Information</ion-card-title> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              Name
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="order.userName"></app-text-shell>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              Cell Number for Order Updates
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="order.mobilePhoneNumber"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              Rank(s)
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.ranks"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              Assingment(s)
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.assignments"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col size="12">
+                Shipping Address
+              </ion-col>
+              <ion-col size="12">
+                <app-text-shell animation="bouncing" lines="1" [data]="order.address"></app-text-shell>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Product Details</ion-card-subtitle>
+      <!-- <ion-card-title>Order Information</ion-card-title> -->
+    </ion-card-header>
+    <ion-card-content *ngFor="let product of products">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <app-image-shell animation="spinner" [src]="'https://integration.ebusiness.pittsburghpublicsafety.com'+product.mainPictureURI" class="details-icon"></app-image-shell>
+          </ion-col>
+          <ion-col size="8" style="position: relative;">
+            <h2 style="font-weight: 600; font-size: 15px;"><app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell></h2>
+            <!-- <ion-row>
+              <ion-col size="4" *ngFor='let v of product.variants'>
+                <app-text-shell [data]="v.name"></app-text-shell>
+                <app-text-shell [data]="v.value"></app-text-shell>
+              </ion-col>
+            </ion-row> -->
+            <div style="justify-content: space-between; align-items: center;">
+              <h1><app-text-shell animation="bouncing" lines="1" [data]="product.extendedPrice/100 | currency" color="primary"></app-text-shell></h1>
+              <span>
+                <a *ngIf="product.extendedPrice">View More -></a>
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  
+    <!-- <ion-card-content *ngFor="let product of order.products">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <img src="{{'https://integration.ebusiness.pittsburghpublicsafety.com'+product.mainPictureURI}}" style="width: 100%"/>
+          </ion-col>
+          <ion-col size="8">
+            <div>
+              {{product.productTitle}}
+            </div>
+            <div>
+                {{product.extendedPrice|currency}}
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content> -->
+  </ion-card>
+
+</ion-content>

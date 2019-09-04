@@ -1,0 +1,10 @@
+ion-card{
+    ion-card-content{
+        ion-row{
+            ion-col:nth-child(2){
+                color: #333;
+                font-weight: 600;
+            }
+        }
+    }
+}

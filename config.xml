@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionictheme.cheeseburger" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicthemes.pittsburghpublicsafetysupply" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>PPSS</name>
-    <description>Pittsburgh Public Safety Supply</description>
-    <author email="firminoata@gmail.com" href="https://ionictheme.com">Ionic Theme</author>
+    <description>The most advanced and complete Mobile and PWA starter app template</description>
+    <author email="hi@ionicthemes.com" href="https://ionicthemes.com">IonicThemes</author>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="*" subdomains="true" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -75,17 +75,13 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
-        <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-            <string>To scan barcodes</string>
-        </edit-config>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <plugin name="phonegap-plugin-barcodescanner" />
-    <engine name="android" spec="~7.0.0" />
-    <allow-navigation href="http://localhost:8100" sessionid="6e31689e" />
+    <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0" />
+    <engine name="ios" spec="5.0.1" />
+    <engine name="android" spec="8.0.0" />
 </widget>

@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Orders To Pick
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <!-- <p class="user-description">
+        <app-text-shell animation="bouncing" lines="4" [data]="order"></app-text-shell>
+      </p> -->
+    <!-- Blank orders with silver lines at the start of the page -->
+    <!-- <ng-container *ngIf='!orders.length;else pickedOrders'> -->
+      <ion-card *ngFor="let order of orders.orders" (click)="openActionSheet(order)">
+        <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <h6>Order #</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="order.orderNumber"></app-text-shell>
+              </ion-col>
+              <ion-col size="4">
+                <h6>Source</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="order.orderSource"></app-text-shell>
+              </ion-col>
+              <ion-col size="4">
+                <h6>Organization</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="order.orgName"></app-text-shell>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4">
+                <h6>Age</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="order.orderAge"></app-text-shell>
+              </ion-col>
+              <ion-col size="4">
+                <h6>Status</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="order.orderStatus"></app-text-shell>
+              </ion-col>
+              <ion-col size="4">
+                <h6>Sub Status</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="order.orderSubstatus"></app-text-shell>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-card>
+    <!-- </ng-container> -->
+    <!-- <ng-template #pickedOrders>
+      <ion-card *ngFor="let order of orders" (click)="openActionSheet(order)">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <h5>Order #</h5>
+              <div>{{order.orderNumber}}</div>
+            </ion-col>
+            <ion-col size="4">
+              <h5>Source</h5>
+              <div>{{order.orderSource}}</div>
+            </ion-col>
+            <ion-col size="4">
+              <h5>Organization</h5>
+              <div>{{order.orgName}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <h5>Age</h5>
+              <div>{{order.orderAge}}</div>
+            </ion-col>
+            <ion-col size="4">
+              <h5>Status</h5>
+              <div>{{order.orderStatus}}</div>
+            </ion-col>
+            <ion-col size="4">
+              <h5>Sub Status</h5>
+              <div>{{order.orderSubstatus}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ng-template> -->
+    
+  </ion-content>
+  
