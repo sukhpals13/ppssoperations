@@ -89,10 +89,15 @@ export class Products extends ShellModel {
     customizationPriceDetails?: object;
     customizationPrice?: number;
     variants?: Array<VariantModel>;
-    customizations?: string;
+    customizations?: Array<CustomModel>;
 }
 
 export class VariantModel extends ShellModel {
+    name: string;
+    value: string;
+}
+
+export class CustomModel extends ShellModel {
     name: string;
     value: string;
 }

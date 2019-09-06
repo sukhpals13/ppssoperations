@@ -15,6 +15,7 @@ export class OrderDetailsPage implements OnInit {
 
   order: OrderModel;
   products: Array<Products>;
+  step: number;
 
   // userInfo : Object;
 
@@ -73,6 +74,7 @@ export class OrderDetailsPage implements OnInit {
           isShell: true
         },
       ],
+      customizations:[],
       isShell: true
       },
       {
@@ -88,34 +90,21 @@ export class OrderDetailsPage implements OnInit {
             isShell: true
           },
         ],
+        customizations:[],
         isShell: true
         },
     ]
-    // this.orderInfo = {};
-    // this.orderInfoArray = [
-    //   'orderNumber',
-    //   'orderStatus',
-    //   'orgName',
-    //   'orderType',
-    //   'created'
-    // ];
-    // this.orderInfoNames = [
-    //   'Order Number',
-    //   'Status',
-    //   'Organization',
-    //   'Order Type',
-    //   'Order Date'
-    // ];
-    // this.order = {
-    //   userInfo:{},
-    //   shipping:{}
-    // }
   }
 
   ionViewDidEnter() {
     this.getOrders();
+    this.step = 0;
   }
   
+  setStep(index: number) {
+    this.step = index;
+  }
+
   // Get all the order that need to be picked or picking
   async getOrders(){
     this.getDetailsService.getAllOrders()
@@ -135,13 +124,23 @@ export class OrderDetailsPage implements OnInit {
         obj.variants = [];
         obj.isShell = true;
         let variantsName = [],
-        variantsVal = [];
+        variantsVal = [],
+        customNames =[],
+        customVals = [];
         for(let v in obj){
           if(v.includes('has')){
-            console.log(v,obj[v],'custom');
+              let o = {
+                name : v,
+                nameToShow: v.split(/(?=[A-Z])/).reverse().slice(0,v.split(/(?=[A-Z])/).length-1).reverse().join(' '),
+                value: obj[v]
+              }
+              customNames.push(o);
+            // }
+          }
+          if(v.includes('DisplayText')){
+            customVals.push(obj[v])
           }
           if(v.includes('variant')){
-            console.log(v,obj[v],'variant');
             if(v.includes('Name')){
               variantsName[parseInt(v.slice(7,8))-1] = obj[v];
             }
@@ -157,13 +156,18 @@ export class OrderDetailsPage implements OnInit {
             isShell: true
           };
         })
-        console.log(variantsName,variantsVal);
-        console.log(obj.variants);
+        let finalVal = customNames.map((v,i)=>{
+          let obj = {name:v.nameToShow,value:customVals[i],isShell:v.value}
+          return obj
+        }).filter(v=>{
+          if(v.isShell)
+            return v
+        })
+        obj.customizations = finalVal;
         return obj;
       })
       this.order = order;
       this.products = products;
-      console.log(this.products)
     },err=>{
       console.log(err);
     })

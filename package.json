@@ -16,9 +16,12 @@
     "lint": "ng lint"
   },
   "dependencies": {
+    "@angular/animations": "^8.2.5",
+    "@angular/cdk": "^8.1.4",
     "@angular/common": "8.2.1",
     "@angular/core": "8.2.1",
     "@angular/forms": "8.2.1",
+    "@angular/material": "^8.1.4",
     "@angular/platform-browser": "8.2.1",
     "@angular/platform-browser-dynamic": "8.2.1",
     "@angular/pwa": "~0.802.1",

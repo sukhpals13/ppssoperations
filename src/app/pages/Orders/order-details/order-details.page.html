@@ -12,7 +12,7 @@
   <ion-card>
     <ion-card-header color="primary">
       <ion-card-subtitle>Order Information</ion-card-subtitle>
-      <!-- <ion-card-title>Order Information</ion-card-title> -->
+      
     </ion-card-header>
   
     <ion-card-content>
@@ -66,7 +66,7 @@
   <ion-card>
     <ion-card-header color="primary">
       <ion-card-subtitle>Customer Information</ion-card-subtitle>
-      <!-- <ion-card-title>Customer Information</ion-card-title> -->
+      
     </ion-card-header>
   
     <ion-card-content>
@@ -118,52 +118,50 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header color="primary">
-      <ion-card-subtitle>Product Details</ion-card-subtitle>
-      <!-- <ion-card-title>Order Information</ion-card-title> -->
-    </ion-card-header>
-    <ion-card-content *ngFor="let product of products">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4">
-            <app-image-shell animation="spinner" [src]="'https://integration.ebusiness.pittsburghpublicsafety.com'+product.mainPictureURI" class="details-icon"></app-image-shell>
-          </ion-col>
-          <ion-col size="8" style="position: relative;">
-            <h2 style="font-weight: 600; font-size: 15px;"><app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell></h2>
-            <!-- <ion-row>
-              <ion-col size="4" *ngFor='let v of product.variants'>
-                <app-text-shell [data]="v.name"></app-text-shell>
-                <app-text-shell [data]="v.value"></app-text-shell>
-              </ion-col>
-            </ion-row> -->
-            <div style="justify-content: space-between; align-items: center;">
-              <h1><app-text-shell animation="bouncing" lines="1" [data]="product.extendedPrice/100 | currency" color="primary"></app-text-shell></h1>
-              <span>
-                <a *ngIf="product.extendedPrice">View More -></a>
-              </span>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  
-    <!-- <ion-card-content *ngFor="let product of order.products">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4">
-            <img src="{{'https://integration.ebusiness.pittsburghpublicsafety.com'+product.mainPictureURI}}" style="width: 100%"/>
-          </ion-col>
-          <ion-col size="8">
-            <div>
-              {{product.productTitle}}
-            </div>
-            <div>
-                {{product.extendedPrice|currency}}
-              </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content> -->
-  </ion-card>
+      <ion-card-header color="primary">
+        <ion-card-subtitle>Product Details</ion-card-subtitle>
+      </ion-card-header>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display" (opened)="setStep(i)" [expanded]="step === i">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell>
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+            <img mat-card-image [src]="'https://integration.ebusiness.pittsburghpublicsafety.com'+product.mainPictureURI" [alt]="product.title">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4" *ngFor="let v of product.variants">
+                      <h5>{{v.name}}</h5>
+                      <p>{{v.value}}</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col size="12">
+                        <h3 *ngIf="product.customizations.length">Customizations</h3>
+                        <div *ngFor="let customization of product.customizations">
+                          <h6>{{customization.name}}</h6>
+                          <div>{{customization.value}}</div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="8">
+                      Items total: {{product.customersProductPrice/100 | currency}} X{{product.quantity}}
+                    </ion-col>
+                    <ion-col size="4" style="text-align: right;">
+                      {{product.extendedPrice/100 | currency}}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ion-card>
 
 </ion-content>

@@ -23,6 +23,8 @@ import { Intercept } from './interceptors/interceptors';
 import { AuthService } from './services/auth/auth.service';
 import { GetDetailsService } from './services/getDetails/get-details.service';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,8 +34,9 @@ import { GetDetailsService } from './services/getDetails/get-details.service';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ComponentsModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     StatusBar,
