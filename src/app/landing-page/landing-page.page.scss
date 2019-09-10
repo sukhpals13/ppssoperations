@@ -1,0 +1,17 @@
+ion-content{
+    position: relative;
+    .landing-page-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%,-70%);
+        padding: 10px;
+        text-align: center;
+        ion-button {
+            width: 100%;
+            max-width: 600px;
+        }
+    }
+
+}

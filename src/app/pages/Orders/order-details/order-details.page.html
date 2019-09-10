@@ -122,7 +122,7 @@
         <ion-card-subtitle>Product Details</ion-card-subtitle>
       </ion-card-header>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display" (opened)="setStep(i)" [expanded]="step === i">
+        <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display">
           <mat-expansion-panel-header>
             <mat-panel-title>
                 <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell>

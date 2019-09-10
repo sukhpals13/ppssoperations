@@ -24,6 +24,8 @@ import { AuthService } from './services/auth/auth.service';
 import { GetDetailsService } from './services/getDetails/get-details.service';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AuthModule } from './auth/auth.module';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     ComponentsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    AuthModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,

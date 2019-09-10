@@ -98,12 +98,12 @@ export class OrderDetailsPage implements OnInit {
 
   ionViewDidEnter() {
     this.getOrders();
-    this.step = 0;
+    // this.step = 0;
   }
   
-  setStep(index: number) {
-    this.step = index;
-  }
+  // setStep(index: number) {
+  //   this.step = index;
+  // }
 
   // Get all the order that need to be picked or picking
   async getOrders(){

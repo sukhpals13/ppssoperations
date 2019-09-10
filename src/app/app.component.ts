@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Events, MenuController, Platform, AlertController } from '@ionic/angular';
-import { AuthService } from './services/auth/auth.service';
+// import { AuthService } from './services/auth/auth.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from './auth/auth.service';
+import { IUserInfo } from './auth/user-info.model';
+import { AuthActions, IAuthAction } from 'ionic-appauth';
+import { TokenResponse } from '@openid/appauth';
+
+
 
 @Component({
   selector: 'app-root',
@@ -89,20 +95,12 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.auth.sessionCheckedOn('check login')
+    // this.auth.sessionCheckedOn('check login')
+    
   }
 
   logout() {
-    this.auth.logout()
-      .subscribe(res => {
-        console.log(res);
-        this.alertPopup('Logged Out', 'Logged out successfully!!!');
-        localStorage.removeItem('user')
-        this.router.navigate(['auth/login']);
-      }, err => {
-        console.log(err);
-        this.alertPopup('Cannot logout', 'Error logging out!!!');
-      })
+    this.auth.signOut();
   }
 
   async alertPopup(title, msg) {
@@ -118,7 +116,8 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(true);
+
       this.splashScreen.hide();
     });
   }
