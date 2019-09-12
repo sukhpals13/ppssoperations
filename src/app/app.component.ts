@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Events, MenuController, Platform, AlertController } from '@ionic/angular';
-// import { AuthService } from './services/auth/auth.service';
+import { AuthService } from './services/auth/auth.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthService } from './auth/auth.service';
-import { IUserInfo } from './auth/user-info.model';
-import { AuthActions, IAuthAction } from 'ionic-appauth';
-import { TokenResponse } from '@openid/appauth';
+// import { AuthService } from './auth/auth.service';
+// import { IUserInfo } from './auth/user-info.model';
+// import { AuthActions, IAuthAction } from 'ionic-appauth';
+// import { TokenResponse } from '@openid/appauth';
 
 
 
@@ -96,11 +96,21 @@ export class AppComponent {
 
   ngOnInit(){
     // this.auth.sessionCheckedOn('check login')
-    
+    let token = localStorage.getItem('token');
+    if(token){
+      this.router.navigate(['/orders/view-orders']);
+    }else{
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   logout() {
-    this.auth.signOut();
+    this.auth.logout().subscribe(res=>{
+      this.alertPopup('Success','Successefully Logged out')
+      this.router.navigate(['/auth/login']);
+    },err=>{
+      this.alertPopup('Error',JSON.stringify(err))
+    });
   }
 
   async alertPopup(title, msg) {

@@ -82,7 +82,9 @@ export class LoginPage implements OnInit {
       }else{
         localStorage.removeItem('remUser');
       }
-      this.router.navigate(['app/categories']);
+      localStorage.setItem('token',res.user.accessToken);
+      this.alertPopup("Success","Logged in successfully!!!")
+      this.router.navigate(['/orders/view-orders']);
     },err=>{
       this.alertPopup('Error logging in!!!',JSON.stringify(err))
     })

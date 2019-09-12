@@ -4,6 +4,7 @@ export interface User {
     lastName: string;
     userType: string;
     roles: Array<string>;
+    accessToken: string;
 }
 
 export interface userResposne {

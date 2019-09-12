@@ -42,7 +42,8 @@ export class LandingPagePage implements OnInit {
   }
 
   signIn() {
-    this.authService.signIn().catch(error => console.error(`Sign in error: ${error}`));
+    // this.authService.signIn().catch(error => console.error(`Sign in error: ${error}`));
+    this.navCtrl.navigateForward('/auth/login');
   }
 
   public async getUserInfo(): Promise<void> {

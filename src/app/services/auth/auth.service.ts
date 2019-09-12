@@ -24,28 +24,28 @@ export class AuthService {
   }
 
   // Session Check
-  sessionCheck() {
-    return this.http.get<userResposne>('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth')
-  }
+  // sessionCheck() {
+  //   return this.http.get<userResposne>('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/me')
+  // }
 
-  sessionCheckedOn(str) {
-    let user = localStorage.getItem('user');
-    if (user) {
-      this.sessionCheck()
-      .subscribe(res => {
-        console.log(res, 'logged in');
-        console.log(this.router.url);
-        if(str=='login')
-          this.router.navigate(['app/categories']);  
-      },
-      err => {
-        console.log(err, 'not logged in');
-        if(str!='login')
-          this.router.navigate(['auth/login']);
-      })
-    }else{
-      if(str!='login')
-        this.router.navigate(['auth/login']);
-    }
-  }
+  // sessionCheckedOn(str) {
+  //   let token = localStorage.getItem('token');
+  //   if (token) {
+  //     this.sessionCheck()
+  //     .subscribe(res => {
+  //       console.log(res, 'logged in');
+  //       console.log(this.router.url);
+  //       if(str=='login')
+  //         this.router.navigate(['app/categories']);  
+  //     },
+  //     err => {
+  //       console.log(err, 'not logged in');
+  //       if(str!='login')
+  //         this.router.navigate(['auth/login']);
+  //     })
+  //   }else{
+  //     if(str!='login')
+  //       this.router.navigate(['auth/login']);
+  //   }
+  // }
 }
