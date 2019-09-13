@@ -130,7 +130,7 @@
             <mat-panel-description>
             </mat-panel-description>
           </mat-expansion-panel-header>
-            <img mat-card-image [src]="'https://integration.ebusiness.pittsburghpublicsafety.com'+product.mainPictureURI" [alt]="product.title">
+            <img mat-card-image [src]="product.imageToShow" [alt]="product.title">
                 <ion-grid>
                   <ion-row>
                     <ion-col size="4" *ngFor="let v of product.variants">
@@ -139,7 +139,7 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-                <ion-grid>
+                <ion-grid *ngIf="product.customizations.length">
                     <ion-row>
                       <ion-col size="12">
                         <h3 *ngIf="product.customizations.length">Customizations</h3>
@@ -152,12 +152,60 @@
                 </ion-grid>
                 <ion-grid>
                   <ion-row>
+                    <ion-col>
+                      <h6>Order Reason</h6>
+                    </ion-col>
+                    <ion-col>
+                      {{product.orderReason}}
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <h6>Additional Info</h6>
+                    </ion-col>
+                    <ion-col>
+                      {{product.orderReasonDetails}}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      Items total:  
+                    </ion-col>
+                    <ion-col size="8" style="text-align: right;">
+                        {{product.quantity}} X ( {{product.customersProductPrice/100 | currency}}+ {{product.customizationPrice/100 | currency}} )
+                      
+                    </ion-col>
+                  </ion-row>
+                  
+                  <ion-row *ngIf="product.customizationPriceDetails&&!product.customizationPriceDetails.multiplePriceDetails">
                     <ion-col size="8">
-                      Items total: {{product.customersProductPrice/100 | currency}} X{{product.quantity}}
+                      {{product.customizationPriceDetails.summary}}
                     </ion-col>
                     <ion-col size="4" style="text-align: right;">
-                      {{product.extendedPrice/100 | currency}}
+                      {{product.customizationPriceDetails.totalPrice | currency}}
                     </ion-col>
+                  </ion-row>
+                  <div *ngIf="product.customizationPriceDetails&&product.customizationPriceDetails.multiplePriceDetails">
+                    <ion-row *ngFor="let multiPrice of product.multipleProductsArray">
+                        <ion-col size="8">
+                          {{multiPrice.summary}}
+                        </ion-col>
+                        <ion-col size="4" style="text-align: right;">
+                          {{multiPrice.price | currency}}
+                        </ion-col>
+                    </ion-row>
+                  </div>
+                </ion-grid>  
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="8">
+                      <h6>Total price</h6>
+                    </ion-col>
+                    <ion-col size="4" style="text-align: right;">
+                      <h6>{{product.extendedPrice/100 | currency}}</h6>
+                     </ion-col>
                   </ion-row>
                 </ion-grid>
         </mat-expansion-panel>

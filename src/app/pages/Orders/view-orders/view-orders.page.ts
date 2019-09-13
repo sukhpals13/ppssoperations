@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { NavController, ActionSheetController } from '@ionic/angular';
+import { NavController, ActionSheetController, MenuController } from '@ionic/angular';
 
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
 
@@ -19,7 +19,8 @@ export class ViewOrdersPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
-    private getDetailsService: GetDetailsService
+    private getDetailsService: GetDetailsService,
+    public menu: MenuController
   ) { }
 
   @HostBinding('class.is-shell') get isShell() {
@@ -50,6 +51,7 @@ export class ViewOrdersPage implements OnInit {
   
   ionViewDidEnter() {
     this.getOrderPickingDetails();
+    this.menu.enable(true);
   }
 
   async getOrderPickingDetails(){
