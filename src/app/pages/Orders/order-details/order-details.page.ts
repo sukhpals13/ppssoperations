@@ -123,7 +123,7 @@ export class OrderDetailsPage implements OnInit {
 
   getTypeOfOrders(){
     if(this.router.url=="/orders/view-orders/"+this.orderNumber){
-      return this.getDetailsService.getAllOrders();
+      return this.getDetailsService.getAllOrders(null);
     }
     else if(this.router.url=="/orders/to-pick/"+this.productNumber){
        this.showPickInfo = true;

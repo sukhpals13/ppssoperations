@@ -16,7 +16,11 @@ export class GetDetailsService {
   getListNeedingPicked(){
     return this.http.get<OrdersToPickModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/admin/order/listNeedingPicked')
   }
-  getAllOrders(){
-    return this.http.get<OrdersToPickModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/admin/order/list')
+  getAllOrders(filter){
+    let url = "https://integration.ebusiness.pittsburghpublicsafety.com/api/admin/order/list";
+    if(filter){
+      url = url + "/" + filter.status + "/" + filter.subStatus;
+    }
+    return this.http.get<OrdersToPickModel>(url)
   }
 }

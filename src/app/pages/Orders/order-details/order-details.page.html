@@ -216,7 +216,7 @@
                       Items total:  
                     </ion-col>
                     <ion-col size="8" style="text-align: right;">
-                        {{product.quantity}} X ( {{product.customersProductPrice/100 | currency}}+ {{product.customizationPrice/100 | currency}} )
+                        {{product.quantity}} X ( {{product.customersProductPrice/100 | currency}}<span *ngIf="product.customizationPrice&&product.customizationPrice!=0"> + {{product.customizationPrice/100 | currency}}</span> )
                       
                     </ion-col>
                   </ion-row>

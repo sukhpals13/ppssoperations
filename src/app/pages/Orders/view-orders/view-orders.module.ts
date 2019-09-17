@@ -21,8 +21,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ComponentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
-  declarations: [ViewOrdersPage]
+  declarations: [ViewOrdersPage],
+  entryComponents: []
 })
 export class ViewOrdersPageModule {}

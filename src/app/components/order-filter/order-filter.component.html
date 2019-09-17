@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Filter Orders</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="data.status">
+            <mat-option *ngFor="let stat of statusTypeArray" [value]="stat">
+                {{stat}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>SubStatus</mat-label>
+        <mat-select [(value)]="data.subStatus">
+            <mat-option *ngFor="let stat of subStatusTypeArray" [value]="stat">
+                {{stat}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data">Ok</button>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+</div>

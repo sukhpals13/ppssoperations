@@ -5,6 +5,10 @@ import { GetDetailsService } from '../../../services/getDetails/get-details.serv
 
 import { OrdersToPickModel } from '../../../interfaces/order';
 
+import { MatDialog } from '@angular/material/dialog';
+import { OrderFilterComponent } from '../../../components/order-filter/order-filter.component'
+
+
 @Component({
   selector: 'app-view-orders',
   templateUrl: './view-orders.page.html',
@@ -15,12 +19,18 @@ export class ViewOrdersPage implements OnInit {
   orders : OrdersToPickModel;
   Arr = Array; //Array type captured in a variable
   num:number = 6;
+  
+  filter : {
+    status: string;
+    subStatus: string;
+  }
 
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
+    public menu: MenuController,
+    public dialog: MatDialog,
     private getDetailsService: GetDetailsService,
-    public menu: MenuController
   ) { }
 
   @HostBinding('class.is-shell') get isShell() {
@@ -33,6 +43,14 @@ export class ViewOrdersPage implements OnInit {
       orders: [],
       isShell: true
     };
+    this.initializeData()
+    this.filter = {
+      status : "New",
+      subStatus: "Needs Picked"
+    }
+  }
+  
+  initializeData(){
     var i =0;
     while(i<6){
       var obj = {
@@ -48,15 +66,14 @@ export class ViewOrdersPage implements OnInit {
       i++;
     }
   }
-  
+
   ionViewDidEnter() {
-    this.getOrderPickingDetails();
+    this.getOrders(this.filter);
     this.menu.enable(true);
   }
 
-  async getOrderPickingDetails(){
-    
-    this.getDetailsService.getAllOrders()
+  async getOrders(data){
+    this.getDetailsService.getAllOrders(data)
     .subscribe(res=>{
       console.log(res);
       this.orders = res;
@@ -69,44 +86,18 @@ export class ViewOrdersPage implements OnInit {
     this.navCtrl.navigateForward('/orders/view-orders/'+o.orderNumber);
   }
 
-  async openActionSheet(o) {
-    let pickOptions = [{
-      text: 'Begin Pick',
-      icon: 'play',
-      handler: () => {
-        console.log('Begin clicked');
-      }
-    }, {
-      text: 'Resume Pick',
-      icon: 'bicycle',
-      handler: () => {
-        console.log('Resume clicked');
-      }
-    }, {
-      text: 'End Pick',
-      icon: 'power',
-      role: 'destructive',
-      handler: () => {
-        console.log('End clicked');
-      }
-    }, {
-      text: 'Cancel',
-      icon: 'close',
-      role: 'cancel',
-      handler: () => {
-        console.log('Cancel clicked');
-      }
-    }]
-    let finalPickOptions = (o.orderSubstatus=='Needs Picked')?pickOptions.filter((v,i)=>{if(i==0||i==3)return v}):pickOptions.filter((v,i)=>{if(i==1||i==2||i==3)return v});
-
-    console.log(finalPickOptions)
-    const actionSheet = await this.actionSheetController
-    .create({
-      header: 'Picking Options',
-      buttons: finalPickOptions
+  openFilters(): void {
+    const dialogRef = this.dialog.open(OrderFilterComponent, {
+      width: '250px',
+      data: this.filter
     });
-
-    await actionSheet.present();
+    dialogRef.afterClosed().subscribe(data => {
+      // console.log('The dialog was closed',data);
+      if(data){
+        this.initializeData();
+        this.getOrders(data);
+      }
+    });
   }
 
 }
