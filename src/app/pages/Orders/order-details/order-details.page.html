@@ -80,7 +80,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="order.userName"></app-text-shell>
               </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="!showPickInfo">
             <ion-col size="12">
               Cell Number for Order Updates
             </ion-col>
@@ -88,7 +88,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="order.mobilePhoneNumber"></app-text-shell>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="!showPickInfo">
             <ion-col size="12">
               Rank(s)
             </ion-col>
@@ -96,7 +96,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.ranks"></app-text-shell>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="!showPickInfo">
             <ion-col size="12">
               Assingment(s)
             </ion-col>
@@ -104,7 +104,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.assignments"></app-text-shell>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="!showPickInfo">
               <ion-col size="12">
                 Shipping Address
               </ion-col>
@@ -116,6 +116,10 @@
       </div>
     </ion-card-content>
   </ion-card>
+
+  <!-- compact grid data start -->
+
+  <!-- compact grid data end -->
 
   <ion-card>
       <ion-card-header color="primary">
@@ -139,8 +143,46 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
+
+
+                <!-- List of Text Items -->
+                <ion-grid *ngIf="showPickInfo" class="">
+                  <ion-row>
+                    <ion-col>Manufacturer</ion-col>
+                    <ion-col>
+                        <strong><app-text-shell animation="bouncing" lines="1" [data]="product.manufacturer"></app-text-shell></strong>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>Manufacturer Num</ion-col>
+                      <ion-col>
+                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.manufacturerNum"></app-text-shell></strong>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>UPC</ion-col>
+                      <ion-col>
+                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.upc"></app-text-shell></strong>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>Quantity</ion-col>
+                      <ion-col>
+                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.quantity"></app-text-shell></strong>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>Status</ion-col>
+                      <ion-col>
+                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.status"></app-text-shell></strong>
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
+                
+
+
                 <ion-grid *ngIf="product.customizations.length">
-                    <ion-row>
+                    <ion-row *ngIf="!showPickInfo">
                       <ion-col size="12">
                         <h3 *ngIf="product.customizations.length">Customizations</h3>
                         <div *ngFor="let customization of product.customizations">
@@ -150,7 +192,7 @@
                       </ion-col>
                     </ion-row>
                 </ion-grid>
-                <ion-grid>
+                <ion-grid *ngIf="!showPickInfo">
                   <ion-row>
                     <ion-col>
                       <h6>Order Reason</h6>
@@ -168,7 +210,7 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-                <ion-grid>
+                <ion-grid *ngIf="!showPickInfo">
                   <ion-row>
                     <ion-col size="4">
                       Items total:  
@@ -198,7 +240,7 @@
                     </ion-row>
                   </div>
                 </ion-grid>  
-                <ion-grid>
+                <ion-grid *ngIf="!showPickInfo">
                   <ion-row>
                     <ion-col size="8">
                       <h6>Total price</h6>
@@ -211,5 +253,9 @@
         </mat-expansion-panel>
       </mat-accordion>
     </ion-card>
+    <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
+      <ion-button color="">Complete</ion-button>
+      <ion-button color="danger">Suspend</ion-button>
+    </div>
 
 </ion-content>

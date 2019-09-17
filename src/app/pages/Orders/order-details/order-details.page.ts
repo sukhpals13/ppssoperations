@@ -6,7 +6,7 @@ import { GetDetailsService } from '../../../services/getDetails/get-details.serv
 
 import { OrderModel, Products } from '../../../interfaces/order';
 
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -19,6 +19,8 @@ export class OrderDetailsPage implements OnInit {
   products: Array<Products>;
   step: number;
   public orderNumber: number;
+  public productNumber: number;
+  public showPickInfo: boolean;
 
   // userInfo : Object;
 
@@ -31,14 +33,17 @@ export class OrderDetailsPage implements OnInit {
     public actionSheetController: ActionSheetController,
     private getDetailsService: GetDetailsService,
     private _Activatedroute: ActivatedRoute,
-    public menu: MenuController
+    public menu: MenuController,
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    this.showPickInfo = false;
     console.log(this._Activatedroute);
     this._Activatedroute.params.subscribe(it=>{
-      // console.log(it);
+      // console.log('it onumber',it);
       this.orderNumber = it.oNumber;
+      this.productNumber = it.pNumber;
     })
     this.order = {
       orderNumber: null,
@@ -116,15 +121,28 @@ export class OrderDetailsPage implements OnInit {
   //   this.step = index;
   // }
 
+  getTypeOfOrders(){
+    if(this.router.url=="/orders/view-orders/"+this.orderNumber){
+      return this.getDetailsService.getAllOrders();
+    }
+    else if(this.router.url=="/orders/to-pick/"+this.productNumber){
+       this.showPickInfo = true;
+       return this.getDetailsService.getListNeedingPicked();
+      //  this.getDetailsService.getListNeedingPicked();
+    }
+  }
+
   // Get all the order that need to be picked or picking
   async getOrders(){
-    this.getDetailsService.getAllOrders()
+    this.getTypeOfOrders()
     .subscribe(res=>{
-      console.log(res);
+      console.log('response order detail data',res);
       let order,products;
       order = res.orders.filter(val=>{
-        if(val.orderNumber==this.orderNumber)
-          return val
+        // console.log('ordernum',val.orderNumber);
+        // console.log('this ordernum',this.productNumber);
+        if(val.orderNumber==this.orderNumber || val.orderNumber==this.productNumber)
+          return val;
       })[0];
       order.userName = order.userInfo.firstName + ' ' + order.userInfo.lastName;
       if(order.shipping)

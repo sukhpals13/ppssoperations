@@ -4,6 +4,7 @@ import { NavController, ActionSheetController } from '@ionic/angular';
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
 
 import { OrdersToPickModel } from '../../../interfaces/order';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-orders-to-pick',
@@ -19,7 +20,9 @@ export class OrdersToPickPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
-    private getDetailsService: GetDetailsService
+    private getDetailsService: GetDetailsService,
+    private _Activatedroute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   @HostBinding('class.is-shell') get isShell() {
@@ -73,6 +76,10 @@ export class OrdersToPickPage implements OnInit {
     })
   }
 
+  viewPickDetails(o){
+    this.navCtrl.navigateForward('orders/to-pick/'+o.orderNumber);
+  }
+
   async openActionSheet(o) {
     let pickOptions = [{
       text: 'Begin Pick',
@@ -80,7 +87,7 @@ export class OrdersToPickPage implements OnInit {
       handler: () => {
         console.log('Begin clicked');
       }
-    }, {
+    },{
       text: 'Resume Pick',
       icon: 'bicycle',
       handler: () => {
@@ -100,8 +107,15 @@ export class OrdersToPickPage implements OnInit {
       handler: () => {
         console.log('Cancel clicked');
       }
+    },{
+      text: 'Pick Detail',
+      icon: 'arrow-forward',
+      handler: () => {
+        console.log('pick detail clicked');
+        this.viewPickDetails(o);
+      }
     }]
-    let finalPickOptions = (o.orderSubstatus=='Needs Picked')?pickOptions.filter((v,i)=>{if(i==0||i==3)return v}):pickOptions.filter((v,i)=>{if(i==1||i==2||i==3)return v});
+    let finalPickOptions = (o.orderSubstatus=='Needs Picked')?pickOptions.filter((v,i)=>{if(i==0||i==3||i==4)return v}):pickOptions.filter((v,i)=>{if(i==1||i==2||i==3||i==4)return v});
 
     console.log(finalPickOptions)
     const actionSheet = await this.actionSheetController

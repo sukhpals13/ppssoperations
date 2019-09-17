@@ -13,3 +13,41 @@ mat-accordion {
         margin: 0px;
     }
 }
+.sc-ion-card-md-s,
+.sc-ion-card-ios-s{
+    img{
+        &.mat-card-image{
+            width:auto;
+            max-width:100%;
+        }
+    }
+}
+ion-list{
+    ion-item{
+        &:last-child{
+           border-bottom:0px;
+        }
+    }
+    ion-label{
+        span{
+            &.title{
+              min-width:150px;
+              display:inline-block;
+            }
+        }
+    }
+}
+.group-btns{
+    @media (max-width:767px){
+        padding:0px 9px;
+        margin-bottom:7px;
+    }
+    ion-button{
+        @media (max-width:767px){
+            width:100%;
+            display:block;
+            margin-left:0px;
+            margin-right:0px;
+        }
+    }
+}
