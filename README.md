@@ -13,11 +13,17 @@ Run `ionic serve` to start a live-reload dev server
 
 ## iOS Platform
 Run `ionic cordova prepare ios` to add the iOS platform to the project
+After this run `ionic cordova build ios`
+Read more in https://ionicframework.com/docs/building/ios
+
+## PWA Platform
+Run `ionic cordova prepare ios` to add the iOS platform to the project
+After this run `ionic cordova build ios`
 Read more in https://ionicframework.com/docs/building/ios
 
 ## Android Platform
-Run `ionic cordova prepare android` to add the Android platform to the project
-Read more in https://ionicframework.com/docs/building/android
+Run `ionic build --prod` to add the Android platform to the project
+Read more in https://ionicframework.com/docs/publishing/progressive-web-app
 
 ## Support
 Drop us a line to contact@ionicthemes.com
