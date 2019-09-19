@@ -42,7 +42,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="order.date"></app-text-shell>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="!showPickInfo">
             <ion-col>
               Order Type
             </ion-col>
@@ -50,7 +50,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="order.orderType"></app-text-shell>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="!showPickInfo">
             <ion-col>
               Status
             </ion-col>
@@ -126,7 +126,7 @@
         <ion-card-subtitle>Product Details</ion-card-subtitle>
       </ion-card-header>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display">
+        <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display" >
           <mat-expansion-panel-header>
             <mat-panel-title>
                 <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell>
@@ -177,10 +177,58 @@
                           <strong><app-text-shell animation="bouncing" lines="1" [data]="product.status"></app-text-shell></strong>
                       </ion-col>
                   </ion-row>
+                  <ion-row>
+                    <ion-col style="padding-bottom:0px;">Sub Status</ion-col>
+                 </ion-row>
+                <ion-row>
+                  <ion-col class="substatus"  style="padding-top:0px;">
+                      <strong><app-text-shell animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell> 
+                        <span class="editStatus color-primary" (click)="substatusOptions(product)">Edit Status</span></strong>
+                  </ion-col>
+              </ion-row>
                 </ion-grid>
+
+
+                <!-- status buttons -->
+                <!-- <ion-card *ngIf="statuseditshow">
+                    <ion-card-content>
+                      <div class="status-btns">
+                          <ion-icon name="close" (click)="substatusClose();"></ion-icon>
+                          <ion-button color="success" (click)="editSubstatus(product, 'Picked');">Picked</ion-button>
+                          <ion-button color="warning" (click)="editSubstatus(product, 'Needs Picked');">Needs Picked</ion-button>
+                          <ion-button color="danger" (click)="editSubstatus(product, 'Needs Ordered');">Needs Ordered</ion-button>
+                      </div>
+                    </ion-card-content>
+                </ion-card> -->
+                <ion-card *ngIf="statuseditMaxQty">
+                    <ion-card-content>
+                      <div class="status-btns maxQtyStatusInputs">
+                          <ion-icon name="close" (click)="substatusClose();"></ion-icon>
+                          <div class="inputField">
+                              <label>Picked</label>
+                              <button (click)="decrement('picked', product)" class='qtyminus' >-</button>
+                              <input [(ngModel)]="pickedQty" name="picked" type="number" class="qty" placeholder="Picked" />
+                              <button (click)="increment('picked', product)" [disabled]="pickedQty==product.quantity || checkTotal(product.quantity)" >+</button>
+                          </div>
+                          <div class="inputField">
+                              <label>Needs Picked</label>
+                              <button (click)="decrement('need', product)" class='qtyminus' >-</button>
+                              <input [(ngModel)]="needsPickedQty" name="needspicked" type="number" class="qty" placeholder="Needs Picked" />
+                              <button  (click)="increment('need', product)" [disabled]="needsPickedQty==product.quantity || checkTotal(product.quantity)">+</button>
+                          </div>
+                          <div class="inputField">
+                              <label>Needs Ordered</label>
+                              <button (click)="decrement('ordered', product)" class='qtyminus' >-</button>
+                              <input [(ngModel)]="needsOrderedQty" name="needspicked" type="number" class="qty" placeholder="Needs Ordered" />
+                              <button (click)="increment('ordered', product)" [disabled]="needsOrderedQty==product.quantity || checkTotal(product.quantity)">+</button>
+                          </div>
+                      </div>
+                      <div class="ion-text-right ion-padding-bottom multiQtyStatus">
+                        <ion-button color="" (click)="SubmitSubStatuses(product, product.quantity);">Submit</ion-button>
+                      </div>
+                    </ion-card-content>
+                </ion-card>
                 
-
-
                 <ion-grid *ngIf="product.customizations.length">
                     <ion-row *ngIf="!showPickInfo">
                       <ion-col size="12">
@@ -255,7 +303,7 @@
     </ion-card>
     <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
       <ion-button color="">Complete</ion-button>
-      <ion-button color="danger">Suspend</ion-button>
+      <ion-button color="danger" routerLink="/orders/to-pick">Suspend</ion-button>
     </div>
 
 </ion-content>

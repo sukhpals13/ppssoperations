@@ -1,53 +1,144 @@
-ion-card{
-    ion-card-content{
-        ion-row{
-            ion-col:nth-child(2){
+ion-card {
+    ion-card-content {
+        ion-row {
+            ion-col:nth-child(2) {
                 color: #333;
                 font-weight: 600;
             }
         }
     }
 }
+
 mat-accordion {
     h6 {
         margin: 0px;
     }
 }
+
 .sc-ion-card-md-s,
-.sc-ion-card-ios-s{
-    img{
-        &.mat-card-image{
-            width:auto;
-            max-width:100%;
-        }
+.sc-ion-card-ios-s {
+    img {
+        width: auto;
+        max-width: 100%;
     }
 }
-ion-list{
-    ion-item{
-        &:last-child{
-           border-bottom:0px;
+
+ion-list {
+    ion-item {
+        &:last-child {
+            border-bottom: 0px;
         }
     }
-    ion-label{
-        span{
-            &.title{
-              min-width:150px;
-              display:inline-block;
+
+    ion-label {
+        span {
+            &.title {
+                min-width: 150px;
+                display: inline-block;
             }
         }
     }
 }
-.group-btns{
-    @media (max-width:767px){
-        padding:0px 9px;
-        margin-bottom:7px;
+
+.group-btns {
+    @media (max-width:767px) {
+        padding: 0px 9px;
+        margin-bottom: 7px;
     }
+
+    ion-button {
+        @media (max-width:767px) {
+            width: 100%;
+            display: block;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+    }
+}
+.status-btns{
+    ion-button{
+        width:100%;
+        margin-left:0;
+        margin-right:0;
+    }
+    ion-icon{
+        font-size: 20px;
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        cursor:pointer;
+    }
+    .inputField{
+        position: relative;
+        margin-bottom: 15px;
+        width: 32%;
+        float: left;
+        margin-right: 2%;
+        @media (max-width:767px){
+            width:100%;
+            margin-right:0px;
+            margin-bottom:7px;
+        }
+        &:last-child{
+            margin-right:0;
+            @media (max-width:767px){
+               margin-bottom:20px;
+            }
+        }
+        label{
+            font-size:13px;
+            color:#000000;
+            display:block;
+            margin-bottom:5px;
+            font-weight: 600;
+        }
+        button{
+            position: absolute;
+            bottom: 0px;
+            height: 27px;
+            width: 27px;
+            right: 0px;
+            background:#ebebeb;
+            border:1px solid #c5c5c5;
+            border-radius:0px 3px 3px 0px;-webkit-border-radius:0px 3px 3px 0px;-moz-border-radius:0px 3px 3px 0px;
+            -o-border-radius:0px 3px 3px 0px;
+
+            &.qtyminus{
+                right:initial;
+                left:0px;
+                border-radius:3px 0px 0px 3px;-webkit-border-radius:3px 0px 0px 3px;-moz-border-radius:3px 0px 0px 3px;
+                -o-border-radius:3px 0px 0px 3px;
+            }
+            &:focus{
+                outline:none;
+                box-shadow:none;
+            }
+        }
+        input{
+          max-width:100%;
+          width:100%;
+          border:1px solid #c5c5c5;
+          height:27px;
+          padding-left: 30px;
+          font-size: 13px;
+          border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;-ms-border-radius:3px;
+        }
+    }
+}
+.substatus{
+    // font-size:11px;
+    .editStatus{
+        font-weight: normal;
+        font-size: 12px;
+        // margin-left: 10px;
+        color: #3796ea;
+        cursor:pointer;
+    }
+}
+.multiQtyStatusBtn{
     ion-button{
         @media (max-width:767px){
             width:100%;
-            display:block;
-            margin-left:0px;
-            margin-right:0px;
         }
     }
 }
