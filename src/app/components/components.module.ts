@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ShellModule } from '../shell/shell.module';
@@ -17,7 +17,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule,MatInputModule,MatButtonModule} from '@angular/material';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import {OrderFilterComponent} from './order-filter/order-filter.component'
+// import {EditSubStatusComponent} from './edit-sub-status/edit-sub-status.component'
 
 var commonMods = [
   MatExpansionModule,
@@ -26,16 +30,19 @@ var commonMods = [
   MatInputModule,
   MatButtonModule,
   MatSelectModule,
-  MatIconModule
+  MatIconModule,
+  MatButtonToggleModule,
+  MatGridListModule
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ShellModule,
     IonicModule.forRoot(),
-    ...commonMods
+    ...commonMods,
   ],
   declarations: [
     CheckboxWrapperComponent,
@@ -43,7 +50,8 @@ var commonMods = [
     CountdownTimerComponent,
     CounterInputComponent,
     RatingInputComponent,
-    OrderFilterComponent
+    OrderFilterComponent,
+    // EditSubStatusComponent
   ],
   exports: [
     ShellModule,
@@ -54,6 +62,9 @@ var commonMods = [
     RatingInputComponent,
     ...commonMods
   ],
-  entryComponents: [OrderFilterComponent],
+  entryComponents: [
+    OrderFilterComponent,
+    // EditSubStatusComponent
+  ],
 })
 export class ComponentsModule {}

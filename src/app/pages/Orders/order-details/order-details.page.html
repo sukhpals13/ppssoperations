@@ -3,307 +3,333 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Order Details</ion-title>
+    <ion-title *ngIf="showPickInfo; else viewOrder">Pick Order Details</ion-title>
+    <ng-template #viewOrder><ion-title>Order Details</ion-title></ng-template>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid style="padding: 0;">
+    <ion-row>
+      <ion-col size-md="6" size-xs="12" style="padding: 0;">
+        <ion-card>
+          <ion-card-header color="primary">
+            <ion-card-subtitle>Order Information</ion-card-subtitle>
     
-  <ion-card>
-    <ion-card-header color="primary">
-      <ion-card-subtitle>Order Information</ion-card-subtitle>
-      
-    </ion-card-header>
-  
-    <ion-card-content>
-      <div>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              Organization
-            </ion-col>
-            <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orgName"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              Order #
-            </ion-col>
-            <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderNumber"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              Order Date
-            </ion-col>
-            <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.date"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row *ngIf="!showPickInfo">
-            <ion-col>
-              Order Type
-            </ion-col>
-            <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderType"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row *ngIf="!showPickInfo">
-            <ion-col>
-              Status
-            </ion-col>
-            <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderStatus"></app-text-shell>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </ion-card-content>
-  </ion-card>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <div>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    Organization
+                  </ion-col>
+                  <ion-col>
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.orgName"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    Order #
+                  </ion-col>
+                  <ion-col>
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.orderNumber"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    Order Date
+                  </ion-col>
+                  <ion-col>
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.date"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!showPickInfo">
+                  <ion-col>
+                    Order Type
+                  </ion-col>
+                  <ion-col>
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.orderType"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!showPickInfo">
+                  <ion-col>
+                    Status
+                  </ion-col>
+                  <ion-col>
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.orderStatus"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size-md="6" size-xs="12" style="padding: 0;">
+        <ion-card>
+          <ion-card-header color="primary">
+            <ion-card-subtitle>Customer Information</ion-card-subtitle>
+    
+          </ion-card-header>
+    
+          <ion-card-content>
+            <div>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    Name
+                  </ion-col>
+                  <ion-col size="12">
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.userName"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!showPickInfo">
+                  <ion-col size="12">
+                    Cell Number for Order Updates
+                  </ion-col>
+                  <ion-col size="12">
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.mobilePhoneNumber"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!showPickInfo">
+                  <ion-col size="12">
+                    Rank(s)
+                  </ion-col>
+                  <ion-col size="12">
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.ranks"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!showPickInfo">
+                  <ion-col size="12">
+                    Assingment(s)
+                  </ion-col>
+                  <ion-col size="12">
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.assignments"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!showPickInfo">
+                  <ion-col size="12">
+                    Shipping Address
+                  </ion-col>
+                  <ion-col size="12">
+                    <app-text-shell animation="bouncing" lines="1" [data]="order.address"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-card>
     <ion-card-header color="primary">
-      <ion-card-subtitle>Customer Information</ion-card-subtitle>
-      
+      <ion-card-subtitle>Product Details</ion-card-subtitle>
     </ion-card-header>
-  
-    <ion-card-content>
-      <div>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell>
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <img mat-card-image [src]="product.imageToShow" [alt]="product.title">
         <ion-grid>
           <ion-row>
-            <ion-col size="12">
-              Name
+            <ion-col size="4" *ngFor="let v of product.variants">
+              <h5>{{v.name}}</h5>
+              <p>{{v.value}}</p>
             </ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- List of Text Items -->
+        <ion-grid *ngIf="showPickInfo" class="">
+          <ion-row>
+            <ion-col>Manufacturer</ion-col>
+            <ion-col>
+              <strong>
+                <app-text-shell animation="bouncing" lines="1" [data]="product.manufacturer"></app-text-shell>
+              </strong>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Manufacturer Num</ion-col>
+            <ion-col>
+              <strong>
+                <app-text-shell animation="bouncing" lines="1" [data]="product.manufacturerNum"></app-text-shell>
+              </strong>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>UPC</ion-col>
+            <ion-col>
+              <strong>
+                <app-text-shell animation="bouncing" lines="1" [data]="product.upc"></app-text-shell>
+              </strong>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Quantity</ion-col>
+            <ion-col>
+              <strong>
+                <app-text-shell animation="bouncing" lines="1" [data]="product.quantity"></app-text-shell>
+              </strong>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Status</ion-col>
+            <ion-col>
+              <strong>
+                <app-text-shell animation="bouncing" lines="1" [data]="product.status"></app-text-shell>
+              </strong>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="product.subStatus">
+            <ion-col>Sub Status</ion-col>
+            <ion-col *ngIf="15>product.subStatus.length">
+              <app-text-shell animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell>
+            </ion-col>
+            <ion-col *ngIf="product.subStatus.length>15">
+              <div style="text-align: right;" [innerHTML]="product.subStatus"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="text-align: right;" class="substatus">
+                <span class="editStatus color-primary" (click)="substatusOptions(product)">Edit Status>>></span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+        <!-- status buttons -->
+        <!-- quantity is 1 -->
+        <ion-grid *ngIf="product.statuseditshow">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Picked" [checked]="product.subStatus=='Picked'" (change)="changeProductSubStatus(product,'Picked')">
+              Picked
+            </mat-button-toggle>
+            <mat-button-toggle value="Needs Picked" [checked]="product.subStatus=='Needs Picked'" (change)="changeProductSubStatus(product,'Needs Pick')">
+              Needs Pick
+            </mat-button-toggle>
+            <mat-button-toggle value="Needs Ordered" [checked]="product.subStatus=='Needs Ordered'" (change)="changeProductSubStatus(product,'Needs Ordered')">
+              Needs Ordered
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </ion-grid>
+        <!-- quantity greater than 1 -->
+        <ion-grid *ngIf="product.statuseditMaxQty">
+          <div class="status-btns maxQtyStatusInputs">
+            <ion-icon name="close" (click)="substatusClose();"></ion-icon>
+            <div class="inputField">
+              <label>Picked</label>
+              <button (click)="decrement('picked', product)" class='qtyminus'>-</button>
+              <input [(ngModel)]="product.pickedQty" name="picked" type="number" class="qty" placeholder="Picked" />
+              <button (click)="increment('picked', product)"
+                [disabled]="pickedQty==product.quantity || checkTotal(product)">+</button>
+            </div>
+            <div class="inputField">
+              <label>Needs Picked</label>
+              <button (click)="decrement('need', product)" class='qtyminus'>-</button>
+              <input [(ngModel)]="product.needsPickedQty" name="needspicked" type="number" class="qty"
+                placeholder="Needs Picked" />
+              <button (click)="increment('need', product)"
+                [disabled]="needsPickedQty==product.quantity || checkTotal(product)">+</button>
+            </div>
+            <div class="inputField">
+              <label>Needs Ordered</label>
+              <button (click)="decrement('ordered', product)" class='qtyminus'>-</button>
+              <input [(ngModel)]="product.needsOrderedQty" name="needspicked" type="number" class="qty"
+                placeholder="Needs Ordered" />
+              <button (click)="increment('ordered', product)"
+                [disabled]="needsOrderedQty==product.quantity || checkTotal(product)">+</button>
+            </div>
+          </div>
+          <div class="ion-text-right ion-padding-bottom multiQtyStatus">
+            <button mat-button (click)="SubmitSubStatuses(product);">Submit</button>
+          </div>
+        </ion-grid>
+
+        <ion-grid *ngIf="product.customizations.length">
+          <ion-row *ngIf="!showPickInfo">
             <ion-col size="12">
-              <app-text-shell animation="bouncing" lines="1" [data]="order.userName"></app-text-shell>
+              <h3 *ngIf="product.customizations.length">Customizations</h3>
+              <div *ngFor="let customization of product.customizations">
+                <h6>{{customization.name}}</h6>
+                <div>{{customization.value}}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="!showPickInfo">
+          <ion-row>
+            <ion-col>
+              <h6>Order Reason</h6>
+            </ion-col>
+            <ion-col>
+              {{product.orderReason}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Additional Info</h6>
+            </ion-col>
+            <ion-col>
+              {{product.orderReasonDetails}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="!showPickInfo">
+          <ion-row>
+            <ion-col size="4">
+              Items total:
+            </ion-col>
+            <ion-col size="8" style="text-align: right;">
+              {{product.quantity}} X ( {{product.customersProductPrice/100 | currency}}<span
+                *ngIf="product.customizationPrice&&product.customizationPrice!=0"> +
+                {{product.customizationPrice/100 | currency}}</span> )
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="product.customizationPriceDetails&&!product.customizationPriceDetails.multiplePriceDetails">
+            <ion-col size="8">
+              {{product.customizationPriceDetails.summary}}
+            </ion-col>
+            <ion-col size="4" style="text-align: right;">
+              {{product.customizationPriceDetails.totalPrice | currency}}
+            </ion-col>
+          </ion-row>
+          <div *ngIf="product.customizationPriceDetails&&product.customizationPriceDetails.multiplePriceDetails">
+            <ion-row *ngFor="let multiPrice of product.multipleProductsArray">
+              <ion-col size="8">
+                {{multiPrice.summary}}
               </ion-col>
-          </ion-row>
-          <ion-row *ngIf="!showPickInfo">
-            <ion-col size="12">
-              Cell Number for Order Updates
-            </ion-col>
-            <ion-col size="12">
-              <app-text-shell animation="bouncing" lines="1" [data]="order.mobilePhoneNumber"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row *ngIf="!showPickInfo">
-            <ion-col size="12">
-              Rank(s)
-            </ion-col>
-            <ion-col size="12">
-              <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.ranks"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row *ngIf="!showPickInfo">
-            <ion-col size="12">
-              Assingment(s)
-            </ion-col>
-            <ion-col size="12">
-              <app-text-shell animation="bouncing" lines="1" [data]="order.userInfo.assignments"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row *ngIf="!showPickInfo">
-              <ion-col size="12">
-                Shipping Address
-              </ion-col>
-              <ion-col size="12">
-                <app-text-shell animation="bouncing" lines="1" [data]="order.address"></app-text-shell>
+              <ion-col size="4" style="text-align: right;">
+                {{multiPrice.price | currency}}
               </ion-col>
             </ion-row>
+          </div>
         </ion-grid>
-      </div>
-    </ion-card-content>
+        <ion-grid *ngIf="!showPickInfo">
+          <ion-row>
+            <ion-col size="8">
+              <h6>Total price</h6>
+            </ion-col>
+            <ion-col size="4" style="text-align: right;">
+              <h6>{{product.extendedPrice/100 | currency}}</h6>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </mat-expansion-panel>
+    </mat-accordion>
   </ion-card>
-
-  <!-- compact grid data start -->
-
-  <!-- compact grid data end -->
-
-  <ion-card>
-      <ion-card-header color="primary">
-        <ion-card-subtitle>Product Details</ion-card-subtitle>
-      </ion-card-header>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display" >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell>
-            </mat-panel-title>
-            <mat-panel-description>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-            <img mat-card-image [src]="product.imageToShow" [alt]="product.title">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="4" *ngFor="let v of product.variants">
-                      <h5>{{v.name}}</h5>
-                      <p>{{v.value}}</p>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-
-
-                <!-- List of Text Items -->
-                <ion-grid *ngIf="showPickInfo" class="">
-                  <ion-row>
-                    <ion-col>Manufacturer</ion-col>
-                    <ion-col>
-                        <strong><app-text-shell animation="bouncing" lines="1" [data]="product.manufacturer"></app-text-shell></strong>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col>Manufacturer Num</ion-col>
-                      <ion-col>
-                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.manufacturerNum"></app-text-shell></strong>
-                      </ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col>UPC</ion-col>
-                      <ion-col>
-                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.upc"></app-text-shell></strong>
-                      </ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col>Quantity</ion-col>
-                      <ion-col>
-                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.quantity"></app-text-shell></strong>
-                      </ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col>Status</ion-col>
-                      <ion-col>
-                          <strong><app-text-shell animation="bouncing" lines="1" [data]="product.status"></app-text-shell></strong>
-                      </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col style="padding-bottom:0px;">Sub Status</ion-col>
-                 </ion-row>
-                <ion-row>
-                  <ion-col class="substatus"  style="padding-top:0px;">
-                      <strong><app-text-shell animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell> 
-                        <span class="editStatus color-primary" (click)="substatusOptions(product)">Edit Status</span></strong>
-                  </ion-col>
-              </ion-row>
-                </ion-grid>
-
-
-                <!-- status buttons -->
-                <!-- <ion-card *ngIf="statuseditshow">
-                    <ion-card-content>
-                      <div class="status-btns">
-                          <ion-icon name="close" (click)="substatusClose();"></ion-icon>
-                          <ion-button color="success" (click)="editSubstatus(product, 'Picked');">Picked</ion-button>
-                          <ion-button color="warning" (click)="editSubstatus(product, 'Needs Picked');">Needs Picked</ion-button>
-                          <ion-button color="danger" (click)="editSubstatus(product, 'Needs Ordered');">Needs Ordered</ion-button>
-                      </div>
-                    </ion-card-content>
-                </ion-card> -->
-                <ion-card *ngIf="statuseditMaxQty">
-                    <ion-card-content>
-                      <div class="status-btns maxQtyStatusInputs">
-                          <ion-icon name="close" (click)="substatusClose();"></ion-icon>
-                          <div class="inputField">
-                              <label>Picked</label>
-                              <button (click)="decrement('picked', product)" class='qtyminus' >-</button>
-                              <input [(ngModel)]="pickedQty" name="picked" type="number" class="qty" placeholder="Picked" />
-                              <button (click)="increment('picked', product)" [disabled]="pickedQty==product.quantity || checkTotal(product.quantity)" >+</button>
-                          </div>
-                          <div class="inputField">
-                              <label>Needs Picked</label>
-                              <button (click)="decrement('need', product)" class='qtyminus' >-</button>
-                              <input [(ngModel)]="needsPickedQty" name="needspicked" type="number" class="qty" placeholder="Needs Picked" />
-                              <button  (click)="increment('need', product)" [disabled]="needsPickedQty==product.quantity || checkTotal(product.quantity)">+</button>
-                          </div>
-                          <div class="inputField">
-                              <label>Needs Ordered</label>
-                              <button (click)="decrement('ordered', product)" class='qtyminus' >-</button>
-                              <input [(ngModel)]="needsOrderedQty" name="needspicked" type="number" class="qty" placeholder="Needs Ordered" />
-                              <button (click)="increment('ordered', product)" [disabled]="needsOrderedQty==product.quantity || checkTotal(product.quantity)">+</button>
-                          </div>
-                      </div>
-                      <div class="ion-text-right ion-padding-bottom multiQtyStatus">
-                        <ion-button color="" (click)="SubmitSubStatuses(product, product.quantity);">Submit</ion-button>
-                      </div>
-                    </ion-card-content>
-                </ion-card>
-                
-                <ion-grid *ngIf="product.customizations.length">
-                    <ion-row *ngIf="!showPickInfo">
-                      <ion-col size="12">
-                        <h3 *ngIf="product.customizations.length">Customizations</h3>
-                        <div *ngFor="let customization of product.customizations">
-                          <h6>{{customization.name}}</h6>
-                          <div>{{customization.value}}</div>
-                        </div>
-                      </ion-col>
-                    </ion-row>
-                </ion-grid>
-                <ion-grid *ngIf="!showPickInfo">
-                  <ion-row>
-                    <ion-col>
-                      <h6>Order Reason</h6>
-                    </ion-col>
-                    <ion-col>
-                      {{product.orderReason}}
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col>
-                      <h6>Additional Info</h6>
-                    </ion-col>
-                    <ion-col>
-                      {{product.orderReasonDetails}}
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-                <ion-grid *ngIf="!showPickInfo">
-                  <ion-row>
-                    <ion-col size="4">
-                      Items total:  
-                    </ion-col>
-                    <ion-col size="8" style="text-align: right;">
-                        {{product.quantity}} X ( {{product.customersProductPrice/100 | currency}}<span *ngIf="product.customizationPrice&&product.customizationPrice!=0"> + {{product.customizationPrice/100 | currency}}</span> )
-                      
-                    </ion-col>
-                  </ion-row>
-                  
-                  <ion-row *ngIf="product.customizationPriceDetails&&!product.customizationPriceDetails.multiplePriceDetails">
-                    <ion-col size="8">
-                      {{product.customizationPriceDetails.summary}}
-                    </ion-col>
-                    <ion-col size="4" style="text-align: right;">
-                      {{product.customizationPriceDetails.totalPrice | currency}}
-                    </ion-col>
-                  </ion-row>
-                  <div *ngIf="product.customizationPriceDetails&&product.customizationPriceDetails.multiplePriceDetails">
-                    <ion-row *ngFor="let multiPrice of product.multipleProductsArray">
-                        <ion-col size="8">
-                          {{multiPrice.summary}}
-                        </ion-col>
-                        <ion-col size="4" style="text-align: right;">
-                          {{multiPrice.price | currency}}
-                        </ion-col>
-                    </ion-row>
-                  </div>
-                </ion-grid>  
-                <ion-grid *ngIf="!showPickInfo">
-                  <ion-row>
-                    <ion-col size="8">
-                      <h6>Total price</h6>
-                    </ion-col>
-                    <ion-col size="4" style="text-align: right;">
-                      <h6>{{product.extendedPrice/100 | currency}}</h6>
-                     </ion-col>
-                  </ion-row>
-                </ion-grid>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ion-card>
-    <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
-      <ion-button color="">Complete</ion-button>
-      <ion-button color="danger" routerLink="/orders/to-pick">Suspend</ion-button>
-    </div>
+  <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
+    <ion-button color="">Complete</ion-button>
+    <ion-button color="danger" routerLink="/orders/to-pick">Suspend</ion-button>
+  </div>
 
 </ion-content>

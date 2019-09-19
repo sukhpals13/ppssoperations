@@ -51,6 +51,7 @@ export class ViewOrdersPage implements OnInit {
   }
   
   initializeData(){
+    this.orders.orders = [];
     var i =0;
     while(i<6){
       var obj = {
@@ -69,9 +70,10 @@ export class ViewOrdersPage implements OnInit {
 
   ionViewDidEnter() {
     this.getOrders(this.filter);
+    // enables the menu bar for the page
     this.menu.enable(true);
   }
-
+  // get all the orders
   async getOrders(data){
     this.getDetailsService.getAllOrders(data)
     .subscribe(res=>{
@@ -81,11 +83,11 @@ export class ViewOrdersPage implements OnInit {
       console.log(err);
     })
   }
-
+  // opening of the order details page
   viewOrderDetails(o){
     this.navCtrl.navigateForward('/orders/view-orders/'+o.orderNumber);
   }
-
+  // opening the filter dialog
   openFilters(): void {
     const dialogRef = this.dialog.open(OrderFilterComponent, {
       width: '250px',

@@ -54,7 +54,7 @@ export class OrdersToPickPage implements OnInit {
   ionViewDidEnter() {
     this.getOrderPickingDetails();
   }
-
+  // get all the order to pick
   async getOrderPickingDetails(){
     
     this.getDetailsService.getListNeedingPicked()
@@ -80,6 +80,7 @@ export class OrdersToPickPage implements OnInit {
     this.navCtrl.navigateForward('orders/to-pick/'+o.orderNumber);
   }
 
+  // Opening the action sheet when clicked on pick order
   async openActionSheet(o) {
     let pickOptions = [{
       text: 'Begin Pick',
@@ -115,6 +116,7 @@ export class OrdersToPickPage implements OnInit {
         this.viewPickDetails(o);
       }
     }]
+    // filtering what to show depending upon the status of the order
     let finalPickOptions = (o.orderSubstatus=='Needs Picked')?pickOptions.filter((v,i)=>{if(i==0||i==3||i==4)return v}):pickOptions.filter((v,i)=>{if(i==1||i==2||i==3||i==4)return v});
 
     console.log(finalPickOptions)

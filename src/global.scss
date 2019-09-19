@@ -22,3 +22,8 @@
 
 // Angular material css
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.split-pane-visible >.split-pane-side {
+    // min-width: 150px!important;
+    max-width: 20% !important;
+  }

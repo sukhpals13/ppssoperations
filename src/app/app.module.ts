@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Intercept } from './interceptors/interceptors';
 
-// HTTP requests
+// custom HTTP requests services 
 import { AuthService } from './services/auth/auth.service';
 import { GetDetailsService } from './services/getDetails/get-details.service';
 

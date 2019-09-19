@@ -71,6 +71,8 @@ export class Intercept implements HttpInterceptor {
                                                     if(data.status==401){
                                                         // this.navCtrl.(['/landing-page']);
                                                         // this.router.navigate(['/landing-page'])
+                                                        localStorage.removeItem('token');
+                                                        localStorage.removeItem('user');
                                                         this.navCtrl.navigateRoot('/landing-page')
                                                         this.alertPopup("Time Out","Your session timed out!!!")
                                                         // this.router.navigate(['/landing-page'])
@@ -92,6 +94,8 @@ export class Intercept implements HttpInterceptor {
                     if(data.status==401){
                         // this.navCtrl.(['/landing-page']);
                         // this.router.navigate(['/landing-page'])
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('user');
                         this.navCtrl.navigateRoot('/landing-page')
                         this.alertPopup("Time Out","Your session timed out!!!")
                         // this.router.navigate(['/landing-page'])

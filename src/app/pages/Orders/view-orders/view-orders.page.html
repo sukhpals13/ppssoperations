@@ -13,48 +13,57 @@
 </ion-header>
 
 <ion-content>
+  <!-- All the orders of a customer -->
   <div *ngIf="orders.orders.length; else noOrderBlock">
-    <ion-card *ngFor="let order of orders.orders" (click)="viewOrderDetails(order)">
-      <ion-grid>
-          <ion-row>
-            <ion-col size="4">
-              <h6>Order #</h6>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderNumber"></app-text-shell>
-            </ion-col>
-            <ion-col size="4">
-              <h6>Source</h6>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderSource"></app-text-shell>
-            </ion-col>
-            <ion-col size="4">
-              <h6>Organization</h6>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orgName"></app-text-shell>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              <h6>Total Due</h6>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderTotalDue"></app-text-shell>
-            </ion-col>
-            <ion-col size="4">
-              <h6>Status</h6>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderStatus"></app-text-shell>
-            </ion-col>
-            <ion-col size="4">
-              <h6>Sub Status</h6>
-              <app-text-shell animation="bouncing" lines="1" [data]="order.orderSubstatus"></app-text-shell>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-    </ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="4" size-xs="12" *ngFor="let order of orders.orders">
+            <ion-card (click)="viewOrderDetails(order)">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      <h6>Order #</h6>
+                      <app-text-shell animation="bouncing" lines="1" [data]="order.orderNumber"></app-text-shell>
+                    </ion-col>
+                    <ion-col size="4">
+                      <h6>Source</h6>
+                      <app-text-shell animation="bouncing" lines="1" [data]="order.orderSource"></app-text-shell>
+                    </ion-col>
+                    <ion-col size="4">
+                      <h6>Organization</h6>
+                      <app-text-shell animation="bouncing" lines="1" [data]="order.orgName"></app-text-shell>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <h6>Total Due</h6>
+                      <app-text-shell animation="bouncing" lines="1" [data]="order.orderTotalDue"></app-text-shell>
+                    </ion-col>
+                    <ion-col size="4">
+                      <h6>Status</h6>
+                      <app-text-shell animation="bouncing" lines="1" [data]="order.orderStatus"></app-text-shell>
+                    </ion-col>
+                    <ion-col size="4">
+                      <h6>Sub Status</h6>
+                      <app-text-shell animation="bouncing" lines="1" [data]="order.orderSubstatus"></app-text-shell>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
   </div>
+  <!-- If there are no orders -->
   <ng-template #noOrderBlock>
-  <ion-card>
-    <ion-card-content>
-      <h3>
-        No Orders with the status "{{filter.status}}" and subStatus "{{filter.subStatus}}"
-      </h3>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <h3>
+          No Orders with the status "{{filter.status}}" and subStatus "{{filter.subStatus}}"
+        </h3>
+      </ion-card-content>
+    </ion-card>
   </ng-template>
 
 </ion-content>

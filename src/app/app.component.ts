@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart, Event } from '@angular/router';
-import { Events, MenuController, Platform, AlertController } from '@ionic/angular';
+import { Events, MenuController, Platform, AlertController, NavController } from '@ionic/angular';
 import { AuthService } from './services/auth/auth.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -22,6 +22,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   ]
 })
 export class AppComponent {
+  // list of pages to show in the menu
   appPages = [
     {
       title: 'Categories',
@@ -91,43 +92,55 @@ export class AppComponent {
     public router: Router,
     public alertCtrl: AlertController,
     private auth: AuthService,
+    public navCtrl: NavController,
   ) {
     this.initializeApp();
   }
+
   ionViewDidEnter(){
-  }
-  ngOnInit(){
-    let token = localStorage.getItem('token');
-    if(token){
-      // this.router
-      // .events
-      // .subscribe(
-      //     (event) => {
-      //         if (event instanceof NavigationStart) {
-      //             if (event.url=='/landing-page') {
-                    this.router.navigate(['/orders/view-orders']);
-      //             }
-      //             console.log(event.url)
-      //         }
-      //     }
-      // );
-    }else{
-      this.router.navigate(['/auth/login']);
-    }
-    // this.auth.sessionCheckedOn('check login')
+  
   }
 
+  ngOnInit(){
+    // check for token on client side
+    // if(token){
+      this.router
+      .events
+      .subscribe(
+        (event) => {
+          if (event instanceof NavigationStart) {
+                let token = localStorage.getItem('token');
+                console.log(event.url);
+                  if (event.url=='/landing-page'||event.url=='/auth/login') {
+                    if(token)
+                      this.router.navigate(['/orders/view-orders']);
+                  }else{
+                    if(!token)
+                      this.router.navigate(['/landing-page']);
+                  }
+              }
+          }
+      );
+    // }else{
+    //   this.router.navigate(['/auth/login']);
+    // }
+  }
+
+  // logout function
   logout() {
     this.auth.logout().subscribe(res=>{
       this.alertPopup('Success','Successefully Logged out')
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      this.router.navigate(['/auth/login']);
+      // this.router.navigate(['/auth/login']);
+      console.log('logout called')
+      this.navCtrl.navigateRoot(['/landing-page'])
     },err=>{
       this.alertPopup('Error',JSON.stringify(err))
     });
   }
 
+  // showing the alert popup
   async alertPopup(title, msg) {
     const alert = await this.alertCtrl.create({
       header: title,
@@ -139,6 +152,7 @@ export class AppComponent {
     await alert.present();
   }
 
+  // functions after the loading screen loads in the app
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(true);
@@ -146,4 +160,5 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
 }
