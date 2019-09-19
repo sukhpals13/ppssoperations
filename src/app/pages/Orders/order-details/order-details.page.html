@@ -191,10 +191,10 @@
           <ion-row *ngIf="product.subStatus" class="multiStatus">
             <ion-col>Sub Status</ion-col>
             <ion-col *ngIf="15>product.subStatus.length">
-              <app-text-shell animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell>
+              <app-text-shell  class="bold" animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell>
             </ion-col>
             <ion-col *ngIf="product.subStatus.length>15">
-              <div [innerHTML]="product.subStatus"></div>
+              <div class="bold" [innerHTML]="product.subStatus"></div>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -207,7 +207,7 @@
 
         <!-- status buttons -->
         <!-- quantity is 1 -->
-        <ion-grid *ngIf="product.statuseditshow">
+        <ion-grid *ngIf="product.statuseditshow" class="singleQtyStatus">
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
             <mat-button-toggle value="Picked" [checked]="product.subStatus=='Picked'" (change)="changeProductSubStatus(product,'Picked')">
               Picked
@@ -329,7 +329,7 @@
   </ion-card>
   <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
     <ion-button color="">Complete</ion-button>
-    <ion-button color="danger" routerLink="/orders/to-pick">Suspend</ion-button>
+    <ion-button color="danger" (click)="backToPick();">Suspend</ion-button>
   </div>
 
 </ion-content>

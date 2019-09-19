@@ -188,4 +188,10 @@ export class OrderDetailsPage implements OnInit {
     prod.statuseditMaxQty = false;
   }
 
+  // back to pick list
+  backToPick(){
+    this.navCtrl.navigateBack('/orders/to-pick');
+  }
+  
+
 } 
