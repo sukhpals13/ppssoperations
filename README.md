@@ -11,17 +11,17 @@ Run `npm install` to install the project dependencies.
 Run `ionic build` or `ionic build --prod` to build the project
 Run `ionic serve` to start a live-reload dev server
 
+## Android Platform
+Run `ionic cordova prepare android` to add the iOS platform to the project
+After this run `ionic cordova build android`
+Read more in https://ionicframework.com/docs/building/android
+
 ## iOS Platform
 Run `ionic cordova prepare ios` to add the iOS platform to the project
 After this run `ionic cordova build ios`
 Read more in https://ionicframework.com/docs/building/ios
 
-## PWA Platform
-Run `ionic cordova prepare ios` to add the iOS platform to the project
-After this run `ionic cordova build ios`
-Read more in https://ionicframework.com/docs/building/ios
-
-## Android Platform
+## PWA
 Run `ionic build --prod` to add the Android platform to the project
 Read more in https://ionicframework.com/docs/publishing/progressive-web-app
 
