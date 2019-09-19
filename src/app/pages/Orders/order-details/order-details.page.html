@@ -188,13 +188,13 @@
               </strong>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="product.subStatus">
+          <ion-row *ngIf="product.subStatus" class="multiStatus">
             <ion-col>Sub Status</ion-col>
             <ion-col *ngIf="15>product.subStatus.length">
               <app-text-shell animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell>
             </ion-col>
             <ion-col *ngIf="product.subStatus.length>15">
-              <div style="text-align: right;" [innerHTML]="product.subStatus"></div>
+              <div [innerHTML]="product.subStatus"></div>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -248,8 +248,8 @@
                 [disabled]="needsOrderedQty==product.quantity || checkTotal(product)">+</button>
             </div>
           </div>
-          <div class="ion-text-right ion-padding-bottom multiQtyStatus">
-            <button mat-button (click)="SubmitSubStatuses(product);">Submit</button>
+          <div class="ion-text-right multiQtyStatus">
+            <ion-button (click)="SubmitSubStatuses(product);">Submit</ion-button>
           </div>
         </ion-grid>
 
