@@ -209,13 +209,13 @@
         <!-- quantity is 1 -->
         <ion-grid *ngIf="product.statuseditshow" class="singleQtyStatus">
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle value="Picked" [checked]="product.subStatus=='Picked'" (change)="changeProductSubStatus(product,'Picked')">
+            <mat-button-toggle value="Picked" [checked]="product.subStatus=='Picked'" (change)="changeProductSubStatus(product,'Picked',order)">
               Picked
             </mat-button-toggle>
-            <mat-button-toggle value="Needs Picked" [checked]="product.subStatus=='Needs Picked'" (change)="changeProductSubStatus(product,'Needs Pick')">
+            <mat-button-toggle value="Needs Picked" [checked]="product.subStatus=='Needs Picked'" (change)="changeProductSubStatus(product,'Needs Pick',order)">
               Needs Pick
             </mat-button-toggle>
-            <mat-button-toggle value="Needs Ordered" [checked]="product.subStatus=='Needs Ordered'" (change)="changeProductSubStatus(product,'Needs Ordered')">
+            <mat-button-toggle value="Needs Ordered" [checked]="product.subStatus=='Needs Ordered'" (change)="changeProductSubStatus(product,'Needs Ordered',order)">
               Needs Ordered
             </mat-button-toggle>
           </mat-button-toggle-group>
@@ -249,7 +249,7 @@
             </div>
           </div>
           <div class="ion-text-right multiQtyStatus">
-            <ion-button (click)="SubmitSubStatuses(product);">Submit</ion-button>
+            <ion-button (click)="SubmitSubStatuses(product, order);">Submit</ion-button>
           </div>
         </ion-grid>
 

@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, MenuController } from '@ionic/ang
 
 // Get order details
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
+import { PostDetailsService } from '../../../services/postDetails/post-details.service';
 
 import { OrderModel, Products } from '../../../interfaces/order';
 
@@ -41,6 +42,7 @@ export class OrderDetailsPage implements OnInit {
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private getDetailsService: GetDetailsService,
+    private postDetailsService: PostDetailsService,
     private _Activatedroute: ActivatedRoute,
     public menu: MenuController,
     private router: Router,
@@ -66,7 +68,7 @@ export class OrderDetailsPage implements OnInit {
     if (this.router.url == "/orders/view-orders/" + this.orderNumber) {
       return this.getDetailsService.getAllOrders(null);
     }
-    else if (this.router.url == "/orders/to-pick/" + this.productNumber) {
+    else if (this.router.url == "/orders/to-pick/" + this.productNumber ) {
       this.showPickInfo = true;
       return this.getDetailsService.getListNeedingPicked();
     }
@@ -79,10 +81,11 @@ export class OrderDetailsPage implements OnInit {
         let products;
         this.order = setOrderDetails(res.orders,this.orderNumber,this.productNumber);
         products = setProductsDetails(this.order.products);
+        this.products = products
         this.products = products.map(val => {
           let newObj = val;
-          console.log('val', val);
-          newObj.subStatus = "Open";
+         // console.log('val', val); 
+          //newObj.subStatus = "Open";
           newObj.pickedQty = 0;
           newObj.needsPickedQty = 0;
           newObj.needsOrderedQty = 0;
@@ -95,9 +98,20 @@ export class OrderDetailsPage implements OnInit {
   }
 
   // edit substatus
-  changeProductSubStatus(p, v) {
+  changeProductSubStatus(p, v,o) {
     p.subStatus = v;
+    var productID = p._id;
+    let orderID = o._id;
+    let status = p.status;
+    let subStatus = p.subStatus;
     p.statuseditshow = false;
+    this.postDetailsService.updateProductStatusDetails(orderID, productID, status, subStatus)
+    .subscribe(res => {
+       console.log('response',res);
+    }, 
+      err => {
+      console.log(err);
+    })
   }
 
   // substatus options open
@@ -171,7 +185,7 @@ export class OrderDetailsPage implements OnInit {
   }
 
   // submit substatuses for multiple quantity
-  SubmitSubStatuses(prod) {
+  SubmitSubStatuses(prod, order) {
     // console.log('productttttttttttttt', prod);
     let newstatuses = {
       "Picked": prod.pickedQty,
@@ -185,7 +199,20 @@ export class OrderDetailsPage implements OnInit {
       console.log(multiSubstatus)
       prod.subStatus = multiSubstatus;
     })
+    var prodID = prod._id;
+    var orderID = order._id;
+    var status = prod.status;
+    var subStatus = prod.subStatus;
     prod.statuseditMaxQty = false;
+
+    this.postDetailsService.updateProductStatusDetails(orderID, prodID, status, subStatus)
+    .subscribe(res => {
+       console.log('response',res);
+    }, 
+      err => {
+      console.log(err);
+    })
+
   }
 
   // back to pick list

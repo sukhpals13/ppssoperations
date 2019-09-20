@@ -39,6 +39,9 @@
 
     .user-name {
       margin: 0px 0px 5px;
+      @media(max-width:767px){
+        font-size: 16px;
+      }
     }
 
     .user-handle {
@@ -46,6 +49,9 @@
       margin: 0px;
       font-size: 14px;
       font-weight: 400;
+      @media(max-width:767px){
+        font-size: 12px;
+      }
     }
   }
 
