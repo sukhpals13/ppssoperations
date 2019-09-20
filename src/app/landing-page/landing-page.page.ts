@@ -26,15 +26,9 @@ export class LandingPagePage implements OnInit {
     if(authentic){
       this.authService.signIn().catch(error => console.error(`Sign in error: ${error}`));
     }
+  }
+  ionViewDidEnter(){
     this.menu.enable(false);
-    this.authService.authObservable.subscribe((action) => {
-      this.action = action;
-      if (action.action === AuthActions.SignInSuccess || action.action === AuthActions.AuthSignInSuccess) {
-        this.authenticated = true;
-      } else if (action.action === AuthActions.SignOutSuccess) {
-        this.authenticated = false;
-      }
-    });
   }
 
   signOut() {

@@ -54,6 +54,10 @@ export class LoginPage implements OnInit {
     }
     // this.auth.sessionCheckedOn('login');
   }
+  
+  ionViewDidEnter(){
+    this.menu.enable(false);
+  }
 
   async alertPopup(title,msg){
     const alert = await this.alertCtrl.create({
@@ -84,7 +88,11 @@ export class LoginPage implements OnInit {
       }
       localStorage.setItem('token',res.user.accessToken);
       this.alertPopup("Success","Logged in successfully!!!")
-      this.router.navigate(['/orders/view-orders']);
+      if(res.user.roles.includes('VIEW_ORDERS')){
+        this.router.navigate(['/orders/view-orders']);
+      }else{
+        this.router.navigate(['/orders/to-pick']);
+      }
     },err=>{
       this.alertPopup('Error logging in!!!',JSON.stringify(err))
     })

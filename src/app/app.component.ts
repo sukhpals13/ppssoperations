@@ -76,12 +76,12 @@ export class AppComponent {
     {
       title: 'Orders To Pick',
       url: '/orders/to-pick',
-      icon: 'walk'
+      icon: 'walk',
     },
     {
       title: 'View Orders',
       url: '/orders/view-orders',
-      icon: 'list-box'
+      icon: 'list-box',
     },
   ]
 
@@ -98,7 +98,7 @@ export class AppComponent {
   }
 
   ionViewDidEnter(){
-  
+    
   }
 
   ngOnInit(){
@@ -109,14 +109,36 @@ export class AppComponent {
       .subscribe(
         (event) => {
           if (event instanceof NavigationStart) {
-                let token = localStorage.getItem('token');
-                console.log(event.url);
+                let token = localStorage.getItem('token'),
+                user = localStorage.getItem('user');
+                if(user){
+                  var userString = JSON.parse(user);
+                  if(userString.roles.includes('VIEW_ORDERS')){
+                    this.orderPages = [
+                      {
+                        title: 'View Orders',
+                        url: '/orders/view-orders',
+                        icon: 'list-box',
+                      },
+                    ] 
+                  }
+                  if(userString.roles.includes('ORDER_PICKER')){
+                    this.orderPages = [
+                      {
+                        title: 'Orders To Pick',
+                        url: '/orders/to-pick',
+                        icon: 'walk',
+                      },
+                    ]
+                  }
+                }
+                // console.log(event.url);
                   if (event.url=='/landing-page'||event.url=='/auth/login') {
                     if(token)
                       this.router.navigate(['/orders/view-orders']);
                   }else{
                     if(!token)
-                      this.router.navigate(['/landing-page']);
+                      this.router.navigate(['/auth/login']);
                   }
               }
           }
@@ -134,7 +156,7 @@ export class AppComponent {
       localStorage.removeItem('user')
       // this.router.navigate(['/auth/login']);
       console.log('logout called')
-      this.navCtrl.navigateRoot(['/landing-page'])
+      this.navCtrl.navigateRoot(['/auth/login'])
     },err=>{
       this.alertPopup('Error',JSON.stringify(err))
     });

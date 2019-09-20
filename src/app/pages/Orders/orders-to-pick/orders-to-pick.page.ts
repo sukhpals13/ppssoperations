@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { NavController, ActionSheetController } from '@ionic/angular';
+import { NavController, ActionSheetController, MenuController } from '@ionic/angular';
 
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
 
@@ -21,6 +21,7 @@ export class OrdersToPickPage implements OnInit {
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private getDetailsService: GetDetailsService,
+    public menu: MenuController,
     private _Activatedroute: ActivatedRoute,
     private router: Router,
   ) { }
@@ -53,6 +54,7 @@ export class OrdersToPickPage implements OnInit {
   
   ionViewDidEnter() {
     this.getOrderPickingDetails();
+    this.menu.enable(true);
   }
   // get all the order to pick
   async getOrderPickingDetails(){

@@ -85,5 +85,6 @@ export function setProductsDetails(p) {
       }
       return obj;
     })
+    console.log(products)
     return products;
 }
