@@ -41,6 +41,7 @@ ion-list {
 }
 
 .group-btns {
+    position:relative;
     @media (max-width:767px) {
         padding: 0px 9px;
         margin-bottom: 7px;
@@ -54,6 +55,12 @@ ion-list {
             margin-right: 0px;
         }
     }
+    // ion-spinner{
+    //   position: absolute;
+    //   top:-24px;
+    //   left:50%;
+    //   transform: translateX(-50%);
+    // }
 }
 .status-btns{
     ion-button{

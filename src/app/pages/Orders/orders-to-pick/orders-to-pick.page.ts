@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { NavController, ActionSheetController, MenuController } from '@ionic/angular';
 
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
+import { PostDetailsService } from '../../../services/postDetails/post-details.service';
 
 import { OrdersToPickModel } from '../../../interfaces/order';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -21,6 +22,7 @@ export class OrdersToPickPage implements OnInit {
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private getDetailsService: GetDetailsService,
+    public postDetailsService: PostDetailsService,
     public menu: MenuController,
     private _Activatedroute: ActivatedRoute,
     private router: Router,
@@ -81,6 +83,24 @@ export class OrdersToPickPage implements OnInit {
   viewPickDetails(o){
     this.navCtrl.navigateForward('orders/to-pick/'+o.orderNumber);
   }
+  // Begin pick status
+  beginPickStatus(order){
+    console.log('ordertopick order',order);
+    let reqBody = {
+      orderID :order._id,
+      status : order.orderStatus,
+      subStatus: order.orderSubstatus
+    };
+    this.postDetailsService.completeStatusUpdate(reqBody)
+    .subscribe(res =>{
+      //  this.getOrders()
+    },
+     err =>{
+      console.log(err);
+     }
+
+    )
+  }
 
   // Opening the action sheet when clicked on pick order
   async openActionSheet(o) {
@@ -88,7 +108,7 @@ export class OrdersToPickPage implements OnInit {
       text: 'Begin Pick',
       icon: 'play',
       handler: () => {
-        console.log('Begin clicked');
+        this.beginPickStatus(o);
       }
     },{
       text: 'Resume Pick',

@@ -30,6 +30,7 @@ export class OrderDetailsPage implements OnInit {
   // private needsPickedQty = 0;
   // private needsOrderedQty = 0;
   public remainingCount = 0;
+  public completeClicked: boolean;
 
 
   // userInfo : Object;
@@ -57,6 +58,7 @@ export class OrderDetailsPage implements OnInit {
     })
     this.order = defaultOrder;
     this.products = defaultProduct;
+    this.completeClicked = false;
   }
 
   ionViewDidEnter() {
@@ -100,12 +102,14 @@ export class OrderDetailsPage implements OnInit {
   // edit substatus
   changeProductSubStatus(p, v,o) {
     p.subStatus = v;
-    var productID = p._id;
-    let orderID = o._id;
-    let status = p.status;
-    let subStatus = p.subStatus;
+    let reqBody = {
+      subStatus: p.subStatus,
+      status:  p.status,
+    }
+      let orderId= o._id;
+      let prodId= p._id;
     p.statuseditshow = false;
-    this.postDetailsService.updateProductStatusDetails(orderID, productID, status, subStatus)
+    this.postDetailsService.updateProductStatusDetails(orderId, prodId, reqBody)
     .subscribe(res => {
        console.log('response',res);
     }, 
@@ -193,19 +197,25 @@ export class OrderDetailsPage implements OnInit {
       "Needs Ordered": prod.needsOrderedQty,
     }
     let multiSubstatus = '';
-    Object.entries(newstatuses).forEach(val => {
-      console.log('foreach val', val);
-      multiSubstatus += '<div>'+val[0] + ' : ' + val[1] + ' </div>';
-      console.log(multiSubstatus)
-      prod.subStatus = multiSubstatus;
-    })
-    var prodID = prod._id;
-    var orderID = order._id;
-    var status = prod.status;
-    var subStatus = prod.subStatus;
+    // Object.entries(newstatuses).forEach(val => {
+    //   console.log('foreach val', val);
+    //   multiSubstatus += val[0] + ' : ' + val[1];
+    //   console.log('multiSubstatusdfgdfgdf',multiSubstatus);
+    //   prod.subStatus = multiSubstatus;
+    // })
+    let reqBody = {
+       subStatus : {
+        "Picked": prod.pickedQty,
+        "Needs Picked": prod.needsPickedQty,
+        "Needs Ordered": prod.needsOrderedQty,
+       },
+       status: prod.status,
+    }
+    let prodID =  prod._id;
+    let orderID= order._id;
     prod.statuseditMaxQty = false;
 
-    this.postDetailsService.updateProductStatusDetails(orderID, prodID, status, subStatus)
+    this.postDetailsService.updateProductStatusDetails(orderID, prodID, reqBody)
     .subscribe(res => {
        console.log('response',res);
     }, 
@@ -213,6 +223,27 @@ export class OrderDetailsPage implements OnInit {
       console.log(err);
     })
 
+  }
+
+  // Complete status
+  completeStatus(order){
+    this.completeClicked = true;
+    let reqBody = {
+      orderID :order._id,
+      status : order.orderStatus,
+      subStatus: order.orderSubstatus
+    };
+    this.postDetailsService.completeStatusUpdate(reqBody)
+    .subscribe(res =>{
+      this.completeClicked = false;
+       console.log('ordercomplete response');
+    },
+     err =>{
+      this.completeClicked = false;
+      console.log(err);
+     }
+
+    )
   }
 
   // back to pick list

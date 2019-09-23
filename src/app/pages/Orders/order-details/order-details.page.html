@@ -328,7 +328,10 @@
     </mat-accordion>
   </ion-card>
   <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
-    <ion-button color="">Complete</ion-button>
+    <ion-button color="" (click)="completeStatus(order)"> 
+      <!-- <ion-spinner *ngIf="completeClicked" name="dots"></ion-spinner> -->
+      {{completeClicked?'':'Complete'}}<ion-spinner *ngIf="completeClicked" name="dots"></ion-spinner>
+    </ion-button>
     <ion-button color="danger" (click)="backToPick();">Suspend</ion-button>
   </div>
 
