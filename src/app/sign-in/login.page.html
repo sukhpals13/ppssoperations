@@ -41,8 +41,7 @@
         </ng-container>
       </div>
     </ion-list>
-
-    <ion-button class="login-btn" type="submit" expand="block" [disabled]="!loginForm.valid">Log In</ion-button>
+    <ion-button class="login-btn" type="submit" expand="block" [disabled]="!loginForm.valid||loginClicked">{{loginClicked?'':'Login'}}<ion-spinner *ngIf="loginClicked" name="dots"></ion-spinner></ion-button>
     <ion-row class="other-auth-options-row">
       <ion-label class="toggle-label">Remember Me</ion-label>
       <ion-toggle color="secondary" formControlName="remember"></ion-toggle>

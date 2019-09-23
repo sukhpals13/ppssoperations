@@ -111,27 +111,39 @@ export class AppComponent {
           if (event instanceof NavigationStart) {
                 let token = localStorage.getItem('token'),
                 user = localStorage.getItem('user');
-                // if(user){
-                //   var userString = JSON.parse(user);
-                //   if(userString.roles.includes('VIEW_ORDERS')){
-                //     this.orderPages = [
-                //       {
-                //         title: 'View Orders',
-                //         url: '/orders/view-orders',
-                //         icon: 'list-box',
-                //       },
-                //     ] 
-                //   }
-                //   if(userString.roles.includes('ORDER_PICKER')){
-                //     this.orderPages = [
-                //       {
-                //         title: 'Orders To Pick',
-                //         url: '/orders/to-pick',
-                //         icon: 'walk',
-                //       },
-                //     ]
-                //   }
-                // }
+                if(user){
+                  var userString = JSON.parse(user);
+                  if(userString.roles.includes('SUPER')){
+                    this.orderPages = [
+                      {
+                        title: 'Orders To Pick',
+                        url: '/orders/to-pick',
+                        icon: 'walk',
+                      },
+                      {
+                        title: 'View Orders',
+                        url: '/orders/view-orders',
+                        icon: 'list-box',
+                      },
+                    ] 
+                  }else if(userString.roles.includes('VIEW_ORDERS')){
+                    this.orderPages = [
+                      {
+                        title: 'View Orders',
+                        url: '/orders/view-orders',
+                        icon: 'list-box',
+                      },
+                    ] 
+                  }else if(userString.roles.includes('ORDER_PICKER')){
+                    this.orderPages = [
+                      {
+                        title: 'Orders To Pick',
+                        url: '/orders/to-pick',
+                        icon: 'walk',
+                      },
+                    ]
+                  }
+                }
                 // console.log(event.url);
                   if (event.url=='/landing-page'||event.url=='/auth/login') {
                     if(token)

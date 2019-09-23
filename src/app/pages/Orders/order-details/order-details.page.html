@@ -190,12 +190,20 @@
           </ion-row>
           <ion-row *ngIf="product.subStatus" class="multiStatus">
             <ion-col>Sub Status</ion-col>
-            <ion-col *ngIf="15>product.subStatus.length">
-              <app-text-shell  class="bold" animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell>
+            <ion-col>
+              <!-- <app-text-shell  class="bold" animation="bouncing" lines="1" [data]="product.subStatus"></app-text-shell> -->
+              <strong>
+                <div *ngIf="checkSubStatusType(product)=='string'">{{product.subStatus}}</div>
+                <div *ngIf="checkSubStatusType(product)=='object'">
+                  <div *ngFor="let subStatus of product.subStatusToShow">
+                    {{subStatus[0]}}: {{subStatus[1]}}
+                  </div>
+                </div>
+              </strong>
             </ion-col>
-            <ion-col *ngIf="product.subStatus.length>15">
+            <!-- <ion-col *ngIf="product.subStatus.length>15">
               <div class="bold" [innerHTML]="product.subStatus"></div>
-            </ion-col>
+            </ion-col> -->
           </ion-row>
           <ion-row>
             <ion-col style="text-align: right;" class="substatus">

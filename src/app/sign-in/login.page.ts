@@ -13,6 +13,7 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
+  loginClicked: boolean;
 
   validation_messages = {
     'email': [
@@ -57,6 +58,7 @@ export class LoginPage implements OnInit {
   
   ionViewDidEnter(){
     this.menu.enable(false);
+    this.loginClicked = false;
   }
 
   async alertPopup(title,msg){
@@ -76,9 +78,11 @@ export class LoginPage implements OnInit {
       password: this.loginForm.get('password').value
     }
     console.log(user)
+    this.loginClicked = true;
     // this.alertPopup('User Details',JSON.stringify(user))
     this.auth.login(user)
     .subscribe(res=>{
+      this.loginClicked = false;
       console.log(res);
       localStorage.setItem('user',JSON.stringify(res.user));
       if(this.loginForm.get('remember').value){
@@ -94,6 +98,7 @@ export class LoginPage implements OnInit {
         this.router.navigate(['/orders/to-pick']);
       }
     },err=>{
+      this.loginClicked = false;
       this.alertPopup('Error logging in!!!',JSON.stringify(err))
     })
   }

@@ -101,14 +101,22 @@ export class OrderDetailsPage implements OnInit {
 
   // edit substatus
   changeProductSubStatus(p, v,o) {
-    p.subStatus = v;
+    console.log(v)
+    p.subStatus = {
+      "Picked": (v=='Picked')?1:0,
+      "Needs Picked": (v=='Needs Pick')?1:0,
+      "Needs Ordered": (v=='Needs Ordered')?1:0,
+    };
+    p.subStatusToShow = Object.entries(p.subStatus);
     let reqBody = {
-      subStatus: p.subStatus,
+      subStatus : p.subStatus,
       status:  p.status,
     }
-      let orderId= o._id;
-      let prodId= p._id;
+    let orderId= o._id;
+    let prodId= p._id;
     p.statuseditshow = false;
+    console.log(typeof p)
+    console.log(p)
     this.postDetailsService.updateProductStatusDetails(orderId, prodId, reqBody)
     .subscribe(res => {
        console.log('response',res);
@@ -191,18 +199,18 @@ export class OrderDetailsPage implements OnInit {
   // submit substatuses for multiple quantity
   SubmitSubStatuses(prod, order) {
     // console.log('productttttttttttttt', prod);
-    let newstatuses = {
+    prod.subStatus = {
       "Picked": prod.pickedQty,
       "Needs Picked": prod.needsPickedQty,
       "Needs Ordered": prod.needsOrderedQty,
     }
-    let multiSubstatus = '';
-    // Object.entries(newstatuses).forEach(val => {
-    //   console.log('foreach val', val);
-    //   multiSubstatus += val[0] + ' : ' + val[1];
-    //   console.log('multiSubstatusdfgdfgdf',multiSubstatus);
-    //   prod.subStatus = multiSubstatus;
-    // })
+    // let multiSubstatus = '';
+    // // Object.entries(newstatuses).forEach(val => {
+    // //   console.log('foreach val', val);
+    // //   multiSubstatus += val[0] + ' : ' + val[1];
+    // //   console.log('multiSubstatusdfgdfgdf',multiSubstatus);
+    // //   prod.subStatus = multiSubstatus;
+    // // })
     let reqBody = {
        subStatus : {
         "Picked": prod.pickedQty,
@@ -211,10 +219,11 @@ export class OrderDetailsPage implements OnInit {
        },
        status: prod.status,
     }
+    prod.subStatusToShow = Object.entries(prod.subStatus)
     let prodID =  prod._id;
     let orderID= order._id;
     prod.statuseditMaxQty = false;
-
+    // console.log(prod)
     this.postDetailsService.updateProductStatusDetails(orderID, prodID, reqBody)
     .subscribe(res => {
        console.log('response',res);
@@ -250,6 +259,8 @@ export class OrderDetailsPage implements OnInit {
   backToPick(){
     this.navCtrl.navigateBack('/orders/to-pick');
   }
-  
+  checkSubStatusType(p){
+    return typeof p.subStatus
+  }
 
 } 
