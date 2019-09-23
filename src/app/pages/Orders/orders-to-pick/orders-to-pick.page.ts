@@ -65,7 +65,7 @@ export class OrdersToPickPage implements OnInit {
     .subscribe(res=>{
       console.log(res);
       this.orders = res;
-      
+      console.log(this.orders)
       this.orders.orders.push({
         orderNumber: 1,
         orderSource: 'abc',
@@ -84,16 +84,17 @@ export class OrdersToPickPage implements OnInit {
     this.navCtrl.navigateForward('orders/to-pick/'+o.orderNumber);
   }
   // Begin pick status
-  beginPickStatus(order){
+  async beginPickStatus(order){
     console.log('ordertopick order',order);
     let reqBody = {
       orderID :order._id,
-      status : order.orderStatus,
-      subStatus: order.orderSubstatus
+      status : "Begun",
+      subStatus: "Picking"
     };
     this.postDetailsService.completeStatusUpdate(reqBody)
     .subscribe(res =>{
       //  this.getOrders()
+      this.getOrderPickingDetails()
     },
      err =>{
       console.log(err);

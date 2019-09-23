@@ -91,6 +91,7 @@ export class OrderDetailsPage implements OnInit {
           newObj.pickedQty = 0;
           newObj.needsPickedQty = 0;
           newObj.needsOrderedQty = 0;
+          newObj.subStatusToShow = Object.entries(newObj.subStatus)
           return newObj;
         });
 
@@ -239,8 +240,8 @@ export class OrderDetailsPage implements OnInit {
     this.completeClicked = true;
     let reqBody = {
       orderID :order._id,
-      status : order.orderStatus,
-      subStatus: order.orderSubstatus
+      status : "Status Changed",
+      subStatus: "Complete"
     };
     this.postDetailsService.completeStatusUpdate(reqBody)
     .subscribe(res =>{
