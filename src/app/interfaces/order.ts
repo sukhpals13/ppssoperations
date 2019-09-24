@@ -6,7 +6,8 @@ export class OrderModel extends ShellModel {
     orgName: string;
     orderAge?: string;
     orderStatus: string;
-    orderSubstatus: string;
+    orderSubstatus?: string;
+    orderSubStatus?: string;
     orderTotalDue?: number;
     userInfo?: UserInfo;
     shipping?: Shipping;

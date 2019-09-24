@@ -72,7 +72,7 @@ export class OrdersToPickPage implements OnInit {
         orgName: 'test',
         orderAge: 'some days',
         orderStatus: 'done',
-        orderSubstatus: 'Picking',
+        orderSubStatus: 'Picking',
         isShell: true
       })
     },err=>{

@@ -60,7 +60,7 @@ export class ViewOrdersPage implements OnInit {
         orgName: null,
         orderTotalDue: null,
         orderStatus: null,
-        orderSubstatus: null,
+        orderSubStatus: null,
         isShell: true
       };
       this.orders.orders.push(obj);
