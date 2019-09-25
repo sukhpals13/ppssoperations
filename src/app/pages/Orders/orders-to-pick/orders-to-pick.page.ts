@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, NgZone } from '@angular/core';
 import { NavController, ActionSheetController, MenuController } from '@ionic/angular';
 
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
@@ -14,9 +14,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class OrdersToPickPage implements OnInit {
 
-  orders : OrdersToPickModel;
+  orders: OrdersToPickModel;
   Arr = Array; //Array type captured in a variable
-  num:number = 6;
+  num: number = 6;
 
   constructor(
     public navCtrl: NavController,
@@ -26,6 +26,7 @@ export class OrdersToPickPage implements OnInit {
     public menu: MenuController,
     private _Activatedroute: ActivatedRoute,
     private router: Router,
+    private zone: NgZone,
   ) { }
 
   @HostBinding('class.is-shell') get isShell() {
@@ -38,8 +39,8 @@ export class OrdersToPickPage implements OnInit {
       orders: [],
       isShell: true
     };
-    var i =0;
-    while(i<6){
+    var i = 0;
+    while (i < 6) {
       var obj = {
         orderNumber: null,
         orderSource: null,
@@ -53,54 +54,47 @@ export class OrdersToPickPage implements OnInit {
       i++;
     }
   }
-  
+
   ionViewDidEnter() {
     this.getOrderPickingDetails();
     this.menu.enable(true);
   }
   // get all the order to pick
-  async getOrderPickingDetails(){
-    
+  async getOrderPickingDetails() {
+
     this.getDetailsService.getListNeedingPicked()
-    .subscribe(res=>{
-      console.log(res);
-      this.orders = res;
-      console.log(this.orders)
-      this.orders.orders.push({
-        orderNumber: 1,
-        orderSource: 'abc',
-        orgName: 'test',
-        orderAge: 'some days',
-        orderStatus: 'done',
-        orderSubStatus: 'Picking',
-        isShell: true
+      .subscribe(res => {
+        this.orders = res;
+        console.log(res, 'called now', this.orders)
+      }, err => {
+        console.log(err);
       })
-    },err=>{
-      console.log(err);
-    })
   }
 
-  viewPickDetails(o){
-    this.navCtrl.navigateForward('orders/to-pick/'+o.orderNumber);
+  viewPickDetails(o) {
+    this.navCtrl.navigateForward('orders/to-pick/' + o.orderNumber);
   }
   // Begin pick status
-  async beginPickStatus(order){
-    console.log('ordertopick order',order);
+  async changePickStatus(order, type) {
+    console.log('ordertopick order', order);
     let reqBody = {
-      orderID :order._id,
-      status : "Begun",
-      subStatus: "Picking"
+      orderID: order._id,
+      status: type == 'Begin' ? 'Started' : (type == 'Resume' ? 'Resume' : 'Completed'),
+      subStatus: (type=="Picked"||type == 'Resume') ? 'Picked' : 'Delivered',
     };
     this.postDetailsService.completeStatusUpdate(reqBody)
-    .subscribe(res =>{
-      //  this.getOrders()
-      this.getOrderPickingDetails()
-    },
-     err =>{
-      console.log(err);
-     }
+      .subscribe(res => {
+        console.log(res);
+        this.zone.run(() => {
+          order.orderStatus = reqBody.status;
+          order.orderSubStatus = reqBody.subStatus;
+        })
+      },
+        err => {
+          console.log(err);
+        }
 
-    )
+      )
   }
 
   // Opening the action sheet when clicked on pick order
@@ -109,20 +103,23 @@ export class OrdersToPickPage implements OnInit {
       text: 'Begin Pick',
       icon: 'play',
       handler: () => {
-        this.beginPickStatus(o);
+        // this.changePickStatus(o, 'Begin');
+        console.log('Begin Pick');
       }
-    },{
+    }, {
       text: 'Resume Pick',
       icon: 'bicycle',
       handler: () => {
-        console.log('Resume clicked');
+        // this.changePickStatus(o, 'Resume');
+        console.log('Resume Pick');
       }
     }, {
       text: 'End Pick',
       icon: 'power',
       role: 'destructive',
       handler: () => {
-        console.log('End clicked');
+        // this.changePickStatus(o, 'End');
+        console.log('End Pick');
       }
     }, {
       text: 'Cancel',
@@ -131,7 +128,7 @@ export class OrdersToPickPage implements OnInit {
       handler: () => {
         console.log('Cancel clicked');
       }
-    },{
+    }, {
       text: 'Pick Detail',
       icon: 'arrow-forward',
       handler: () => {
@@ -140,14 +137,15 @@ export class OrdersToPickPage implements OnInit {
       }
     }]
     // filtering what to show depending upon the status of the order
-    let finalPickOptions = (o.orderSubstatus=='Needs Picked')?pickOptions.filter((v,i)=>{if(i==0||i==3||i==4)return v}):pickOptions.filter((v,i)=>{if(i==1||i==2||i==3||i==4)return v});
-
-    console.log(finalPickOptions)
+    // let finalPickOptions = (o.orderSubStatus == 'Needs Picked') ? pickOptions.filter((v, i) => { if (i == 0 || i == 3 || i == 4) return v }) : (o.orderSubStatus == 'Needs Picked')?pickOptions.filter((v, i) => { if ( i == 3 ) return v }) : pickOptions.filter((v, i) => { if (i == 1 || i == 2 || i == 3 || i == 4) return v });
+    let finalPickOptions = [...pickOptions];
+    
+    // console.log(finalPickOptions)
     const actionSheet = await this.actionSheetController
-    .create({
-      header: 'Picking Options',
-      buttons: finalPickOptions
-    });
+      .create({
+        header: 'Picking Options',
+        buttons: finalPickOptions
+      });
 
     await actionSheet.present();
   }

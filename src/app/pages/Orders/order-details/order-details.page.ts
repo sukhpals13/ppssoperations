@@ -247,6 +247,7 @@ export class OrderDetailsPage implements OnInit {
     .subscribe(res =>{
       this.completeClicked = false;
        console.log('ordercomplete response');
+       this.navCtrl.navigateBack('/orders/to-pick');
     },
      err =>{
       this.completeClicked = false;

@@ -160,3 +160,43 @@ ion-col {
         font-weight:bold;
     }
 }
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0;
+        width: 50%;
+    }
+    50%{
+        background-position: 0 0;
+        width: 100%;
+    }
+    100%{
+        background-position: 468px 0;
+        width: 50%;
+    }
+}
+:host {
+    --text-shell-background: transparent;
+    --text-shell-line-color: #EEE;
+    --text-shell-line-height: 16px;
+    --text-shell-line-gutter: 3px;
+
+    .animated-background {
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #F6F6F6;
+        background: linear-gradient(to right, var(--text-shell-line-color, #CCC) 93% , var(--text-shell-background, #FFF) 93%);
+        background-size: 800px 104px;
+        height: 96px;
+        position: relative;
+    }
+    .text-line {
+        height: var(--text-shell-line-height);
+        width: 230px;
+        //  background: #F6F6F6;
+        margin: 4px 0;
+        @extend .animated-background;
+    }
+  }

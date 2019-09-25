@@ -132,12 +132,14 @@
       <mat-expansion-panel *ngFor="let product of products; let i = index" class="product-display">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell>
+            <!-- <app-text-shell animation="bouncing" lines="1" [data]="product.productTitle"></app-text-shell> -->
+            <div *ngIf="product.productTitle">{{product.productTitle}}</div>
+            <div class="text-line" *ngIf="!product.productTitle">{{product.productTitle}}</div>
           </mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <img mat-card-image [src]="product.imageToShow" [alt]="product.title">
+        <img mat-card-image [src]="product.imageToShow" [alt]="product.title" *ngIf="product.imageToShow">
         <ion-grid>
           <ion-row>
             <ion-col size="4" *ngFor="let v of product.variants">

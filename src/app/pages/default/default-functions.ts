@@ -10,6 +10,7 @@ export function setOrderDetails(o,oNo,pNo) {
         order.address = (order.shipping.streetAddress ? order.shipping.streetAddress + ',' : '') + (order.shipping.city ? order.shipping.city + ', ' : '') + (order.shipping.state ? order.shipping.state + '-' : '') + (order.shipping.zipCode ? order.shipping.zipCode : '');
     else
         order.address = '-';
+    order.mobilePhoneNumber = order.mobilePhoneNumber?order.mobilePhoneNumber:'-';
     let date = new Date(order.created);
     let mm = (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : "0" + (date.getMonth() + 1);
     let dd = date.getDate() > 10 ? date.getDate() : "0" + date.getDate();

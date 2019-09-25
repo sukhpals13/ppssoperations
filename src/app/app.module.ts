@@ -22,6 +22,7 @@ import { Intercept } from './interceptors/interceptors';
 // custom HTTP requests services 
 import { AuthService } from './services/auth/auth.service';
 import { GetDetailsService } from './services/getDetails/get-details.service';
+import { PostDetailsService } from './services/postDetails/post-details.service';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
@@ -47,6 +48,7 @@ import { IonicStorageModule } from '@ionic/storage';
     SplashScreen,
     AuthService,
     GetDetailsService,
+    PostDetailsService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: Intercept, multi: true },
   ],

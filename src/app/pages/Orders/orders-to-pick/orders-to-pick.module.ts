@@ -24,9 +24,6 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  // providers: [
-  //   GetDetailsService
-  // ],
   declarations: [OrdersToPickPage]
 })
 export class OrdersToPickPageModule {}
