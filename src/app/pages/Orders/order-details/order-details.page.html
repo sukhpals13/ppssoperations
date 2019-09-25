@@ -208,7 +208,7 @@
             </ion-col> -->
           </ion-row>
           <ion-row>
-            <ion-col style="text-align: right;" class="substatus">
+            <ion-col *ngIf="editOrderCheck" style="text-align: right;" class="substatus">
                 <span class="editStatus color-primary" (click)="substatusOptions(product)">Edit Status>>></span>
             </ion-col>
           </ion-row>
@@ -337,12 +337,12 @@
       </mat-expansion-panel>
     </mat-accordion>
   </ion-card>
-  <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo">
-    <ion-button color="" (click)="completeStatus(order)"> 
+  <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo && editOrderCheck">
+    <ion-button color="" (click)="completeStatus(order, products)"> 
       <!-- <ion-spinner *ngIf="completeClicked" name="dots"></ion-spinner> -->
       {{completeClicked?'':'Complete'}}<ion-spinner *ngIf="completeClicked" name="dots"></ion-spinner>
     </ion-button>
-    <ion-button color="danger" (click)="backToPick();">Suspend</ion-button>
+    <ion-button color="danger" (click)="backToPick(order);">Suspend</ion-button>
   </div>
 
 </ion-content>

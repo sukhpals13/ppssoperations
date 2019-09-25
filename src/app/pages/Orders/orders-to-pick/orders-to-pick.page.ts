@@ -74,13 +74,21 @@ export class OrdersToPickPage implements OnInit {
   viewPickDetails(o) {
     this.navCtrl.navigateForward('orders/to-pick/' + o.orderNumber);
   }
+
+  // Edit pick detail
+  editPickDetails(o) {
+    this.navCtrl.navigateForward('orders/to-pick/edit/' + o.orderNumber);
+  }
+
   // Begin pick status
   async changePickStatus(order, type) {
     console.log('ordertopick order', order);
     let reqBody = {
       orderID: order._id,
-      status: type == 'Begin' ? 'Started' : (type == 'Resume' ? 'Resume' : 'Completed'),
-      subStatus: (type=="Picked"||type == 'Resume') ? 'Picked' : 'Delivered',
+      // status: type == 'Begin' ? 'Started' : (type == 'Resume' ? 'Resume' : 'Completed'),
+      // subStatus: (type=="Picked"||type == 'Resume') ? 'Picked' : 'Delivered',
+      status: "In Progress",
+      subStatus: "Picking",
     };
     this.postDetailsService.completeStatusUpdate(reqBody)
       .subscribe(res => {
@@ -89,6 +97,7 @@ export class OrdersToPickPage implements OnInit {
           order.orderStatus = reqBody.status;
           order.orderSubStatus = reqBody.subStatus;
         })
+        this.editPickDetails(order);
       },
         err => {
           console.log(err);
@@ -99,13 +108,15 @@ export class OrdersToPickPage implements OnInit {
 
   // Opening the action sheet when clicked on pick order
   async openActionSheet(o) {
+    console.log('orderrrrrr',o);
     let pickOptions = [{
       text: 'Begin Pick',
       icon: 'play',
       handler: () => {
-        // this.changePickStatus(o, 'Begin');
+        this.changePickStatus(o, 'Begin');
         console.log('Begin Pick');
-      }
+
+      } 
     }, {
       text: 'Resume Pick',
       icon: 'bicycle',
