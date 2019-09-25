@@ -28,9 +28,6 @@ export class OrderDetailsPage implements OnInit {
   public statuseditshow = false;
   public statuseditMaxQty = false;
   public editOrderCheck: boolean;
-  // private pickedQty = 0;
-  // private needsPickedQty = 0;
-  // private needsOrderedQty = 0;
   public remainingCount = 0;
   public completeClicked: boolean;
 
@@ -215,13 +212,6 @@ export class OrderDetailsPage implements OnInit {
       "Needs Picked": prod.needsPickedQty,
       "Needs Ordered": prod.needsOrderedQty,
     }
-    // let multiSubstatus = '';
-    // // Object.entries(newstatuses).forEach(val => {
-    // //   console.log('foreach val', val);
-    // //   multiSubstatus += val[0] + ' : ' + val[1];
-    // //   console.log('multiSubstatusdfgdfgdf',multiSubstatus);
-    // //   prod.subStatus = multiSubstatus;
-    // // })
     let reqBody = {
       subStatus: {
         "Picked": prod.pickedQty,
@@ -245,7 +235,7 @@ export class OrderDetailsPage implements OnInit {
 
   }
 
-  async alertPopup(title,msg){
+  async alertPopup(title, msg) {
     const alert = await this.alertCtrl.create({
       header: title,
       message: msg,
@@ -266,26 +256,28 @@ export class OrderDetailsPage implements OnInit {
       subStatus: "Complete"
     };
     product.forEach(val => {
-      if (val.subStatus.Picked !== val.quantity) {
+      console.log(val.subStatus);
+      if (val.subStatus.Picked + val.subStatus["Needs Ordered"] !== val.quantity) {
         this.completeClicked = false;
         flag = false;
-        this.alertPopup("Alert","All products are not Picked!")
-        
+
       }
     });
 
-    if(flag){
+    if (flag) {
       this.postDetailsService.completeStatusUpdate(reqBody)
-      .subscribe(res =>{
-         console.log('ordercomplete response');
-         this.navCtrl.navigateBack('/orders/to-pick');
-         this.completeClicked = false;
-      },
-       err =>{
-        this.completeClicked = false;
-        console.log(err);
-       }
-      )
+        .subscribe(res => {
+          console.log('ordercomplete response');
+          this.navCtrl.navigateBack('/orders/to-pick');
+          this.completeClicked = false;
+        },
+          err => {
+            this.completeClicked = false;
+            console.log(err);
+          }
+        )
+    } else {
+      this.alertPopup("Alert", "All products are not Set!")
     }
 
 
@@ -301,12 +293,12 @@ export class OrderDetailsPage implements OnInit {
       subStatus: "Pick Suspended"
     };
     this.postDetailsService.completeStatusUpdate(reqBody)
-      .subscribe(res =>{
-         this.navCtrl.navigateBack('/orders/to-pick');
+      .subscribe(res => {
+        this.navCtrl.navigateBack('/orders/to-pick');
       },
-       err =>{
-        console.log(err);
-       }
+        err => {
+          console.log(err);
+        }
       )
   }
   checkSubStatusType(p) {

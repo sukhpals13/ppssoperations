@@ -81,7 +81,7 @@ export class OrdersToPickPage implements OnInit {
   }
 
   // Begin pick status
-  async changePickStatus(order, type) {
+  async changePickStatus(order) {
     console.log('ordertopick order', order);
     let reqBody = {
       orderID: order._id,
@@ -113,7 +113,7 @@ export class OrdersToPickPage implements OnInit {
       text: 'Begin Pick',
       icon: 'play',
       handler: () => {
-        this.changePickStatus(o, 'Begin');
+        this.changePickStatus(o);
         console.log('Begin Pick');
 
       } 
@@ -122,15 +122,8 @@ export class OrdersToPickPage implements OnInit {
       icon: 'bicycle',
       handler: () => {
         // this.changePickStatus(o, 'Resume');
+        this.changePickStatus(o);
         console.log('Resume Pick');
-      }
-    }, {
-      text: 'End Pick',
-      icon: 'power',
-      role: 'destructive',
-      handler: () => {
-        // this.changePickStatus(o, 'End');
-        console.log('End Pick');
       }
     }, {
       text: 'Cancel',
@@ -148,8 +141,8 @@ export class OrdersToPickPage implements OnInit {
       }
     }]
     // filtering what to show depending upon the status of the order
-    // let finalPickOptions = (o.orderSubStatus == 'Needs Picked') ? pickOptions.filter((v, i) => { if (i == 0 || i == 3 || i == 4) return v }) : (o.orderSubStatus == 'Needs Picked')?pickOptions.filter((v, i) => { if ( i == 3 ) return v }) : pickOptions.filter((v, i) => { if (i == 1 || i == 2 || i == 3 || i == 4) return v });
-    let finalPickOptions = [...pickOptions];
+    let finalPickOptions = (o.orderSubStatus == 'Needs Picked') ? pickOptions.filter((v, i) => { if (i == 0 || i == 2 || i == 3) return v }) : pickOptions.filter((v, i) => { if (i == 1 || i == 2 || i == 3) return v });
+    // let finalPickOptions = [...pickOptions];
     
     // console.log(finalPickOptions)
     const actionSheet = await this.actionSheetController
