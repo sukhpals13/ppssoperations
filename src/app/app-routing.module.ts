@@ -24,6 +24,10 @@ const routes: Routes = [
   { path: 'orders/view-orders/:oNumber', loadChildren: () => import('./pages/Orders/order-details/order-details.module').then(m => m.OrderDetailsPageModule) },
   { path: 'orders/to-pick/:pNumber', loadChildren: () => import('./pages/Orders/order-details/order-details.module').then(m => m.OrderDetailsPageModule) },
   { path: 'orders/to-pick/edit/:pNumber', loadChildren: () => import('./pages/Orders/order-details/order-details.module').then(m => m.OrderDetailsPageModule) },
+
+  { path: 'clients/view-clients', loadChildren: () => import('./pages/Clients/view-clients/view-clients.module').then(m => m.ViewClientsPageModule) },
+  { path: 'clients/client-details', loadChildren: () => import('./pages/Clients/client-details/client-details.module').then(m => m.ClientDetailsPageModule) },
+
   { path: '**', redirectTo: 'page-not-found' },
   // { path: 'order-details', loadChildren: './pages/Orders/order-details/order-details.module#OrderDetailsPageModule' },
   // { path: 'orders-to-pick', loadChildren: './pages/Orders/orders-to-pick/orders-to-pick.module#OrdersToPickPageModule' }

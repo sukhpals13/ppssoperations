@@ -83,6 +83,18 @@ export class AppComponent {
       url: '/orders/view-orders',
       icon: 'list-box',
     },
+  ];
+  clientPages = [
+    {
+      title: 'View Clients',
+      url: '/clients/view-clients',
+      icon: 'eye',
+    },
+    {
+      title: 'Client Details',
+      url: '/clients/client-details',
+      icon: 'list-box',
+    },  
   ]
 
   constructor(

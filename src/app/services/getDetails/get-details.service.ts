@@ -23,4 +23,9 @@ export class GetDetailsService {
     }
     return this.http.get<OrdersToPickModel>(url)
   }
+
+  // Get All clients
+  getAllClients(){
+    return this.http.get<OrdersToPickModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/client')
+  }
 }

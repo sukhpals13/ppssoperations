@@ -39,6 +39,17 @@
           </ion-menu-toggle>
         </ion-list>
         <ion-list>
+          <ion-list-header>Clients</ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let c of clientPages; let i = index">
+            <ion-item [routerLink]="c.url">
+              <ion-icon slot="start" [name]="c.icon"></ion-icon>
+              <ion-label>
+                {{c.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <ion-list>
           <ion-list-header>Orders</ion-list-header>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of orderPages; let i = index">
             <ion-item [routerLink]="p.url">
