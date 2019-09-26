@@ -26,6 +26,6 @@ export class GetDetailsService {
 
   // Get All clients
   getAllClients(){
-    return this.http.get<OrdersToPickModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/client')
+    return this.http.post<any>('https://integration.ebusiness.pittsburghpublicsafety.com/api/client/find',{"searchPhrase":"Pittsburgh"});
   }
 }
