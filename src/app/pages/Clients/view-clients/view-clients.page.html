@@ -1,9 +1,36 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>viewClients</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Clients
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="4" size-xs="12" *ngFor="let client of clients.clients">
+          <ion-card>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <h6>Name</h6>
+                  <app-text-shell animation="bouncing" lines="2" [data]="client.name"></app-text-shell>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <h6>Client Number</h6>
+                    <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>

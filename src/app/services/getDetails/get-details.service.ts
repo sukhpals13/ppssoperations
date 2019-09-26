@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { OrdersToPickModel } from '../../interfaces/order';
+import { ClientsListModel } from '../../interfaces/clients';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,6 @@ export class GetDetailsService {
 
   // Get All clients
   getAllClients(){
-    return this.http.post<any>('https://integration.ebusiness.pittsburghpublicsafety.com/api/client/find',{"searchPhrase":"Pittsburgh"});
+    return this.http.post<ClientsListModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/client/find',{"searchPhrase":"Pittsburgh"});
   }
 }

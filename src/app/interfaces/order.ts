@@ -107,3 +107,4 @@ export class OrdersToPickModel extends ShellModel {
     status: number;
     orders: Array<OrderModel>;
 }
+
