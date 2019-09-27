@@ -6,6 +6,8 @@ export class ClientsModel extends ShellModel {
 }
 
 export class ClientsListModel extends ShellModel {
+    clientNumber: number;
+    name: string;
     clients: Array<ClientsModel>;
 }
 
