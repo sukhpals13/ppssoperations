@@ -12,7 +12,7 @@ import { ClientsListModel } from '../../../interfaces/clients'
 export class ViewClientsPage implements OnInit {
 
   clients: ClientsListModel;
-  searchText: string = " ";
+  searchText: string;
 
  
 
@@ -29,14 +29,32 @@ export class ViewClientsPage implements OnInit {
 
   ngOnInit() {
     this.clients = {
+      name: null,
+      clientNumber: null,
       clients: [],
-      isShell: true
+      isShell: true,
+      
     };
+    this.initializeData();
     this.getClientList();
   }
 
+  initializeData(){
+    this.clients.clients = [];
+    var i =0;
+    while(i<6){
+      var obj = {
+        name: null,
+        clientNumber: null,
+        isShell: true
+      };
+      this.clients.clients.push(obj);
+      i++;
+    }
+  }
+
   getClientList(){
-    this.getDetailsService.getAllClients(this.searchText)
+    this.getDetailsService.getAllClients()
     .subscribe(res => {
       
       this.clients = res;
