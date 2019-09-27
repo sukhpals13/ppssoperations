@@ -24,24 +24,34 @@
             <ion-col size="12">
               Name
             </ion-col>
-            <ion-col size="12">
+            <ion-col size="12" *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1" [data]="client.name"></app-text-shell>
+            </ion-col>
+            <ion-col size="12" *ngIf="editMode">
+              <ion-input [(ngModel)]="client.name"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
               Client #
             </ion-col>
-            <ion-col size="12">
+            <ion-col size="12" *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
+            </ion-col>
+            <ion-col size="12" *ngIf="editMode">
+              <ion-input type="number" [(ngModel)]="client.clientNumber"></ion-input>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
               Has Standard Pricing
             </ion-col>
-            <ion-col size="12">
-              <app-text-shell animation="bouncing" lines="1" [data]="client.hasStandardPricing?'Yes':'No'"></app-text-shell>
+            <ion-col size="12" *ngIf="!editMode">
+              <app-text-shell animation="bouncing" lines="1" [data]="client.hasStandardPricing?'Yes':'No'">
+              </app-text-shell>
+            </ion-col>
+            <ion-col size="12" *ngIf="editMode">
+              <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -57,39 +67,45 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              Enable Agency Order
+              Agency Order
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1"
                 [data]="client.customizations.enableAgencyOrder?'Yes':'No'"></app-text-shell>
-              <!-- <app-text-shell animation="bouncing" lines="1" #enableAgency></app-text-shell> -->
+            </ion-col>
+            <ion-col *ngIf="editMode">
+              <ion-toggle [(ngModel)]="client.customizations.enableAgencyOrder"></ion-toggle>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              Enable Allotment Order
+              Allotment Order
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1"
                 [data]="client.customizations.enableAllotmentOrder?'Yes':'No'"></app-text-shell>
-              <!-- <app-text-shell animation="bouncing" lines="1" #enableAllotment></app-text-shell> -->
+            </ion-col>
+            <ion-col *ngIf="editMode">
+              <ion-toggle [(ngModel)]="client.customizations.enableAllotmentOrder"></ion-toggle>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              Enable Cash Order
+              Cash Order
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1" [data]="client.customizations.enableCashOrder?'Yes':'No'">
               </app-text-shell>
-              <!-- <app-text-shell animation="bouncing" lines="1" #enableCash></app-text-shell> -->
+            </ion-col>
+            <ion-col *ngIf="editMode">
+              <ion-toggle [(ngModel)]="client.customizations.enableCashOrder"></ion-toggle>
             </ion-col>
           </ion-row>
         </ion-grid>
       </div>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="client.ranksOrTitles.length" id="client-ranks">
+  <ion-card *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
     <ion-card-header color="primary">
       <ion-card-subtitle>Ranks or Titles</ion-card-subtitle>
     </ion-card-header>
@@ -98,8 +114,22 @@
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let rank of client.ranksOrTitles">
             <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+              <app-text-shell style="padding: 10px" animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+              <!-- <ion-fab-button *ngIf="editMode">
+                <ion-icon name="trash"></ion-icon>
+              </ion-fab-button> -->
             </ion-col>
+            <ion-col style="text-align: right;">
+              <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="editMode">
+            <mat-form-field>
+              <input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition">
+            </mat-form-field>
+            <ion-button (click)="addRanks()">Add</ion-button>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -112,17 +142,28 @@
       </div>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="client.assignments.length" id="client-assingment">
+  <ion-card *ngIf="client.assignments.length||editMode" id="client-assingment">
     <ion-card-header color="primary">
       <ion-card-subtitle>Assingments</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <div>
         <ion-grid *ngIf="client.name">
-          <ion-row *ngFor="let rank of client.assignments">
+          <ion-row *ngFor="let data of client.assignments">
             <ion-col>
-              <app-text-shell animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+              <app-text-shell style="padding: 10px;" animation="bouncing" lines="1" [data]="data"></app-text-shell>
             </ion-col>
+            <ion-col style="text-align: right;">
+              <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="editMode">
+            <mat-form-field>
+              <input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition">
+            </mat-form-field>
+            <ion-button (click)="addAssingment()">Add</ion-button>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -134,6 +175,13 @@
         </ion-grid>
       </div>
     </ion-card-content>
+  </ion-card>
+  <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
+    <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
+  </ion-card>
+  <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="editMode">
+    <ion-button style="width: 100%;" (click)="editToggle()">Save</ion-button>
+    <!-- <ion-button style="width: 100%;" (click)="editToggle()">Cancel</ion-button> -->
   </ion-card>
 
 </ion-content>

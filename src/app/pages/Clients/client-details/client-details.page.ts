@@ -11,6 +11,10 @@ export class ClientDetailsPage implements OnInit {
 
   public client : any;
   public clientId : string;
+  public editMode : boolean;
+  public rankAddition: string;
+  public assingmentAddition: string;
+  public storedData: any;
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.client && this.client.isShell) ? true : false;
@@ -23,6 +27,9 @@ export class ClientDetailsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.editMode = false;
+    this.rankAddition = '';
+    this.assingmentAddition = '';
     this.client = {
       name:null,
       customizations:{
@@ -34,7 +41,10 @@ export class ClientDetailsPage implements OnInit {
     };
   }
   ionViewDidEnter(){
-    let clientId
+    this.rankAddition = '';
+    this.assingmentAddition = '';
+    let clientId;
+    this.editMode = false;
     this._Activatedroute.params.subscribe(it => {
       clientId = it.cNumber;
     })
@@ -45,6 +55,26 @@ export class ClientDetailsPage implements OnInit {
     },err=>{
       console.log(err);
     })
+  }
+  editToggle(){
+    this.editMode = !this.editMode;
+    console.log(this.editMode);
+  }
+  addRanks(){
+    this.client.ranksOrTitles.push(this.rankAddition);
+    this.rankAddition = '';
+  }
+  addAssingment(){
+    this.client.assignments.push(this.assingmentAddition);
+    this.assingmentAddition = '';
+  }
+  deleteRank(r){
+    console.log(r);
+    this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==r);
+  }
+  deleteAssignment(a){
+    console.log(a);
+    this.client.assignments = this.client.assignments.filter(v=>v!==a);
   }
   
 
