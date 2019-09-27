@@ -23,7 +23,7 @@ export class ClientDetailsPage implements OnInit {
   constructor(
     private getDetailsService: GetDetailsService,
     private _Activatedroute: ActivatedRoute,
-    private router: Router,
+    // private router: Router,
   ) { }
 
   ngOnInit() {
@@ -41,10 +41,13 @@ export class ClientDetailsPage implements OnInit {
     };
   }
   ionViewDidEnter(){
+    // console.log(this.router.url)
     this.rankAddition = '';
     this.assingmentAddition = '';
     let clientId;
     this.editMode = false;
+    // console.log(this._Activatedroute,'this._Activatedroute');
+    // console.log(this.router,'this.router');
     this._Activatedroute.params.subscribe(it => {
       clientId = it.cNumber;
     })
@@ -59,6 +62,8 @@ export class ClientDetailsPage implements OnInit {
   editToggle(){
     this.editMode = !this.editMode;
     console.log(this.editMode);
+    
+    window.scroll(-5,-5);
   }
   addRanks(){
     this.client.ranksOrTitles.push(this.rankAddition);
@@ -69,11 +74,11 @@ export class ClientDetailsPage implements OnInit {
     this.assingmentAddition = '';
   }
   deleteRank(r){
-    console.log(r);
+    // console.log(r);
     this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==r);
   }
   deleteAssignment(a){
-    console.log(a);
+    // console.log(a);
     this.client.assignments = this.client.assignments.filter(v=>v!==a);
   }
   

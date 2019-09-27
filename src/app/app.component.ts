@@ -92,7 +92,7 @@ export class AppComponent {
     },
     {
       title: 'Create Client',
-      url: '/clients/create-client',
+      url: '/clients/create',
       icon: 'list-box',
     },  
   ]
