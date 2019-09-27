@@ -19,7 +19,7 @@
           <ion-row>
             <ion-col>
               <mat-form-field style="width: 100%;">
-                <input matInput placeholder="Name of Client">
+                <input matInput placeholder="Name of Client" [(ngModel)]="client.name">
               </mat-form-field>
             </ion-col>
           </ion-row>
@@ -27,5 +27,5 @@
       </div>
     </ion-card-content>
   </ion-card>
-  <ion-button style="padding: 0px 16px; width: 100%;">Create</ion-button>
+  <ion-button style="padding: 0px 16px; width: 100%;" [disabled]="client.name==''" (click)="create()">Create</ion-button>
 </ion-content>

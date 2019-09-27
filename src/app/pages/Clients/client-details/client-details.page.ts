@@ -62,8 +62,6 @@ export class ClientDetailsPage implements OnInit {
   editToggle(){
     this.editMode = !this.editMode;
     console.log(this.editMode);
-    
-    window.scroll(-5,-5);
   }
   addRanks(){
     this.client.ranksOrTitles.push(this.rankAddition);
