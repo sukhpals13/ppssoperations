@@ -27,6 +27,7 @@ export class OrderFilterComponent implements OnInit {
       'New',
       'Not Approved',
       'On Hold',
+      'In Progress'
     ]
     this.subStatusTypeArray = [
       'Approved',
@@ -34,6 +35,8 @@ export class OrderFilterComponent implements OnInit {
       'Needs Picked',
       'Not Approved',
       'Payment Error',
+      'Pick Complete',
+      'Pick Suspended'
     ]
   }
 }

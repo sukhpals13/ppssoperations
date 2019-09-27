@@ -13,6 +13,7 @@ export class ViewClientsPage implements OnInit {
 
   clients: ClientsListModel;
   searchText: string;
+  searchSubmitted: boolean;
 
  
 
@@ -35,7 +36,8 @@ export class ViewClientsPage implements OnInit {
       isShell: true,
       
     };
-    this.initializeData();
+    this.searchSubmitted = false;
+    // this.initializeData();
     // this.getClientList();
   }
 
@@ -54,19 +56,27 @@ export class ViewClientsPage implements OnInit {
   }
 
   getClientList(phrase){
-    console.log(phrase)
-    let send = phrase;
-    if(phrase==''){
-      send = ' ';
-    }
-    this.getDetailsService.getAllClients(send)
+    // console.log(phrase)
+    // let send = phrase;
+    // if(phrase==''){
+    //   this.clients = {
+    //     name: null,
+    //     clientNumber: null,
+    //     clients: [],
+    //     isShell: true,
+        
+    //   };
+    // }
+    this.initializeData();
+    this.getDetailsService.getAllClients(phrase)
     .subscribe(res => {
-      
+      this.searchSubmitted = true;
       this.clients = res;
       console.log('response clients', this.clients);
     },
       err => {
         console.log(err);
+        this.clients.clients = []
       })
   }
 
@@ -75,7 +85,8 @@ export class ViewClientsPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.getClientList(' ');
+    // this.searchText = '';
+    // this.getClientList('');
   }
 
 }

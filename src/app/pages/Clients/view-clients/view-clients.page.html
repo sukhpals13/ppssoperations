@@ -16,7 +16,7 @@
         <ion-item class="input-item">
           <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search here"></ion-input>
           <button mat-icon-button style="color: black;" color="primary" (click)="getClientList(searchText)"
-            aria-label="Example icon-button with a search icon">
+            aria-label="Example icon-button with a search icon" [disabled]="searchText==''||searchText==undefined">
             <mat-icon>search</mat-icon>
           </button>
         </ion-item>
@@ -45,5 +45,12 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-card *ngIf="searchText!=undefined&&clients.clients.length==0&&searchSubmitted">
+      <ion-card-content>
+        <h3>
+          No Clients with searched key phrase 
+        </h3>
+      </ion-card-content>
+    </ion-card>
 
 </ion-content>
