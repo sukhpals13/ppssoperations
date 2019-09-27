@@ -7,6 +7,7 @@ import { FloorPipe } from 'angular-pipes';
 
 import { TimeDifferencePipe } from './time-difference.pipe';
 import { TimeAgoPipe } from './time-ago.pipe';
+import { SearchClientPipe } from './search-client.pipe';
 
 @NgModule({
   imports: [
@@ -16,12 +17,14 @@ import { TimeAgoPipe } from './time-ago.pipe';
   ],
   declarations: [
     TimeDifferencePipe,
-    TimeAgoPipe
+    TimeAgoPipe,
+    SearchClientPipe
   ],
   exports: [
     FloorPipe,
     TimeDifferencePipe,
-    TimeAgoPipe
+    TimeAgoPipe,
+    SearchClientPipe
   ],
   entryComponents: [],
 })
