@@ -15,6 +15,8 @@ Run `ionic serve` to start a live-reload dev server
 Run `ionic cordova prepare android` to add the iOS platform to the project
 After this run `ionic cordova build android`
 Read more in https://ionicframework.com/docs/building/android
+For running the android app in Android device `https://www.kingoapp.com/root-tutorials/how-to-enable-usb-debugging-mode-on-android.htm`
+
 
 ## iOS Platform
 Run `ionic cordova prepare ios` to add the iOS platform to the project
