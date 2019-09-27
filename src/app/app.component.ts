@@ -86,13 +86,13 @@ export class AppComponent {
   ];
   clientPages = [
     {
-      title: 'View Clients',
-      url: '/clients/view-clients',
+      title: 'Search Client',
+      url: '/clients/search-client',
       icon: 'eye',
     },
     {
-      title: 'Client Details',
-      url: '/clients/client-details',
+      title: 'Create Client',
+      url: '/clients/create-client',
       icon: 'list-box',
     },  
   ]

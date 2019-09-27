@@ -11,6 +11,7 @@ import { ClientsListModel } from '../../../interfaces/clients'
 export class ViewClientsPage implements OnInit {
 
   clients: ClientsListModel;
+  searchText: string = " ";
 
  
 
@@ -30,12 +31,11 @@ export class ViewClientsPage implements OnInit {
       clients: [],
       isShell: true
     };
-
     this.getClientList();
   }
 
   getClientList(){
-    this.getDetailsService.getAllClients()
+    this.getDetailsService.getAllClients(this.searchText)
     .subscribe(res => {
       
       this.clients = res;
