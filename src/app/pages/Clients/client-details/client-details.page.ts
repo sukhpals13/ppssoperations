@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-client-details',
@@ -9,6 +10,7 @@ import { GetDetailsService } from '../../../services/getDetails/get-details.serv
 export class ClientDetailsPage implements OnInit {
 
   public client : any;
+  public clientId : string;
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.client && this.client.isShell) ? true : false;
@@ -16,6 +18,8 @@ export class ClientDetailsPage implements OnInit {
 
   constructor(
     private getDetailsService: GetDetailsService,
+    private _Activatedroute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -30,12 +34,18 @@ export class ClientDetailsPage implements OnInit {
     };
   }
   ionViewDidEnter(){
-    this.getDetailsService.getClient().subscribe(res=>{
+    let clientId
+    this._Activatedroute.params.subscribe(it => {
+      clientId = it.cNumber;
+    })
+    console.log(clientId);
+    this.getDetailsService.getClient(clientId).subscribe(res=>{
       console.log(res);
       this.client = res.client;
     },err=>{
       console.log(err);
     })
   }
+  
 
 }
