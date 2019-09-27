@@ -32,9 +32,7 @@ export class ClientDetailsPage implements OnInit {
     this.assingmentAddition = '';
     this.client = {
       name:null,
-      customizations:{
-
-      },
+      customizations:{ },
       ranksOrTitles:[null,null],
       assignments:[null,null],
       isShell: true

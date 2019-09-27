@@ -36,7 +36,7 @@ export class ViewClientsPage implements OnInit {
       
     };
     this.initializeData();
-    this.getClientList();
+    // this.getClientList();
   }
 
   initializeData(){
@@ -67,6 +67,10 @@ export class ViewClientsPage implements OnInit {
 
   viewClientDetails(c){
     this.navCtrl.navigateForward('/clients/details/'+c._id);
+  }
+
+  ionViewDidEnter(){
+    this.getClientList();
   }
 
 }
