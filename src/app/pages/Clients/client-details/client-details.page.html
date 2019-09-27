@@ -1,9 +1,139 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>clientDetails</ion-title>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Clients
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card id="client-info">
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Client Information</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              Name
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="client.name"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              Client #
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              Has Standard Pricing
+            </ion-col>
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="client.hasStandardPricing"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card id="client-custom">
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Client Customizations</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              Name
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1"
+                [data]="client.customizations.enableAgencyOrder?'Yes':'No'"></app-text-shell>
+              <!-- <app-text-shell animation="bouncing" lines="1" #enableAgency></app-text-shell> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Client #
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1"
+                [data]="client.customizations.enableAllotmentOrder?'Yes':'No'"></app-text-shell>
+              <!-- <app-text-shell animation="bouncing" lines="1" #enableAllotment></app-text-shell> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Has Standard Pricing
+            </ion-col>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="client.customizations.enableCashOrder?'Yes':'No'">
+              </app-text-shell>
+              <!-- <app-text-shell animation="bouncing" lines="1" #enableCash></app-text-shell> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="client.ranksOrTitles.length" id="client-ranks">
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Ranks or Titles</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+        <ion-grid *ngIf="client.name">
+          <ion-row *ngFor="let rank of client.ranksOrTitles">
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="!client.name">
+          <ion-row>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="client.assignments.length" id="client-assingment">
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Assingments</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+        <ion-grid *ngIf="client.name">
+          <ion-row *ngFor="let rank of client.assignments">
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="!client.name">
+          <ion-row>
+            <ion-col>
+              <app-text-shell animation="bouncing" lines="1"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

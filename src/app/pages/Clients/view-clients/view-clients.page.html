@@ -25,7 +25,7 @@
     <ion-grid>
       <ion-row>
         <!-- <ion-col size-md="4" size-xs="12" *ngFor="let client of clients.clients | filter:searchText"> -->
-            <ion-col size-md="4" size-xs="12" *ngFor="let client of clients.clients">
+            <ion-col size-md="4" size-xs="12" *ngFor="let client of clients.clients" (click)="viewClientDetails(client)">
           <ion-card>
             <ion-grid>
               <ion-row>
