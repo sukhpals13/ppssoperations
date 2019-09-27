@@ -53,8 +53,13 @@ export class ViewClientsPage implements OnInit {
     }
   }
 
-  getClientList(){
-    this.getDetailsService.getAllClients()
+  getClientList(phrase){
+    console.log(phrase)
+    let send = phrase;
+    if(phrase==''){
+      send = ' ';
+    }
+    this.getDetailsService.getAllClients(send)
     .subscribe(res => {
       
       this.clients = res;
@@ -70,7 +75,7 @@ export class ViewClientsPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.getClientList();
+    this.getClientList(' ');
   }
 
 }
