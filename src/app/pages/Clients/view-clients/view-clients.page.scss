@@ -7,3 +7,11 @@ ion-col{
         }
     }
 }
+form{
+    width:100%;
+}
+ion-item{
+    .item-native{
+        padding-left:0px !important;
+    }
+}

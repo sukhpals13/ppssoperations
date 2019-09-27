@@ -19,36 +19,36 @@
         <ion-grid>
           <ion-row>
             <ion-col size="12">
-              Name
-            </ion-col>
-            <ion-col size="12" *ngIf="!editMode">
-              <app-text-shell animation="bouncing" lines="1" [data]="client.name"></app-text-shell>
-            </ion-col>
-            <ion-col size="12" *ngIf="editMode">
-              <ion-input [(ngModel)]="client.name"></ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              Client #
-            </ion-col>
-            <ion-col size="12" *ngIf="!editMode">
-              <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
-            </ion-col>
-            <ion-col size="12" *ngIf="editMode">
-              <ion-input type="number" [(ngModel)]="client.clientNumber"></ion-input>
+              <h6>Name</h6>
+              <div *ngIf="!editMode">
+                <app-text-shell animation="bouncing" lines="1" [data]="client.name"></app-text-shell>
+              </div>
+              <div *ngIf="editMode">
+                <ion-input [(ngModel)]="client.name"></ion-input>
+              </div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              Has Standard Pricing
+              <h6>Client #</h6>
+              <div *ngIf="!editMode">
+                <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
+              </div>
+              <div *ngIf="editMode">
+                <ion-input type="number" [(ngModel)]="client.clientNumber"></ion-input>
+              </div>
             </ion-col>
-            <ion-col size="12" *ngIf="!editMode">
-              <app-text-shell animation="bouncing" lines="1" [data]="client.hasStandardPricing?'Yes':'No'">
-              </app-text-shell>
-            </ion-col>
-            <ion-col size="12" *ngIf="editMode">
-              <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <h6>Has Standard Pricing</h6>
+              <div *ngIf="!editMode">
+                <app-text-shell animation="bouncing" lines="1" [data]="client.hasStandardPricing?'Yes':'No'">
+                </app-text-shell>
+              </div>
+              <div *ngIf="editMode">
+                <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -64,7 +64,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              Agency Order
+              <h6>Agency Order</h6>
             </ion-col>
             <ion-col *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1"
@@ -76,7 +76,7 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              Allotment Order
+              <h6>Allotment Order</h6>
             </ion-col>
             <ion-col *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1"
@@ -88,7 +88,7 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              Cash Order
+              <h6>Cash Order</h6>
             </ion-col>
             <ion-col *ngIf="!editMode">
               <app-text-shell animation="bouncing" lines="1" [data]="client.customizations.enableCashOrder?'Yes':'No'">
@@ -111,7 +111,7 @@
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let rank of client.ranksOrTitles">
             <ion-col>
-              <app-text-shell style="padding: 10px" animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+              <app-text-shell style="padding:10px 0px;" animation="bouncing" lines="1" [data]="rank"></app-text-shell>
               <!-- <ion-fab-button *ngIf="editMode">
                 <ion-icon name="trash"></ion-icon>
               </ion-fab-button> -->
