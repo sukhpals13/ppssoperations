@@ -47,4 +47,8 @@ export class ViewClientsPage implements OnInit {
       })
   }
 
+  viewClientDetails(c){
+    this.navCtrl.navigateForward('/clients/details/'+c._id);
+  }
+
 }

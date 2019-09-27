@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'orders/to-pick/edit/:pNumber', loadChildren: () => import('./pages/Orders/order-details/order-details.module').then(m => m.OrderDetailsPageModule) },
 
   { path: 'clients/search-client', loadChildren: () => import('./pages/Clients/view-clients/view-clients.module').then(m => m.ViewClientsPageModule) },
-  { path: 'clients/create-client', loadChildren: () => import('./pages/Clients/client-details/client-details.module').then(m => m.ClientDetailsPageModule) },
+  { path: 'clients/details/:cNumber', loadChildren: () => import('./pages/Clients/client-details/client-details.module').then(m => m.ClientDetailsPageModule) },
 
   { path: '**', redirectTo: 'page-not-found' },
   // { path: 'order-details', loadChildren: './pages/Orders/order-details/order-details.module#OrderDetailsPageModule' },
