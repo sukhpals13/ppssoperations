@@ -2,7 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
 import { NavController, ActionSheetController, MenuController } from '@ionic/angular';
 import { ClientsListModel } from '../../../interfaces/clients'
-import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Component({
   selector: 'app-view-clients',
