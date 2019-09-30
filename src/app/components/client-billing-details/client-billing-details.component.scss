@@ -5,3 +5,13 @@ ion-col{
        font-weight: 500;
     }
 }
+ion-input{
+    padding: 0px 5px !important;
+    border: 1px solid #cccccc;
+    border-radius:3px;
+    -webkit-border-radius:3px;-moz-border-radius:3px;
+    border-radius: 3px;
+    input{
+        padding:0px;
+    }
+ }

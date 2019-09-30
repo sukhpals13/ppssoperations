@@ -111,7 +111,7 @@
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let rank of client.ranksOrTitles">
             <ion-col>
-              <app-text-shell style="padding:10px 0px;" animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+              <app-text-shell  animation="bouncing" lines="1" [data]="rank"></app-text-shell>
               <!-- <ion-fab-button *ngIf="editMode">
                 <ion-icon name="trash"></ion-icon>
               </ion-fab-button> -->
@@ -123,10 +123,12 @@
             </ion-col>
           </ion-row>
           <ion-row *ngIf="editMode">
-            <mat-form-field>
-              <input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition">
-            </mat-form-field>
-            <ion-button [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button>
+            <ion-col>
+                <mat-form-field>
+                    <input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition">
+                  </mat-form-field>
+                  <ion-button [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button>
+            </ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -148,7 +150,7 @@
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let data of client.assignments">
             <ion-col>
-              <app-text-shell style="padding: 10px;" animation="bouncing" lines="1" [data]="data"></app-text-shell>
+              <app-text-shell animation="bouncing" lines="1" [data]="data"></app-text-shell>
             </ion-col>
             <ion-col style="text-align: right;">
               <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
@@ -157,10 +159,12 @@
             </ion-col>
           </ion-row>
           <ion-row *ngIf="editMode">
-            <mat-form-field>
-              <input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition">
-            </mat-form-field>
-            <ion-button [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()" [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots" *ngIf="addingAssingment"></ion-spinner></ion-button>
+            <ion-col>
+                <mat-form-field>
+                  <input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition">
+                  </mat-form-field>
+                  <ion-button [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()" [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots" *ngIf="addingAssingment"></ion-spinner></ion-button>
+            </ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
