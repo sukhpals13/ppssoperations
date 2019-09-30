@@ -35,6 +35,7 @@ export class ClientDetailsPage implements OnInit {
       customizations:{ },
       ranksOrTitles:[null,null],
       assignments:[null,null],
+      billingInfo:{  },
       isShell: true
     };
   }
@@ -42,41 +43,59 @@ export class ClientDetailsPage implements OnInit {
     // console.log(this.router.url)
     this.rankAddition = '';
     this.assingmentAddition = '';
-    let clientId;
     this.editMode = false;
+    this.getClient();
+  }
+  getClient() {
+    let clientId;
+    console.log(clientId);
     // console.log(this._Activatedroute,'this._Activatedroute');
     // console.log(this.router,'this.router');
     this._Activatedroute.params.subscribe(it => {
       clientId = it.cNumber;
     })
-    console.log(clientId);
     this.getDetailsService.getClient(clientId).subscribe(res=>{
       console.log(res);
       this.client = res.client;
+      if(!this.client.billingInfo){
+        this.client.billingInfo = {}
+      }
     },err=>{
       console.log(err);
     })
   }
   editToggle(){
+    let flag = false;
     this.editMode = !this.editMode;
-    console.log(this.editMode);
+    console.log(this.client);
+    for(var prop in this.client.billingInfo) {
+      if (this.client.billingInfo.hasOwnProperty(prop)) {
+          flag = true;
+          break;
+      }
+    }
+    this.getClient();
+    // console.log(this.client.billingInfo.hasOwnProperty());
   }
+
   addRanks(){
     this.client.ranksOrTitles.push(this.rankAddition);
     this.rankAddition = '';
   }
+
   addAssingment(){
     this.client.assignments.push(this.assingmentAddition);
     this.assingmentAddition = '';
   }
+
   deleteRank(r){
     // console.log(r);
     this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==r);
   }
+
   deleteAssignment(a){
     // console.log(a);
     this.client.assignments = this.client.assignments.filter(v=>v!==a);
   }
-  
 
 }
