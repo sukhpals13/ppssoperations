@@ -29,4 +29,14 @@ export class PostDetailsService {
     return this.http.put<any>(url,request);
   }
 
+  addAssignment(clientId,assignment){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/assignment/"+clientId;
+    return this.http.put<any>(url,{name:assignment})
+  }
+
+  addRank(clientId,rank){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/rank/"+clientId;
+    return this.http.put<any>(url,{name:rank})
+  }
+
 }
