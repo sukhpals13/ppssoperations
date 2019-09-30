@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
+  { path: '', redirectTo: '/orders/view-orders', pathMatch: 'full' },
   { path: 'implicit/callback', loadChildren: './auth/implicit/auth-callback/auth-callback.module#AuthCallbackPageModule' },
   { path: 'implicit/logout', loadChildren: './auth/implicit/end-session/end-session.module#EndSessionPageModule' },
   { path: 'landing-page', loadChildren: './landing-page/landing-page.module#LandingPagePageModule' },

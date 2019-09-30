@@ -156,7 +156,7 @@ export class AppComponent {
                     ]
                   }
                 }
-                // console.log(event.url);
+                console.log(event.url);
                   if (event.url=='/landing-page'||event.url=='/auth/login') {
                     if(token)
                       this.router.navigate(['/orders/view-orders']);
@@ -167,6 +167,10 @@ export class AppComponent {
               }
           }
       );
+      // let token = localStorage.getItem('token');
+      // if(token&&this.router.url=="/landing-page"){
+      //   this.router.navigate(['/orders/view-orders'])
+      // }
     // }else{
     //   this.router.navigate(['/auth/login']);
     // }
