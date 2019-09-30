@@ -138,7 +138,7 @@ export class ClientDetailsPage implements OnInit {
           text: 'Delete',
           handler: () => {
             console.log('Confirm Okay');
-            this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==a);
+            this.client.assignments = this.client.assignments.filter(v=>v!==a);
           }
         }
       ]
