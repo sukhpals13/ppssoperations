@@ -21,6 +21,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatGridListModule} from '@angular/material/grid-list';
 
 import {OrderFilterComponent} from './order-filter/order-filter.component'
+import {ClientBillingDetailsComponent} from './client-billing-details/client-billing-details.component'
 // import {EditSubStatusComponent} from './edit-sub-status/edit-sub-status.component'
 
 var commonMods = [
@@ -42,6 +43,7 @@ var commonMods = [
     ReactiveFormsModule,
     ShellModule,
     IonicModule.forRoot(),
+    // ClientBillingDetailsComponent,
     ...commonMods,
   ],
   declarations: [
@@ -51,6 +53,7 @@ var commonMods = [
     CounterInputComponent,
     RatingInputComponent,
     OrderFilterComponent,
+    ClientBillingDetailsComponent,
     // EditSubStatusComponent
   ],
   exports: [
@@ -60,10 +63,12 @@ var commonMods = [
     CountdownTimerComponent,
     CounterInputComponent,
     RatingInputComponent,
+    ClientBillingDetailsComponent,
     ...commonMods
   ],
   entryComponents: [
     OrderFilterComponent,
+    // ClientBillingDetailsComponent,
     // EditSubStatusComponent
   ],
 })

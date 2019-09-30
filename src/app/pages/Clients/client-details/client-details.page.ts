@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ClientBillingDetailsComponent } from '../../../components/client-billing-details/client-billing-details.component';
 
 @Component({
   selector: 'app-client-details',
