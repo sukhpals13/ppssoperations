@@ -126,7 +126,7 @@
             <mat-form-field>
               <input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition">
             </mat-form-field>
-            <ion-button (click)="addRanks()">Add</ion-button>
+            <ion-button [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -160,7 +160,7 @@
             <mat-form-field>
               <input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition">
             </mat-form-field>
-            <ion-button (click)="addAssingment()">Add</ion-button>
+            <ion-button [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()" [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots" *ngIf="addingAssingment"></ion-spinner></ion-button>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">

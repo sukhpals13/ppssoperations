@@ -39,7 +39,7 @@ export class PostDetailsService {
     return this.http.put<any>(url,{name:rank})
   }
   updateBillingInfo(clientId,reqBody){
-    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/updateBilling/"+'5d40606c480c470004320f76';
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/updateBilling/"+clientId;
     return this.http.post<any>(url,reqBody)
   }
 
