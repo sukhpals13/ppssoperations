@@ -19,7 +19,6 @@ export class ClientDetailsPage implements OnInit {
   public addingRank: boolean;
   public addingAssingment: boolean;
   public storedData: any;
-  alertCtrl: any;
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.client && this.client.isShell) ? true : false;
@@ -29,9 +28,7 @@ export class ClientDetailsPage implements OnInit {
     private getDetailsService: GetDetailsService,
     private postDetailsService: PostDetailsService,
     private _Activatedroute: ActivatedRoute,
-    public alertController: AlertController
-    
-    // private router: Router,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -49,6 +46,7 @@ export class ClientDetailsPage implements OnInit {
       isShell: true
     };
   }
+
   ionViewDidEnter(){
     // console.log(this.router.url)
     this.rankAddition = '';
@@ -58,6 +56,7 @@ export class ClientDetailsPage implements OnInit {
     this.addingRank = false;
     this.getClient();
   }
+
   getClient() {
     let clientId;
     console.log(clientId);
@@ -77,6 +76,7 @@ export class ClientDetailsPage implements OnInit {
       console.log(err);
     })
   }
+
   editToggle(){
     let flag = false;
     this.editMode = !this.editMode;
@@ -87,37 +87,54 @@ export class ClientDetailsPage implements OnInit {
           break;
       }
     }
-    this.getClient();
-    // console.log(this.client.billingInfo.hasOwnProperty());
+    if(flag)
+      this.getClient();
+  }
+
+  async alertPopup(title,msg){
+    const alert = await this.alertController.create({
+      header: title,
+      message: msg,
+      buttons: [{
+        text: 'Okay'
+      }]
+    });
+    await alert.present();
   }
 
   addRanks(){
     this.addingRank = true;
-    this.postDetailsService.addRank(this.clientId,this.rankAddition).subscribe(res=>{
-      this.client.ranksOrTitles.push(this.rankAddition);
-      this.rankAddition = '';
+    if(this.client.ranksOrTitles.includes(this.rankAddition)){
+      this.alertPopup('Duplicate Error!!!','Rank with the same name already exists');
       this.addingRank = false;
-      console.log(res);
-    },err=>{
-      console.log(err);
-    })
+    }else{
+      this.postDetailsService.addRank(this.clientId,this.rankAddition).subscribe(res=>{
+        this.client.ranksOrTitles.push(this.rankAddition);
+        this.rankAddition = '';
+        this.addingRank = false;
+        console.log(res);
+      },err=>{
+        console.log(err);
+      })
+    }
   }
 
-  
   addAssingment(){
     this.addingAssingment = true;
-    this.postDetailsService.addAssignment(this.clientId, this.assingmentAddition).subscribe(res=> {
-      this.client.assignments.push(this.assingmentAddition);
-      console.log(res);
-      this.assingmentAddition = '';
+    if(this.client.assignments.includes(this.assingmentAddition)){
+      this.alertPopup('Duplicate Error!!!','Assingment with the same name already exists');
       this.addingAssingment = false;
-      
-    }, err=> {
-      console.log(err);
-      
+    }else{
+      this.postDetailsService.addAssignment(this.clientId, this.assingmentAddition).subscribe(res=> {
+        this.client.assignments.push(this.assingmentAddition);
+        console.log(res);
+        this.assingmentAddition = '';
+        this.addingAssingment = false;
+        
+      }, err=> {
+        console.log(err);
+      })
     }
-    
-    )
   }
 
   async deleteRank(r){
@@ -146,8 +163,6 @@ export class ClientDetailsPage implements OnInit {
   }
 
   async deleteAssignment(a){
-    // console.log(a);
-    // this.client.assignments = this.client.assignments.filter(v=>v!==a);
 
     const alert = await this.alertController.create({
       header: 'Confirm!',
