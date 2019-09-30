@@ -1,8 +1,9 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, NgZone } from '@angular/core';
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { PostDetailsService } from '../../../services/postDetails/post-details.service';
+import { DeleteServicesService } from '../../../services/deleteServices/delete-services.service';
 
 @Component({
   selector: 'app-client-details',
@@ -27,8 +28,11 @@ export class ClientDetailsPage implements OnInit {
   constructor(
     private getDetailsService: GetDetailsService,
     private postDetailsService: PostDetailsService,
+    private deleteService: DeleteServicesService,
     private _Activatedroute: ActivatedRoute,
     public alertController: AlertController,
+    public loadingController: LoadingController,
+    public zone: NgZone
   ) { }
 
   ngOnInit() {
@@ -138,6 +142,10 @@ export class ClientDetailsPage implements OnInit {
   }
 
   async deleteRank(r){
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    
     const alert = await this.alertController.create({
       header: 'Confirm!',
       message: 'Are you sure you want to delete the Rank or Titles?',
@@ -152,8 +160,21 @@ export class ClientDetailsPage implements OnInit {
         }, {
           text: 'Delete',
           handler: () => {
-            console.log('Confirm Okay');
-            this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==r);
+            // console.log('Confirm Okay');
+            // console.log(r);
+            loading.present();
+            this.deleteService.deleteRank(this.client._id,r)
+            .subscribe(res=>{
+              this.zone.run(()=>{
+                this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==r);
+              })
+              console.log(res);
+              loading.dismiss();
+            },err=>{
+              console.log(err)
+              loading.dismiss();
+              this.alertPopup('Error deleting Rank!!!',JSON.stringify(err));
+            });
           }
         }
       ]
@@ -163,6 +184,9 @@ export class ClientDetailsPage implements OnInit {
   }
 
   async deleteAssignment(a){
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
 
     const alert = await this.alertController.create({
       header: 'Confirm!',
@@ -178,8 +202,20 @@ export class ClientDetailsPage implements OnInit {
         }, {
           text: 'Delete',
           handler: () => {
-            console.log('Confirm Okay');
-            this.client.assignments = this.client.assignments.filter(v=>v!==a);
+            // console.log('Confirm Okay');
+            loading.present();
+            this.deleteService.deleteAssignment(this.client._id,a)
+            .subscribe(res=>{
+              this.zone.run(()=>{
+                this.client.assignments = this.client.assignments.filter(v=>v!==a);
+              })
+              loading.dismiss();
+              console.log(res)
+            },err=>{
+              console.log(err)
+              loading.dismiss();
+              this.alertPopup('Error deleting Assingment!!!',JSON.stringify(err));
+            })
           }
         }
       ]
