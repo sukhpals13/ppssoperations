@@ -38,5 +38,11 @@ export class PostDetailsService {
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/rank/"+clientId;
     return this.http.put<any>(url,{name:rank})
   }
+  updateBillingInfo(clientId,reqBody){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/updateBilling/"+'5d40606c480c470004320f76';
+    return this.http.post<any>(url,reqBody)
+  }
+
+  // /api/client/updateBilling/5d40606c480c470004320f76
 
 }
