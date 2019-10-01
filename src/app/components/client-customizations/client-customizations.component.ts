@@ -21,7 +21,7 @@ export class ClientCustomizationsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-     this.loader=false;
+    console.log('customization data',this.clientCustomizations);
   }
 
 }

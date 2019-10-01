@@ -3,175 +3,240 @@
      <ion-card-subtitle>Customization</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
+      <!-- {{clientCustomizations|json}} -->
      <ion-grid>
-        <ion-row *ngIf="data.billingMethod||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Enable Allotment Order </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Yes</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.enableAllotmentOrder}}</div>
            </ion-col>
            <ion-col *ngIf="edit">
-              <!-- <ion-item> -->
-                 <!-- <ion-label>Gender</ion-label> -->
                  <mat-form-field style="width: 100%;">
-                    <!-- <mat-label>Favorite food</mat-label> -->
-                    <mat-select [(ngModel)]="data.billingMethod">
-                       <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
-                          {{billingMethod}}
-                       </mat-option>
-                    </mat-select>
+                    <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                      <div class="info"></div>
+                   </ion-col>
                  </mat-form-field>
-              <!-- </ion-item> -->
-              <!-- <ion-input [(ngModel)]="data.billingMethod"></ion-input> -->
            </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.contactName||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Enable Agency Order </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Yes</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.enableAgencyOrder}}</div>
            </ion-col>
            <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.contactName"></ion-input>
+              <ion-input></ion-input>
            </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.contactEmail||edit">
-           <ion-col size-md="6" size-xs="12">
+        <ion-row>
+            <ion-col size-md="6" size-xs="12">
+               <h6>Enable Cash Order </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12">
+               <div class="info">{{clientCustomizations.enableCashOrder}}</div>
+            </ion-col>
+            <ion-col *ngIf="edit">
+               <ion-input></ion-input>
+            </ion-col>
+         </ion-row>
+        <ion-row>
+           <ion-col size-md="12" size-xs="12">
               <h6>Home Page Message </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Lorem ipsum dollar</div>
+           <ion-col size-md="12" size-xs="12">
+              <div class="info">{{clientCustomizations.homepageMessage}}</div>
            </ion-col>
            <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.contactEmail"></ion-input>
+              <ion-input ></ion-input>
            </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.contactPhone||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Pickup Locations </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Lorem ipsum dollar</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info"></div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.contactPhone"></ion-input>
-           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+               <mat-form-field style="width: 100%;">
+                  <mat-select [(ngModel)]="data.pickupLocations">
+                     <mat-option *ngFor="let pickuploc of pickupLocations" [value]="pickupLocations">
+                        {{pickuploc}}
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field>
+         </ion-col> -->
         </ion-row>
-        <ion-row *ngIf="data.poRequired||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Delivery Locations </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Delivery locations</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">loc1 loc2 loc3</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-toggle [(ngModel)]="data.poRequired"></ion-toggle>
-           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+               <mat-form-field style="width: 100%;">
+                  <mat-select [(ngModel)]="data.deliveryLocations">
+                     <mat-option *ngFor="let loc of deliveryLocations" [value]="deliveryLocations">
+                        {{loc}}
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field>
+         </ion-col> -->
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Enable Order Shipping </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Yes</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.enableOrderShipping}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-toggle [(ngModel)]="data.taxExemptFormOnFile"></ion-toggle>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-toggle></ion-toggle>
+           </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.billingNotes||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Agency Order Overview Text </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Lorem ipsum dollar</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.agencyOrderOverviewText}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.billingNotes"></ion-input>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-input></ion-input>
+           </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.addressLine1||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Agency Order Allow Shipping Address </h6>
            </ion-col>
            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">No</div>
+              <div class="info">agencyOrderAllowShippingAddress</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.addressLine1"></ion-input>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-input ></ion-input>
+           </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.addressLine2||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Agency Order Shipping Text </h6>
            </ion-col>
            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Lorem ipsum</div>
+              <div class="info">{{clientCustomizations.agencyOrderShippingText}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.addressLine2"></ion-input>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-input></ion-input>
+           </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.addressLine3||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Cash Order Overview Text </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Lorem ipsum dollar</div>
-           </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.addressLine3"></ion-input>
-           </ion-col> -->
-        </ion-row>
-        <ion-row *ngIf="data.addressLine4||edit">
            <ion-col size-md="6" size-xs="12">
-              <h6>Work flow Settings </h6>
+              <div class="info">{{clientCustomizations.cashOrderOverviewText}}</div>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Do not add yet</div>
+           <ion-col *ngIf="edit">
+              <ion-input></ion-input>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.addressLine4"></ion-input>
-           </ion-col> -->
         </ion-row>
-        <ion-row *ngIf="data.city||edit">
+        <ion-row>
+           <ion-col size-md="12" size-xs="12">
+              <h3>Work flow Settings </h3>
+           </ion-col>
+           <ion-col size-md="12" size-xs="12">
+              <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                      <h6>Work Flow Type</h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12">
+                      {{clientCustomizations.workflowSettings?.workflowType}}
+                  </ion-col>
+                </ion-row>
+              <!-- <div class="info">Work Flow Type: {{clientCustomizations.workflowSettings?.workflowType}}</div> -->
+              <ion-row>
+                  <ion-col size-md="12"><h3>Approvers</h3></ion-col>
+              </ion-row>
+              <div class="info" *ngFor= "let workflowapprovers of clientCustomizations.workflowSettings?.workflowData.approvers">
+                  <ion-row>
+                    <ion-col size-md="6" size-xs="12">
+                        <h6>Name:</h6>
+                    </ion-col>
+                    <ion-col size-md="6" size-xs="12">
+                        {{workflowapprovers.name}}
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size-md="6" size-xs="12">
+                          <h6>Email:</h6>
+                      </ion-col>
+                      <ion-col size-md="6" size-xs="12">
+                          {{workflowapprovers.email}}
+                      </ion-col>
+                    </ion-row>
+              </div>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size-md="6" size-xs="12">
+               <h6>Allotment Order Requires Approval </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12">
+               <div class="info">{{clientCustomizations.allotmentOrderRequiresApproval}}</div>
+            </ion-col>
+            <ion-col *ngIf="edit">
+               <ion-input></ion-input>
+            </ion-col>
+         </ion-row>
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Agency Order Page Header Text </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Agency Order Page Header</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.agencyOrderRequiresApproval}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.city"></ion-input>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-input></ion-input>
+           </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.state||edit">
+        <ion-row>
+            <ion-col size-md="6" size-xs="12">
+               <h6>Cash Order Requires Approval </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12">
+               <div class="info">{{clientCustomizations.cashOrderRequiresApproval}}</div>
+            </ion-col>
+            <ion-col *ngIf="edit">
+               <ion-input></ion-input>
+            </ion-col>
+         </ion-row>
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Cash Order Page Header Text </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">Cash Order Page Header</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.cashOrderPageHeaderText}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.state"></ion-input>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-input></ion-input>
+           </ion-col>
         </ion-row>
-        <ion-row *ngIf="data.zipCode||edit">
+        <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>User Onboard Template </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">User Onboard Template</div>
+           <ion-col size-md="6" size-xs="12">
+              <div class="info">{{clientCustomizations.userOnboardTemplate}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-              <ion-input [(ngModel)]="data.zipCode"></ion-input>
-           </ion-col> -->
+           <ion-col *ngIf="edit">
+              <ion-input></ion-input>
+           </ion-col>
         </ion-row>
-        <ion-button *ngIf="edit" (click)="editcustomization()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
+        <!-- <ion-button  (click)="editCustomization()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-        </ion-button>
+        </ion-button> -->
      </ion-grid>
   </ion-card-content>
 </ion-card>
