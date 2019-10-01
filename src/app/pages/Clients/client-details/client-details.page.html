@@ -51,7 +51,7 @@
               </div>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="client.parentClientId">
+          <ion-row *ngIf="client.parentClientId||editMode">
               <ion-col size="12">
                 <h6>Parent Client Id</h6>
                 <div *ngIf="!editMode">
@@ -61,12 +61,14 @@
                   <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
                 </div> -->
                 
-                <div *ngIf="editMode">
-                    <mat-form-field>
+                <div *ngIf="editMode ">
+                    <!-- <mat-form-field> -->
+                      <div>
                     <ion-input [(ngModel)]="client.parentClientId"></ion-input>
+                  </div>
                    
-                    <ion-button >Edit</ion-button>
-                  </mat-form-field>
+                  <!-- </mat-form-field> -->
+                  <ion-button >Edit</ion-button>
                   </div>
               </ion-col>
             </ion-row>
