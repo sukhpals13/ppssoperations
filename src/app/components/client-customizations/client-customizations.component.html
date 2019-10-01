@@ -9,116 +9,94 @@
            <ion-col size-md="6" size-xs="12">
               <h6>Enable Allotment Order </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
-              <div class="info">{{clientCustomizations.enableAllotmentOrder}}</div>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">{{clientCustomizations.enableAllotmentOrder?"Yes":"No"}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-                 <mat-form-field style="width: 100%;">
-                    <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                      <div class="info"></div>
-                   </ion-col>
-                 </mat-form-field>
-           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-toggle [(ngModel)]="clientCustomizations.enableAllotmentOrder"></ion-toggle>
+            </ion-col>
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Enable Agency Order </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
-              <div class="info">{{clientCustomizations.enableAgencyOrder}}</div>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">{{clientCustomizations.enableAgencyOrder?"Yes":"No"}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+              <ion-toggle [(ngModel)]="clientCustomizations.enableAgencyOrder"></ion-toggle>
            </ion-col>
         </ion-row>
         <ion-row>
             <ion-col size-md="6" size-xs="12">
                <h6>Enable Cash Order </h6>
             </ion-col>
-            <ion-col size-md="6" size-xs="12">
-               <div class="info">{{clientCustomizations.enableCashOrder}}</div>
+            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <div class="info">{{clientCustomizations.enableCashOrder?"Yes":"No"}}</div>
             </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input></ion-input>
-            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                  <ion-toggle [(ngModel)]="clientCustomizations.enableCashOrder"></ion-toggle>
+               </ion-col>
          </ion-row>
         <ion-row>
            <ion-col size-md="12" size-xs="12">
               <h6>Home Page Message </h6>
            </ion-col>
-           <ion-col size-md="12" size-xs="12">
-              <div class="info">{{clientCustomizations.homepageMessage}}</div>
+           <ion-col size-md="12" size-xs="12" *ngIf="!edit">
+              <div class="info" [innerHTML]="clientCustomizations.homepageMessage"></div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input ></ion-input>
-           </ion-col>
+           <ion-col size-md="12" size-xs="12" *ngIf="edit">
+               <ion-textarea [(ngModel)]="clientCustomizations.homepageMessage"></ion-textarea>
+            </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="clientCustomizations.pickupLocations.length||edit">
            <ion-col size-md="6" size-xs="12">
               <h6>Pickup Locations </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
-              <div class="info"></div>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info" *ngFor="let p of clientCustomizations.pickupLocations">{{p}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-               <mat-form-field style="width: 100%;">
-                  <mat-select [(ngModel)]="data.pickupLocations">
-                     <mat-option *ngFor="let pickuploc of pickupLocations" [value]="pickupLocations">
-                        {{pickuploc}}
-                     </mat-option>
-                  </mat-select>
-               </mat-form-field>
-         </ion-col> -->
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="clientCustomizations.deliveryLocations.length||edit">
            <ion-col size-md="6" size-xs="12">
               <h6>Delivery Locations </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
-              <div class="info">loc1 loc2 loc3</div>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info" *ngFor="let d of clientCustomizations.deliveryLocations">{{d}}</div>
            </ion-col>
-           <!-- <ion-col *ngIf="edit">
-               <mat-form-field style="width: 100%;">
-                  <mat-select [(ngModel)]="data.deliveryLocations">
-                     <mat-option *ngFor="let loc of deliveryLocations" [value]="deliveryLocations">
-                        {{loc}}
-                     </mat-option>
-                  </mat-select>
-               </mat-form-field>
-         </ion-col> -->
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Enable Order Shipping </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
-              <div class="info">{{clientCustomizations.enableOrderShipping}}</div>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">{{clientCustomizations.enableOrderShipping?"Yes":"No"}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-toggle></ion-toggle>
-           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-toggle [(ngModel)]="clientCustomizations.enableOrderShipping"></ion-toggle>
+            </ion-col>
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Agency Order Overview Text </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
               <div class="info">{{clientCustomizations.agencyOrderOverviewText}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
-           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-input [(ngModel)]="clientCustomizations.agencyOrderOverviewText"></ion-input>
+            </ion-col>
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Agency Order Allow Shipping Address </h6>
            </ion-col>
            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">agencyOrderAllowShippingAddress</div>
+              <div class="info">{{clientCustomizations.agencyOrderAllowShippingAddress?"Yes":"No"}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input ></ion-input>
-           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-toggle [(ngModel)]="clientCustomizations.agencyOrderAllowShippingAddress"></ion-toggle>
+            </ion-col>
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
@@ -127,22 +105,22 @@
            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
               <div class="info">{{clientCustomizations.agencyOrderShippingText}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
-           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-input [(ngModel)]="clientCustomizations.agencyOrderShippingText"></ion-input>
+            </ion-col>
         </ion-row>
         <ion-row>
            <ion-col size-md="6" size-xs="12">
               <h6>Cash Order Overview Text </h6>
            </ion-col>
-           <ion-col size-md="6" size-xs="12">
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
               <div class="info">{{clientCustomizations.cashOrderOverviewText}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
-           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-input [(ngModel)]="clientCustomizations.cashOrderOverviewText"></ion-input>
+            </ion-col>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
            <ion-col size-md="12" size-xs="12">
               <h3>Work flow Settings </h3>
            </ion-col>
@@ -155,7 +133,6 @@
                       {{clientCustomizations.workflowSettings?.workflowType}}
                   </ion-col>
                 </ion-row>
-              <!-- <div class="info">Work Flow Type: {{clientCustomizations.workflowSettings?.workflowType}}</div> -->
               <ion-row>
                   <ion-col size-md="12"><h3>Approvers</h3></ion-col>
               </ion-row>
@@ -178,16 +155,13 @@
                     </ion-row>
               </div>
            </ion-col>
-        </ion-row>
-        <ion-row>
+        </ion-row> -->
+        <!-- <ion-row>
             <ion-col size-md="6" size-xs="12">
                <h6>Allotment Order Requires Approval </h6>
             </ion-col>
             <ion-col size-md="6" size-xs="12">
                <div class="info">{{clientCustomizations.allotmentOrderRequiresApproval}}</div>
-            </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input></ion-input>
             </ion-col>
          </ion-row>
         <ion-row>
@@ -195,10 +169,7 @@
               <h6>Agency Order Page Header Text </h6>
            </ion-col>
            <ion-col size-md="6" size-xs="12">
-              <div class="info">{{clientCustomizations.agencyOrderRequiresApproval}}</div>
-           </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
+              <div class="info">{{clientCustomizations.agencyOrderPageHeaderText}}</div>
            </ion-col>
         </ion-row>
         <ion-row>
@@ -206,10 +177,7 @@
                <h6>Cash Order Requires Approval </h6>
             </ion-col>
             <ion-col size-md="6" size-xs="12">
-               <div class="info">{{clientCustomizations.cashOrderRequiresApproval}}</div>
-            </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input></ion-input>
+               <div class="info">{{clientCustomizations.cashOrderPageHeaderText}}</div>
             </ion-col>
          </ion-row>
         <ion-row>
@@ -217,10 +185,7 @@
               <h6>Cash Order Page Header Text </h6>
            </ion-col>
            <ion-col size-md="6" size-xs="12">
-              <div class="info">{{clientCustomizations.cashOrderPageHeaderText}}</div>
-           </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
+              <div class="info">{{clientCustomizations.userOnboardTemplate}}</div>
            </ion-col>
         </ion-row>
         <ion-row>
@@ -230,10 +195,7 @@
            <ion-col size-md="6" size-xs="12">
               <div class="info">{{clientCustomizations.userOnboardTemplate}}</div>
            </ion-col>
-           <ion-col *ngIf="edit">
-              <ion-input></ion-input>
-           </ion-col>
-        </ion-row>
+        </ion-row> -->
         <!-- <ion-button  (click)="editCustomization()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
         </ion-button> -->

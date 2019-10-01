@@ -42,9 +42,16 @@ export class ClientDetailsPage implements OnInit {
     this.assingmentAddition = '';
     this.addingAssingment = false;
     this.addingRank = false;
+    this.initializeClient();
+  }
+
+  initializeClient(){
     this.client = {
       name:null,
-      customizations:{ },
+      customizations:{
+        pickupLocations:[null,null],
+        deliveryLocations:[null,null]
+       },
       ranksOrTitles:[null,null],
       assignments:[null,null],
       billingInfo:{  },
@@ -59,6 +66,7 @@ export class ClientDetailsPage implements OnInit {
     this.editMode = false;
     this.addingAssingment = false;
     this.addingRank = false;
+    this.initializeClient();
     this.getClient();
   }
 
