@@ -16,6 +16,7 @@ export class ClientDetailsPage implements OnInit {
   public clientId : string;
   public editMode : boolean;
   public rankAddition: string;
+  public isDisabled: boolean = true; 
   public assingmentAddition: string;
   public addingRank: boolean;
   public addingAssingment: boolean;

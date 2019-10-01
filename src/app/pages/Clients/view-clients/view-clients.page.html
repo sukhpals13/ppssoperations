@@ -12,6 +12,7 @@
 <ion-content>
   <ion-grid>
     <ion-row>
+      <form (onSubmit)="getClientList(searchText)">
       <ion-col>
         <ion-item class="input-item">
           <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search here"></ion-input>
@@ -21,6 +22,7 @@
           </button>
         </ion-item>
       </ion-col>
+    </form>
     </ion-row>
   </ion-grid>
   <ion-grid>

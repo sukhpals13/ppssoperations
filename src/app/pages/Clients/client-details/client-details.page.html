@@ -35,7 +35,7 @@
                 <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
               </div>
               <div *ngIf="editMode">
-                <ion-input type="number" [(ngModel)]="client.clientNumber"></ion-input>
+                <ion-input type="number" [disabled]="isDisabled" [(ngModel)]="client.clientNumber"></ion-input>
               </div>
             </ion-col>
           </ion-row>
@@ -51,6 +51,25 @@
               </div>
             </ion-col>
           </ion-row>
+          <ion-row *ngIf="client.parentClientId">
+              <ion-col size="12">
+                <h6>Parent Client Id</h6>
+                <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="client.parentClientId"></app-text-shell>
+                </div>
+                <!-- <div *ngIf="editMode">
+                  <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
+                </div> -->
+                
+                <div *ngIf="editMode">
+                    <mat-form-field>
+                    <ion-input [(ngModel)]="client.parentClientId"></ion-input>
+                   
+                    <ion-button >Edit</ion-button>
+                  </mat-form-field>
+                  </div>
+              </ion-col>
+            </ion-row>
         </ion-grid>
       </div>
     </ion-card-content>
