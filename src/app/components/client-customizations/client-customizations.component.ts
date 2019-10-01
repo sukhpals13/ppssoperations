@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PostDetailsService } from '../../services/postDetails/post-details.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-client-customizations',
@@ -11,8 +13,15 @@ export class ClientCustomizationsComponent implements OnInit {
   @Input() edit: any;
   @Input() id: any;
 
-  constructor() { }
+  public loader: boolean;
 
-  ngOnInit() {}
+  constructor(
+    private postDetails: PostDetailsService,
+    public alertController: AlertController,
+  ) { }
+
+  ngOnInit() {
+     this.loader=false;
+  }
 
 }

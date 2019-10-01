@@ -1,3 +1,177 @@
-<p>
-  client-customizations works!
-</p>
+<ion-card>
+  <ion-card-header color="primary">
+     <ion-card-subtitle>Customization</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+     <ion-grid>
+        <ion-row *ngIf="data.billingMethod||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Enable Allotment Order </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Yes</div>
+           </ion-col>
+           <ion-col *ngIf="edit">
+              <!-- <ion-item> -->
+                 <!-- <ion-label>Gender</ion-label> -->
+                 <mat-form-field style="width: 100%;">
+                    <!-- <mat-label>Favorite food</mat-label> -->
+                    <mat-select [(ngModel)]="data.billingMethod">
+                       <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
+                          {{billingMethod}}
+                       </mat-option>
+                    </mat-select>
+                 </mat-form-field>
+              <!-- </ion-item> -->
+              <!-- <ion-input [(ngModel)]="data.billingMethod"></ion-input> -->
+           </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.contactName||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Enable Agency Order </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Yes</div>
+           </ion-col>
+           <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.contactName"></ion-input>
+           </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.contactEmail||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Home Page Message </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Lorem ipsum dollar</div>
+           </ion-col>
+           <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.contactEmail"></ion-input>
+           </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.contactPhone||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Pickup Locations </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Lorem ipsum dollar</div>
+           </ion-col>
+           <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.contactPhone"></ion-input>
+           </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.poRequired||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Delivery Locations </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Delivery locations</div>
+           </ion-col>
+           <ion-col *ngIf="edit">
+              <ion-toggle [(ngModel)]="data.poRequired"></ion-toggle>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+           <ion-col size-md="6" size-xs="12">
+              <h6>Enable Order Shipping </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Yes</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-toggle [(ngModel)]="data.taxExemptFormOnFile"></ion-toggle>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.billingNotes||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Agency Order Overview Text </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Lorem ipsum dollar</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.billingNotes"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.addressLine1||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Agency Order Allow Shipping Address </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">No</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.addressLine1"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.addressLine2||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Agency Order Shipping Text </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Lorem ipsum</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.addressLine2"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.addressLine3||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Cash Order Overview Text </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Lorem ipsum dollar</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.addressLine3"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.addressLine4||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Work flow Settings </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Do not add yet</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.addressLine4"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.city||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Agency Order Page Header Text </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Agency Order Page Header</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.city"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.state||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>Cash Order Page Header Text </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">Cash Order Page Header</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.state"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-row *ngIf="data.zipCode||edit">
+           <ion-col size-md="6" size-xs="12">
+              <h6>User Onboard Template </h6>
+           </ion-col>
+           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <div class="info">User Onboard Template</div>
+           </ion-col>
+           <!-- <ion-col *ngIf="edit">
+              <ion-input [(ngModel)]="data.zipCode"></ion-input>
+           </ion-col> -->
+        </ion-row>
+        <ion-button *ngIf="edit" (click)="editcustomization()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
+           <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+        </ion-button>
+     </ion-grid>
+  </ion-card-content>
+</ion-card>
