@@ -55,7 +55,7 @@
       </div>
     </ion-card-content>
   </ion-card>
-  <ion-card id="client-custom">
+  <!-- <ion-card id="client-custom">
     <ion-card-header color="primary">
       <ion-card-subtitle>Client Customizations</ion-card-subtitle>
     </ion-card-header>
@@ -101,7 +101,8 @@
         </ion-grid>
       </div>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
+  <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client.id"></app-client-customizations>
   <ion-card *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
     <ion-card-header color="primary">
       <ion-card-subtitle>Ranks or Titles</ion-card-subtitle>
