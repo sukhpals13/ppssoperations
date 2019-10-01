@@ -12,11 +12,11 @@ import { DeleteServicesService } from '../../../services/deleteServices/delete-s
 })
 export class ClientDetailsPage implements OnInit {
 
-  public client : any;
-  public clientId : string;
-  public editMode : boolean;
+  public client: any;
+  public clientId: string;
+  public editMode: boolean;
   public rankAddition: string;
-  public isDisabled: boolean = true; 
+  public isDisabled: boolean = true;
   public assingmentAddition: string;
   public addingRank: boolean;
   public addingAssingment: boolean;
@@ -45,21 +45,21 @@ export class ClientDetailsPage implements OnInit {
     this.initializeClient();
   }
 
-  initializeClient(){
+  initializeClient() {
     this.client = {
-      name:null,
-      customizations:{
-        pickupLocations:[null,null],
-        deliveryLocations:[null,null]
-       },
-      ranksOrTitles:[null,null],
-      assignments:[null,null],
-      billingInfo:{  },
+      name: null,
+      customizations: {
+        pickupLocations: [],
+        deliveryLocations: []
+      },
+      ranksOrTitles: [null, null],
+      assignments: [null, null],
+      billingInfo: {},
       isShell: true
     };
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     // console.log(this.router.url)
     this.rankAddition = '';
     this.assingmentAddition = '';
@@ -70,41 +70,90 @@ export class ClientDetailsPage implements OnInit {
     this.getClient();
   }
 
+  handleClientResponse(res){
+    this.client = res.client;
+      if (!this.client.billingInfo) {
+        this.client.billingInfo = {}
+      }
+      if (this.client.customizations) {
+        if (this.client.customizations.homepageMessage) {
+          this.client.customizations.homepageMessage = this.client.customizations.homepageMessage.split("src='/img").join("src='https://integration.ebusiness.pittsburghpublicsafety.com/img")
+        }
+        if (!this.client.customizations.pickupLocations) {
+          this.client.customizations.pickupLocations = []
+        }
+        if (!this.client.customizations.deliveryLocations) {
+          this.client.customizations.deliveryLocations = []
+        }
+      }
+  }
   getClient() {
     let clientId;
     console.log(clientId);
     // console.log(this._Activatedroute,'this._Activatedroute');
     // console.log(this.router,'this.router');
     this._Activatedroute.params.subscribe(it => {
-      clientId = it.cNumber; 
-      this.clientId = it.cNumber; 
+      clientId = it.cNumber;
+      this.clientId = it.cNumber;
     })
-    this.getDetailsService.getClient(clientId).subscribe(res=>{
+    this.getDetailsService.getClient(clientId).subscribe(res => {
       console.log(res);
-      this.client = res.client;
-      if(!this.client.billingInfo){
-        this.client.billingInfo = {}
-      }
-    },err=>{
+      this.handleClientResponse(res);
+      // this.client = res.client;
+      // if (!this.client.billingInfo) {
+      //   this.client.billingInfo = {}
+      // }
+      // if (this.client.customizations) {
+      //   if (this.client.customizations.homepageMessage) {
+      //     this.client.customizations.homepageMessage = this.client.customizations.homepageMessage.split("src='/img").join("src='https://integration.ebusiness.pittsburghpublicsafety.com/img")
+      //   }
+      //   if (!this.client.customizations.pickupLocations) {
+      //     this.client.customizations.pickupLocations = []
+      //   }
+      //   if (!this.client.customizations.deliveryLocations) {
+      //     this.client.customizations.deliveryLocations = []
+      //   }
+      // }
+    }, err => {
       console.log(err);
     })
   }
 
-  editToggle(){
-    let flag = false;
-    this.editMode = !this.editMode;
-    console.log(this.client);
-    for(var prop in this.client.billingInfo) {
-      if (this.client.billingInfo.hasOwnProperty(prop)) {
-          flag = true;
-          break;
+  async editToggle() {
+    // let flag = false;
+    
+    this.zone.run(() => {
+      console.log(this.client);
+      let flag = true;
+      if(this.client.customizations.agencyOrderAllowShippingAddress==undefined || this.client.customizations.agencyOrderAllowShippingAddress==false){
+        if(!this.client.customizations.agencyOrderShippingText){
+          flag = false
+        }
       }
-    }
-    if(flag)
-      this.getClient();
+      // if(flag){
+        if (this.editMode) {
+          if(flag){
+            this.editMode = false;
+            this.postDetailsService.updateClient(this.client)
+              .subscribe(res => {
+                console.log(res);
+                this.handleClientResponse(res);
+              }, err => {
+                console.log(err);
+              });
+          }else{
+            this.alertPopup('Error!!!','Agency Order Shipping Text Required!!!')
+          }
+        } else {
+          this.editMode = true;
+        }
+      // }
+    })
+    // this.editMode = !this.editMode;
+
   }
 
-  async alertPopup(title,msg){
+  async alertPopup(title, msg) {
     const alert = await this.alertController.create({
       header: title,
       message: msg,
@@ -115,46 +164,46 @@ export class ClientDetailsPage implements OnInit {
     await alert.present();
   }
 
-  addRanks(){
+  addRanks() {
     this.addingRank = true;
-    if(this.client.ranksOrTitles.includes(this.rankAddition)){
-      this.alertPopup('Duplicate Error!!!','Rank with the same name already exists');
+    if (this.client.ranksOrTitles.includes(this.rankAddition)) {
+      this.alertPopup('Duplicate Error!!!', 'Rank with the same name already exists');
       this.addingRank = false;
-    }else{
-      this.postDetailsService.addRank(this.clientId,this.rankAddition).subscribe(res=>{
+    } else {
+      this.postDetailsService.addRank(this.clientId, this.rankAddition).subscribe(res => {
         this.client.ranksOrTitles.push(this.rankAddition);
         this.rankAddition = '';
         this.addingRank = false;
         console.log(res);
-      },err=>{
+      }, err => {
         console.log(err);
       })
     }
   }
 
-  addAssingment(){
+  addAssingment() {
     this.addingAssingment = true;
-    if(this.client.assignments.includes(this.assingmentAddition)){
-      this.alertPopup('Duplicate Error!!!','Assingment with the same name already exists');
+    if (this.client.assignments.includes(this.assingmentAddition)) {
+      this.alertPopup('Duplicate Error!!!', 'Assingment with the same name already exists');
       this.addingAssingment = false;
-    }else{
-      this.postDetailsService.addAssignment(this.clientId, this.assingmentAddition).subscribe(res=> {
+    } else {
+      this.postDetailsService.addAssignment(this.clientId, this.assingmentAddition).subscribe(res => {
         this.client.assignments.push(this.assingmentAddition);
         console.log(res);
         this.assingmentAddition = '';
         this.addingAssingment = false;
-        
-      }, err=> {
+
+      }, err => {
         console.log(err);
       })
     }
   }
 
-  async deleteRank(r){
+  async deleteRank(r) {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
     });
-    
+
     const alert = await this.alertController.create({
       header: 'Confirm!',
       message: 'Are you sure you want to delete the Rank or Titles?',
@@ -172,27 +221,27 @@ export class ClientDetailsPage implements OnInit {
             // console.log('Confirm Okay');
             // console.log(r);
             loading.present();
-            this.deleteService.deleteRank(this.client._id,r)
-            .subscribe(res=>{
-              this.zone.run(()=>{
-                this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v=>v!==r);
-              })
-              console.log(res);
-              loading.dismiss();
-            },err=>{
-              console.log(err)
-              loading.dismiss();
-              this.alertPopup('Error deleting Rank!!!',JSON.stringify(err));
-            });
+            this.deleteService.deleteRank(this.client._id, r)
+              .subscribe(res => {
+                this.zone.run(() => {
+                  this.client.ranksOrTitles = this.client.ranksOrTitles.filter(v => v !== r);
+                })
+                console.log(res);
+                loading.dismiss();
+              }, err => {
+                console.log(err)
+                loading.dismiss();
+                this.alertPopup('Error deleting Rank!!!', JSON.stringify(err));
+              });
           }
         }
       ]
     });
     await alert.present();
-    
+
   }
 
-  async deleteAssignment(a){
+  async deleteAssignment(a) {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
     });
@@ -213,18 +262,18 @@ export class ClientDetailsPage implements OnInit {
           handler: () => {
             // console.log('Confirm Okay');
             loading.present();
-            this.deleteService.deleteAssignment(this.client._id,a)
-            .subscribe(res=>{
-              this.zone.run(()=>{
-                this.client.assignments = this.client.assignments.filter(v=>v!==a);
+            this.deleteService.deleteAssignment(this.client._id, a)
+              .subscribe(res => {
+                this.zone.run(() => {
+                  this.client.assignments = this.client.assignments.filter(v => v !== a);
+                })
+                loading.dismiss();
+                console.log(res)
+              }, err => {
+                console.log(err)
+                loading.dismiss();
+                this.alertPopup('Error deleting Assingment!!!', JSON.stringify(err));
               })
-              loading.dismiss();
-              console.log(res)
-            },err=>{
-              console.log(err)
-              loading.dismiss();
-              this.alertPopup('Error deleting Assingment!!!',JSON.stringify(err));
-            })
           }
         }
       ]

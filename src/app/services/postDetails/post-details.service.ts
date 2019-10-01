@@ -45,6 +45,7 @@ export class PostDetailsService {
   }
 
   updateClient(client){
+    console.log(client);
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/"+client._id;
     return this.http.post<any>(url,client)
   }
