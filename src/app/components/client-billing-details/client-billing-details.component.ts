@@ -69,7 +69,7 @@ export class ClientBillingDetailsComponent implements OnInit {
         console.log(val)
         if(this.data[val.name]==""||this.data[val.name]==undefined){
           flag = false;
-          msg += "Address Line 1, City, State and Zip Code are required!!!"
+          msg = "Address Line 1, City, State and Zip Code are required!!!"
         }
       })
     }
