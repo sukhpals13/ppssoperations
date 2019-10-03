@@ -57,17 +57,10 @@
                 <div *ngIf="!editMode">
                     <app-text-shell animation="bouncing" lines="1" [data]="client.parentClientId"></app-text-shell>
                 </div>
-                <!-- <div *ngIf="editMode">
-                  <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
-                </div> -->
-                
                 <div *ngIf="editMode ">
-                    <!-- <mat-form-field> -->
                       <div>
-                    <ion-input [(ngModel)]="client.parentClientId"></ion-input>
+                    {{client.parentClientId?client.parentClientId:"No parent client Id"}}
                   </div>
-                   
-                  <!-- </mat-form-field> -->
                   <ion-button >Edit</ion-button>
                   </div>
               </ion-col>
@@ -123,7 +116,7 @@
       </div>
     </ion-card-content>
   </ion-card> -->
-  <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client.id"></app-client-customizations>
+  <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id"></app-client-customizations>
   <ion-card *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
     <ion-card-header color="primary">
       <ion-card-subtitle>Ranks or Titles</ion-card-subtitle>
