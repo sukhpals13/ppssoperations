@@ -47,7 +47,17 @@ export class PostDetailsService {
   updateClient(client){
     console.log(client);
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/"+client._id;
-    return this.http.post<any>(url,client)
+    return this.http.post<any>(url,client);
+  }
+
+  addPickupLocation(clientId,pickupLocation){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/pickupLocation/"+clientId;
+    return this.http.put<any>(url,{name:pickupLocation})
+  }
+
+  addDeliveryLocation(clientId,deliveryLocation){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/deliveryLocation/"+clientId;
+    return this.http.put<any>(url,{name:deliveryLocation})
   }
 
   // /api/client/updateBilling/5d40606c480c470004320f76
