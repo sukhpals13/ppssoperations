@@ -99,21 +99,6 @@ export class ClientDetailsPage implements OnInit {
     this.getDetailsService.getClient(clientId).subscribe(res => {
       console.log(res);
       this.handleClientResponse(res);
-      // this.client = res.client;
-      // if (!this.client.billingInfo) {
-      //   this.client.billingInfo = {}
-      // }
-      // if (this.client.customizations) {
-      //   if (this.client.customizations.homepageMessage) {
-      //     this.client.customizations.homepageMessage = this.client.customizations.homepageMessage.split("src='/img").join("src='https://integration.ebusiness.pittsburghpublicsafety.com/img")
-      //   }
-      //   if (!this.client.customizations.pickupLocations) {
-      //     this.client.customizations.pickupLocations = []
-      //   }
-      //   if (!this.client.customizations.deliveryLocations) {
-      //     this.client.customizations.deliveryLocations = []
-      //   }
-      // }
     }, err => {
       console.log(err);
     })
@@ -134,7 +119,7 @@ export class ClientDetailsPage implements OnInit {
         if (this.editMode) {
           if(flag){
             this.editMode = false;
-            this.postDetailsService.updateClient(this.client)
+            this.postDetailsService.updateClient({...this.client})
               .subscribe(res => {
                 console.log(res);
                 this.handleClientResponse(res);
