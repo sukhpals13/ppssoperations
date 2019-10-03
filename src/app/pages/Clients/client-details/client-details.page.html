@@ -58,10 +58,10 @@
                     <app-text-shell animation="bouncing" lines="1" [data]="client.parentClientId"></app-text-shell>
                 </div>
                 <div *ngIf="editMode ">
-                      <div>
+                  <div>
                     {{client.parentClientId?client.parentClientId:"No parent client Id"}}
                   </div>
-                  <ion-button >Edit</ion-button>
+                  <ion-button (click)="openSearchClient()">Edit</ion-button>
                   </div>
               </ion-col>
             </ion-row>
@@ -127,9 +127,6 @@
           <ion-row *ngFor="let rank of client.ranksOrTitles">
             <ion-col>
               <app-text-shell  animation="bouncing" lines="1" [data]="rank"></app-text-shell>
-              <!-- <ion-fab-button *ngIf="editMode">
-                <ion-icon name="trash"></ion-icon>
-              </ion-fab-button> -->
             </ion-col>
             <ion-col style="text-align: right;">
               <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">

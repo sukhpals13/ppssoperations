@@ -23,6 +23,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {OrderFilterComponent} from './order-filter/order-filter.component';
 import {ClientBillingDetailsComponent} from './client-billing-details/client-billing-details.component';
 import {ClientCustomizationsComponent} from './client-customizations/client-customizations.component';
+import {ParentClientIdSearchComponent} from './parent-client-id-search/parent-client-id-search.component';
 // import {EditSubStatusComponent} from './edit-sub-status/edit-sub-status.component'
 
 var commonMods = [
@@ -44,6 +45,7 @@ var commonMods = [
     ReactiveFormsModule,
     ShellModule,
     IonicModule.forRoot(),
+    // ParentClientIdSearchComponent,
     // ClientBillingDetailsComponent,
     ...commonMods,
   ],
@@ -56,6 +58,7 @@ var commonMods = [
     OrderFilterComponent,
     ClientBillingDetailsComponent,
     ClientCustomizationsComponent,
+    ParentClientIdSearchComponent
     // EditSubStatusComponent
   ],
   exports: [
@@ -71,6 +74,7 @@ var commonMods = [
   ],
   entryComponents: [
     OrderFilterComponent,
+    ParentClientIdSearchComponent,
     // ClientBillingDetailsComponent,
     // EditSubStatusComponent
   ],

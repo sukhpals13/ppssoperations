@@ -1,0 +1,28 @@
+<!-- <h6 mat-dialog-title>Search Parent Client By Name</h6> -->
+<!-- <ion-grid> -->
+<!-- <ion-row> -->
+<form (onSubmit)="getClientList(searchText)">
+  <!-- <ion-col> -->
+    <ion-item class="input-item">
+      <ion-input type="text" name="search" [(ngModel)]="searchParam" required placeholder="Search Parent Client here">
+      </ion-input>
+      <button mat-icon-button style="color: black;" color="primary" (click)="getClientList(searchParam)"
+        aria-label="Example icon-button with a search icon" [disabled]="searchParam==''||searchParam==undefined">
+        <mat-icon>search</mat-icon>
+      </button>
+    </ion-item>
+  <!-- </ion-col> -->
+</form>
+<!-- <ion-grid>
+  <ion-row> -->
+<div class="name-container" *ngFor="let p of parentClient; let i = index;">
+  <button mat-button [mat-dialog-close]="p">{{p.name}}</button>
+</div>
+<!-- </ion-row>
+</ion-grid> -->
+<!-- </ion-row> -->
+<!-- </ion-grid> -->
+<!-- <div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div> -->

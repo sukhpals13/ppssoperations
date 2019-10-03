@@ -56,17 +56,6 @@ export class ViewClientsPage implements OnInit {
   }
 
   getClientList(phrase){
-    // console.log(phrase)
-    // let send = phrase;
-    // if(phrase==''){
-    //   this.clients = {
-    //     name: null,
-    //     clientNumber: null,
-    //     clients: [],
-    //     isShell: true,
-        
-    //   };
-    // }
     this.initializeData();
     this.getDetailsService.getAllClients(phrase)
     .subscribe(res => {

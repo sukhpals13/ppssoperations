@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { PostDetailsService } from '../../../services/postDetails/post-details.service';
 import { DeleteServicesService } from '../../../services/deleteServices/delete-services.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ParentClientIdSearchComponent} from '../../../components/parent-client-id-search/parent-client-id-search.component'
 
 @Component({
   selector: 'app-client-details',
@@ -33,7 +35,8 @@ export class ClientDetailsPage implements OnInit {
     private _Activatedroute: ActivatedRoute,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    public zone: NgZone
+    public zone: NgZone,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -272,4 +275,39 @@ export class ClientDetailsPage implements OnInit {
 
   }
 
+  openSearchClient(){
+    const dialogRef = this.dialog.open(ParentClientIdSearchComponent, {
+      width: '250px',
+      data: {parentClientId:this.client.parentClientId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result?result:"No result");
+      // if(resul)
+      if(result){
+        this.alertPopupOptions(result)
+      }
+    });
+  }
+  async alertPopupOptions(p){
+    const alert = await this.alertController.create({
+      header: "Are you sure?",
+      message: "Are you sure you want "+p.name+" to be the parent client ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+          this.client.parentClientId = p._id;
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          this.openSearchClient();
+        }
+      }]
+    });
+    await alert.present();
+  }
 }
