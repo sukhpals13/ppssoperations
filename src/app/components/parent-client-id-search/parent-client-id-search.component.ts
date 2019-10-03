@@ -17,6 +17,7 @@ export class ParentClientIdSearchComponent implements OnInit {
 
   public searchParam: string;
   public parentClient: any;
+  public isLength: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<ParentClientIdSearchComponent>,
@@ -25,7 +26,11 @@ export class ParentClientIdSearchComponent implements OnInit {
     private alertController: AlertController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+     this.parentClient = [];
+     this.isLength = false;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -37,6 +42,12 @@ export class ParentClientIdSearchComponent implements OnInit {
     .subscribe(res=>{
       console.log(res);
       this.parentClient = res.clients;
+      if(this.parentClient.length == 0){
+         this.isLength = true;
+      }
+      else{
+        this.isLength = false;
+      }
     },err=>{
       console.log(err);
     })

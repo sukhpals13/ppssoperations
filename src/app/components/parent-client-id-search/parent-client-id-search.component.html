@@ -18,6 +18,7 @@
 <div class="name-container" *ngFor="let p of parentClient; let i = index;">
   <button mat-button [mat-dialog-close]="p">{{p.name}}</button>
 </div>
+<div class="message" *ngIf="isLength">No client with search param</div>
 <!-- </ion-row>
 </ion-grid> -->
 <!-- </ion-row> -->
