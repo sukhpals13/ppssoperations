@@ -101,6 +101,7 @@ export class ClientDetailsPage implements OnInit {
       this.handleClientResponse(res);
     }, err => {
       console.log(err);
+      this.alertPopup("Error!!!",JSON.stringify(err));
     })
   }
 
@@ -123,8 +124,10 @@ export class ClientDetailsPage implements OnInit {
               .subscribe(res => {
                 console.log(res);
                 this.handleClientResponse(res);
+                this.alertPopup('Updated','Client information updated successfully')
               }, err => {
                 console.log(err);
+                this.alertPopup("Error!!!",JSON.stringify(err));
               });
           }else{
             this.alertPopup('Error!!!','Agency Order Shipping Text Required!!!')
@@ -162,6 +165,7 @@ export class ClientDetailsPage implements OnInit {
         console.log(res);
       }, err => {
         console.log(err);
+        this.alertPopup("Error!!!",JSON.stringify(err));
       })
     }
   }
@@ -180,6 +184,7 @@ export class ClientDetailsPage implements OnInit {
 
       }, err => {
         console.log(err);
+        this.alertPopup("Error!!!",JSON.stringify(err));
       })
     }
   }

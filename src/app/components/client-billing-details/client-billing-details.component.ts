@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostDetailsService } from '../../services/postDetails/post-details.service'
 import { AlertController } from '@ionic/angular';
+import { stringify } from '@angular/compiler/src/util';
 
 interface address {
   name:string;
@@ -78,11 +79,13 @@ export class ClientBillingDetailsComponent implements OnInit {
       .subscribe(res=>{
         console.log(res);
         this.loader = false;
+        this.alertPopup("Updated",'Billing details updated successfully');
         // this.data = res.client.billingInfo;
         // console.log(this.data);
       }, err=>{
         this.loader = false;
         console.log(err);
+        this.alertPopup("Error!!!",JSON.stringify(err));
       })
     }else{
       this.alertPopup("Error!!!",msg);
