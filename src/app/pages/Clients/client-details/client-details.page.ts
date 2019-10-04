@@ -55,6 +55,7 @@ export class ClientDetailsPage implements OnInit {
         pickupLocations: [],
         deliveryLocations: []
       },
+      contacts:[],
       ranksOrTitles: [null, null],
       assignments: [null, null],
       billingInfo: {},

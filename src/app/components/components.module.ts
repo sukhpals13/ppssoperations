@@ -24,6 +24,7 @@ import {OrderFilterComponent} from './order-filter/order-filter.component';
 import {ClientBillingDetailsComponent} from './client-billing-details/client-billing-details.component';
 import {ClientCustomizationsComponent} from './client-customizations/client-customizations.component';
 import {ParentClientIdSearchComponent} from './parent-client-id-search/parent-client-id-search.component';
+import {ClientContactDetailsComponent} from './client-contact-details/client-contact-details.component';
 // import {EditSubStatusComponent} from './edit-sub-status/edit-sub-status.component'
 
 var commonMods = [
@@ -35,7 +36,7 @@ var commonMods = [
   MatSelectModule,
   MatIconModule,
   MatButtonToggleModule,
-  MatGridListModule
+  MatGridListModule,
 ];
 
 @NgModule({
@@ -58,7 +59,8 @@ var commonMods = [
     OrderFilterComponent,
     ClientBillingDetailsComponent,
     ClientCustomizationsComponent,
-    ParentClientIdSearchComponent
+    ParentClientIdSearchComponent,
+    ClientContactDetailsComponent
     // EditSubStatusComponent
   ],
   exports: [
@@ -70,6 +72,7 @@ var commonMods = [
     RatingInputComponent,
     ClientBillingDetailsComponent,
     ClientCustomizationsComponent,
+    ClientContactDetailsComponent,
     ...commonMods
   ],
   entryComponents: [
