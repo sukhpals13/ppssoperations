@@ -60,6 +60,14 @@ export class PostDetailsService {
     return this.http.put<any>(url,{name:deliveryLocation})
   }
 
-  // /api/client/updateBilling/5d40606c480c470004320f76
+  addClientContact(clientId,contact){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/contact/"+clientId;
+    return this.http.post<any>(url,contact)
+  }
+
+  updateClientContact(clientId,contact){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/contact/"+clientId;
+    return this.http.put<any>(url,contact)
+  }
 
 }

@@ -30,4 +30,9 @@ export class DeleteServicesService {
     return this.http.request<any>('delete',url,{body:{name:deliveryLocation}})
   }
 
+  deleteClientContact(clientId,contactId){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/contact/"+clientId;
+    return this.http.request<any>('delete',url,{body:{contactId:contactId}})
+  }
+
 }
