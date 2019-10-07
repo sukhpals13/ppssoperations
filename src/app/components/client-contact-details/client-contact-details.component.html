@@ -1,43 +1,124 @@
 <ion-card>
-  <ion-card-header color="primary">
-     <ion-card-subtitle>Contacts</ion-card-subtitle>
-  </ion-card-header>
-  <ion-card-content>
-     {{clientContactDetails|json}}
-     <ion-grid>
-        <!-- <ion-row>
-           <ion-col size-md="6" size-xs="12">
-              <h6>ID </h6>
-           </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">{{clientContactDetails._id"}}</div>
-           </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="edit">
-              <ion-input [(ngModel)]="clientContactDetails._id"></ion-input>
-           </ion-col>
-        </ion-row> -->
-        <ion-row>
-           <ion-col size-md="6" size-xs="12">
-              <h6>Contact Type </h6>
-           </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">{{clientContactDetails.contactType}}</div>
-           </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="edit">
-              <ion-input [(ngModel)]="clientContactDetails.contactType"></ion-input>
-           </ion-col>
-        </ion-row>
-        <ion-row>
-           <ion-col size-md="6" size-xs="12">
-              <h6>Contact Namne </h6>
-           </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-              <div class="info">{{clientContactDetails.contactName}}</div>
-           </ion-col>
-           <ion-col size-md="6" size-xs="12" *ngIf="edit">
-              <ion-input [(ngModel)]="clientContactDetails.contactName"></ion-input>
-           </ion-col>
-        </ion-row>
-     </ion-grid>
-  </ion-card-content>
+   <ion-card-header color="primary">
+      <ion-card-subtitle>Contacts</ion-card-subtitle>
+   </ion-card-header>
+   <ion-card-content>
+      <!-- {{clientContactDetails|json}} -->
+
+      <ion-grid>
+         <mat-accordion>
+
+            <mat-expansion-panel *ngFor=" let contact of clientContactDetails">
+               <mat-expansion-panel-header>
+                  <mat-panel-title>{{contact.contactName}}</mat-panel-title>
+                  <mat-icon *ngIf="edit" (click)="deleteContact(contact)">delete</mat-icon>
+               </mat-expansion-panel-header>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>ID </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact._id}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <ion-input [(ngModel)]="contact._id"></ion-input>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Contact Type </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.contactType}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <ion-input [(ngModel)]="contact.contactType"></ion-input>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Contact Namne </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.contactName}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <ion-input [(ngModel)]="contact.contactName"></ion-input>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Contact Phone </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.contactPhone}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <ion-input [(ngModel)]="contact.contactPhone"></ion-input>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Contact Email </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.contactEmail}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <ion-input [(ngModel)]="contact.contactEmail"></ion-input>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Contact Notes </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.contactNotes}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <ion-input [(ngModel)]="contact.contactNotes"></ion-input>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Created </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.created}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <mat-form-field>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="contact.created"
+                           placeholder="Choose a date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                     </mat-form-field>
+                  </ion-col>
+               </ion-row>
+               <ion-row>
+                  <ion-col size-md="6" size-xs="12">
+                     <h6>Updated </h6>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+                     <div class="info">{{contact.updated}}</div>
+                  </ion-col>
+                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
+                     <mat-form-field>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="contact.updated"
+                           placeholder="Choose a date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                     </mat-form-field>
+                  </ion-col>
+               </ion-row>
+               <ion-button *ngIf="edit" (click)="editContactsInfo()" [disabled]="loader">
+                  {{loader?'':'Update Contacts Info'}}
+                  <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+               </ion-button>
+            </mat-expansion-panel>
+            <ion-button class="addcontact" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add contact
+            </ion-button>
+         </mat-accordion>
+      </ion-grid>
+   </ion-card-content>
 </ion-card>

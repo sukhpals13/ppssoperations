@@ -16,9 +16,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule,MatInputModule,MatButtonModule} from '@angular/material';
+import {MatFormFieldModule,MatInputModule,MatButtonModule,MatNativeDateModule} from '@angular/material';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {OrderFilterComponent} from './order-filter/order-filter.component';
 import {ClientBillingDetailsComponent} from './client-billing-details/client-billing-details.component';
@@ -44,6 +45,9 @@ var commonMods = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    
     ShellModule,
     IonicModule.forRoot(),
     // ParentClientIdSearchComponent,
@@ -81,5 +85,8 @@ var commonMods = [
     // ClientBillingDetailsComponent,
     // EditSubStatusComponent
   ],
+  providers: [
+    MatDatepickerModule,
+  ]
 })
 export class ComponentsModule {}
