@@ -95,6 +95,13 @@ export class AppComponent {
       url: '/clients/create',
       icon: 'list-box',
     },  
+  ];
+  userPages = [
+    {
+      title: 'Search User',
+      url: '/users/search-user',
+      icon: 'eye'
+    },
   ]
 
   constructor(

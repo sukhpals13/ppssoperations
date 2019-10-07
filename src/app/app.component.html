@@ -20,7 +20,7 @@
               <span class="user-stat-name">Following</span>
             </ion-col>
             <ion-col>
-              <span class="user-stat-value">537</span>
+              <span class="user-stat-value">537</span> 
               <span class="user-stat-name">Followers</span>
             </ion-col>
           </ion-row> -->
@@ -45,6 +45,17 @@
               <ion-icon slot="start" [name]="c.icon"></ion-icon>
               <ion-label>
                 {{c.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <ion-list>
+          <ion-list-header>Users</ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let u of userPages; let i = index">
+            <ion-item [routerLink]="u.url">
+              <ion-icon slot="start" [name]="u.icon"></ion-icon>
+              <ion-label>
+                {{u.title}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
