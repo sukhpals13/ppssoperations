@@ -1,9 +1,58 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>searchUser</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Users
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <form (onSubmit)="getUsersList(searchText)">
+      <ion-col>
+        <ion-item class="input-item">
+          <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search here"></ion-input>
+          <button mat-icon-button style="color: black;" color="primary" (click)="getUsersList(searchText)"
+            aria-label="Example icon-button with a search icon" [disabled]="searchText==''||searchText==undefined">
+            <mat-icon>search</mat-icon>
+          </button>
+        </ion-item>
+      </ion-col>
+    </form>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="4" size-xs="12" *ngFor="let user of users.users" (click)="viewUserDetails(user)">
+        <ion-card>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <h6>Name</h6>
+                <app-text-shell animation="bouncing" lines="2" [data]="user.firstName"></app-text-shell>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <h6>User Number</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="user.mobilePhoneNumber"></app-text-shell>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card *ngIf="searchText!=undefined&&users.users.length==0&&searchSubmitted">
+      <ion-card-content>
+        <h3>
+          No users with searched key phrase 
+        </h3>
+      </ion-card-content>
+    </ion-card>
 
 </ion-content>
