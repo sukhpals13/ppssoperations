@@ -40,4 +40,10 @@ export class GetDetailsService {
   getAllUsers(phrase){
     return this.http.post<UsersListModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/find', {"searchPhrase":phrase})
   }
+
+  // Get Client Details https://integration.ebusiness.pittsburghpublicsafety.com/api/client/5d55a0a8951e360004cf8d2a
+  getUser(id){
+    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/'+id
+    return this.http.get<any>(url)
+  }
 }

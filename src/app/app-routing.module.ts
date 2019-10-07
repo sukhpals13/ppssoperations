@@ -31,8 +31,10 @@ const routes: Routes = [
   { path: 'clients/create', loadChildren: './pages/Clients/create-client/create-client.module#CreateClientPageModule' },
   { path: 'clients/details/:cNumber', loadChildren: () => import('./pages/Clients/client-details/client-details.module').then(m => m.ClientDetailsPageModule) },
 
-  { path: '**', redirectTo: 'page-not-found' },
+  
   { path: 'search-user', loadChildren: './pages/Users/search-user/search-user.module#SearchUserPageModule' },
+  { path: 'user/details/:uNumber', loadChildren: () => import('./pages/Users/user-details/user-details.module').then(m => m.UserDetailsPageModule) },
+  { path: '**', redirectTo: 'page-not-found' },
 
   // { path: 'order-details', loadChildren: './pages/Orders/order-details/order-details.module#OrderDetailsPageModule' },
   // { path: 'orders-to-pick', loadChildren: './pages/Orders/orders-to-pick/orders-to-pick.module#OrdersToPickPageModule' }

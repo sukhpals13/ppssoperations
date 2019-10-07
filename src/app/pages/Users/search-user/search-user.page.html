@@ -31,15 +31,19 @@
         <ion-card>
           <ion-grid>
             <ion-row>
-              <ion-col>
-                <h6>Name</h6>
+              <ion-col size-md="6" size-xs="12">
+                <h6>First Name</h6>
                 <app-text-shell animation="bouncing" lines="2" [data]="user.firstName"></app-text-shell>
+              </ion-col>
+              <ion-col size-md="6" size-xs="12">
+                <h6>Last Name</h6>
+                <app-text-shell animation="bouncing" lines="2" [data]="user.lastName"></app-text-shell>
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col>
-                <h6>User Number</h6>
-                <app-text-shell animation="bouncing" lines="1" [data]="user.mobilePhoneNumber"></app-text-shell>
+              <ion-col size-md="6" size-xs="12">
+                <h6>Email</h6>
+                <app-text-shell animation="bouncing" lines="1" [data]="user.email"></app-text-shell>
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -68,7 +68,7 @@ export class ClientContactDetailsComponent implements OnInit {
   addContactRow(){
     console.log('function call');
     //  this.contacts
-    this.clientContactDetails.push({contactType: '', contactName: '', contactPhone: '', contactEmail: '', contactNotes: '', created: '', updated: '' })
+    this.clientContactDetails.push({contactType: '', contactName: '', contactPhone: '', contactEmail: '', contactNotes: '' })
      
     }
 

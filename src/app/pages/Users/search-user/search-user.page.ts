@@ -70,9 +70,10 @@ export class SearchUserPage implements OnInit {
     )
   }
 
-  // viewUserDetails(u){
-  //   this.navCtrl.navigateForward('/clients/details/'+u._id);
-  // }
+  viewUserDetails(u){
+    // this.navCtrl.navigateForward('/user/details/:uNumber'+u._id);
+    this.navCtrl.navigateForward('/user/details/'+u._id);
+  }
 
   ionViewDidEnter(){
     // this.searchText = '';
