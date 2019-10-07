@@ -23,26 +23,47 @@ export class ClientContactDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.loader=false;
-    console.log('data contacts',this.clientContactDetails);
   }
-  editContactsInfo(){
-     let cliendID = this.id;
+  addContactsInfo(contact){
+     let clientId = this.id;
      let reqBody = {
-      contactType: this.clientContactDetails.contactType,
-      contactName: this.clientContactDetails.contactName,
-      contactPhone: this.clientContactDetails.contactPhone,
-      contactEmail: this.clientContactDetails.contactEmail,
-      contactNotes: this.clientContactDetails.contactNotes,
+      contactType: contact.contactType,
+      contactName: contact.contactName,
+      contactPhone: contact.contactPhone,
+      contactEmail: contact.contactEmail,
+      contactNotes: contact.contactNotes,
      }
     // let reqBody = this.clientContactDetails;
      console.log('Edit client detail',this.clientContactDetails);
-     return this.PoseDetailService.updateClientContact(cliendID,reqBody)
+     return this.PoseDetailService.addClientContact(clientId,reqBody)
      .subscribe(res => {
       console.log('Client add detail responseres', res);
+      this.clientContactDetails = res.client.contacts;
     }, err => {
       console.log(err);
     })
   }
+
+  editContactsInfo(contact){
+    let clientId = this.id;
+    let reqBody = {
+      _id: contact._id,
+     contactType: contact.contactType,
+     contactName: contact.contactName,
+     contactPhone: contact.contactPhone,
+     contactEmail: contact.contactEmail,
+     contactNotes: contact.contactNotes,
+    }
+   // let reqBody = this.clientContactDetails;
+    console.log('Edit client detail',reqBody);
+    return this.PoseDetailService.updateClientContact(clientId,reqBody)
+    .subscribe(res => {
+     console.log('Client add detail responseres', res);
+     this.clientContactDetails = res.client.contacts;
+   }, err => {
+     console.log(err);
+   })
+ }
 
   addContactRow(){
     console.log('function call');
@@ -53,9 +74,12 @@ export class ClientContactDetailsComponent implements OnInit {
 
     deleteContact(contact){
       let contactId = contact._id;
-       return this.DeleteDetailService.deleteClientContact(contactId)
+      let clientId = this.id;
+      return this.DeleteDetailService.deleteClientContact(clientId,contactId)
        .subscribe(res => {
         console.log('delete client contact', res);
+        this.clientContactDetails = res.client.contacts;
+
       }, err => {
         console.log(err);
       })

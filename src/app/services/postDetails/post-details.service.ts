@@ -62,12 +62,12 @@ export class PostDetailsService {
 
   addClientContact(clientId,contact){
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/contact/"+clientId;
-    return this.http.post<any>(url,contact)
+    return this.http.put<any>(url,contact)
   }
 
   updateClientContact(clientId,contact){
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/contact/"+clientId;
-    return this.http.put<any>(url,contact)
+    return this.http.post<any>(url,contact)
   }
 
 }
