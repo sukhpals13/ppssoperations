@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { OrdersToPickModel } from '../../interfaces/order';
 import { ClientsListModel } from '../../interfaces/clients';
+import { UsersListModel } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,9 @@ export class GetDetailsService {
   getClient(id){
     let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/'+id
     return this.http.get<any>(url)
+  }
+
+  getAllUsers(phrase){
+    return this.http.post<UsersListModel>('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/find', {"searchPhrase":phrase})
   }
 }

@@ -26,11 +26,13 @@ const routes: Routes = [
   { path: 'orders/to-pick/edit/:pNumber', loadChildren: () => import('./pages/Orders/order-details/order-details.module').then(m => m.OrderDetailsPageModule) },
 
   { path: 'clients/search-client', loadChildren: () => import('./pages/Clients/view-clients/view-clients.module').then(m => m.ViewClientsPageModule) },
+  { path: 'users/search-user', loadChildren: () => import('./pages/Users/search-user/search-user.module').then(m => m.SearchUserPageModule) },
   // { path: 'clients/create', loadChildren: () => import('./pages/Clients/client-details/client-details.module').then(m => m.ClientDetailsPageModule) },
   { path: 'clients/create', loadChildren: './pages/Clients/create-client/create-client.module#CreateClientPageModule' },
   { path: 'clients/details/:cNumber', loadChildren: () => import('./pages/Clients/client-details/client-details.module').then(m => m.ClientDetailsPageModule) },
 
-  { path: '**', redirectTo: 'page-not-found' },  { path: 'search-user', loadChildren: './pages/Users/search-user/search-user.module#SearchUserPageModule' },
+  { path: '**', redirectTo: 'page-not-found' },
+  { path: 'search-user', loadChildren: './pages/Users/search-user/search-user.module#SearchUserPageModule' },
 
   // { path: 'order-details', loadChildren: './pages/Orders/order-details/order-details.module#OrderDetailsPageModule' },
   // { path: 'orders-to-pick', loadChildren: './pages/Orders/orders-to-pick/orders-to-pick.module#OrdersToPickPageModule' }
