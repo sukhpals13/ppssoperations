@@ -72,22 +72,22 @@ export class PostDetailsService {
 
   addClientUserRole(clientId,role){
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/"+clientId;
-    return this.http.post<any>(url,role)
+    return this.http.put<any>(url,role)
   }
 
   updateClientUserRole(clientId,role){
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/"+clientId;
-    return this.http.put<any>(url,role)
+    return this.http.post<any>(url,role)
   }
 
   addClientUserGroup(clientId,group){
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
-    return this.http.post<any>(url,group)
+    return this.http.put<any>(url,group)
   }
 
   updateClientUserGroup(clientId,group){
     let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
-    return this.http.put<any>(url,group)
+    return this.http.post<any>(url,group)
   }
 
 }
