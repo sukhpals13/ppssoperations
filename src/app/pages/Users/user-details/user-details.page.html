@@ -130,7 +130,7 @@
           <ion-row>
             <ion-col size="12">
               <h3>Roles</h3>
-              <div *ngFor="let roles of user.user.clientLinks.roles">
+              <div *ngFor="let roles of clientinfo.roles">
                 <div *ngIf="!editMode">
                   <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
                   <span>{{roles}}</span>
@@ -144,7 +144,7 @@
           <ion-row>
             <ion-col size="12">
               <h3>Ranks</h3>
-              <div *ngFor="let ranks of user.user.clientLinks.ranks">
+              <div *ngFor="let ranks of clientinfo.ranks">
                 <div *ngIf="!editMode">
                   <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
                   <span>{{ranks}}</span>
@@ -158,17 +158,15 @@
           <ion-row>
             <ion-col size="12">
               <h3>Assignments</h3>
-              <div *ngFor="let clicklinks of user.user.clientLinks;let i = index">
-                <div *ngIf="!editMode">
-                  <span>{{clicklinks.assignments}}</span>
+              <div *ngFor="let assignments of clientinfo.assignments;let i = index">
+                <div class="row-info">
+                  <span>{{assignments}}</span> 
+                  <button class="delete" *ngIf="editMode"><mat-icon>delete</mat-icon></button>
                 </div>
-                <button *ngIf="editMode">
-                  <mat-icon>delete</mat-icon>
-                </button>
                 <div *ngIf="editMode">
-                          <ion-input placeholder="Add Assingments"></ion-input>
-                          <ion-button >Add</ion-button>
-                  </div>
+                    <ion-input placeholder="Add Assingments"></ion-input>
+                    <ion-button >Add</ion-button>
+                </div>
               </div>
             </ion-col>
           </ion-row>

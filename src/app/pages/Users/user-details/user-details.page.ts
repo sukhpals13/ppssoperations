@@ -57,7 +57,6 @@ export class UserDetailsPage implements OnInit {
 
   viewUserDetails(user){
     this.initializeData();
-    console.log('function calling', user);
     let userId;
     this._Activatedroute.params.subscribe(it => {
       userId = it.uNumber;
@@ -65,9 +64,7 @@ export class UserDetailsPage implements OnInit {
     })
      return this.getDetailsService.getUser(userId)
      .subscribe(res =>{
-        console.log('user detail response',res);
         this.user = res;
-        console.log('user detail',this.user);
      }, err => {
         console.log(err);
      });
@@ -87,31 +84,11 @@ export class UserDetailsPage implements OnInit {
         if (this.editMode) {
           if(flag){
             this.editMode = false;
-            // this.postDetailsService.updateClient({...this.client})
-            //   .subscribe(res => {
-            //     console.log(res);
-            //     this.handleClientResponse(res);
-            //     this.alertPopup('Updated','Client information updated successfully')
-            //   }, err => {
-            //     console.log(err);
-            //     this.alertPopup("Error!!!",JSON.stringify(err));
-            //   });
-          }else{
-            // this.alertPopup('Error!!!','Agency Order Shipping Text Required!!!')
           }
         } else {
           this.editMode = true;
         }
-      // }
     })
-    // this.editMode = !this.editMode;
 
   }
-
-  // ionViewDidEnter() {
-  //    this.viewUserDetails(user);
-  // }
-
-
-
 }

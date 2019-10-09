@@ -60,7 +60,6 @@ export class SearchUserPage implements OnInit {
       {
         this.searchSubmitted = true;
         this.users = res;
-      console.log('Users:',res);
     },
     (err)=>{
       this.users.users = [];
@@ -71,7 +70,6 @@ export class SearchUserPage implements OnInit {
   }
 
   viewUserDetails(u){
-    // this.navCtrl.navigateForward('/user/details/:uNumber'+u._id);
     this.navCtrl.navigateForward('/user/details/'+u._id);
   }
 

@@ -13,17 +13,6 @@
                   <mat-panel-title>{{contact.contactName}}</mat-panel-title>
                   <mat-icon *ngIf="edit" (click)="deleteContact(contact)">delete</mat-icon>
                </mat-expansion-panel-header>
-               <!-- <ion-row>
-                  <ion-col size-md="6" size-xs="12">
-                     <h6>ID </h6>
-                  </ion-col>
-                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                     <div class="info">{{contact._id}}</div>
-                  </ion-col>
-                  <ion-col size-md="6" size-xs="12" *ngIf="contact._id || edit">
-                     <ion-input [(ngModel)]="contact._id"></ion-input>
-                  </ion-col>
-               </ion-row> -->
                <ion-row>
                   <ion-col size-md="6" size-xs="12">
                      <h6>Contact Type </h6>
@@ -79,38 +68,6 @@
                      <ion-input [(ngModel)]="contact.contactNotes"></ion-input>
                   </ion-col>
                </ion-row>
-               <!-- <ion-row>
-                  <ion-col size-md="6" size-xs="12">
-                     <h6>Created </h6>
-                  </ion-col>
-                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                     <div class="info">{{contact.created}}</div>
-                  </ion-col>
-                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                     <mat-form-field>
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="contact.created"
-                           placeholder="Choose a date">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                     </mat-form-field>
-                  </ion-col>
-               </ion-row>
-               <ion-row>
-                  <ion-col size-md="6" size-xs="12">
-                     <h6>Updated </h6>
-                  </ion-col>
-                  <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                     <div class="info">{{contact.updated}}</div>
-                  </ion-col>
-                  <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                     <mat-form-field>
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="contact.updated"
-                           placeholder="Choose a date">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                     </mat-form-field>
-                  </ion-col>
-               </ion-row> -->
                <ion-button *ngIf="!contact._id && edit" (click)="addContactsInfo(contact)" [disabled]="loader">
                   {{loader?'':'Submit'}}
                   <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
