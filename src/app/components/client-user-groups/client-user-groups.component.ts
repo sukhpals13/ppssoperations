@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GetDetailsService } from '../../services/getDetails/get-details.service';
 import { PostDetailsService } from '../../services/postDetails/post-details.service';
 import { DeleteServicesService } from '../../services/deleteServices/delete-services.service';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-client-user-groups',
@@ -22,11 +23,24 @@ export class ClientUserGroupsComponent implements OnInit {
     private getDetailService: GetDetailsService,
     private postDetailService: PostDetailsService,
     private deleteServicesService : DeleteServicesService,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {
     this.getuserGroups();
     this.loader = false;
+  }
+
+
+  async alertPopup(title, msg) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: msg,
+      buttons: [{
+        text: 'Okay'
+      }]
+    });
+    await alert.present();
   }
 
   getuserGroups() {
@@ -52,9 +66,7 @@ export class ClientUserGroupsComponent implements OnInit {
     .subscribe(res =>{
       console.log('add group response', res);
       console.log('res group',res.group)
-      // this.clientUserGroup.unhift({name: ''});
       this.clientUserGroup[this.clientUserGroup.length-1]= res.group;
-      // this.clientUserGroup.push(res.group);
     }, err => {
       console.log(err);
     }
@@ -75,6 +87,7 @@ export class ClientUserGroupsComponent implements OnInit {
     .subscribe(res =>{
       console.log('Update group response', res);
       this.getuserGroups();
+      this.alertPopup("Updated",'Client User Group updated successfully');
     }, err => {
       console.log(err);
     }
@@ -84,16 +97,13 @@ export class ClientUserGroupsComponent implements OnInit {
 
   // delete client user group
   deleteUserGroup(group){
-    // let name = group.name;
     let clientId = this.id;
     let groupId = group._id;
-    console.log('nameeeeee', name);
-    console.log('group id', groupId);
     return this.deleteServicesService.deleteClientUserGroups(clientId,groupId)
     .subscribe(res =>{
       console.log('delete group response', res);
-      // this.getuserGroups();
       this.clientUserGroup = this.clientUserGroup.filter(val=>{if(val._id!=groupId) return val});
+      this.alertPopup("Deleted",'Client User Group Deleted successfully');
     }, err => {
       console.log(err);
     }

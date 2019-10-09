@@ -80,14 +80,16 @@ export class PostDetailsService {
     return this.http.post<any>(url,role)
   }
 
-  addClientUserGroup(clientId,group){
-    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
-    return this.http.put<any>(url,group)
+  // add client user group
+addClientUserGroup(clientId,name){
+  let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
+  return this.http.put<any>(url,name)
   }
-
-  updateClientUserGroup(clientId,group){
-    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
-    return this.http.post<any>(url,group)
+  
+  // aUpdate client user group
+  updateClientUserGroup(clientId,groupId,name){
+  let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId+'/'+groupId;
+  return this.http.post<any>(url,name)
   }
 
 }
