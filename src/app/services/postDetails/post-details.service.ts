@@ -70,4 +70,24 @@ export class PostDetailsService {
     return this.http.post<any>(url,contact)
   }
 
+  addClientUserRole(clientId,role){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/"+clientId;
+    return this.http.put<any>(url,role)
+  }
+
+  updateClientUserRole(clientId,role){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/"+clientId;
+    return this.http.post<any>(url,role)
+  }
+
+  addClientUserGroup(clientId,group){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
+    return this.http.put<any>(url,group)
+  }
+
+  updateClientUserGroup(clientId,group){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId;
+    return this.http.post<any>(url,group)
+  }
+
 }
