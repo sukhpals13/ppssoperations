@@ -36,7 +36,7 @@ export class DeleteServicesService {
   }
 
   deleteClientUserRole(clientId, role_id) {
-    let url = "https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/" + clientId + "/" + role_id;
+    let url = "https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/" + clientId + "/" + role_id;
     return this.http.request<any>('delete', url)
   }
 

@@ -20,6 +20,8 @@ import {MatFormFieldModule,MatInputModule,MatButtonModule,MatNativeDateModule} f
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 import {OrderFilterComponent} from './order-filter/order-filter.component';
 import {ClientBillingDetailsComponent} from './client-billing-details/client-billing-details.component';
@@ -40,6 +42,7 @@ var commonMods = [
   MatIconModule,
   MatButtonToggleModule,
   MatGridListModule,
+  MatDividerModule,
 ];
 
 @NgModule({

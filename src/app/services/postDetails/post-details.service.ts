@@ -76,7 +76,7 @@ export class PostDetailsService {
   }
 
   updateClientUserRole(clientId,role){
-    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/"+clientId;
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/"+clientId+"/"+role._id;
     return this.http.post<any>(url,role)
   }
 
