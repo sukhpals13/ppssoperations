@@ -9,6 +9,7 @@ import { GetDetailsService } from '../../services/getDetails/get-details.service
 export class ClientUserRolesComponent implements OnInit {
 
   @Input() id: any;
+  @Input() edit: any;
 
   constructor(
 
