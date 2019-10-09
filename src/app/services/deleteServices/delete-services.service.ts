@@ -35,4 +35,14 @@ export class DeleteServicesService {
     return this.http.request<any>('delete',url,{body:{contactId:contactId}})
   }
 
+  deleteClientUserRole(clientId,role_id){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId+"/"+role_id;
+    return this.http.request<any>('delete',url)
+  }
+
+  deleteClientUserGroup(clientId,group_id){
+    let url ="https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/"+clientId+"/"+group_id;
+    return this.http.request<any>('delete',url)
+  }
+
 }
