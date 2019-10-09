@@ -192,14 +192,14 @@
   <app-client-billing-details *ngIf="client.billingInfo._id||this.editMode" [data]="client.billingInfo" [edit]="editMode" [id]="client._id"></app-client-billing-details>
 
 
-  <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id"></app-client-contact-details>
+  <app-client-contact-details *ngIf="client.contacts.length" [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id"></app-client-contact-details>
   <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode"></app-client-user-roles>
   <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode"></app-client-user-groups>
 
   <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
   </ion-card>
-  <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="editMode">
+  <ion-card style="background: transparent;box-shadow: 0px 0 px 0px;" *ngIf="editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Save</ion-button>
     <!-- <ion-button style="width: 100%;" (click)="editToggle()">Cancel</ion-button> -->
   </ion-card>

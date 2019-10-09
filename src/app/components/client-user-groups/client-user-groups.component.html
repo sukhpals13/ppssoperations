@@ -1,3 +1,42 @@
-<p>
-  client-user-groups works!
-</p>
+<ion-card>
+  <ion-card-header color="primary">
+    <ion-card-subtitle>Client User Groups</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <!-- {{clientUserGroup|json}} -->
+    <!-- {{clientUserGroup}} -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" size-xs="12">
+          <h6>Groups Name</h6>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let group of clientUserGroup">
+        <ion-col size-md="6" size-xs="8" *ngIf="!edit">
+            {{group.name}}
+        </ion-col>
+        <ion-col size-md="6" size-xs="4" *ngIf="!edit">
+          <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ion-col>
+        <ion-col *ngIf="edit" size-md="8" size-xs="8">
+          <ion-input [(ngModel)]="group.name"></ion-input>
+        </ion-col>
+        <ion-col size-md="4" size-xs="4">
+            <!-- <ion-input [(ngModel)]="addGroupName"></ion-input> -->
+            <ion-button *ngIf="!group._id && edit" (click)="addUserGroup(group)" [disabled]="loader">
+                {{loader?'':'Submit'}}
+                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+             </ion-button>
+             <ion-button *ngIf="group._id && edit" (click)="editUserGroup(group)" [disabled]="loader">
+                {{loader?'':'Update'}}
+                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+             </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-button class="addgroup" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add Group
+        </ion-button>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
