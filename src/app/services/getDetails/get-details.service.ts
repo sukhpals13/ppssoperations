@@ -49,12 +49,12 @@ export class GetDetailsService {
 
   // get cklient use role
   getClientUserRoles(id){
-    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/'+'5d2a1717eccc890dd45b0683'
+    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/'+id;
     return this.http.get<any>(url)
   }
   // get cklient use role
   getClientUserGroups(id){
-    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/'+'5d2a1717eccc890dd45b0683'
+    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/'+id;
     return this.http.get<any>(url)
   }
 }

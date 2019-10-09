@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GetDetailsService } from '../../services/getDetails/get-details.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { GetDetailsService } from '../../services/getDetails/get-details.service
   styleUrls: ['./client-user-roles.component.scss'],
 })
 export class ClientUserRolesComponent implements OnInit {
+
+  @Input() id: any;
 
   constructor(
 
@@ -18,7 +20,7 @@ export class ClientUserRolesComponent implements OnInit {
   }
 
   getuserroles(){
-     return this.getDetailService.getClientUserRoles('5d2a1717eccc890dd45b0683')
+     return this.getDetailService.getClientUserRoles(this.id)
      .subscribe(res =>{
         console.log('get user roles', res);
      }, err =>{

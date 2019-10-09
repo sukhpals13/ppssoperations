@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GetDetailsService } from '../../services/getDetails/get-details.service';
 
 @Component({
@@ -7,7 +7,9 @@ import { GetDetailsService } from '../../services/getDetails/get-details.service
   styleUrls: ['./client-user-groups.component.scss'],
 })
 export class ClientUserGroupsComponent implements OnInit {
-
+  
+  @Input() id: any;
+  
   constructor(
     private getDetailService: GetDetailsService,
   ) { }
@@ -17,7 +19,7 @@ export class ClientUserGroupsComponent implements OnInit {
   }
 
   getuserGroups(){
-    return this.getDetailService.getClientUserGroups('5d2a1717eccc890dd45b0683')
+    return this.getDetailService.getClientUserGroups(this.id)
     .subscribe(res =>{
        console.log('get user groups', res);
     }, err =>{
