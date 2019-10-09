@@ -26,6 +26,8 @@ import {ClientBillingDetailsComponent} from './client-billing-details/client-bil
 import {ClientCustomizationsComponent} from './client-customizations/client-customizations.component';
 import {ParentClientIdSearchComponent} from './parent-client-id-search/parent-client-id-search.component';
 import {ClientContactDetailsComponent} from './client-contact-details/client-contact-details.component';
+import {ClientUserRolesComponent} from './client-user-roles/client-user-roles.component';
+import {ClientUserGroupsComponent} from './client-user-groups/client-user-groups.component';
 // import {EditSubStatusComponent} from './edit-sub-status/edit-sub-status.component'
 
 var commonMods = [
@@ -64,7 +66,10 @@ var commonMods = [
     ClientBillingDetailsComponent,
     ClientCustomizationsComponent,
     ParentClientIdSearchComponent,
-    ClientContactDetailsComponent
+    ClientContactDetailsComponent,
+    ClientUserRolesComponent,
+    ClientUserGroupsComponent,
+
     // EditSubStatusComponent
   ],
   exports: [
@@ -77,6 +82,8 @@ var commonMods = [
     ClientBillingDetailsComponent,
     ClientCustomizationsComponent,
     ClientContactDetailsComponent,
+    ClientUserRolesComponent,
+    ClientUserGroupsComponent,
     ...commonMods
   ],
   entryComponents: [

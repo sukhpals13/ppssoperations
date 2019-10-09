@@ -193,6 +193,8 @@
 
 
   <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id"></app-client-contact-details>
+  <app-client-user-roles></app-client-user-roles>
+  <app-client-user-groups></app-client-user-groups>
 
   <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>

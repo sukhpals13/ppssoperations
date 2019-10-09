@@ -46,4 +46,15 @@ export class GetDetailsService {
     let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/'+id
     return this.http.get<any>(url)
   }
+
+  // get cklient use role
+  getClientUserRoles(id){
+    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserRoles/'+'5d2a1717eccc890dd45b0683'
+    return this.http.get<any>(url)
+  }
+  // get cklient use role
+  getClientUserGroups(id){
+    let url = 'https://integration.ebusiness.pittsburghpublicsafety.com/api/client/clientUserGroups/'+'5d2a1717eccc890dd45b0683'
+    return this.http.get<any>(url)
+  }
 }
