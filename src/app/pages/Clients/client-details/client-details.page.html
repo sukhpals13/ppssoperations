@@ -47,7 +47,7 @@
                 </app-text-shell>
               </div>
               <div *ngIf="editMode">
-                <ion-toggle [(ngModel)]="client.hasStandardPricing"></ion-toggle>
+                <ion-toggle class="pl-0" [(ngModel)]="client.hasStandardPricing"></ion-toggle>
               </div>
             </ion-col>
           </ion-row>
@@ -125,10 +125,10 @@
       <div>
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let rank of client.ranksOrTitles">
-            <ion-col>
+            <ion-col size-md="10" size-xs="10">
               <app-text-shell  animation="bouncing" lines="1" [data]="rank"></app-text-shell>
             </ion-col>
-            <ion-col style="text-align: right;">
+            <ion-col size-md="2" size-xs="2" style="text-align: right;">
               <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
                 <mat-icon>delete</mat-icon>
               </button>
@@ -136,10 +136,11 @@
           </ion-row>
           <ion-row *ngIf="editMode">
             <ion-col>
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition">
-                  </mat-form-field>
-                  <ion-button [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button>
+                  </mat-form-field> -->
+                  <ion-input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition"></ion-input>
+                  <ion-button class="mt-5" [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -161,10 +162,10 @@
       <div>
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let data of client.assignments">
-            <ion-col>
+            <ion-col size-md="10" size-xs="10">
               <app-text-shell animation="bouncing" lines="1" [data]="data"></app-text-shell>
             </ion-col>
-            <ion-col style="text-align: right;">
+            <ion-col size-md="2" size-xs="2" style="text-align: right;">
               <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
                 <mat-icon>delete</mat-icon>
               </button>
@@ -172,10 +173,11 @@
           </ion-row>
           <ion-row *ngIf="editMode">
             <ion-col>
-                <mat-form-field>
+                <!-- <mat-form-field>
                   <input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition">
-                  </mat-form-field>
-                  <ion-button [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()" [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots" *ngIf="addingAssingment"></ion-spinner></ion-button>
+                  </mat-form-field> -->
+                  <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
+                  <ion-button class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()" [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots" *ngIf="addingAssingment"></ion-spinner></ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

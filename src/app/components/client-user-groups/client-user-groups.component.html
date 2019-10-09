@@ -12,7 +12,7 @@
         </ion-col>
       </ion-row>
       <ion-row *ngFor="let group of clientUserGroup">
-        <ion-col size-md="6" size-xs="8" *ngIf="!edit">
+        <ion-col size-md="6" size-xs="9" *ngIf="!edit">
             {{group.name}}
         </ion-col>
         <!-- <ion-col size-md="6" size-xs="4" *ngIf="!edit">
@@ -20,10 +20,10 @@
             <mat-icon>delete</mat-icon>
           </button>
         </ion-col> -->
-        <ion-col *ngIf="edit" size-md="9" size-xs="9">
+        <ion-col *ngIf="edit" size-md="6" size-xs="9">
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
-        <ion-col size-md="3" size-xs="3">
+        <ion-col size-md="6" size-xs="3">
             <button mat-icon-button *ngIf="!group._id && edit" (click)="addUserGroup(group)" [disabled]="loader">
                 <mat-icon title="Add new Group">add_circle_outline</mat-icon>
                 <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
