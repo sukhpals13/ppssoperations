@@ -103,7 +103,7 @@ export class ClientUserGroupsComponent implements OnInit {
     return this.postDetailService.updateClientUserGroup(clientId,groupId,reqBody)
     .subscribe(res =>{
       console.log('Update group response', res);
-      this.getuserGroups();
+      // this.getuserGroups();
       this.alertPopup("Updated",'Client User Group updated successfully');
     }, err => {
       console.log(err);
