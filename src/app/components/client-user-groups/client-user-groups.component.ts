@@ -15,6 +15,7 @@ export class ClientUserGroupsComponent implements OnInit {
   @Input() edit: any;
   add: boolean;
   private  addGroupName: string;
+  private addingGroup: boolean;
 
   public clientUserGroup: any;
   public loader: boolean;
@@ -29,6 +30,7 @@ export class ClientUserGroupsComponent implements OnInit {
   ngOnInit() {
     this.getuserGroups();
     this.loader = false;
+    this.addingGroup = true;
   }
 
 
@@ -57,6 +59,7 @@ export class ClientUserGroupsComponent implements OnInit {
 
   // add client user group
   addUserGroup(group){
+    this.addingGroup = false;
     const reqBody = {
       name: group.name
     };
@@ -67,8 +70,11 @@ export class ClientUserGroupsComponent implements OnInit {
       console.log('add group response', res);
       console.log('res group',res.group)
       this.clientUserGroup[this.clientUserGroup.length-1]= res.group;
+
     }, err => {
       console.log(err);
+      this.addingGroup = true;
+      this.alertPopup("Error",JSON.stringify(err.error.message));
     }
 
     )
@@ -76,6 +82,7 @@ export class ClientUserGroupsComponent implements OnInit {
   }
   // add client user group
   editUserGroup(group){
+    this.addingGroup = true;
     const reqBody = {
       name: group.name
     };
@@ -90,6 +97,7 @@ export class ClientUserGroupsComponent implements OnInit {
       this.alertPopup("Updated",'Client User Group updated successfully');
     }, err => {
       console.log(err);
+      this.alertPopup("Error",JSON.stringify(err.error.message));
     }
 
     )
@@ -103,7 +111,7 @@ export class ClientUserGroupsComponent implements OnInit {
     .subscribe(res =>{
       console.log('delete group response', res);
       this.clientUserGroup = this.clientUserGroup.filter(val=>{if(val._id!=groupId) return val});
-      this.alertPopup("Deleted",'Client User Group updated successfully');
+      this.alertPopup("Deleted",'Client User Group deleted successfully');
     }, err => {
       console.log(err);
     }
