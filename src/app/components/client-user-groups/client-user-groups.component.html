@@ -1,10 +1,17 @@
-<ion-card>
+<!-- <ion-card>
   <ion-card-header color="primary">
     <ion-card-subtitle>Client User Groups</ion-card-subtitle>
   </ion-card-header>
-  <ion-card-content>
-    <!-- {{clientUserGroup|json}} -->
-    <!-- {{clientUserGroup}} -->
+  <ion-card-content> -->
+<!-- {{clientUserGroup|json}} -->
+<!-- {{clientUserGroup}} -->
+<mat-accordion *ngIf="(gotResponse&&!noData)||edit">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          User Groups
+      </mat-panel-title>
+    </mat-expansion-panel-header>
     <ion-grid>
       <ion-row>
         <ion-col size-md="6" size-xs="12">
@@ -13,7 +20,7 @@
       </ion-row>
       <ion-row *ngFor="let group of clientUserGroup">
         <ion-col size-md="6" size-xs="9" *ngIf="!edit">
-            {{group.name}}
+          {{group.name}}
         </ion-col>
         <!-- <ion-col size-md="6" size-xs="4" *ngIf="!edit">
           <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
@@ -24,22 +31,27 @@
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
         <ion-col size-md="6" size-xs="3" class="ion-text-right">
-            <button mat-icon-button *ngIf="!group._id && edit" (click)="addUserGroup(group)" [attr.disabled]="group.name ? null : '' " [disabled]="addingGroup">
-                <mat-icon title="Add new Group">add_circle_outline</mat-icon>
-                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-             </button>
-             <button mat-icon-button *ngIf="group._id && edit" (click)="editUserGroup(group)"  [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
-                <!-- {{loader?'':'Update'}} -->
-                <mat-icon title="Update">check</mat-icon>
-                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-             </button>
-             <button *ngIf="group._id && edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
-                <mat-icon>delete</mat-icon>
-             </button>
+          <button mat-icon-button *ngIf="!group._id && edit" (click)="addUserGroup(group)"
+            [attr.disabled]="group.name ? null : '' " [disabled]="addingGroup">
+            <mat-icon title="Add new Group">add_circle_outline</mat-icon>
+            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+          </button>
+          <button mat-icon-button *ngIf="group._id && edit" (click)="editUserGroup(group)"
+            [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
+            <!-- {{loader?'':'Update'}} -->
+            <mat-icon title="Update">check</mat-icon>
+            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+          </button>
+          <button *ngIf="group._id && edit" mat-icon-button aria-label="Example icon-button with a heart icon"
+            (click)="deleteUserGroup(group)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </ion-col>
       </ion-row>
       <ion-button class="addgroup" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add Group
-        </ion-button>
+      </ion-button>
     </ion-grid>
-  </ion-card-content>
-</ion-card>
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- </ion-card-content>
+</ion-card> -->

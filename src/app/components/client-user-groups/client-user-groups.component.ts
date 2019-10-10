@@ -19,6 +19,8 @@ export class ClientUserGroupsComponent implements OnInit {
 
   public clientUserGroup: any;
   public loader: boolean;
+  public gotResponse: boolean;
+  public noData: boolean;
 
   constructor(
     private getDetailService: GetDetailsService,
@@ -31,6 +33,8 @@ export class ClientUserGroupsComponent implements OnInit {
     this.getuserGroups();
     this.loader = false;
     this.addingGroup = true;
+    this.gotResponse = false;
+    this.noData = true;
   }
 
 
@@ -51,6 +55,12 @@ export class ClientUserGroupsComponent implements OnInit {
       .subscribe(res => {
         console.log('get user groups', res);
         this.clientUserGroup = res.groups;
+        this.gotResponse = true;
+        if(this.clientUserGroup.length==0){
+          this.noData = true;
+        }else{
+          this.noData = false;
+        }
       }, err => {
         console.log(err);
       }

@@ -52,19 +52,19 @@
             </ion-col>
           </ion-row>
           <ion-row *ngIf="client.parentClientId||editMode">
-              <ion-col size="12">
-                <h6>Parent Client Id</h6>
-                <div *ngIf="!editMode">
-                    <app-text-shell animation="bouncing" lines="1" [data]="client.parentClientId"></app-text-shell>
+            <ion-col size="12">
+              <h6>Parent Client Id</h6>
+              <div *ngIf="!editMode">
+                <app-text-shell animation="bouncing" lines="1" [data]="client.parentClientId"></app-text-shell>
+              </div>
+              <div *ngIf="editMode ">
+                <div>
+                  {{client.parentClientId?client.parentClientId:"No parent client Id"}}
                 </div>
-                <div *ngIf="editMode ">
-                  <div>
-                    {{client.parentClientId?client.parentClientId:"No parent client Id"}}
-                  </div>
-                  <ion-button (click)="openSearchClient()">Edit</ion-button>
-                  </div>
-              </ion-col>
-            </ion-row>
+                <ion-button (click)="openSearchClient()">Edit</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
         </ion-grid>
       </div>
     </ion-card-content>
@@ -116,31 +116,43 @@
       </div>
     </ion-card-content>
   </ion-card> -->
-  <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id"></app-client-customizations>
-  <ion-card *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
+  <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
+  </app-client-customizations>
+  <!-- <ion-card *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
     <ion-card-header color="primary">
       <ion-card-subtitle>Ranks or Titles</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content> -->
+  <mat-accordion *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ranks or Titles
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <div>
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let rank of client.ranksOrTitles">
             <ion-col size-md="10" size-xs="10">
-              <app-text-shell  animation="bouncing" lines="1" [data]="rank"></app-text-shell>
+              <app-text-shell animation="bouncing" lines="1" [data]="rank"></app-text-shell>
             </ion-col>
             <ion-col size-md="2" size-xs="2" style="text-align: right;">
-              <button *ngIf="editMode"  class="delete-icon" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
+              <button *ngIf="editMode" class="delete-icon" mat-icon-button
+                aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="editMode">
             <ion-col>
-                <!-- <mat-form-field>
+              <!-- <mat-form-field>
                     <input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition">
                   </mat-form-field> -->
-                  <ion-input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition"></ion-input>
-                  <ion-button class="mt-5" [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button>
+              <ion-input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition"></ion-input>
+              <ion-button class="mt-5" [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()"
+                [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank">
+                </ion-spinner>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -152,13 +164,22 @@
           </ion-row>
         </ion-grid>
       </div>
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngIf="client.assignments.length||editMode" id="client-assingment">
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!-- </ion-card-content>
+  </ion-card> -->
+  <!-- <ion-card *ngIf="client.assignments.length||editMode" id="client-assingment">
     <ion-card-header color="primary">
       <ion-card-subtitle>Assingments</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content> -->
+  <mat-accordion *ngIf="client.assignments.length||editMode" id="client-assingment">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Assingments
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <div>
         <ion-grid *ngIf="client.name">
           <ion-row *ngFor="let data of client.assignments">
@@ -166,18 +187,22 @@
               <app-text-shell animation="bouncing" lines="1" [data]="data"></app-text-shell>
             </ion-col>
             <ion-col size-md="2" size-xs="2" style="text-align: right;">
-              <button *ngIf="editMode" class="delete-icon" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
+              <button *ngIf="editMode" class="delete-icon" mat-icon-button
+                aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="editMode">
             <ion-col>
-                <!-- <mat-form-field>
+              <!-- <mat-form-field>
                   <input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition">
                   </mat-form-field> -->
-                  <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
-                  <ion-button class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()" [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots" *ngIf="addingAssingment"></ion-spinner></ion-button>
+              <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
+              <ion-button class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()"
+                [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots"
+                  *ngIf="addingAssingment"></ion-spinner>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -189,12 +214,16 @@
           </ion-row>
         </ion-grid>
       </div>
-    </ion-card-content>
-  </ion-card>
-  <app-client-billing-details *ngIf="client.billingInfo._id||this.editMode" [data]="client.billingInfo" [edit]="editMode" [id]="client._id"></app-client-billing-details>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!-- </ion-card-content>
+  </ion-card> -->
+  <app-client-billing-details *ngIf="client.billingInfo._id||this.editMode" [data]="client.billingInfo"
+    [edit]="editMode" [id]="client._id"></app-client-billing-details>
 
 
-  <app-client-contact-details *ngIf="client.contacts.length" [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id"></app-client-contact-details>
+  <app-client-contact-details *ngIf="client.contacts.length" [clientContactDetails]="client.contacts" [edit]="editMode"
+    [id]="client._id"></app-client-contact-details>
   <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode"></app-client-user-roles>
   <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode"></app-client-user-groups>
 

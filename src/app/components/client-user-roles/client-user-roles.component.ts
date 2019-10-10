@@ -25,6 +25,7 @@ export class ClientUserRolesComponent implements OnInit {
   public selectRoleToAdd: object;
   public adding: boolean;
   public roleToAdd: object;
+  public noData: boolean;
 
   constructor(
     private getDetailService: GetDetailsService,
@@ -35,6 +36,7 @@ export class ClientUserRolesComponent implements OnInit {
   ngOnInit() {
     this.getuserroles();
     this.gotResponse = false;
+    this.noData = false;
     this.roleToAdd = {
       rights:[],
       accessRights: []
@@ -105,6 +107,11 @@ export class ClientUserRolesComponent implements OnInit {
         })
         this.roles = roles;
         this.gotResponse = true;
+        if(this.roles.length==0){
+          this.noData = true
+        }else{
+          this.noData = false
+        }
       }, err => {
         console.log(err);
       }

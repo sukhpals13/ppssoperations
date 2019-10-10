@@ -1,8 +1,15 @@
-<ion-card>
+<!-- <ion-card>
    <ion-card-header color="primary">
       <ion-card-subtitle>Billing</ion-card-subtitle>
-   </ion-card-header>
-   <ion-card-content>
+   </ion-card-header> -->
+<!-- <ion-card-content> -->
+<mat-accordion>
+   <mat-expansion-panel>
+      <mat-expansion-panel-header>
+         <mat-panel-title>
+            Billing
+         </mat-panel-title>
+      </mat-expansion-panel-header>
       <ion-grid>
          <ion-row *ngIf="data.billingMethod||edit">
             <ion-col size-md="6" size-xs="12">
@@ -13,15 +20,15 @@
             </ion-col>
             <ion-col *ngIf="edit">
                <!-- <ion-item> -->
-                  <!-- <ion-label>Gender</ion-label> -->
-                  <mat-form-field style="width: 100%;" appearance="none">
-                     <!-- <mat-label>Favorite food</mat-label> -->
-                     <mat-select [(ngModel)]="data.billingMethod">
-                        <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
-                           {{billingMethod}}
-                        </mat-option>
-                     </mat-select>
-                  </mat-form-field>
+               <!-- <ion-label>Gender</ion-label> -->
+               <mat-form-field style="width: 100%;" appearance="none">
+                  <!-- <mat-label>Favorite food</mat-label> -->
+                  <mat-select [(ngModel)]="data.billingMethod">
+                     <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
+                        {{billingMethod}}
+                     </mat-option>
+                  </mat-select>
+               </mat-form-field>
                <!-- </ion-item> -->
                <!-- <ion-input [(ngModel)]="data.billingMethod"></ion-input> -->
             </ion-col>
@@ -171,11 +178,14 @@
          </ion-row>
          <ion-row>
             <ion-col>
-               <ion-button *ngIf="edit" (click)="editInfoCalled()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
+               <ion-button *ngIf="edit" (click)="editInfoCalled()" [disabled]="loader">
+                  {{loader?'':'Update Billing Info'}}
                   <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
                </ion-button>
             </ion-col>
          </ion-row>
       </ion-grid>
-   </ion-card-content>
-</ion-card>
+   </mat-expansion-panel>
+</mat-accordion>
+<!-- </ion-card-content> -->
+<!-- </ion-card> -->

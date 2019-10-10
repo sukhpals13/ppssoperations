@@ -1,9 +1,16 @@
-<ion-card>
+<!-- <ion-card>
    <ion-card-header color="primary">
       <ion-card-subtitle>Customization</ion-card-subtitle>
    </ion-card-header>
-   <ion-card-content>
-      <!-- {{clientCustomizations|json}} -->
+   <ion-card-content> -->
+<!-- {{clientCustomizations|json}} -->
+<mat-accordion>
+   <mat-expansion-panel>
+      <mat-expansion-panel-header>
+         <mat-panel-title>
+            Customization
+         </mat-panel-title>
+      </mat-expansion-panel-header>
       <ion-grid>
          <ion-row>
             <ion-col size-md="6" size-xs="12">
@@ -43,7 +50,7 @@
                <h6>Home Page Message </h6>
             </ion-col>
             <ion-col size-md="12" size-xs="12" *ngIf="!edit">
-                  <div class="info">{{clientCustomizations.homepageMessage}}</div>
+               <div class="info">{{clientCustomizations.homepageMessage}}</div>
                <!-- <div class="info" [innerHTML]="clientCustomizations.homepageMessage"></div> -->
             </ion-col>
             <ion-col size-md="12" size-xs="12" *ngIf="edit">
@@ -59,8 +66,8 @@
                   <ion-row *ngFor="let p of clientCustomizations.pickupLocations" class="ion-align-items-center">
                      <ion-col size-md="10" size-xs="10" class="ion-no-padding">{{p}}</ion-col>
                      <ion-col size-md="2" size-xs="2" class="ion-no-padding" style="text-align: right;">
-                        <button *ngIf="edit" class="delete-icon ion-text-right" mat-icon-button aria-label="Example icon-button with a heart icon"
-                           (click)="deletePickLocations(p)">
+                        <button *ngIf="edit" class="delete-icon ion-text-right" mat-icon-button
+                           aria-label="Example icon-button with a heart icon" (click)="deletePickLocations(p)">
                            <mat-icon>delete</mat-icon>
                         </button>
                      </ion-col>
@@ -70,98 +77,106 @@
                         <!-- <mat-form-field>
                            <input matInput placeholder="Add Pickup Locations" [(ngModel)]="pickupLocationAddition">
                         </mat-form-field> -->
-                        <ion-input matInput placeholder="Add Pickup Locations" [(ngModel)]="pickupLocationAddition"></ion-input>
+                        <ion-input matInput placeholder="Add Pickup Locations" [(ngModel)]="pickupLocationAddition">
+                        </ion-input>
                         <!-- <ion-button [attr.disabled]="pickupLocationAddition ? null : '' " (click)="addPickLocations()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button> -->
-                        <ion-button class="mt-5" [attr.disabled]="pickupLocationAddition ? null : '' " (click)="addPickLocations()" [disabled]="addingPickup">{{addingPickup?'':'Add'}}<ion-spinner name="dots" *ngIf="addingPickup"></ion-spinner> </ion-button>
+                        <ion-button class="mt-5" [attr.disabled]="pickupLocationAddition ? null : '' "
+                           (click)="addPickLocations()" [disabled]="addingPickup">{{addingPickup?'':'Add'}}<ion-spinner
+                              name="dots" *ngIf="addingPickup"></ion-spinner>
+                        </ion-button>
                      </ion-col>
                   </ion-row>
                </ion-grid>
             </ion-col>
          </ion-row>
          <ion-row *ngIf="clientCustomizations.deliveryLocations.length||edit">
-               <ion-col size="12">
-                  <h6>Delivery Locations </h6>
-               </ion-col>
-               <ion-col size="12">
-                  <ion-grid class="ion-no-padding">
-                     <ion-row *ngFor="let d of clientCustomizations.deliveryLocations" class="ion-align-items-center">
-                        <ion-col size-md="10" size-xs="10" class="ion-no-padding">{{d}}</ion-col>
-                        <ion-col size-md="2" size-xs="2" class="ion-no-padding" style="text-align: right;">
-                           <button *ngIf="edit"  class="delete-icon ion-text-right" mat-icon-button aria-label="Example icon-button with a heart icon"
-                              (click)="deleteDeliverLocations(d)">
-                              <mat-icon>delete</mat-icon>
-                           </button>
-                        </ion-col>
-                     </ion-row>
-                     <ion-row *ngIf="edit">
-                        <ion-col class="ion-no-padding">
-                           <!-- <mat-form-field>
+            <ion-col size="12">
+               <h6>Delivery Locations </h6>
+            </ion-col>
+            <ion-col size="12">
+               <ion-grid class="ion-no-padding">
+                  <ion-row *ngFor="let d of clientCustomizations.deliveryLocations" class="ion-align-items-center">
+                     <ion-col size-md="10" size-xs="10" class="ion-no-padding">{{d}}</ion-col>
+                     <ion-col size-md="2" size-xs="2" class="ion-no-padding" style="text-align: right;">
+                        <button *ngIf="edit" class="delete-icon ion-text-right" mat-icon-button
+                           aria-label="Example icon-button with a heart icon" (click)="deleteDeliverLocations(d)">
+                           <mat-icon>delete</mat-icon>
+                        </button>
+                     </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="edit">
+                     <ion-col class="ion-no-padding">
+                        <!-- <mat-form-field>
                               <input matInput placeholder="Add Delivery Locations" [(ngModel)]="deliveryLocationAddition">
                            </mat-form-field> -->
-                           <ion-input matInput placeholder="Add Delivery Locations" [(ngModel)]="deliveryLocationAddition"></ion-input>
-                           <ion-button class="mt-5" [attr.disabled]="deliveryLocationAddition ? null : '' " (click)="addDeliveryLocations()" [disabled]="addingDelivery">{{addingDelivery?'':'Add'}}<ion-spinner name="dots" *ngIf="addingDelivery"></ion-spinner> </ion-button>
-                        </ion-col>
-                     </ion-row>
-                  </ion-grid>
-               </ion-col>
-            </ion-row>
-            <ion-row *ngIf="clientCustomizations.hasOwnProperty('')||edit" class="ion-align-items-center">
-               <ion-col size-md="6" size-xs="12">
-                  <h6>Enable Order Shipping </h6>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                  <div class="info">{{clientCustomizations.enableOrderShipping?"Yes":"No"}}</div>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                  <ion-toggle [(ngModel)]="clientCustomizations.enableOrderShipping"></ion-toggle>
-               </ion-col>
-            </ion-row>
-            <ion-row *ngIf="clientCustomizations.agencyOrderOverviewText||edit"  class="ion-align-items-center">
-               <ion-col size-md="6" size-xs="12">
-                  <h6>Agency Order Overview Text </h6>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                  <div class="info">{{clientCustomizations.agencyOrderOverviewText}}</div>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                  <ion-input [(ngModel)]="clientCustomizations.agencyOrderOverviewText"></ion-input>
-               </ion-col>
-            </ion-row>
-            <ion-row *ngIf="clientCustomizations.hasOwnProperty('')||edit" class="ion-align-items-center">
-               <ion-col size-md="6" size-xs="12">
-                  <h6>Agency Order Allow Shipping Address </h6>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                  <div class="info">{{clientCustomizations.agencyOrderAllowShippingAddress?"Yes":"No"}}</div>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                  <ion-toggle [(ngModel)]="clientCustomizations.agencyOrderAllowShippingAddress"></ion-toggle>
-               </ion-col>
-            </ion-row>
-            <ion-row *ngIf="clientCustomizations.agencyOrderShippingText||edit" class="ion-align-items-center">
-               <ion-col size-md="6" size-xs="12">
-                  <h6>Agency Order Shipping Text </h6>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                  <div class="info">{{clientCustomizations.agencyOrderShippingText}}</div>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                  <ion-input [(ngModel)]="clientCustomizations.agencyOrderShippingText"></ion-input>
-               </ion-col>
-            </ion-row>
-            <ion-row *ngIf="clientCustomizations.cashOrderOverviewText||edit" class="ion-align-items-center">
-               <ion-col size-md="6" size-xs="12">
-                  <h6>Cash Order Overview Text </h6>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-                  <div class="info">{{clientCustomizations.cashOrderOverviewText}}</div>
-               </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                  <ion-input [(ngModel)]="clientCustomizations.cashOrderOverviewText"></ion-input>
-               </ion-col>
-            </ion-row>
-            <!-- <ion-row> -->
-               <!-- <ion-col size-md="12" size-xs="12">
+                        <ion-input matInput placeholder="Add Delivery Locations" [(ngModel)]="deliveryLocationAddition">
+                        </ion-input>
+                        <ion-button class="mt-5" [attr.disabled]="deliveryLocationAddition ? null : '' "
+                           (click)="addDeliveryLocations()" [disabled]="addingDelivery">{{addingDelivery?'':'Add'}}
+                           <ion-spinner name="dots" *ngIf="addingDelivery"></ion-spinner>
+                        </ion-button>
+                     </ion-col>
+                  </ion-row>
+               </ion-grid>
+            </ion-col>
+         </ion-row>
+         <ion-row *ngIf="clientCustomizations.hasOwnProperty('')||edit" class="ion-align-items-center">
+            <ion-col size-md="6" size-xs="12">
+               <h6>Enable Order Shipping </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <div class="info">{{clientCustomizations.enableOrderShipping?"Yes":"No"}}</div>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-toggle [(ngModel)]="clientCustomizations.enableOrderShipping"></ion-toggle>
+            </ion-col>
+         </ion-row>
+         <ion-row *ngIf="clientCustomizations.agencyOrderOverviewText||edit" class="ion-align-items-center">
+            <ion-col size-md="6" size-xs="12">
+               <h6>Agency Order Overview Text </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <div class="info">{{clientCustomizations.agencyOrderOverviewText}}</div>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-input [(ngModel)]="clientCustomizations.agencyOrderOverviewText"></ion-input>
+            </ion-col>
+         </ion-row>
+         <ion-row *ngIf="clientCustomizations.hasOwnProperty('')||edit" class="ion-align-items-center">
+            <ion-col size-md="6" size-xs="12">
+               <h6>Agency Order Allow Shipping Address </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <div class="info">{{clientCustomizations.agencyOrderAllowShippingAddress?"Yes":"No"}}</div>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-toggle [(ngModel)]="clientCustomizations.agencyOrderAllowShippingAddress"></ion-toggle>
+            </ion-col>
+         </ion-row>
+         <ion-row *ngIf="clientCustomizations.agencyOrderShippingText||edit" class="ion-align-items-center">
+            <ion-col size-md="6" size-xs="12">
+               <h6>Agency Order Shipping Text </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <div class="info">{{clientCustomizations.agencyOrderShippingText}}</div>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-input [(ngModel)]="clientCustomizations.agencyOrderShippingText"></ion-input>
+            </ion-col>
+         </ion-row>
+         <ion-row *ngIf="clientCustomizations.cashOrderOverviewText||edit" class="ion-align-items-center">
+            <ion-col size-md="6" size-xs="12">
+               <h6>Cash Order Overview Text </h6>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <div class="info">{{clientCustomizations.cashOrderOverviewText}}</div>
+            </ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-input [(ngModel)]="clientCustomizations.cashOrderOverviewText"></ion-input>
+            </ion-col>
+         </ion-row>
+         <!-- <ion-row> -->
+         <!-- <ion-col size-md="12" size-xs="12">
               <h3>Work flow Settings </h3>
            </ion-col>
            <ion-col size-md="12" size-xs="12">
@@ -196,7 +211,7 @@
               </div>
            </ion-col>
         </ion-row> -->
-               <!-- <ion-row>
+         <!-- <ion-row>
             <ion-col size-md="6" size-xs="12">
                <h6>Allotment Order Requires Approval </h6>
             </ion-col>
@@ -236,9 +251,11 @@
               <div class="info">{{clientCustomizations.userOnboardTemplate}}</div>
            </ion-col>
         </ion-row> -->
-               <!-- <ion-button  (click)="editCustomization()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
+         <!-- <ion-button  (click)="editCustomization()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
         </ion-button> -->
       </ion-grid>
-   </ion-card-content>
-</ion-card>
+   </mat-expansion-panel>
+</mat-accordion>
+<!-- </ion-card-content>
+</ion-card> -->

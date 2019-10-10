@@ -26,3 +26,42 @@
       right:-3px;
     }
  }
+ 
+// mat-expansion-panel {
+//     margin: 16px;
+//     mat-expansion-panel-header {
+//         background: #1c1c1c !important;
+//         mat-panel-title{
+//             color: #fff !important;
+//         }
+//         .mat-expansion-indicator{
+//             ::after{
+//                 color: #fff;
+//             }
+//         }
+//     }
+// }
+// .mat-expansion-indicator::after{
+//     color: #fff;
+// }
+:host ::ng-deep {
+    // app-client-customizations,app-client-billing-details,app-client-contact-details,app-client-user-roles,app-client-user-groups{
+        mat-expansion-panel {
+            margin: 16px;
+            mat-expansion-panel-header {
+                background: #1c1c1c !important;
+                mat-panel-title{
+                    color: #fff !important;
+                }
+                .mat-expansion-indicator{
+                    ::after{
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .mat-expansion-indicator::after{
+            color: #fff;
+        }
+    // }
+}
