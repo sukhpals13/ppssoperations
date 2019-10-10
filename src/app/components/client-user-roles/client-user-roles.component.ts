@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { GetDetailsService } from '../../services/getDetails/get-details.service';
 import { PostDetailsService } from '../../services/postDetails/post-details.service';
 import { DeleteServicesService } from '../../services/deleteServices/delete-services.service';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-client-user-roles',
@@ -31,7 +32,21 @@ export class ClientUserRolesComponent implements OnInit {
     private getDetailService: GetDetailsService,
     private postDetailsService: PostDetailsService,
     private deleteDetailsService: DeleteServicesService,
+    public alrtCtrl: AlertController,
+    public loadingController: LoadingController,
+    public zone: NgZone,
   ) { }
+
+  async alertPopup(title, msg) {
+    const alert = await this.alrtCtrl.create({
+      header: title,
+      message: msg,
+      buttons: [{
+        text: 'Okay'
+      }]
+    });
+    await alert.present();
+  }
 
   ngOnInit() {
     this.getuserroles();
@@ -105,13 +120,15 @@ export class ClientUserRolesComponent implements OnInit {
             })
           }
         })
-        this.roles = roles;
-        this.gotResponse = true;
-        if(this.roles.length==0){
-          this.noData = true
-        }else{
-          this.noData = false
-        }
+        this.zone.run(()=>{
+          this.roles = roles;
+          this.gotResponse = true;
+          if(this.roles.length==0){
+            this.noData = true
+          }else{
+            this.noData = false
+          }
+        })
       }, err => {
         console.log(err);
       }
@@ -173,8 +190,13 @@ export class ClientUserRolesComponent implements OnInit {
     s.category = undefined;
   }
 
-  sendAddRoleRequest(r) {
+  async sendAddRoleRequest(r) {
     console.log(r);
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+
+    loading.present();
     this.postDetailsService.addClientUserRole(this.id,this.roleToAdd)
     .subscribe(res=>{
       console.log(res);
@@ -184,30 +206,88 @@ export class ClientUserRolesComponent implements OnInit {
       };
       this.adding = false;
       this.getuserroles();
+      loading.dismiss();
     },err=>{
       console.log(err);
     })
   }
 
-  deleteRole(id) {
-    this.deleteDetailsService.deleteClientUserRole(this.id,id)
-    .subscribe(res=>{
-      console.log(res);
-      this.getuserroles();
-    },err=>{
-      console.log(err);
-    })
+  async confirmDeleteRole(id){
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alrtCtrl.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to delete this role ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+          console.log('Confirm Yes: blah');
+          // this.deleteRole(id);
+          this.deleteDetailsService.deleteClientUserRole(this.id,id)
+          .subscribe(res=>{
+            console.log(res);
+            this.getuserroles();
+            loading.dismiss();
+          },err=>{
+            console.log(err);
+            loading.dismiss();
+          })
+          
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          // this.openSearchClient();
+        }
+      }]
+    });
+    await alert.present();
   }
 
-  updateRole(r) {
-    console.log(r);
-    this.postDetailsService.updateClientUserRole(this.id,r)
-    .subscribe(res=>{
-      console.log(res);
-      this.getuserroles();
-    },err=>{
-      console.log(err);
-    })
+  // deleteRole(id) {
+  //   this.deleteDetailsService.deleteClientUserRole(this.id,id)
+  //         .subscribe(res=>{
+  //           console.log(res);
+  //           this.getuserroles();
+  //         },err=>{
+  //           console.log(err);
+  //         })    
+  // }
+
+  async updateRole(r) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alrtCtrl.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to change this role ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+          console.log('Confirm Yes: blah');
+          this.postDetailsService.updateClientUserRole(this.id,r)
+          .subscribe(res=>{
+            console.log(res);
+            this.getuserroles();
+            loading.dismiss()
+          },err=>{
+            console.log(err);
+            loading.dismiss();
+          })
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          // this.openSearchClient();
+        }
+      }]
+    });
+    await alert.present();
   }
 
 }

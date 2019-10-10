@@ -65,14 +65,13 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ion-button *ngIf="select.category&&select.name" (click)="addAccessRight(select,role)">Add Access Right
-          </ion-button>
+          <ion-button [disabled]="!(select.category&&select.name)" (click)="addAccessRight(select,role)">Add Access Right</ion-button>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="edit">
         <ion-col>
           <ion-button (click)="updateRole(role)">Update Role</ion-button>
-          <ion-button (click)="deleteRole(role._id)">Delete Role</ion-button>
+          <ion-button (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
         </ion-col>
       </ion-row>
       <mat-divider></mat-divider>
@@ -130,7 +129,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ion-button *ngIf="selectRoleToAdd.category&&selectRoleToAdd.name"
+          <ion-button [disabled]="!(selectRoleToAdd.category&&selectRoleToAdd.name)"
             (click)="addSelectedRoleAddAccessRight(selectRoleToAdd,roleToAdd)">Add Access Right</ion-button>
         </ion-col>
       </ion-row>

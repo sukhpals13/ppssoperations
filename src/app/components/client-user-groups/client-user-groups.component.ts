@@ -14,7 +14,7 @@ export class ClientUserGroupsComponent implements OnInit {
   @Input() id: any;
   @Input() edit: any;
   add: boolean;
-  private  addGroupName: string;
+  private addGroupName: string;
   private addingGroup: boolean;
 
   public clientUserGroup: any;
@@ -25,14 +25,16 @@ export class ClientUserGroupsComponent implements OnInit {
   constructor(
     private getDetailService: GetDetailsService,
     private postDetailService: PostDetailsService,
-    private deleteServicesService : DeleteServicesService,
+    private deleteServicesService: DeleteServicesService,
     public alertController: AlertController,
+    public loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
     this.getuserGroups();
     this.loader = false;
     this.addingGroup = true;
+    this.add = false;
     this.gotResponse = false;
     this.noData = true;
   }
@@ -56,84 +58,143 @@ export class ClientUserGroupsComponent implements OnInit {
         console.log('get user groups', res);
         this.clientUserGroup = res.groups;
         this.gotResponse = true;
-        if(this.clientUserGroup.length==0){
+        if (this.clientUserGroup.length == 0) {
           this.noData = true;
-        }else{
+        } else {
           this.noData = false;
         }
+        this.add = false;
       }, err => {
         console.log(err);
+        this.add = false;
       }
       )
   }
 
   // add client user group
-  addUserGroup(group){
+  addUserGroup(group) {
     this.addingGroup = false;
     const reqBody = {
       name: group.name
     };
     let clientId = this.id;
     console.log('nameeeeee', reqBody);
-    return this.postDetailService.addClientUserGroup(clientId,reqBody)
-    .subscribe(res =>{
-      console.log('add group response', res);
-      console.log('res group',res.group)
-      this.clientUserGroup[this.clientUserGroup.length-1]= res.group;
+    return this.postDetailService.addClientUserGroup(clientId, reqBody)
+      .subscribe(res => {
+        console.log('add group response', res);
+        console.log('res group', res.group)
+        this.clientUserGroup[this.clientUserGroup.length - 1] = res.group;
+        this.add = false;
 
-    }, err => {
-      console.log(err);
-      this.addingGroup = true;
-      this.alertPopup("Error",JSON.stringify(err.error.message));
-    }
+      }, err => {
+        console.log(err);
+        this.addingGroup = true;
+        this.alertPopup("Error", JSON.stringify(err.error.message));
+        this.add = false;
+      }
 
-    )
-     
+      )
+
   }
   // add client user group
-  editUserGroup(group){
-    this.addingGroup = true;
-    const reqBody = {
-      name: group.name
-    };
-    let clientId = this.id;
-    let groupId = group._id;
-    console.log('nameeeeee', name);
-    console.log('group id', groupId);
-    return this.postDetailService.updateClientUserGroup(clientId,groupId,reqBody)
-    .subscribe(res =>{
-      console.log('Update group response', res);
-      // this.getuserGroups();
-      this.alertPopup("Updated",'Client User Group updated successfully');
-    }, err => {
-      console.log(err);
-      this.alertPopup("Error",JSON.stringify(err.error.message));
-    }
+  async editUserGroup(group) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alertController.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to delete this user group ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+          // console.log('Confirm Yes: blah');
+          // let clientId = this.id;
+          // let groupId = group._id;
+          // return this.deleteServicesService.deleteClientUserGroups(clientId,groupId)
+          // .subscribe(res =>{
+          //   console.log('delete group response', res);
+          //   this.clientUserGroup = this.clientUserGroup.filter(val=>{if(val._id!=groupId) return val});
+          //   loading.dismiss();
+          //   this.alertPopup("Deleted",'Client User Group deleted successfully');
+          // }, err => {
+          //   console.log(err);
+          //   loading.dismiss();
+          // })
 
-    )
+          this.addingGroup = true;
+          const reqBody = {
+            name: group.name
+          };
+          let clientId = this.id;
+          let groupId = group._id;
+          console.log('nameeeeee', name);
+          console.log('group id', groupId);
+          return this.postDetailService.updateClientUserGroup(clientId, groupId, reqBody)
+            .subscribe(res => {
+              console.log('Update group response', res);
+              // this.getuserGroups();
+              loading.dismiss();
+              this.alertPopup("Updated", 'Client User Group updated successfully');
+            }, err => {
+              console.log(err);
+              loading.dismiss();
+              this.alertPopup("Error", JSON.stringify(err.error.message));
+            })
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          // this.openSearchClient();
+        }
+      }]
+    });
+    alert.present()
   }
 
   // delete client user group
-  deleteUserGroup(group){
-    let clientId = this.id;
-    let groupId = group._id;
-    return this.deleteServicesService.deleteClientUserGroups(clientId,groupId)
-    .subscribe(res =>{
-      console.log('delete group response', res);
-      this.clientUserGroup = this.clientUserGroup.filter(val=>{if(val._id!=groupId) return val});
-      this.alertPopup("Deleted",'Client User Group deleted successfully');
-    }, err => {
-      console.log(err);
-    }
-
-    )
+  async deleteUserGroup(group) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alertController.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to delete this user group ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+          console.log('Confirm Yes: blah');
+          let clientId = this.id;
+          let groupId = group._id;
+          return this.deleteServicesService.deleteClientUserGroups(clientId, groupId)
+            .subscribe(res => {
+              console.log('delete group response', res);
+              this.clientUserGroup = this.clientUserGroup.filter(val => { if (val._id != groupId) return val });
+              loading.dismiss();
+              this.alertPopup("Deleted", 'Client User Group deleted successfully');
+            }, err => {
+              console.log(err);
+              loading.dismiss();
+            })
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          // this.openSearchClient();
+        }
+      }]
+    });
+    alert.present()
   }
 
 
   // add group user row
-  addContactRow(){
+  addContactRow() {
     this.add = true;
-    this.clientUserGroup.push({name: ''});
+    this.clientUserGroup.push({ name: '' });
   }
 
 }

@@ -186,7 +186,7 @@ export class AppComponent {
   // logout function
   logout() {
     this.auth.logout().subscribe(res=>{
-      this.alertPopup('Success','Successefully Logged out')
+      this.alertPopup('Success','Successfully Logged out')
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       // this.router.navigate(['/auth/login']);
@@ -212,8 +212,8 @@ export class AppComponent {
   // functions after the loading screen loads in the app
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.overlaysWebView(true);
-
+      // this.statusBar.overlaysWebView(true);
+      this.statusBar.styleLightContent()
       this.splashScreen.hide();
     });
   }
