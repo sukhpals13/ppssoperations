@@ -103,7 +103,7 @@ export class ClientUserGroupsComponent implements OnInit {
     .subscribe(res =>{
       console.log('delete group response', res);
       this.clientUserGroup = this.clientUserGroup.filter(val=>{if(val._id!=groupId) return val});
-      this.alertPopup("Deleted",'Client User Group Deleted successfully');
+      this.alertPopup("Deleted",'Client User Group updated successfully');
     }, err => {
       console.log(err);
     }

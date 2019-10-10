@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PostDetailsService } from '../../services/postDetails/post-details.service'
 import { AlertController } from '@ionic/angular';
 import { stringify } from '@angular/compiler/src/util';
+import { } from '@angular/material';
 
 interface address {
   name:string;

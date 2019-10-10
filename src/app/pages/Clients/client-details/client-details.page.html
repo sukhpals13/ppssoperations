@@ -129,7 +129,7 @@
               <app-text-shell  animation="bouncing" lines="1" [data]="rank"></app-text-shell>
             </ion-col>
             <ion-col size-md="2" size-xs="2" style="text-align: right;">
-              <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
+              <button *ngIf="editMode"  class="delete-icon" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col>
@@ -166,7 +166,7 @@
               <app-text-shell animation="bouncing" lines="1" [data]="data"></app-text-shell>
             </ion-col>
             <ion-col size-md="2" size-xs="2" style="text-align: right;">
-              <button *ngIf="editMode" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
+              <button *ngIf="editMode" class="delete-icon" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col>

@@ -14,7 +14,7 @@
             <ion-col *ngIf="edit">
                <!-- <ion-item> -->
                   <!-- <ion-label>Gender</ion-label> -->
-                  <mat-form-field style="width: 100%;">
+                  <mat-form-field style="width: 100%;" appearance="none">
                      <!-- <mat-label>Favorite food</mat-label> -->
                      <mat-select [(ngModel)]="data.billingMethod">
                         <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
@@ -169,9 +169,13 @@
                <ion-input [(ngModel)]="data.zipCode"></ion-input>
             </ion-col>
          </ion-row>
-         <ion-button *ngIf="edit" (click)="editInfoCalled()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
-            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-         </ion-button>
+         <ion-row>
+            <ion-col>
+               <ion-button *ngIf="edit" (click)="editInfoCalled()" [disabled]="loader">{{loader?'':'Update Billing Info'}}
+                  <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+               </ion-button>
+            </ion-col>
+         </ion-row>
       </ion-grid>
    </ion-card-content>
 </ion-card>

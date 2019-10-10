@@ -40,3 +40,9 @@ ion-input{
     border-radius: 3px;
  }
  .mt-5{margin-top:12px;}
+ .delete-icon{
+    mat-icon{
+      position:relative;
+      right:-3px;
+    }
+ }

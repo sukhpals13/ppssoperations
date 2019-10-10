@@ -23,12 +23,12 @@
         <ion-col *ngIf="edit" size-md="6" size-xs="9">
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
-        <ion-col size-md="6" size-xs="3">
-            <button mat-icon-button *ngIf="!group._id && edit" (click)="addUserGroup(group)" [disabled]="loader">
+        <ion-col size-md="6" size-xs="3" class="ion-text-right">
+            <button mat-icon-button *ngIf="!group._id && edit" (click)="addUserGroup(group)" [disabled]="addingGroup">
                 <mat-icon title="Add new Group">add_circle_outline</mat-icon>
                 <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
              </button>
-             <button mat-icon-button *ngIf="group._id && edit" (click)="editUserGroup(group)" [disabled]="loader">
+             <button mat-icon-button *ngIf="group._id && edit" (click)="editUserGroup(group)" [disabled]="addingGroup">
                 <!-- {{loader?'':'Update'}} -->
                 <mat-icon title="Update">check</mat-icon>
                 <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
