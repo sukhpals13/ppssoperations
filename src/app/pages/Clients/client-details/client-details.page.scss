@@ -50,6 +50,7 @@
             margin: 16px;
             mat-expansion-panel-header {
                 background: #1c1c1c !important;
+                max-height:48px !important;
                 mat-panel-title{
                     color: #fff !important;
                 }

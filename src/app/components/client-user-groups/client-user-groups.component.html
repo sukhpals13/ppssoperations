@@ -30,7 +30,7 @@
         <ion-col *ngIf="edit" size-md="6" size-xs="9">
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
-        <ion-col size-md="6" size-xs="3" class="ion-text-right">
+        <ion-col size-md="6" size-xs="3" class="ion-text-right ion-no-padding">
           <button mat-icon-button *ngIf="!group._id && edit" (click)="addUserGroup(group)"
             [attr.disabled]="group.name ? null : '' " [disabled]="addingGroup">
             <mat-icon title="Add new Group">add_circle_outline</mat-icon>
@@ -48,8 +48,12 @@
           </button>
         </ion-col>
       </ion-row>
-      <ion-button class="addgroup" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add Group
-      </ion-button>
+      <ion-row>
+        <ion-col>
+          <ion-button class="addgroup" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add Group
+          </ion-button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </mat-expansion-panel>
 </mat-accordion>
