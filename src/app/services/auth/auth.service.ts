@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { userResposne } from '../../interfaces/user';
+import { config } from '../default';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,12 @@ export class AuthService {
 
   // Login
   login(user) {
-    return this.http.post<userResposne>('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth',user)
+    return this.http.post<userResposne>(config.hostName+'/api/auth',user)
   }
 
   // Logout
   logout() {
-    return this.http.post('https://integration.ebusiness.pittsburghpublicsafety.com/api/auth/logout',{})
+    return this.http.post(config.hostName+'/api/auth/logout',{})
   }
 
   // Session Check
