@@ -63,7 +63,7 @@
                <div class="info">{{data.contactPhone}}</div>
             </ion-col>
             <ion-col *ngIf="edit">
-               <ion-input [(ngModel)]="data.contactPhone"></ion-input>
+               <input [(ngModel)]="data.contactPhone" class="phoneInput" type = "text" [textMask]="{mask: phoneNumberMask}"/>
             </ion-col>
          </ion-row>
          <ion-row *ngIf="data.poRequired||edit">

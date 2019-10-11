@@ -44,3 +44,10 @@ ion-input{
     padding-bottom: 0;
 }
 :host ::ng-deep .mat-form-field-infix{border-top:0px;}
+.phoneInput{
+    padding: 9px 5px !important;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    border-radius: 3px;
+    width: 100%;
+}

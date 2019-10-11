@@ -15,6 +15,7 @@ export class ClientContactDetailsComponent implements OnInit {
   public loader: boolean;
   public panelOpenState = false;
   public contacts = [];
+  public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
   constructor(
     public PoseDetailService: PostDetailsService,

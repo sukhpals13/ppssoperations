@@ -21,6 +21,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDividerModule} from '@angular/material/divider';
+import { TextMaskModule } from 'angular2-text-mask';
+
 
 
 import {OrderFilterComponent} from './order-filter/order-filter.component';
@@ -54,6 +56,7 @@ var commonMods = [
     MatNativeDateModule,
     
     ShellModule,
+    TextMaskModule,
     IonicModule.forRoot(),
     // ParentClientIdSearchComponent,
     // ClientBillingDetailsComponent,

@@ -48,7 +48,7 @@
                   <div class="info">{{contact.contactPhone}}</div>
                </ion-col>
                <ion-col size-md="6" size-xs="12" *ngIf="edit">
-                  <ion-input [(ngModel)]="contact.contactPhone"></ion-input>
+                  <input [(ngModel)]="contact.contactPhone" class="phoneInput" type = "text" [textMask]="{mask: phoneNumberMask}"/>
                </ion-col>
             </ion-row>
             <ion-row>

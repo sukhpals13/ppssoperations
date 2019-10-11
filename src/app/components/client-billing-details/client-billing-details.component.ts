@@ -20,6 +20,7 @@ export class ClientBillingDetailsComponent implements OnInit {
   public loader: boolean;
   public billingMethods: Array<string>;
   public addressCheck: Array<address>;
+  public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
   constructor(
     private postDetails: PostDetailsService,
@@ -93,4 +94,6 @@ export class ClientBillingDetailsComponent implements OnInit {
       this.loader = false;
     }
   }
+
+  
 }
