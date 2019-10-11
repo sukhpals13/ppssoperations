@@ -43,6 +43,11 @@ export class AppComponent {
       title: 'Notifications',
       url: '/app/notifications',
       icon: './assets/sample-icons/side-menu/notifications.svg'
+    },
+    {
+      title: 'Barcode',
+      url: '/barcode',
+      icon: './assets/sample-icons/side-menu/notifications.svg'
     }
   ];
   accountPages = [

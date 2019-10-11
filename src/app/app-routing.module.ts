@@ -34,7 +34,9 @@ const routes: Routes = [
   
   { path: 'search-user', loadChildren: './pages/Users/search-user/search-user.module#SearchUserPageModule' },
   { path: 'user/details/:uNumber', loadChildren: () => import('./pages/Users/user-details/user-details.module').then(m => m.UserDetailsPageModule) },
+  { path: 'barcode', loadChildren: './pages/test_barcode/barcode/barcode.module#BarcodePageModule' },
   { path: '**', redirectTo: 'page-not-found' },
+
 
   // { path: 'order-details', loadChildren: './pages/Orders/order-details/order-details.module#OrderDetailsPageModule' },
   // { path: 'orders-to-pick', loadChildren: './pages/Orders/orders-to-pick/orders-to-pick.module#OrdersToPickPageModule' }

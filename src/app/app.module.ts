@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 // Interceptors
 import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Intercept } from './interceptors/interceptors';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 // custom HTTP requests services 
 import { AuthService } from './services/auth/auth.service';
@@ -49,6 +50,7 @@ import { IonicStorageModule } from '@ionic/storage';
     AuthService,
     GetDetailsService,
     PostDetailsService,
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: Intercept, multi: true },
   ],
