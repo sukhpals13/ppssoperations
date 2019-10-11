@@ -70,7 +70,16 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks" [disabled]="editMode">
+    <mat-expansion-panel [disabled]="editMode">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Customization
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
+      </app-client-customizations>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Ranks or Titles
@@ -108,7 +117,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.assignments.length||editMode" id="client-assingment" [disabled]="editMode">
+    <mat-expansion-panel *ngIf="client.assignments.length||editMode" id="client-assingment">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Assingments
@@ -146,16 +155,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel [disabled]="editMode">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Customization
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
-      </app-client-customizations>
-    </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.billingInfo._id||this.editMode" [disabled]="editMode">
+    <mat-expansion-panel *ngIf="client.billingInfo._id||this.editMode">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Billing
@@ -164,11 +164,11 @@
       <app-client-billing-details [data]="client.billingInfo" [edit]="editMode" [id]="client._id">
       </app-client-billing-details>
     </mat-expansion-panel>
-    <mat-expansion-panel [disabled]="editMode">
+    <mat-expansion-panel *ngIf="client.contacts.length||editMode">
       <mat-expansion-panel-header>
         <mat-panel-title>Contacts</mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-contact-details *ngIf="client.contacts.length" [clientContactDetails]="client.contacts"
+      <app-client-contact-details [clientContactDetails]="client.contacts"
         [edit]="editMode" [id]="client._id"></app-client-contact-details>
     </mat-expansion-panel>
   </mat-accordion>
