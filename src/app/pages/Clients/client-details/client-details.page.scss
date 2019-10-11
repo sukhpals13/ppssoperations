@@ -47,7 +47,8 @@
 :host ::ng-deep {
     // app-client-customizations,app-client-billing-details,app-client-contact-details,app-client-user-roles,app-client-user-groups{
         mat-expansion-panel {
-            margin: 16px;
+            margin-left:16px;
+            margin-right:16px;
             mat-expansion-panel-header {
                 background: #1c1c1c !important;
                 max-height:48px !important;
@@ -57,12 +58,17 @@
                 .mat-expansion-indicator{
                     ::after{
                         color: #fff;
+                        padding: 5px;
                     }
                 }
             }
         }
+        mat-expansion-panel:first-child,.mat-accordion>.mat-expansion-panel-spacing:first-child {
+            margin-top: 20px;
+        }
         .mat-expansion-indicator::after{
             color: #fff;
+            padding: 5px;
         }
     // }
 }
