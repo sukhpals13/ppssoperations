@@ -16,7 +16,7 @@
         <form (onSubmit)="getUsersList(searchText)">
           <ion-col>
             <ion-item class="input-item" no-padding>
-              <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search here"></ion-input>
+              <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search User"></ion-input>
               <button mat-icon-button style="color: black;" color="primary" (click)="getUsersList(searchText)"
                 aria-label="Example icon-button with a search icon" [disabled]="searchText==''||searchText==undefined">
                 <mat-icon>search</mat-icon>
