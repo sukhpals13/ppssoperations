@@ -79,7 +79,7 @@
       <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
       </app-client-customizations>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks">
+    <mat-expansion-panel *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks" [disabled]="editMode&&client.ranksOrTitles.length!=0">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Ranks or Titles
@@ -117,7 +117,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.assignments.length||editMode" id="client-assingment">
+    <mat-expansion-panel *ngIf="client.assignments.length||editMode" id="client-assingment" [disabled]="editMode&&client.assignments.length!=0">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Assingments
@@ -155,7 +155,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.billingInfo._id||this.editMode">
+    <mat-expansion-panel *ngIf="client.billingInfo._id||this.editMode" [disabled]="editMode&&client.billingInfo._id">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Billing
@@ -164,29 +164,31 @@
       <app-client-billing-details [data]="client.billingInfo" [edit]="editMode" [id]="client._id">
       </app-client-billing-details>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.contacts.length||editMode">
+    <mat-expansion-panel *ngIf="client.contacts.length||editMode" [disabled]="editMode&&client.contacts.length!=0">
       <mat-expansion-panel-header>
         <mat-panel-title>Contacts</mat-panel-title>
       </mat-expansion-panel-header>
       <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id">
       </app-client-contact-details>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="(gotRoleResponse&&!noRoleData)||editMode">
+    <mat-expansion-panel *ngIf="(gotRoleResponse&&!noRoleData)||editMode" [disabled]="editMode&&!noRoleData">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Roles
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode" (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-roles>
+      <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode"
+        (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-roles>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="(gotGroupResponse&&!noGroupData)||editMode">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            User Groups
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode" (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-groups>
-      </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="(gotGroupResponse&&!noGroupData)||editMode" [disabled]="editMode&&!noGroupData">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          User Groups
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode"
+        (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-groups>
+    </mat-expansion-panel>
   </mat-accordion>
   <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
