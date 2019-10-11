@@ -12,17 +12,19 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <form (onSubmit)="getClientList(searchText)">
       <ion-col>
-        <ion-item class="input-item">
-          <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search here"></ion-input>
-          <button mat-icon-button style="color: black;" color="primary" (click)="getClientList(searchText)"
-            aria-label="Example icon-button with a search icon" [disabled]="searchText==''||searchText==undefined">
-            <mat-icon>search</mat-icon>
-          </button>
-        </ion-item>
+        <form (onSubmit)="getClientList(searchText)">
+            <ion-col>
+              <ion-item class="input-item" no-padding>
+                <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search here"></ion-input>
+                <button mat-icon-button style="color: black;" color="primary" (click)="getClientList(searchText)"
+                  aria-label="Example icon-button with a search icon" [disabled]="searchText==''||searchText==undefined">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </ion-item>
+            </ion-col>
+        </form>
       </ion-col>
-    </form>
     </ion-row>
   </ion-grid>
   <ion-grid>
