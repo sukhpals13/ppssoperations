@@ -15,6 +15,8 @@ export class ClientContactDetailsComponent implements OnInit {
   public loader: boolean;
   public panelOpenState = false;
   public contacts = [];
+  public actionVisible: boolean;
+  public add: boolean;
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
   constructor(
@@ -24,6 +26,8 @@ export class ClientContactDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.loader=false;
+    this.actionVisible = true;
+    this.add = true;
   }
   addContactsInfo(contact){
      let clientId = this.id;
@@ -38,9 +42,12 @@ export class ClientContactDetailsComponent implements OnInit {
      console.log('Edit client detail',this.clientContactDetails);
      return this.PoseDetailService.addClientContact(clientId,reqBody)
      .subscribe(res => {
+      this.add = true;
       console.log('Client add detail responseres', res);
       this.clientContactDetails = res.client.contacts;
+      // this.actionVisible = true;
     }, err => {
+      this.add = false;
       console.log(err);
     })
   }
@@ -59,14 +66,18 @@ export class ClientContactDetailsComponent implements OnInit {
     console.log('Edit client detail',reqBody);
     return this.PoseDetailService.updateClientContact(clientId,reqBody)
     .subscribe(res => {
+      this.add = true;
      console.log('Client add detail responseres', res);
      this.clientContactDetails = res.client.contacts;
    }, err => {
+    this.add = false;
      console.log(err);
    })
  }
 
   addContactRow(){
+    // this.actionVisible = false;
+    this.add = false;
     console.log('function call');
     //  this.contacts
     this.clientContactDetails.push({contactType: '', contactName: '', contactPhone: '', contactEmail: '', contactNotes: '' })
