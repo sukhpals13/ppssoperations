@@ -70,6 +70,15 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
+    <mat-expansion-panel [disabled]="editMode">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Customization
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
+      </app-client-customizations>
+    </mat-expansion-panel>
     <mat-expansion-panel *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks" [disabled]="editMode">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -146,15 +155,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel [disabled]="editMode">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Customization
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
-      </app-client-customizations>
-    </mat-expansion-panel>
+
     <mat-expansion-panel *ngIf="client.billingInfo._id||this.editMode" [disabled]="editMode">
       <mat-expansion-panel-header>
         <mat-panel-title>
