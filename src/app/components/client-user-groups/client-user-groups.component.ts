@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GetDetailsService } from '../../services/getDetails/get-details.service';
 import { PostDetailsService } from '../../services/postDetails/post-details.service';
 import { DeleteServicesService } from '../../services/deleteServices/delete-services.service';
@@ -13,6 +13,10 @@ export class ClientUserGroupsComponent implements OnInit {
 
   @Input() id: any;
   @Input() edit: any;
+
+  @Output() gotResponseSend = new EventEmitter();
+  @Output() noDataSend = new EventEmitter();
+  
   add: boolean;
   private addGroupName: string;
   private addingGroup: boolean;
@@ -21,6 +25,8 @@ export class ClientUserGroupsComponent implements OnInit {
   public loader: boolean;
   public gotResponse: boolean;
   public noData: boolean;
+
+
 
   constructor(
     private getDetailService: GetDetailsService,
@@ -58,17 +64,19 @@ export class ClientUserGroupsComponent implements OnInit {
         console.log('get user groups', res);
         this.clientUserGroup = res.groups;
         this.gotResponse = true;
+        this.gotResponseSend.emit({gotGroupResponse:true})
         if (this.clientUserGroup.length == 0) {
           this.noData = true;
+          this.noDataSend.emit({noGroupData:true})
         } else {
           this.noData = false;
+          this.noDataSend.emit({noGroupData:false})
         }
         this.add = false;
       }, err => {
         console.log(err);
         this.add = false;
-      }
-      )
+      })
   }
 
   // add client user group
@@ -85,7 +93,9 @@ export class ClientUserGroupsComponent implements OnInit {
         console.log('res group', res.group)
         this.clientUserGroup[this.clientUserGroup.length - 1] = res.group;
         this.add = false;
-
+        if(this.clientUserGroup.length>0){
+          this.noDataSend.emit({noGroupData:false})
+        }
       }, err => {
         console.log(err);
         this.addingGroup = true;
@@ -108,19 +118,6 @@ export class ClientUserGroupsComponent implements OnInit {
         text: 'Yes',
         handler: (blah) => {
           loading.present();
-          // console.log('Confirm Yes: blah');
-          // let clientId = this.id;
-          // let groupId = group._id;
-          // return this.deleteServicesService.deleteClientUserGroups(clientId,groupId)
-          // .subscribe(res =>{
-          //   console.log('delete group response', res);
-          //   this.clientUserGroup = this.clientUserGroup.filter(val=>{if(val._id!=groupId) return val});
-          //   loading.dismiss();
-          //   this.alertPopup("Deleted",'Client User Group deleted successfully');
-          // }, err => {
-          //   console.log(err);
-          //   loading.dismiss();
-          // })
 
           this.addingGroup = true;
           const reqBody = {
@@ -174,6 +171,9 @@ export class ClientUserGroupsComponent implements OnInit {
               this.clientUserGroup = this.clientUserGroup.filter(val => { if (val._id != groupId) return val });
               loading.dismiss();
               this.alertPopup("Deleted", 'Client User Group deleted successfully');
+              if(this.clientUserGroup.length==0){
+                this.noDataSend.emit({noGroupData:true})
+              }
             }, err => {
               console.log(err);
               loading.dismiss();

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input, NgZone, EventEmitter, Output, OnChanges } from '@angular/core';
 import { GetDetailsService } from '../../services/getDetails/get-details.service';
 import { PostDetailsService } from '../../services/postDetails/post-details.service';
 import { DeleteServicesService } from '../../services/deleteServices/delete-services.service';
@@ -27,6 +27,9 @@ export class ClientUserRolesComponent implements OnInit {
   public adding: boolean;
   public roleToAdd: object;
   public noData: boolean;
+
+  @Output() gotResponseSend = new EventEmitter();
+  @Output() noDataSend = new EventEmitter();
 
   constructor(
     private getDetailService: GetDetailsService,
@@ -123,10 +126,13 @@ export class ClientUserRolesComponent implements OnInit {
         this.zone.run(()=>{
           this.roles = roles;
           this.gotResponse = true;
+          this.gotResponseSend.emit({gotRoleResponse:true})
           if(this.roles.length==0){
             this.noData = true
+            this.noDataSend.emit({noRoleData:true})
           }else{
             this.noData = false
+            this.noDataSend.emit({noRoleData:false})
           }
         })
       }, err => {
@@ -136,7 +142,6 @@ export class ClientUserRolesComponent implements OnInit {
   }
 
   deleteAccessRight(r,i) {
-    // console.log(r,i);
     r.accessRights = r.accessRights.filter((val,index)=>{
       if(index!=i){
         return val
@@ -147,7 +152,6 @@ export class ClientUserRolesComponent implements OnInit {
         return val
       }
     });
-    // console.log(r,i)
   }
 
   addRole(){

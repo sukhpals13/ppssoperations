@@ -11,7 +11,7 @@
 
 <ion-content>
   <mat-accordion id="client-info">
-    <mat-expansion-panel [expanded]="true" [disabled]="editMode">
+    <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Client Information
@@ -70,7 +70,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel [disabled]="editMode">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Customization
@@ -168,12 +168,26 @@
       <mat-expansion-panel-header>
         <mat-panel-title>Contacts</mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-contact-details [clientContactDetails]="client.contacts"
-        [edit]="editMode" [id]="client._id"></app-client-contact-details>
+      <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id">
+      </app-client-contact-details>
     </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="(gotRoleResponse&&!noRoleData)||editMode">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Roles
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode" (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-roles>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="(gotGroupResponse&&!noGroupData)||editMode">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            User Groups
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode" (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-groups>
+      </mat-expansion-panel>
   </mat-accordion>
-  <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode"></app-client-user-roles>
-  <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode"></app-client-user-groups>
   <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
   </ion-card>

@@ -23,6 +23,10 @@ export class ClientDetailsPage implements OnInit {
   public addingRank: boolean;
   public addingAssingment: boolean;
   public storedData: any;
+  public gotRoleResponse: boolean;
+  public noRoleData: boolean;
+  public gotGroupResponse: boolean;
+  public noGroupData: boolean;
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.client && this.client.isShell) ? true : false;
@@ -46,6 +50,10 @@ export class ClientDetailsPage implements OnInit {
     this.addingAssingment = false;
     this.addingRank = false;
     this.initializeClient();
+    this.gotRoleResponse = true;
+    this.noRoleData = false;
+    this.gotGroupResponse = true;
+    this.noGroupData = false;
   }
 
   initializeClient() {
@@ -70,6 +78,10 @@ export class ClientDetailsPage implements OnInit {
     this.editMode = false;
     this.addingAssingment = false;
     this.addingRank = false;
+    this.gotRoleResponse = true;
+    this.noRoleData = false;
+    this.gotGroupResponse = true;
+    this.noGroupData = false;
     this.initializeClient();
     this.getClient();
   }
@@ -310,5 +322,13 @@ export class ClientDetailsPage implements OnInit {
       }]
     });
     await alert.present();
+  }
+
+  gotResponse(e){
+    console.log(e);
+    for(var i in e){
+      this[i] = e[i]
+      console.log(i,this[i])
+    }
   }
 }
