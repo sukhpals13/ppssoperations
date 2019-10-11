@@ -252,8 +252,8 @@ export class OrderDetailsPage implements OnInit {
     let flag = true;
     let reqBody = {
       orderID: order._id,
-      status: "Status Changed",
-      subStatus: "Complete"
+      status: "In Progress",
+      subStatus: "Pick Complete"
     };
     product.forEach(val => {
       console.log(val.subStatus);
