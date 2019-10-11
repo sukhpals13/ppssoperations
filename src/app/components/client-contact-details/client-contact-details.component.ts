@@ -78,11 +78,11 @@ export class ClientContactDetailsComponent implements OnInit {
   addContactRow(){
     // this.actionVisible = false;
     this.add = false;
-    console.log('function call');
+    // console.log('function call');
     //  this.contacts
     this.clientContactDetails.push({contactType: '', contactName: '', contactPhone: '', contactEmail: '', contactNotes: '' })
      
-    }
+  }
 
     deleteContact(contact){
       let contactId = contact._id;
