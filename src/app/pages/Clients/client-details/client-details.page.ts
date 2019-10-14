@@ -146,7 +146,7 @@ export class ClientDetailsPage implements OnInit {
                 this.alertPopup("Error!!!",JSON.stringify(err));
               });
           }else{
-            this.alertPopup('Error!!!','Agency Order Shipping Text Required!!!')
+            this.alertPopup('Error!!!','Agency order shipping text required!!!')
           }
         } else {
           this.editMode = true;
