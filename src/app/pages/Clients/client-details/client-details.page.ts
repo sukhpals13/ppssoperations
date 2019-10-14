@@ -124,6 +124,9 @@ export class ClientDetailsPage implements OnInit {
   async editToggle() {
     // let flag = false;
     
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
     this.zone.run(() => {
       console.log(this.client);
       let flag = true;
@@ -136,13 +139,16 @@ export class ClientDetailsPage implements OnInit {
         if (this.editMode) {
           if(flag){
             this.editMode = false;
+            loading.present();
             this.postDetailsService.updateClient({...this.client})
               .subscribe(res => {
                 console.log(res);
                 this.handleClientResponse(res);
+                loading.dismiss();
                 this.alertPopup('Updated','Client information updated successfully')
               }, err => {
                 console.log(err);
+                loading.dismiss();
                 this.alertPopup("Error!!!",JSON.stringify(err));
               });
           }else{
