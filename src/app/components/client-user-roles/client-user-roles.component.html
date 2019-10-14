@@ -4,145 +4,152 @@
   </ion-card-header>
   <ion-card-content> -->
 <!-- <mat-accordion> -->
-  <!-- <mat-expansion-panel *ngIf="(gotResponse&&!noData)||edit">
+<!-- <mat-expansion-panel *ngIf="(gotResponse&&!noData)||edit">
     <mat-expansion-panel-header>
       <mat-panel-title>
           Roles
       </mat-panel-title>
     </mat-expansion-panel-header> -->
-    <ion-grid *ngFor="let role of roles">
-      <ion-row>
-        <ion-col size="12">
-          <h6>Name</h6>
-          <div *ngIf="!edit">{{role.name}}</div>
-          <ion-input [(ngModel)]="role.name" *ngIf="edit"></ion-input>
-        </ion-col>
-      </ion-row>
-      <!-- </ion-grid>
+<ion-grid *ngFor="let role of roles">
+  <ion-row>
+    <ion-col size="12">
+      <h6>Name</h6>
+      <div *ngIf="!edit">{{role.name}}</div>
+      <ion-input [(ngModel)]="role.name" *ngIf="edit"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h6>Description</h6>
+      <div *ngIf="!edit">{{role.description}}</div>
+      <ion-input [(ngModel)]="role.description" *ngIf="edit"></ion-input>
+    </ion-col>
+  </ion-row>
+  <!-- </ion-grid>
         <ion-grid *ngIf="role.accessRights"> -->
-      <ion-row>
-        <ion-col size="5">
-          <h6>Category</h6>
-        </ion-col>
-        <ion-col size="6">
-          <h6>Access Right</h6>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="!role.accessRights.length; else access">
-        <ion-col>No access rights added yet</ion-col>
-      </ion-row>
-      <ng-template #access>
-        <ion-row *ngFor="let right of role.rights; let i = index">
-          <ion-col size="5" style="text-transform: capitalize;">
-            {{right.category}}
-          </ion-col>
-          <ion-col size="6" style="text-transform: capitalize;">
-            {{right.nameToShow}}
-          </ion-col>
-          <ion-col size="1" *ngIf="edit">
-            <button mat-icon-button aria-label="Example icon-button with a heart icon"
-              (click)="deleteAccessRight(role,i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ng-template>
-      <ion-row *ngIf="edit">
-        <ion-col size="12">
-          <mat-form-field style="width: 100%;">
-            <mat-label>Category</mat-label>
-            <mat-select [(ngModel)]="select.category" (selectionChange)="changeAccessRights(select.category,'edit')">
-              <mat-option *ngFor="let category of categories" [value]="category.value">
-                {{category.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field style="width: 100%;" *ngIf="select.category">
-            <mat-label>Name</mat-label>
-            <mat-select [(ngModel)]="select.name">
-              <mat-option *ngFor="let right of accessRights" [value]="right.value">
-                {{right.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <ion-button [disabled]="!(select.category&&select.name)" (click)="addAccessRight(select,role)">Add Access Right</ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="edit">
-        <ion-col>
-          <ion-button (click)="updateRole(role)">Update Role</ion-button>
-          <ion-button (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
-        </ion-col>
-      </ion-row>
-      <mat-divider></mat-divider>
-    </ion-grid>
-    <ion-grid *ngIf="edit&&adding">
-      <ion-row>
-        <ion-col size="12">
-          <h6>Name</h6>
-          <ion-input [(ngModel)]="roleToAdd.name"></ion-input>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="5">
-          <h6>Category</h6>
-        </ion-col>
-        <ion-col size="6">
-          <h6>AccessRight</h6>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="!roleToAdd.accessRights.length; else accessRights">
-        <ion-col>No access rights added yet</ion-col>
-      </ion-row>
-      <ng-template #accessRights>
-        <ion-row *ngFor="let right of roleToAdd.rights; let i = index">
-          <ion-col size="5" style="text-transform: capitalize;">
-            {{right.category}}
-          </ion-col>
-          <ion-col size="6" style="text-transform: capitalize;">
-            {{right.nameToShow}}
-          </ion-col>
-          <ion-col size="1" *ngIf="edit">
-            <button mat-icon-button aria-label="Example icon-button with a heart icon"
-              (click)="deleteAccessRight(roleToAdd,i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ng-template>
-      <ion-row>
-        <ion-col size="12">
-          <mat-form-field style="width: 100%;">
-            <mat-label>Category</mat-label>
-            <mat-select [(ngModel)]="selectRoleToAdd.category"
-              (selectionChange)="changeAccessRights(selectRoleToAdd.category,'add')">
-              <mat-option *ngFor="let category of categories" [value]="category.value">
-                {{category.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field style="width: 100%;" *ngIf="selectRoleToAdd.category">
-            <mat-label>Name</mat-label>
-            <mat-select [(ngModel)]="selectRoleToAdd.name">
-              <mat-option *ngFor="let right of addingAccessRights" [value]="right.value">
-                {{right.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <ion-button [disabled]="!(selectRoleToAdd.category&&selectRoleToAdd.name)"
-            (click)="addSelectedRoleAddAccessRight(selectRoleToAdd,roleToAdd)">Add Access Right</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-grid *ngIf="edit">
-      <ion-row>
-        <ion-col>
-          <ion-button *ngIf="adding" (click)="sendAddRoleRequest(roleToAdd)">Submit</ion-button>
-          <ion-button (click)="addRole()">{{adding?"Cancel":"Add Role"}}</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  <!-- </mat-expansion-panel> -->
+  <ion-row>
+    <ion-col size="5">
+      <h6>Category</h6>
+    </ion-col>
+    <ion-col size="6">
+      <h6>Access Right</h6>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!role.accessRights.length; else access">
+    <ion-col>No access rights added yet</ion-col>
+  </ion-row>
+  <ng-template #access>
+    <ion-row *ngFor="let right of role.rights; let i = index">
+      <ion-col size="5" style="text-transform: capitalize;">
+        {{right.category}}
+      </ion-col>
+      <ion-col size="6" style="text-transform: capitalize;">
+        {{right.nameToShow}}
+      </ion-col>
+      <ion-col size="1" *ngIf="edit">
+        <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteAccessRight(role,i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  <ion-row *ngIf="edit">
+    <ion-col size="12">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="select.category" (selectionChange)="changeAccessRights(select.category,'edit')">
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+            {{category.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 100%;" *ngIf="select.category">
+        <mat-label>Name</mat-label>
+        <mat-select [(ngModel)]="select.name">
+          <mat-option *ngFor="let right of accessRights" [value]="right.value">
+            {{right.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ion-button [disabled]="!(select.category&&select.name)" (click)="addAccessRight(select,role)">Add Access Right
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="edit">
+    <ion-col>
+      <ion-button (click)="updateRole(role)">Update Role</ion-button>
+      <ion-button (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
+    </ion-col>
+  </ion-row>
+  <mat-divider></mat-divider>
+</ion-grid>
+<ion-grid *ngIf="edit&&adding">
+  <ion-row>
+    <ion-col size="12">
+      <h6>Name</h6>
+      <ion-input [(ngModel)]="roleToAdd.name"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="5">
+      <h6>Category</h6>
+    </ion-col>
+    <ion-col size="6">
+      <h6>AccessRight</h6>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!roleToAdd.accessRights.length; else accessRights">
+    <ion-col>No access rights added yet</ion-col>
+  </ion-row>
+  <ng-template #accessRights>
+    <ion-row *ngFor="let right of roleToAdd.rights; let i = index">
+      <ion-col size="5" style="text-transform: capitalize;">
+        {{right.category}}
+      </ion-col>
+      <ion-col size="6" style="text-transform: capitalize;">
+        {{right.nameToShow}}
+      </ion-col>
+      <ion-col size="1" *ngIf="edit">
+        <button mat-icon-button aria-label="Example icon-button with a heart icon"
+          (click)="deleteAccessRight(roleToAdd,i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  <ion-row>
+    <ion-col size="12">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="selectRoleToAdd.category"
+          (selectionChange)="changeAccessRights(selectRoleToAdd.category,'add')">
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+            {{category.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 100%;" *ngIf="selectRoleToAdd.category">
+        <mat-label>Name</mat-label>
+        <mat-select [(ngModel)]="selectRoleToAdd.name">
+          <mat-option *ngFor="let right of addingAccessRights" [value]="right.value">
+            {{right.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ion-button [disabled]="!(selectRoleToAdd.category&&selectRoleToAdd.name)"
+        (click)="addSelectedRoleAddAccessRight(selectRoleToAdd,roleToAdd)">Add Access Right</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid *ngIf="edit">
+  <ion-row>
+    <ion-col>
+      <ion-button *ngIf="adding" (click)="sendAddRoleRequest(roleToAdd)">Submit</ion-button>
+      <ion-button (click)="addRole()">{{adding?"Cancel":"Add Role"}}</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- </mat-expansion-panel> -->
 <!-- </mat-accordion> -->
 <!-- </ion-card-content>
 </ion-card> -->

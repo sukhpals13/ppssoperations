@@ -83,7 +83,8 @@ export class ClientUserGroupsComponent implements OnInit {
   addUserGroup(group) {
     this.addingGroup = false;
     const reqBody = {
-      name: group.name
+      name: group.name,
+      description: group.description
     };
     let clientId = this.id;
     console.log('nameeeeee', reqBody);
@@ -113,7 +114,7 @@ export class ClientUserGroupsComponent implements OnInit {
     });
     const alert = await this.alertController.create({
       header: "Are you sure ?",
-      message: "Are you sure you want to delete this user group ?",
+      message: "Are you sure you want to update this user group ?",
       buttons: [{
         text: 'Yes',
         handler: (blah) => {
@@ -121,7 +122,8 @@ export class ClientUserGroupsComponent implements OnInit {
 
           this.addingGroup = true;
           const reqBody = {
-            name: group.name
+            name: group.name,
+            description: group.description
           };
           let clientId = this.id;
           let groupId = group._id;
@@ -194,7 +196,7 @@ export class ClientUserGroupsComponent implements OnInit {
   // add group user row
   addContactRow() {
     this.add = true;
-    this.clientUserGroup.push({ name: '' });
+    this.clientUserGroup.push({ name: '', description: '' });
   }
 
 }
