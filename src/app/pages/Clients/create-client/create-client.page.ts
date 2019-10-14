@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PostDetailsService } from '../../../services/postDetails/post-details.service';
 import { NavController, AlertController } from '@ionic/angular';
 
+interface client {
+  name: string;
+}
+
 @Component({
   selector: 'app-create-client',
   templateUrl: './create-client.page.html',
@@ -10,7 +14,7 @@ import { NavController, AlertController } from '@ionic/angular';
 export class CreateClientPage implements OnInit {
 
   // public name: string;
-  public client: Object;
+  public client: client;
 
   constructor(
     public postDetails: PostDetailsService,

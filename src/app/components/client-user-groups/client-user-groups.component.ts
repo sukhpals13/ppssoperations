@@ -97,6 +97,7 @@ export class ClientUserGroupsComponent implements OnInit {
         if(this.clientUserGroup.length>0){
           this.noDataSend.emit({noGroupData:false})
         }
+        this.addingGroup = true;
       }, err => {
         console.log(err);
         this.addingGroup = true;

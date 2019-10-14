@@ -127,7 +127,7 @@ export class ClientDetailsPage implements OnInit {
     this.zone.run(() => {
       console.log(this.client);
       let flag = true;
-      if(this.client.customizations.agencyOrderAllowShippingAddress==undefined || this.client.customizations.agencyOrderAllowShippingAddress==false){
+      if(this.client.customizations.agencyOrderAllowShippingAddress==false){
         if(!this.client.customizations.agencyOrderShippingText){
           flag = false
         }

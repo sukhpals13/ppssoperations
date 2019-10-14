@@ -11,7 +11,7 @@
 
 <ion-content>
   <mat-accordion id="client-info">
-    <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel [expanded]="true" [disabled]="editMode">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Client Information
@@ -70,7 +70,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel [disabled]="editMode">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Customization

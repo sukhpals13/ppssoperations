@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 export interface DialogData {
   animal: string;
   name: string;
+  // searchText: string;
 };
 
 @Component({

@@ -28,7 +28,7 @@
         <ion-col *ngIf="edit" size-md="6" size-xs="12">
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
-        <ion-col size-md="12" size-xs="12" class="ion-no-padding">
+        <ion-col size-md="12" size-xs="12" class="ion-no-padding" *ngIf="edit||group.description">
             <ion-row>
               <ion-col size-md="6" size-xs="12"><strong>Description</strong></ion-col>
               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
@@ -41,7 +41,7 @@
           </ion-col>
         <ion-col size-md="12" size-xs="12" class="ion-text-right ion-no-padding">
           <ion-button *ngIf="!group._id && edit" (click)="addUserGroup(group)"
-            [attr.disabled]="group.name ? null : '' " [disabled]="addingGroup">
+            [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
             <!-- <mat-icon title="Add new Group">add_circle_outline</mat-icon> -->
             Add
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>

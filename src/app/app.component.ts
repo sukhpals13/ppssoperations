@@ -132,6 +132,7 @@ export class AppComponent {
       .events
       .subscribe(
         (event) => {
+          this.splashScreen.hide();
           if (event instanceof NavigationStart) {
                 let token = localStorage.getItem('token'),
                 user = localStorage.getItem('user');
@@ -219,7 +220,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // this.statusBar.overlaysWebView(true);
       this.statusBar.styleLightContent()
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
     });
   }
 

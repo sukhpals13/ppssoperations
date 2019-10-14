@@ -18,7 +18,7 @@
       <ion-input [(ngModel)]="role.name" *ngIf="edit"></ion-input>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row *ngIf="edit||role.description">
     <ion-col size="12">
       <h6>Description</h6>
       <div *ngIf="!edit">{{role.description}}</div>
@@ -91,13 +91,21 @@
     </ion-col>
   </ion-row>
   <ion-row>
+    <ion-col size="12">
+      <h6>Description</h6>
+      <ion-input [(ngModel)]="roleToAdd.description"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
     <ion-col size="5">
       <h6>Category</h6>
     </ion-col>
+    
     <ion-col size="6">
       <h6>AccessRight</h6>
     </ion-col>
   </ion-row>
+  
   <ion-row *ngIf="!roleToAdd.accessRights.length; else accessRights">
     <ion-col>No access rights added yet</ion-col>
   </ion-row>
