@@ -29,8 +29,9 @@ export class SearchUserPage implements OnInit {
 
   ngOnInit() {
     this.users = {
-      name: null,
-      UserNumber: null,
+      firstName: null,
+      lastName: null,
+      email: null,
       users: [],
       isShell: true,
       
@@ -45,8 +46,9 @@ export class SearchUserPage implements OnInit {
     var i =0;
     while(i<6){
       var obj = {
-        name: null,
-        UserNumber: null,
+        firstName: null,
+        lastName: null,
+        email: null,
         isShell: true
       };
       this.users.users.push(obj);
@@ -55,15 +57,21 @@ export class SearchUserPage implements OnInit {
   }
 
   getUsersList(phrase){
+    this.searchSubmitted = true;
     this.initializeData();
     this.getDetailsService.getAllUsers(phrase).subscribe(res =>
       {
-        this.searchSubmitted = true;
+        this.searchSubmitted = false;
         this.users = res;
+        // this.users.users = this.users.users.map(el=>{
+        //   el['email'] = el['email']|| 'N/A';
+        //   return el;
+        // }) 
     },
     (err)=>{
       this.users.users = [];
       console.log(err);
+      this.searchSubmitted = false;
     }
     
     )

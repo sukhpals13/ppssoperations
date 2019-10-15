@@ -42,7 +42,7 @@
                 <app-text-shell animation="bouncing" lines="2" [data]="user.lastName"></app-text-shell>
               </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row *ngIf="user.email">
               <ion-col size-md="6" size-xs="12">
                 <h6>Email</h6>
                 <app-text-shell animation="bouncing" lines="1" [data]="user.email"></app-text-shell>

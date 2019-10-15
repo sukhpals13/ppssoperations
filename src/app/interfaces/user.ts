@@ -10,13 +10,17 @@ export interface User {
 }
 
 export class UsersModel extends ShellModel {
-    UserNumber: number;
-    name: string;
+    // UserNumber: number;
+    firstName: string;
+    lastName: string;
+    email: string;
 }
 
 export class UsersListModel extends ShellModel {
-    UserNumber: number;
-    name: string;
+    // UserNumber: number;
+    firstName: string;
+    lastName: string;
+    email: string;
     users: Array<UsersModel>;
 }
 
