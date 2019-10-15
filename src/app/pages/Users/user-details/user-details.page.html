@@ -9,7 +9,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-content>
 <ion-grid>
   <mat-accordion>
     <mat-expansion-panel class="ml-0">
@@ -111,8 +111,19 @@
         <ion-col size="12">
           <h5>Roles</h5>
           <div *ngFor="let roles of clientinfo.roles">
-            <div *ngIf="!editMode">
-              <app-text-shell animation="bouncing" lines="1" [data]="roles"></app-text-shell>
+            <div class="row-info">
+              <ion-row>
+                <ion-col size="9">
+                  <app-text-shell animation="bouncing" lines="1" [data]="roles"></app-text-shell>
+                </ion-col>
+                <ion-col *ngIf="editMode && roles.length" size="3" class="ion-text-right">
+                  <button class="delete"><mat-icon>delete</mat-icon></button>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div *ngIf="editMode && roles.length">
+                <ion-input placeholder="Add Roles"></ion-input>
+                <ion-button >Add</ion-button>
             </div>
           </div>
         </ion-col>
@@ -121,8 +132,19 @@
         <ion-col size="12">
           <h5>Ranks</h5>
           <div *ngFor="let ranks of clientinfo.ranks">
-            <div *ngIf="!editMode">
-              <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+            <div class="row-info">
+              <ion-row>
+                <ion-col size="9">
+                  <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+                </ion-col>
+                <ion-col *ngIf="editMode && ranks.length" size="3" class="ion-text-right">
+                  <button class="delete"><mat-icon>delete</mat-icon></button>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div *ngIf="editMode && ranks.length">
+                <ion-input placeholder="Add Ranks"></ion-input>
+                <ion-button >Add</ion-button>
             </div>
           </div>
         </ion-col>
@@ -132,10 +154,16 @@
           <h5>Assignments</h5>
           <div *ngFor="let assignments of clientinfo.assignments;let i = index">
             <div class="row-info">
-              <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
-              <button class="delete" *ngIf="editMode"><mat-icon>delete</mat-icon></button>
+              <ion-row>
+                <ion-col size="9">
+                  <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
+                </ion-col>
+                <ion-col *ngIf="editMode && assignments.length" size="3" class="ion-text-right">
+                  <button class="delete"><mat-icon>delete</mat-icon></button>
+                </ion-col>
+              </ion-row>
             </div>
-            <div *ngIf="editMode">
+            <div *ngIf="editMode && assignments.length">
                 <ion-input placeholder="Add Assingments"></ion-input>
                 <ion-button >Add</ion-button>
             </div>
@@ -153,3 +181,4 @@
     </ion-card>
   </mat-accordion>
 </ion-grid>
+</ion-content>
