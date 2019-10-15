@@ -17,7 +17,7 @@ export class UserDetailsPage implements OnInit {
   public loader: boolean;
   public addRankValue: string;
   public addAssignmentValue: string;
-  public addRoles: string;
+  public addRoleValue: string;
 
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -38,7 +38,7 @@ export class UserDetailsPage implements OnInit {
     this.loader = false;
     this.addRankValue = '';
     this.addAssignmentValue='';
-    this.addRoles='';
+    this.addRoleValue='';
 
     this.user = {
       name: null,
@@ -152,10 +152,7 @@ export class UserDetailsPage implements OnInit {
 
   // add ranks
   addRank(rank){
-     console.log('function calling',rank);
-     console.log('this user', this.user);
      this.user.user.clientLinks[0].ranks.push(rank);
-    //  this.editMode = false;
     this.addRankValue = "";
   }
 
@@ -164,19 +161,27 @@ export class UserDetailsPage implements OnInit {
     this.user.user.clientLinks[0].ranks.splice(index,1);
   }
 
-  // add ranks
-  addAssignments(rank){
-    console.log('function calling',rank);
-    console.log('this user', this.user);
-    this.user.user.clientLinks[0].assignments.push(rank);
-   //  this.editMode = false;
+  // add assignments
+  addAssignments(assignment){
+    this.user.user.clientLinks[0].assignments.push(assignment);
    this.addAssignmentValue = "";
  }
 
- // delete rank
+ // delete assignments
  deleteAssignment(index){
    this.user.user.clientLinks[0].assignments.splice(index,1);
  }
+
+ //add Roles
+ addNewRoles(role){
+  this.user.user.userRoles.push({roleId:role});
+ this.addRoleValue = "";
+}
+
+//delete Roles
+deleteRoles(index){
+  this.user.user.userRoles.splice(index,1);
+}
 
 
 async editToggle() {

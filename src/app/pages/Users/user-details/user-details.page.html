@@ -180,24 +180,24 @@
      <div *ngFor="let userRoles of user.user.userRoles">
       <ion-row>
         <ion-col size="12">
-          <h6>Role Name</h6>
+          <h6>Role ID</h6>
           <div class="row-info">
             <ion-row>
               <ion-col size="10" class="ion-no-padding">
                 <app-text-shell animation="bouncing" lines="1" [data]="userRoles.roleId"></app-text-shell>
               </ion-col>
               <ion-col *ngIf="editMode && userRoles" size="2" class="ion-text-right ion-no-padding">
-                <button class="delete"><mat-icon>delete</mat-icon></button>
+                <button class="delete" (click)="deleteRoles(i)"><mat-icon>delete</mat-icon></button>
               </ion-col>
             </ion-row>
-          </div>
-          <div *ngIf="editMode && userRoles">
-              <ion-input placeholder="Add Role"></ion-input>
-              <ion-button >Add</ion-button>
           </div>
         </ion-col>
       </ion-row>
      </div>
+     <div *ngIf="editMode">
+      <ion-input [(ngModel)]="addRoleValue" placeholder="Add Role"></ion-input>
+      <ion-button (click)="addNewRoles(addRoleValue)">Add</ion-button>
+  </div>
      </mat-expansion-panel>
      <!-- User roles section end -->
     <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
