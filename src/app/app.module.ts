@@ -29,6 +29,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 import { IonicStorageModule } from '@ionic/storage';
 
+import {FileUploadModule} from 'ng2-file-upload';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as cloudinary from 'cloudinary-core';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +47,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AuthModule,
     IonicStorageModule.forRoot(),
+    FileUploadModule,
+    CloudinaryModule.forRoot(cloudinary, { cloud_name: 'dkqbcwlev', upload_preset: 'mkxkglld'}),
   ],
   providers: [
     StatusBar,
