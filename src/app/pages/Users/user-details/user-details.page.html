@@ -10,171 +10,146 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card id="user-info">
-    <ion-card-header color="primary">
-      <ion-card-subtitle>User Information</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <div>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12">
-              <h6>First Name</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
-                <span>{{user.user.firstName}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="user.user.firstName"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h6>Last Name</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.lastName"></app-text-shell> -->
-                <span>{{user.user.lastName}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="user.user.lastName"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h6>Email</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.email"></app-text-shell> -->
-                <span>{{user.user.email}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="user.user.email"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h6>Username</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.username"></app-text-shell> -->
-                <span>{{user.user.username}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="user.user.username"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h6>Mobile Phone</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.email"></app-text-shell> -->
-                <span>{{user.user.mobilePhoneNumber}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="user.user.mobilePhoneNumber"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h6>Last Updated</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.email"></app-text-shell> -->
-                <span>{{user.user.updated}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="user.user.updated"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          
-        </ion-grid>
-      </div>
-    </ion-card-content>
-  </ion-card>
+<ion-grid>
+  <mat-accordion>
+    <mat-expansion-panel class="ml-0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>User Information</mat-panel-title>
+     </mat-expansion-panel-header>
+     <div>
+     <ion-row>
+      <ion-col size="12">
+        <h6>First Name</h6>
+        <div *ngIf="!editMode">
+          <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell>
+        </div>
+        <div *ngIf="editMode">
+          <ion-input [(ngModel)]="user.user.firstName"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <h6>Last Name</h6>
+        <div *ngIf="!editMode">
+          <app-text-shell animation="bouncing" lines="1" [data]="user.user.lastName"></app-text-shell>
+        </div>
+        <div *ngIf="editMode">
+          <ion-input [(ngModel)]="user.user.lastName"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <h6>Email</h6>
+        <div *ngIf="!editMode">
+          <app-text-shell animation="bouncing" lines="1" [data]="user.user.email"></app-text-shell>
+        </div>
+        <div *ngIf="editMode">
+          <ion-input [(ngModel)]="user.user.email"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <h6>Username</h6>
+        <div *ngIf="!editMode">
+          <app-text-shell animation="bouncing" lines="1" [data]="user.user.username"></app-text-shell>
+        </div>
+        <div *ngIf="editMode">
+          <ion-input [(ngModel)]="user.user.username"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <h6>Mobile Phone</h6>
+        <div *ngIf="!editMode">
+          <app-text-shell animation="bouncing" lines="1" [data]="user.user.mobilePhoneNumber"></app-text-shell>
+        </div>
+        <div *ngIf="editMode">
+          <input [(ngModel)]="user.user.mobilePhoneNumber" class="phoneInput" type = "text" [textMask]="{mask: phoneNumberMask}"/>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!editMode">
+      <ion-col size="12">
+        <h6>Last Updated</h6>
+        <div>
+          <app-text-shell animation="bouncing" lines="1" [data]="user.user.updated"></app-text-shell>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+    </mat-expansion-panel>
 
-  <ion-card id="client-links">
-    <ion-card-header color="primary">
-      <ion-card-subtitle>Client Links</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <div>
-        <ion-grid *ngFor="let clientinfo of user.user.clientLinks">
-          <ion-row>
-            <ion-col size="12">
-              <h6>Organization Name</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
-                <span>{{clientinfo.orgName}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="clientinfo.orgName"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h6>Client Id</h6>
-              <div *ngIf="!editMode">
-                <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
-                <span>{{clientinfo.clientId}}</span>
-              </div>
-              <div *ngIf="editMode">
-                <ion-input [(ngModel)]="clientinfo.clientId"></ion-input>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h3>Roles</h3>
-              <div *ngFor="let roles of clientinfo.roles">
-                <div *ngIf="!editMode">
-                  <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
-                  <span>{{roles}}</span>
-                </div>
-                <!-- <div *ngIf="editMode">
-                  <ion-input [(ngModel)]="clientinfo.clientId"></ion-input>
-                </div> -->
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h3>Ranks</h3>
-              <div *ngFor="let ranks of clientinfo.ranks">
-                <div *ngIf="!editMode">
-                  <!-- <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell> -->
-                  <span>{{ranks}}</span>
-                </div>
-                <!-- <div *ngIf="editMode">
-                  <ion-input [(ngModel)]="clientinfo.clientId"></ion-input>
-                </div> -->
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <h3>Assignments</h3>
-              <div *ngFor="let assignments of clientinfo.assignments;let i = index">
-                <div class="row-info">
-                  <span>{{assignments}}</span> 
-                  <button class="delete" *ngIf="editMode"><mat-icon>delete</mat-icon></button>
-                </div>
-                <div *ngIf="editMode">
-                    <ion-input placeholder="Add Assingments"></ion-input>
-                    <ion-button >Add</ion-button>
-                </div>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </ion-card-content>
-  </ion-card>
-  <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
-    <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
-  </ion-card>
-</ion-content>
+    <mat-expansion-panel class="ml-0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Client Links</mat-panel-title>
+     </mat-expansion-panel-header>
+     <div *ngFor="let clientinfo of user.user.clientLinks">
+      <ion-row>
+        <ion-col size="12">
+          <h6>Organization Name</h6>
+          <div *ngIf="!editMode">
+            <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.orgName"></app-text-shell>
+          </div>
+          <div *ngIf="editMode">
+            <ion-input [(ngModel)]="clientinfo.orgName"></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!editMode">
+        <ion-col size="12">
+          <h6>Client Id</h6>
+          <div>
+            <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.clientId"></app-text-shell>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <h5>Roles</h5>
+          <div *ngFor="let roles of clientinfo.roles">
+            <div *ngIf="!editMode">
+              <app-text-shell animation="bouncing" lines="1" [data]="roles"></app-text-shell>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <h5>Ranks</h5>
+          <div *ngFor="let ranks of clientinfo.ranks">
+            <div *ngIf="!editMode">
+              <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <h5>Assignments</h5>
+          <div *ngFor="let assignments of clientinfo.assignments;let i = index">
+            <div class="row-info">
+              <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
+              <button class="delete" *ngIf="editMode"><mat-icon>delete</mat-icon></button>
+            </div>
+            <div *ngIf="editMode">
+                <ion-input placeholder="Add Assingments"></ion-input>
+                <ion-button >Add</ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+     </div>
+     </mat-expansion-panel>
+    <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
+      <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
+    </ion-card>
+    <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="editMode">
+      <ion-button (click)="updateUserDetail(user.user)">Save</ion-button>
+      <ion-button (click)="cancelUserUpdate(user.user)">Cancel</ion-button>
+    </ion-card>
+  </mat-accordion>
+</ion-grid>

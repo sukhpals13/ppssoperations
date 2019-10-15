@@ -3,10 +3,15 @@ import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { ShellModule } from '../../../shell/shell.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { IonicModule } from '@ionic/angular';
 
 import { UserDetailsPage } from './user-details.page';
+
+// phone number masking
+import { TextMaskModule } from 'angular2-text-mask';
 
 const routes: Routes = [
   {
@@ -21,6 +26,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     MatIconModule,
+    TextMaskModule,
+    ShellModule,
+    MatExpansionModule,
+
     RouterModule.forChild(routes)
   ],
   declarations: [UserDetailsPage]

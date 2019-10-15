@@ -87,10 +87,16 @@ addClientUserGroup(clientId,name){
   return this.http.put<any>(url,name)
   }
   
-  // aUpdate client user group
+  // Update client user group
   updateClientUserGroup(clientId,groupId,name){
   let url = config.hostName+"/api/client/clientUserGroups/"+clientId+'/'+groupId;
   return this.http.post<any>(url,name)
   }
+
+  // Update user details
+  updateUser(userId,postBody){
+    let url = config.hostName+"/api/user/update/"+userId;
+    return this.http.post<any>(url,postBody)
+    }
 
 }

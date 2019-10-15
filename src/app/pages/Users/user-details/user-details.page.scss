@@ -12,3 +12,52 @@ ion-input{
     margin-bottom:5px;
     .delete{margin-left:10px;padding:0;background:none;vertical-align: middle}
  }
+
+
+ :host ::ng-deep {
+    // app-client-customizations,app-client-billing-details,app-client-contact-details,app-client-user-roles,app-client-user-groups{
+        mat-expansion-panel {
+            margin-left:16px;
+            margin-right:16px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            mat-expansion-panel-header {
+                background: #1c1c1c;
+                max-height:48px !important;
+                mat-panel-title{
+                    color: #fff !important;
+                }
+                .mat-expansion-indicator{
+                    ::after{
+                        color: #fff;
+                        padding: 5px;
+                    }
+                }
+            }
+        }
+        mat-expansion-panel:first-child,.mat-accordion>.mat-expansion-panel-spacing:first-child {
+            margin-top: 20px;
+        }
+        .mat-expansion-indicator::after{
+            color: #fff;
+            padding: 5px;
+        }
+    // }
+    @media (hover: none){
+        .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover{
+            background: #1c1c1c;
+        }
+        .mat-expansion-panel:not(.mat-expanded)[aria-disabled=true] .mat-expansion-panel-header:hover{
+            background: grey;
+        }
+    }
+    .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover{
+        background: #1c1c1c;
+    }
+    .mat-expansion-panel-header[aria-disabled=true] {
+        background-color: grey;
+    }
+}
+ion-grid{
+    width:100%;
+}

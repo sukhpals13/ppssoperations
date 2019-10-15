@@ -6,6 +6,13 @@ ion-button{
   height: 38px;
   font-size: 15px;
 }
+.phoneInput{
+  padding: 9px 5px !important;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  border-radius: 3px;
+  width: 100%;
+}
 .singleQtyStatus .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
   @media (max-width:767px){
       line-height: 40px;

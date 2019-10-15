@@ -1,5 +1,6 @@
 import { Component, OnInit, NgZone, HostBinding, Input } from '@angular/core';
 import { GetDetailsService } from '../../../services/getDetails/get-details.service';
+import { PostDetailsService } from '../../../services/postDetails/post-details.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 
@@ -13,6 +14,9 @@ export class UserDetailsPage implements OnInit {
   public editMode: boolean;
   public userId: string;
   public user: any;
+  public loader: boolean;
+
+  public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.user && this.user.isShell) ? true : false;
@@ -20,6 +24,7 @@ export class UserDetailsPage implements OnInit {
 
   constructor(
     private getDetailsService: GetDetailsService,
+    private postDetailService: PostDetailsService,
     private _Activatedroute: ActivatedRoute,
     public zone: NgZone,
     public alertController: AlertController,
@@ -27,6 +32,7 @@ export class UserDetailsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loader = false;
 
     this.user = {
       name: null,
@@ -71,12 +77,71 @@ export class UserDetailsPage implements OnInit {
   }
 
 
-  // get user details
+  async alertPopup(title, msg) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: msg,
+      buttons: [{
+        text: 'Okay'
+      }]
+    });
+    await alert.present();
+  }
 
-  
 
 
-  async editToggle() {
+  async updateUserDetail(user) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alertController.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to update this user information ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+
+          // this.addingGroup = true;
+          let userId = user._id;
+          let postBody = {
+            email: user.email ,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            mobilePhoneNumber: user.mobilePhoneNumber,
+          }
+          return this.postDetailService.updateUser(userId, postBody)
+            .subscribe(res => {
+              console.log('Update user info response', res);
+              loading.dismiss();
+              this.alertPopup("Updated", 'Client User Group updated successfully');
+              this.viewUserDetails(user);
+              this.editMode = false;
+            }, err => {
+              console.log(err);
+              loading.dismiss();
+              this.alertPopup("Error", JSON.stringify(err.error.message));
+            })
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          // this.openSearchClient();
+        }
+      }]
+    });
+    alert.present()
+  }
+
+  // cancel user update
+  cancelUserUpdate(){
+    this.editMode = false;
+    this.viewUserDetails(this.user);
+
+  }
+
+async editToggle() {
     
     this.zone.run(() => {
       let flag = true;
