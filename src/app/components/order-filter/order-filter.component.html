@@ -2,7 +2,7 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>Status</mat-label>
-        <mat-select [(value)]="data.status">
+        <mat-select [(ngModel)]="object.status" [(value)]="data.status">
             <mat-option *ngFor="let stat of statusTypeArray" [value]="stat">
                 {{stat}}
             </mat-option>
@@ -10,7 +10,7 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>SubStatus</mat-label>
-        <mat-select [(value)]="data.subStatus">
+        <mat-select [(ngModel)]="object.subStatus" [(value)]="data.subStatus">
             <mat-option *ngFor="let stat of subStatusTypeArray" [value]="stat">
                 {{stat}}
             </mat-option>

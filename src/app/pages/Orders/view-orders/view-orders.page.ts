@@ -16,6 +16,10 @@ import { OrderFilterComponent } from '../../../components/order-filter/order-fil
 })
 export class ViewOrdersPage implements OnInit {
 
+  errorMessage ={
+    status: "string",
+    subStatus:"string"
+  }
   orders : OrdersToPickModel;
   Arr = Array; //Array type captured in a variable
   num:number = 6;
@@ -78,6 +82,7 @@ export class ViewOrdersPage implements OnInit {
     this.getDetailsService.getAllOrders(data)
     .subscribe(res=>{
       console.log(res);
+
       this.orders = res;
     },err=>{
       console.log(err);
@@ -93,11 +98,13 @@ export class ViewOrdersPage implements OnInit {
       width: '250px',
       data: this.filter
     });
-    dialogRef.afterClosed().subscribe(data => {
+    dialogRef.afterClosed().subscribe(object => {
       // console.log('The dialog was closed',data);
-      if(data){
+      if(object){
+        this.errorMessage.status = object.status;
+         this.errorMessage.subStatus = object.subStatus;
         this.initializeData();
-        this.getOrders(data);
+        this.getOrders(object);
       }
     });
   }

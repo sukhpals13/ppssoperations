@@ -10,6 +10,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class OrderFilterComponent implements OnInit {
   public statusTypeArray : Array<string>;
   public subStatusTypeArray : Array<string>;
+  public object = { status: "",
+substatus:""}
 
   constructor(
     public dialogRef: MatDialogRef<OrderFilterComponent>,
@@ -17,7 +19,8 @@ export class OrderFilterComponent implements OnInit {
   ) { }
 
   onCancelClick(): void {
-    this.dialogRef.close();
+
+    this.dialogRef.close(this.object);
   }
 
   ngOnInit() {
