@@ -16,11 +16,14 @@ substatus:""}
   constructor(
     public dialogRef: MatDialogRef<OrderFilterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {
+    this.object.status = data.status;
+    this.object.substatus = data.subStatus;
+   }
 
   onCancelClick(): void {
 
-    this.dialogRef.close(this.object);
+    this.dialogRef.close();
   }
 
   ngOnInit() {
