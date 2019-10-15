@@ -72,7 +72,7 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="!editMode">
+    <ion-row>
       <ion-col size="12">
         <h6>Last Updated</h6>
         <div>
@@ -99,7 +99,7 @@
           </div>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="!editMode">
+      <ion-row>
         <ion-col size="12">
           <h6>Client Id</h6>
           <div>
@@ -131,22 +131,22 @@
       <ion-row>
         <ion-col size="12">
           <h5>Ranks</h5>
-          <div *ngFor="let ranks of clientinfo.ranks">
+          <div *ngFor="let ranks of clientinfo.ranks; let i =index;">
             <div class="row-info">
               <ion-row>
                 <ion-col size="9">
                   <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
                 </ion-col>
                 <ion-col *ngIf="editMode && ranks.length" size="3" class="ion-text-right">
-                  <button class="delete"><mat-icon>delete</mat-icon></button>
+                  <button class="delete" (click)="deleteRank(i)"><mat-icon>delete</mat-icon></button>
                 </ion-col>
               </ion-row>
             </div>
-            <div *ngIf="editMode && ranks.length">
-                <ion-input placeholder="Add Ranks"></ion-input>
-                <ion-button >Add</ion-button>
-            </div>
           </div>
+          <div *ngIf="editMode">
+            <ion-input [(ngModel)]="addRankValue" placeholder="Add Ranks"></ion-input>
+            <ion-button (click)="addRank(addRankValue)">Add</ion-button>
+        </div>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -159,15 +159,15 @@
                   <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
                 </ion-col>
                 <ion-col *ngIf="editMode && assignments.length" size="3" class="ion-text-right">
-                  <button class="delete"><mat-icon>delete</mat-icon></button>
+                  <button class="delete" (click)="deleteAssignment(i)"><mat-icon>delete</mat-icon></button>
                 </ion-col>
               </ion-row>
             </div>
-            <div *ngIf="editMode && assignments.length">
-                <ion-input placeholder="Add Assingments"></ion-input>
-                <ion-button >Add</ion-button>
-            </div>
           </div>
+          <div *ngIf="editMode">
+            <ion-input [(ngModel)]="addAssignmentValue" placeholder="Add Assingments"></ion-input>
+            <ion-button (click)="addAssignments(addAssignmentValue)">Add</ion-button>
+        </div>
         </ion-col>
       </ion-row>
      </div>
@@ -178,17 +178,25 @@
         <mat-panel-title>User Roles</mat-panel-title>
      </mat-expansion-panel-header>
      <div *ngFor="let userRoles of user.user.userRoles">
-      <!-- <ion-row>
+      <ion-row>
         <ion-col size="12">
-          <h6>Organization Name</h6>
-          <div *ngIf="!editMode">
-            <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.orgName"></app-text-shell>
+          <h6>Role Name</h6>
+          <div class="row-info">
+            <ion-row>
+              <ion-col size="10" class="ion-no-padding">
+                <app-text-shell animation="bouncing" lines="1" [data]="userRoles.roleId"></app-text-shell>
+              </ion-col>
+              <ion-col *ngIf="editMode && userRoles" size="2" class="ion-text-right ion-no-padding">
+                <button class="delete"><mat-icon>delete</mat-icon></button>
+              </ion-col>
+            </ion-row>
           </div>
-          <div *ngIf="editMode">
-            <ion-input [(ngModel)]="clientinfo.orgName"></ion-input>
+          <div *ngIf="editMode && userRoles">
+              <ion-input placeholder="Add Role"></ion-input>
+              <ion-button >Add</ion-button>
           </div>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
      </div>
      </mat-expansion-panel>
      <!-- User roles section end -->

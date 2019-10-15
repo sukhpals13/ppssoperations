@@ -15,6 +15,9 @@ export class UserDetailsPage implements OnInit {
   public userId: string;
   public user: any;
   public loader: boolean;
+  public addRankValue: string;
+  public addAssignmentValue: string;
+  public addRoles: string;
 
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -33,12 +36,18 @@ export class UserDetailsPage implements OnInit {
 
   ngOnInit() {
     this.loader = false;
+    this.addRankValue = '';
+    this.addAssignmentValue='';
+    this.addRoles='';
 
     this.user = {
       name: null,
       UserNumber: null,
       users: [],
       isShell: true,
+      clientLinks:[{
+        ranks:[]
+      }],
       
     };
 
@@ -141,11 +150,39 @@ export class UserDetailsPage implements OnInit {
 
   }
 
+  // add ranks
+  addRank(rank){
+     console.log('function calling',rank);
+     console.log('this user', this.user);
+     this.user.user.clientLinks[0].ranks.push(rank);
+    //  this.editMode = false;
+    this.addRankValue = "";
+  }
+
+  // delete rank
+  deleteRank(index){
+    this.user.user.clientLinks[0].ranks.splice(index,1);
+  }
+
+  // add ranks
+  addAssignments(rank){
+    console.log('function calling',rank);
+    console.log('this user', this.user);
+    this.user.user.clientLinks[0].assignments.push(rank);
+   //  this.editMode = false;
+   this.addAssignmentValue = "";
+ }
+
+ // delete rank
+ deleteAssignment(index){
+   this.user.user.clientLinks[0].assignments.splice(index,1);
+ }
+
+
 async editToggle() {
     
     this.zone.run(() => {
       let flag = true;
-      // if(flag){
         if (this.editMode) {
           if(flag){
             this.editMode = false;
