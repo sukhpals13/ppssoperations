@@ -213,6 +213,8 @@ export class ClientUserRolesComponent implements OnInit {
       loading.dismiss();
     },err=>{
       console.log(err);
+      this.alertPopup('Errpr',JSON.stringify(err.error));
+      loading.dismiss();
     })
   }
 

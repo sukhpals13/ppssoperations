@@ -27,6 +27,12 @@ export class ClientDetailsPage implements OnInit {
   public noRoleData: boolean;
   public gotGroupResponse: boolean;
   public noGroupData: boolean;
+  
+  public editInfo : any;
+  public showOtherSections: boolean;
+  public storedClientInfo: any;
+  public storedCustomizationInfo: any;
+  public storedBillingInfo: any;
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.client && this.client.isShell) ? true : false;
@@ -54,6 +60,17 @@ export class ClientDetailsPage implements OnInit {
     this.noRoleData = false;
     this.gotGroupResponse = true;
     this.noGroupData = false;
+    this.editInfo = {
+      clientInfo: false,
+      clientCustomization: false,
+      ranks: false,
+      assignments: false,
+      billingInfo: false,
+      contacts: false,
+      roles: false,
+      groups: false
+    };
+    this.showOtherSections = true;
   }
 
   initializeClient() {
@@ -82,6 +99,17 @@ export class ClientDetailsPage implements OnInit {
     this.noRoleData = false;
     this.gotGroupResponse = true;
     this.noGroupData = false;
+    this.editInfo = {
+      clientInfo: false,
+      clientCustomization: false,
+      ranks: false,
+      assignments: false,
+      billingInfo: false,
+      contacts: false,
+      roles: false,
+      groups: false
+    };
+    this.showOtherSections = true;
     this.initializeClient();
     this.getClient();
   }
@@ -121,47 +149,104 @@ export class ClientDetailsPage implements OnInit {
     })
   }
 
-  async editToggle() {
-    // let flag = false;
-    
+  async editToggle(type,prevData){
     const loading = await this.loadingController.create({
       message: 'Please wait...',
     });
-    this.zone.run(() => {
-      console.log(this.client);
-      let flag = true;
-      if(this.client.customizations.agencyOrderAllowShippingAddress==false){
-        if(!this.client.customizations.agencyOrderShippingText){
-          flag = false
-        }
-      }
-      // if(flag){
-        if (this.editMode) {
-          if(flag){
-            this.editMode = false;
-            loading.present();
-            this.postDetailsService.updateClient({...this.client})
-              .subscribe(res => {
-                console.log(res);
-                this.handleClientResponse(res);
-                loading.dismiss();
-                this.alertPopup('Updated','Client information updated successfully')
-              }, err => {
-                console.log(err);
-                loading.dismiss();
-                this.alertPopup("Error!!!",JSON.stringify(err));
-              });
-          }else{
-            this.alertPopup('Error!!!','Agency order shipping text required!!!')
-          }
-        } else {
-          this.editMode = true;
-        }
-      // }
-    })
-    // this.editMode = !this.editMode;
+    this.editInfo[type]=!this.editInfo[type]
+    this.showOtherSections = !this.showOtherSections;
+    this.storedClientInfo = {...prevData};
+    this.storedCustomizationInfo = {...prevData.customizations};
+    this.storedBillingInfo = {...prevData.billingInfo};
+    console.log(this.storedCustomizationInfo,'this.storedCustomizationInfo');
 
+    if((type=="clientInfo"||type=="clientCustomization")&&!this.editInfo[type]){
+      loading.present();
+      this.zone.run(() => {
+        console.log(this.client);
+        let flag = true;
+        if(this.client.customizations.agencyOrderAllowShippingAddress==false){
+          if(!this.client.customizations.agencyOrderShippingText){
+            flag = false
+          }
+        }
+        // if(flag){
+          // if (this.editMode) {
+            if(flag){
+              this.editMode = false;
+              this.postDetailsService.updateClient({...this.client})
+                .subscribe(res => {
+                  console.log(res);
+                  this.handleClientResponse(res);
+                  loading.dismiss();
+                  this.alertPopup('Updated','Client information updated successfully')
+                }, err => {
+                  console.log(err);
+                  loading.dismiss();
+                  this.alertPopup("Error!!!",JSON.stringify(err));
+                });
+            }else{
+              loading.dismiss();
+              this.alertPopup('Error!!!','Agency order shipping text required!!!')
+            }
+          // } else {
+          //   this.editMode = true;
+          // }
+        // }
+      })
+    }
   }
+
+  cancelToggle(type){
+    this.editInfo[type]=!this.editInfo[type]
+    this.showOtherSections = !this.showOtherSections;
+    console.log(this.storedCustomizationInfo,'this.storedCustomizationInfo');
+    this.client = {...this.storedClientInfo};
+    this.client.customizations = {...this.storedCustomizationInfo};
+    this.client.billingInfo = {...this.storedBillingInfo};
+  }
+  
+  // async editToggle() {
+  //   // let flag = false;
+    
+  //   const loading = await this.loadingController.create({
+  //     message: 'Please wait...',
+  //   });
+    // this.zone.run(() => {
+    //   console.log(this.client);
+    //   let flag = true;
+    //   if(this.client.customizations.agencyOrderAllowShippingAddress==false){
+    //     if(!this.client.customizations.agencyOrderShippingText){
+    //       flag = false
+    //     }
+    //   }
+    //   // if(flag){
+    //     if (this.editMode) {
+    //       if(flag){
+    //         this.editMode = false;
+    //         loading.present();
+    //         this.postDetailsService.updateClient({...this.client})
+    //           .subscribe(res => {
+    //             console.log(res);
+    //             this.handleClientResponse(res);
+    //             loading.dismiss();
+    //             this.alertPopup('Updated','Client information updated successfully')
+    //           }, err => {
+    //             console.log(err);
+    //             loading.dismiss();
+    //             this.alertPopup("Error!!!",JSON.stringify(err));
+    //           });
+    //       }else{
+    //         this.alertPopup('Error!!!','Agency order shipping text required!!!')
+    //       }
+    //     } else {
+    //       this.editMode = true;
+    //     }
+    //   // }
+    // })
+  //   // this.editMode = !this.editMode;
+
+  // }
 
   async alertPopup(title, msg) {
     const alert = await this.alertController.create({
