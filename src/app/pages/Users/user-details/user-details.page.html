@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -10,203 +9,211 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-grid>
-  <mat-accordion>
-    <mat-expansion-panel class="ml-0">
-      <mat-expansion-panel-header>
-        <mat-panel-title>User Information</mat-panel-title>
-     </mat-expansion-panel-header>
-     <div>
-     <ion-row>
-      <ion-col size="12">
-        <h6>First Name</h6>
-        <div *ngIf="!editMode">
-          <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell>
-        </div>
-        <div *ngIf="editMode">
-          <ion-input [(ngModel)]="user.user.firstName"></ion-input>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <h6>Last Name</h6>
-        <div *ngIf="!editMode">
-          <app-text-shell animation="bouncing" lines="1" [data]="user.user.lastName"></app-text-shell>
-        </div>
-        <div *ngIf="editMode">
-          <ion-input [(ngModel)]="user.user.lastName"></ion-input>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <h6>Email</h6>
-        <div *ngIf="!editMode">
-          <app-text-shell animation="bouncing" lines="1" [data]="user.user.email"></app-text-shell>
-        </div>
-        <div *ngIf="editMode">
-          <ion-input [(ngModel)]="user.user.email"></ion-input>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <h6>Username</h6>
-        <div *ngIf="!editMode">
-          <app-text-shell animation="bouncing" lines="1" [data]="user.user.username"></app-text-shell>
-        </div>
-        <div *ngIf="editMode">
-          <ion-input [(ngModel)]="user.user.username"></ion-input>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <h6>Mobile Phone</h6>
-        <div *ngIf="!editMode">
-          <app-text-shell animation="bouncing" lines="1" [data]="user.user.mobilePhoneNumber"></app-text-shell>
-        </div>
-        <div *ngIf="editMode">
-          <input [(ngModel)]="user.user.mobilePhoneNumber" class="phoneInput" type = "text" [textMask]="{mask: phoneNumberMask}"/>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <h6>Last Updated</h6>
-        <div>
-          <app-text-shell animation="bouncing" lines="1" [data]="user.user.updated"></app-text-shell>
-        </div>
-      </ion-col>
-    </ion-row>
-  </div>
-    </mat-expansion-panel>
+  <ion-grid class="ion-padding-top">
+    <mat-accordion [multi]="!mobileMode">
+      <ion-row>
+        <ion-col size-md="6" size-xs="12" class="pb-0 pt-0">
+          <mat-expansion-panel class="ml-0" [expanded]="!mobileMode">
+            <mat-expansion-panel-header>
+              <mat-panel-title>User Information</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>First Name</h6>
+                  <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell>
+                  </div>
+                  <div *ngIf="editMode">
+                    <ion-input [(ngModel)]="user.user.firstName"></ion-input>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Last Name</h6>
+                  <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="user.user.lastName"></app-text-shell>
+                  </div>
+                  <div *ngIf="editMode">
+                    <ion-input [(ngModel)]="user.user.lastName"></ion-input>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Email</h6>
+                  <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="user.user.email"></app-text-shell>
+                  </div>
+                  <div *ngIf="editMode">
+                    <ion-input [(ngModel)]="user.user.email"></ion-input>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Username</h6>
+                  <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="user.user.username"></app-text-shell>
+                  </div>
+                  <div *ngIf="editMode">
+                    <ion-input [(ngModel)]="user.user.username"></ion-input>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Mobile Phone</h6>
+                  <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="user.user.mobilePhoneNumber">
+                    </app-text-shell>
+                  </div>
+                  <div *ngIf="editMode">
+                    <input [(ngModel)]="user.user.mobilePhoneNumber" class="phoneInput" type="text"
+                      [textMask]="{mask: phoneNumberMask}" />
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Last Updated</h6>
+                  <div>
+                    <app-text-shell animation="bouncing" lines="1" [data]="user.user.updated"></app-text-shell>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </mat-expansion-panel>
+          <!-- User roles section start -->
+          <mat-expansion-panel class="ml-0" [expanded]="!mobileMode">
+            <mat-expansion-panel-header>
+              <mat-panel-title>User Roles</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let userRoles of user.user.userRoles">
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Role ID</h6>
+                  <div class="row-info">
+                    <ion-row>
+                      <ion-col size="10" class="ion-no-padding">
+                        <app-text-shell animation="bouncing" lines="1" [data]="userRoles.roleId"></app-text-shell>
+                      </ion-col>
+                      <ion-col *ngIf="editMode && userRoles" size="2" class="ion-text-right ion-no-padding">
+                        <button class="delete" (click)="deleteRoles(i)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div *ngIf="editMode">
+              <ion-input [(ngModel)]="addRoleValue" placeholder="Add Role"></ion-input>
+              <ion-button (click)="addNewRoles(addRoleValue)">Add</ion-button>
+            </div>
+          </mat-expansion-panel>
+        </ion-col>
+        <ion-col size-md="6" size-xs="12" class="pt-0">
+          <mat-expansion-panel class="ml-0" [expanded]="!mobileMode">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Client Links</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let clientinfo of user.user.clientLinks">
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Organization Name</h6>
+                  <div *ngIf="!editMode">
+                    <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.orgName"></app-text-shell>
+                  </div>
+                  <div *ngIf="editMode">
+                    <ion-input [(ngModel)]="clientinfo.orgName"></ion-input>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h6>Client Id</h6>
+                  <div>
+                    <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.clientId"></app-text-shell>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row>
+                <ion-col size="12">
+                  <h5>Roles</h5>
+                  <div *ngFor="let roles of clientinfo.roles">
+                    <div class="row-info">
+                      <ion-row>
+                        <ion-col size="9">
+                          <app-text-shell animation="bouncing" lines="1" [data]="roles"></app-text-shell>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row> -->
+              <ion-row>
+                <ion-col size="12">
+                  <h5>Ranks</h5>
+                  <div *ngFor="let ranks of clientData?.ranksOrTitles; let i =index;">
+                    <div class="row-info">
+                      <ion-row *ngIf="clientinfo.ranks.includes(ranks) && !editMode">
+                        <ion-col size="12">
+                          <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row *ngIf="editMode">
+                          <ion-col size="9">
+                            <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+                          </ion-col>
+                          <ion-col size="3" class="ion-text-right">
+                              <ion-checkbox color="dark" [checked]="clientinfo.ranks.includes(ranks)"></ion-checkbox>
+                          </ion-col>
+                      </ion-row>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <h5>Assignments</h5>
+                  <div *ngFor="let assignments of clientData?.assignments;let i = index">
+                    <div class="row-info">
+                      <ion-row *ngIf="clientinfo.assignments.includes(assignments) && !editMode">
+                        <ion-col size="9">
+                          <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row *ngIf="editMode">
+                          <ion-col size="9">
+                            <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
+                          </ion-col>
+                          <ion-col size="3" class="ion-text-right">
+                              <ion-checkbox color="dark" [checked]="clientinfo.assignments.includes(assignments)"></ion-checkbox>
+                          </ion-col>
+                      </ion-row>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </mat-expansion-panel>
+        </ion-col>
+      </ion-row>
 
-    <mat-expansion-panel class="ml-0">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Client Links</mat-panel-title>
-     </mat-expansion-panel-header>
-     <div *ngFor="let clientinfo of user.user.clientLinks">
+
+
+
+      <!-- User roles section end -->
       <ion-row>
-        <ion-col size="12">
-          <h6>Organization Name</h6>
-          <div *ngIf="!editMode">
-            <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.orgName"></app-text-shell>
-          </div>
-          <div *ngIf="editMode">
-            <ion-input [(ngModel)]="clientinfo.orgName"></ion-input>
-          </div>
+        <ion-col class="ion-text-center outer-buttons">
+          <ion-button *ngIf="!editMode" (click)="editToggle()">Edit</ion-button>
+          <ion-button *ngIf="editMode" (click)="updateUserDetail(user.user)">Save</ion-button>
+          <ion-button *ngIf="editMode" (click)="cancelUserUpdate(user.user)">Cancel</ion-button>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <h6>Client Id</h6>
-          <div>
-            <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.clientId"></app-text-shell>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <h5>Roles</h5>
-          <div *ngFor="let roles of clientinfo.roles">
-            <div class="row-info">
-              <ion-row>
-                <ion-col size="9">
-                  <app-text-shell animation="bouncing" lines="1" [data]="roles"></app-text-shell>
-                </ion-col>
-                <ion-col *ngIf="editMode && roles.length" size="3" class="ion-text-right">
-                  <button class="delete"><mat-icon>delete</mat-icon></button>
-                </ion-col>
-              </ion-row>
-            </div>
-            <div *ngIf="editMode && roles.length">
-                <ion-input placeholder="Add Roles"></ion-input>
-                <ion-button >Add</ion-button>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <h5>Ranks</h5>
-          <div *ngFor="let ranks of clientinfo.ranks; let i =index;">
-            <div class="row-info">
-              <ion-row>
-                <ion-col size="9">
-                  <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
-                </ion-col>
-                <ion-col *ngIf="editMode && ranks.length" size="3" class="ion-text-right">
-                  <button class="delete" (click)="deleteRank(i)"><mat-icon>delete</mat-icon></button>
-                </ion-col>
-              </ion-row>
-            </div>
-          </div>
-          <div *ngIf="editMode">
-            <ion-input [(ngModel)]="addRankValue" placeholder="Add Ranks"></ion-input>
-            <ion-button (click)="addRank(addRankValue)">Add</ion-button>
-        </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <h5>Assignments</h5>
-          <div *ngFor="let assignments of clientinfo.assignments;let i = index">
-            <div class="row-info">
-              <ion-row>
-                <ion-col size="9">
-                  <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
-                </ion-col>
-                <ion-col *ngIf="editMode && assignments.length" size="3" class="ion-text-right">
-                  <button class="delete" (click)="deleteAssignment(i)"><mat-icon>delete</mat-icon></button>
-                </ion-col>
-              </ion-row>
-            </div>
-          </div>
-          <div *ngIf="editMode">
-            <ion-input [(ngModel)]="addAssignmentValue" placeholder="Add Assingments"></ion-input>
-            <ion-button (click)="addAssignments(addAssignmentValue)">Add</ion-button>
-        </div>
-        </ion-col>
-      </ion-row>
-     </div>
-     </mat-expansion-panel>
-     <!-- User roles section start -->
-     <mat-expansion-panel class="ml-0">
-      <mat-expansion-panel-header>
-        <mat-panel-title>User Roles</mat-panel-title>
-     </mat-expansion-panel-header>
-     <div *ngFor="let userRoles of user.user.userRoles">
-      <ion-row>
-        <ion-col size="12">
-          <h6>Role ID</h6>
-          <div class="row-info">
-            <ion-row>
-              <ion-col size="10" class="ion-no-padding">
-                <app-text-shell animation="bouncing" lines="1" [data]="userRoles.roleId"></app-text-shell>
-              </ion-col>
-              <ion-col *ngIf="editMode && userRoles" size="2" class="ion-text-right ion-no-padding">
-                <button class="delete" (click)="deleteRoles(i)"><mat-icon>delete</mat-icon></button>
-              </ion-col>
-            </ion-row>
-          </div>
-        </ion-col>
-      </ion-row>
-     </div>
-     <div *ngIf="editMode">
-      <ion-input [(ngModel)]="addRoleValue" placeholder="Add Role"></ion-input>
-      <ion-button (click)="addNewRoles(addRoleValue)">Add</ion-button>
-  </div>
-     </mat-expansion-panel>
-     <!-- User roles section end -->
-    <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
-      <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
-    </ion-card>
-    <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="editMode">
-      <ion-button (click)="updateUserDetail(user.user)">Save</ion-button>
-      <ion-button (click)="cancelUserUpdate(user.user)">Cancel</ion-button>
-    </ion-card>
-  </mat-accordion>
-</ion-grid>
+    </mat-accordion>
+  </ion-grid>
 </ion-content>
