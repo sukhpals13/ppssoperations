@@ -52,7 +52,7 @@ export class AppComponent {
     {
       title: 'Cloudinary',
       url: '/test-cloudinary',
-      icon: './assets/sample-icons/side-menu/notifications.svg'
+      icon: 'cloud'
     }
   ];
   accountPages = [

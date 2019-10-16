@@ -13,8 +13,8 @@ export class TestCloudinaryPage implements OnInit {
   @Input()
   responses: Array<any>;
 
-  private hasBaseDropZoneOver: boolean = false;
-  private uploader: FileUploader;
+  public hasBaseDropZoneOver: boolean = false;
+  public uploader: FileUploader;
   private title: string;
 
   constructor(

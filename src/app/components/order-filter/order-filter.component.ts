@@ -10,8 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class OrderFilterComponent implements OnInit {
   public statusTypeArray : Array<string>;
   public subStatusTypeArray : Array<string>;
-  public object = { status: "",
-substatus:""}
+  public object = { status: "",substatus:""}
 
   constructor(
     public dialogRef: MatDialogRef<OrderFilterComponent>,
