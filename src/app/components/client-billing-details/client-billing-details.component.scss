@@ -11,6 +11,7 @@ ion-input{
     border-radius:3px;
     -webkit-border-radius:3px;-moz-border-radius:3px;
     border-radius: 3px;
+    color: var--ion-color-danger;
     input{
         padding:0px;
     }
@@ -50,4 +51,10 @@ ion-input{
     border-radius: 3px;
     border-radius: 3px;
     width: 100%;
+}
+
+.validation .sc-ion-input-md-h {
+    border-color: red;
+    border-width: 1px;
+    border-style: solid;
 }

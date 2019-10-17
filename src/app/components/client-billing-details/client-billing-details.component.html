@@ -23,7 +23,7 @@
                <!-- <ion-label>Gender</ion-label> -->
                <mat-form-field style="width: 100%;" appearance="none">
                   <!-- <mat-label>Favorite food</mat-label> -->
-                  <mat-select [(ngModel)]="data.billingMethod">
+                  <mat-select (selectionChange)="billingMethodChanges()" [(ngModel)]="data.billingMethod">
                      <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
                         {{billingMethod}}
                      </mat-option>
@@ -49,10 +49,10 @@
                <h6>Contact Email</h6>
             </ion-col>
             <ion-col size-md="6" size-xs="12" *ngIf="!edit">
-               <div class="info">{{data.contactEmail}}</div>
+               <div  class="info">{{data.contactEmail}}</div>
             </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input [(ngModel)]="data.contactEmail"></ion-input>
+            <ion-col *ngIf="edit" (keyup)="checkValidation(contactEmail , 'Email')" [ngClass]="{'validation': validationErrors.Email && (contactEmail.touched || contactEmail.dirty || hasError)}" >
+               <ion-input   #contactEmail="ngModel" [required]="data.billingMethod == 'Email' ? true : null"  [(ngModel)]="data.contactEmail"></ion-input>
             </ion-col>
          </ion-row>
          <ion-row *ngIf="data.contactPhone||edit">
@@ -106,8 +106,8 @@
             <ion-col size-md="6" size-xs="12" *ngIf="!edit">
                <div class="info">{{data.addressLine1}}</div>
             </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input [(ngModel)]="data.addressLine1"></ion-input>
+            <ion-col *ngIf="edit"  [ngClass]="{'validation': validationErrors.addressLine1 && (addressLine1.touched || addressLine1.dirty || hasError)}">
+               <ion-input (keyup)="checkValidation(addressLine1 , 'addressLine1')" #addressLine1="ngModel" [required]="data.billingMethod == 'Postal Mail'" [(ngModel)]="data.addressLine1"></ion-input>
             </ion-col>
          </ion-row>
          <ion-row *ngIf="data.addressLine2||edit">
@@ -150,8 +150,8 @@
             <ion-col size-md="6" size-xs="12" *ngIf="!edit">
                <div class="info">{{data.city}}</div>
             </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input [(ngModel)]="data.city"></ion-input>
+            <ion-col *ngIf="edit" [ngClass]="{'validation': validationErrors.city && (city.touched || city.dirty || hasError)}">
+               <ion-input (keyup)="checkValidation(city , 'city')" #city="ngModel" [required]="data.billingMethod == 'Postal Mail'" [(ngModel)]="data.city"></ion-input>
             </ion-col>
          </ion-row>
          <ion-row *ngIf="data.state||edit">
@@ -161,8 +161,8 @@
             <ion-col size-md="6" size-xs="12" *ngIf="!edit">
                <div class="info">{{data.state}}</div>
             </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input [(ngModel)]="data.state"></ion-input>
+            <ion-col *ngIf="edit" [ngClass]="{'validation': validationErrors.state && (state.touched || state.dirty || hasError)}">
+               <ion-input (keyup)="checkValidation(state , 'state')" #state="ngModel" [required]="data.billingMethod == 'Postal Mail'" [(ngModel)]="data.state"></ion-input>
             </ion-col>
          </ion-row>
          <ion-row *ngIf="data.zipCode||edit">
@@ -172,8 +172,8 @@
             <ion-col size-md="6" size-xs="12" *ngIf="!edit">
                <div class="info">{{data.zipCode}}</div>
             </ion-col>
-            <ion-col *ngIf="edit">
-               <ion-input [(ngModel)]="data.zipCode"></ion-input>
+            <ion-col *ngIf="edit" [ngClass]="{'validation': validationErrors.zipCode && (zipCode.touched || zipCode.dirty || hasError)}">
+               <ion-input (keyup)="checkValidation(zipCode , 'zipCode')" #zipCode="ngModel" [required]="data.billingMethod == 'Postal Mail'" [(ngModel)]="data.zipCode"></ion-input>
             </ion-col>
          </ion-row>
          <ion-row>
