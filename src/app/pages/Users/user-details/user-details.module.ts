@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ShellModule } from '../../../shell/shell.module';
 import {MatExpansionModule} from '@angular/material/expansion';
+// import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -29,6 +30,8 @@ const routes: Routes = [
     TextMaskModule,
     ShellModule,
     MatExpansionModule,
+    // BreakpointObserver,
+    
 
     RouterModule.forChild(routes)
   ],

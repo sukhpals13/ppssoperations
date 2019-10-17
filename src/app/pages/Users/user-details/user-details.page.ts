@@ -3,6 +3,7 @@ import { GetDetailsService } from '../../../services/getDetails/get-details.serv
 import { PostDetailsService } from '../../../services/postDetails/post-details.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-user-details',
@@ -18,6 +19,10 @@ export class UserDetailsPage implements OnInit {
   public addRankValue: string;
   public addAssignmentValue: string;
   public addRoleValue: string;
+  public clientData: any;
+  public clientId: string;
+  public deviceWidth: any;
+  public mobileMode: boolean;
 
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -32,57 +37,79 @@ export class UserDetailsPage implements OnInit {
     public zone: NgZone,
     public alertController: AlertController,
     public loadingController: LoadingController,
+    public breakpointObserver: BreakpointObserver,
+
   ) { }
 
   ngOnInit() {
     this.loader = false;
     this.addRankValue = '';
-    this.addAssignmentValue='';
-    this.addRoleValue='';
+    this.addAssignmentValue = '';
+    this.addRoleValue = '';
 
     this.user = {
-      name: null,
-      UserNumber: null,
-      users: [],
-      isShell: true,
-      clientLinks:[{
-        ranks:[]
-      }],
-      
+
+      user: {
+        name: null,
+        UserNumber: null,
+        isShell: true,
+        clientLinks: [{
+          ranks: []
+        }],
+      },
     };
 
 
     this.editMode = false;
     this.viewUserDetails(this.user);
+
+    // this.deviceWidth = window.innerWidth
+    this.mobileMode = false;
+    this.breakpointObserver.observe([
+      '(max-width: 768px)'
+        ]).subscribe(result => {
+          if (result.matches) {
+            this.mobileMode = true;
+          } else {
+            this.mobileMode = false;
+          }
+        });
+
   }
 
-  initializeData(){
+  initializeData() {
     this.user.user = [];
-    var i =0;
-    while(i<6){
+    var i = 0;
+    while (i < 6) {
       var obj = {
         name: null,
         UserNumber: null,
-        isShell: true
+        clientLinks: [{
+          ranks: []
+        }],
+        isShell: true,
       };
       this.user.user.push(obj);
       i++;
     }
   }
 
-  viewUserDetails(user){
+  viewUserDetails(user) {
     this.initializeData();
     let userId;
     this._Activatedroute.params.subscribe(it => {
       userId = it.uNumber;
       this.userId = it.uNumber;
     })
-     return this.getDetailsService.getUser(userId)
-     .subscribe(res =>{
+    return this.getDetailsService.getUser(userId)
+      .subscribe(res => {
         this.user = res;
-     }, err => {
+        console.log('response user', res.user.clientLinks[0].clientId);
+        this.clientId = res.user.clientLinks[0].clientId;
+        this.getClientData();
+      }, err => {
         console.log(err);
-     });
+      });
   }
 
 
@@ -114,7 +141,7 @@ export class UserDetailsPage implements OnInit {
           // this.addingGroup = true;
           let userId = user._id;
           let postBody = {
-            email: user.email ,
+            email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
             mobilePhoneNumber: user.mobilePhoneNumber,
@@ -144,57 +171,71 @@ export class UserDetailsPage implements OnInit {
   }
 
   // cancel user update
-  cancelUserUpdate(){
+  cancelUserUpdate() {
     this.editMode = false;
     this.viewUserDetails(this.user);
 
   }
 
   // add ranks
-  addRank(rank){
-     this.user.user.clientLinks[0].ranks.push(rank);
+  addRank(rank) {
+    this.user.user.clientLinks[0].ranks.push(rank);
     this.addRankValue = "";
   }
 
   // delete rank
-  deleteRank(index){
-    this.user.user.clientLinks[0].ranks.splice(index,1);
+  deleteRank(index) {
+    this.user.user.clientLinks[0].ranks.splice(index, 1);
   }
 
   // add assignments
-  addAssignments(assignment){
+  addAssignments(assignment) {
     this.user.user.clientLinks[0].assignments.push(assignment);
-   this.addAssignmentValue = "";
- }
+    this.addAssignmentValue = "";
+  }
 
- // delete assignments
- deleteAssignment(index){
-   this.user.user.clientLinks[0].assignments.splice(index,1);
- }
+  // delete assignments
+  deleteAssignment(index) {
+    this.user.user.clientLinks[0].assignments.splice(index, 1);
+  }
 
- //add Roles
- addNewRoles(role){
-  this.user.user.userRoles.push({roleId:role});
- this.addRoleValue = "";
-}
+  //add Roles
+  addNewRoles(role) {
+    this.user.user.userRoles.push({ roleId: role });
+    this.addRoleValue = "";
+  }
 
-//delete Roles
-deleteRoles(index){
-  this.user.user.userRoles.splice(index,1);
-}
+  //delete Roles
+  deleteRoles(index) {
+    this.user.user.userRoles.splice(index, 1);
+  }
 
 
-async editToggle() {
-    
+  // get client 
+  getClientData() {
+    return this.getDetailsService.getClient(this.clientId)
+      .subscribe(res => {
+        console.log('client data response', res);
+        this.clientData = res.client;
+      }, err => {
+        console.log(err);
+      }
+
+      )
+  }
+
+
+  async editToggle() {
+
     this.zone.run(() => {
       let flag = true;
-        if (this.editMode) {
-          if(flag){
-            this.editMode = false;
-          }
-        } else {
-          this.editMode = true;
+      if (this.editMode) {
+        if (flag) {
+          this.editMode = false;
         }
+      } else {
+        this.editMode = true;
+      }
     })
 
   }

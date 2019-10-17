@@ -11,7 +11,7 @@
 
 <ion-content>
   <mat-accordion id="client-info">
-    <mat-expansion-panel [expanded]="true" [disabled]="editMode">
+    <mat-expansion-panel *ngIf="editInfo.clientInfo||showOtherSections">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Client Information
@@ -22,10 +22,10 @@
           <ion-row>
             <ion-col size="12">
               <h6>Name</h6>
-              <div *ngIf="!editMode">
+              <div *ngIf="!editInfo.clientInfo">
                 <app-text-shell animation="bouncing" lines="1" [data]="client.name"></app-text-shell>
               </div>
-              <div *ngIf="editMode">
+              <div *ngIf="editInfo.clientInfo">
                 <ion-input [(ngModel)]="client.name"></ion-input>
               </div>
             </ion-col>
@@ -33,10 +33,10 @@
           <ion-row>
             <ion-col size="12">
               <h6>Client #</h6>
-              <div *ngIf="!editMode">
+              <div *ngIf="!editInfo.clientInfo">
                 <app-text-shell animation="bouncing" lines="1" [data]="client.clientNumber"></app-text-shell>
               </div>
-              <div *ngIf="editMode">
+              <div *ngIf="editInfo.clientInfo">
                 <ion-input type="number" [disabled]="isDisabled" [(ngModel)]="client.clientNumber"></ion-input>
               </div>
             </ion-col>
@@ -44,22 +44,22 @@
           <ion-row>
             <ion-col size="12">
               <h6>Has Standard Pricing</h6>
-              <div *ngIf="!editMode">
+              <div *ngIf="!editInfo.clientInfo">
                 <app-text-shell animation="bouncing" lines="1" [data]="client.hasStandardPricing?'Yes':'No'">
                 </app-text-shell>
               </div>
-              <div *ngIf="editMode">
+              <div *ngIf="editInfo.clientInfo">
                 <ion-toggle class="pl-0" [(ngModel)]="client.hasStandardPricing"></ion-toggle>
               </div>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="client.parentClientId||editMode">
+          <ion-row *ngIf="client.parentClientId||editInfo.clientInfo">
             <ion-col size="12">
               <h6>Parent Client Id</h6>
-              <div *ngIf="!editMode">
+              <div *ngIf="!editInfo.clientInfo">
                 <app-text-shell animation="bouncing" lines="1" [data]="client.parentClientId"></app-text-shell>
               </div>
-              <div *ngIf="editMode ">
+              <div *ngIf="editInfo.clientInfo">
                 <div>
                   {{client.parentClientId?client.parentClientId:"No parent client Id"}}
                 </div>
@@ -67,19 +67,29 @@
               </div>
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-button *ngIf="!editInfo.clientInfo" (click)="editToggle('clientInfo',client)">Edit</ion-button>
+            <ion-button *ngIf="editInfo.clientInfo" (click)="editToggle('clientInfo',client)">Save</ion-button>
+            <ion-button *ngIf="editInfo.clientInfo" (click)="cancelToggle('clientInfo')">Cancel</ion-button>
+          </ion-row>
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel [disabled]="editMode">
+    <mat-expansion-panel  *ngIf="editInfo.clientCustomization||showOtherSections">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Customization
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editMode" [id]="client._id">
+      <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editInfo.clientCustomization" [id]="client._id">
       </app-client-customizations>
+      <ion-row>
+        <ion-button *ngIf="!editInfo.clientCustomization" (click)="editToggle('clientCustomization',client)">Edit</ion-button>
+        <ion-button *ngIf="editInfo.clientCustomization" (click)="editToggle('clientCustomization',client)">Save</ion-button>
+        <ion-button *ngIf="editInfo.clientCustomization" (click)="cancelToggle('clientCustomization')">Cancel</ion-button>
+      </ion-row>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.ranksOrTitles.length||editMode" id="client-ranks" [disabled]="editMode&&client.ranksOrTitles.length!=0">
+    <mat-expansion-panel  *ngIf="editInfo.ranks||showOtherSections" id="client-ranks">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Ranks or Titles
@@ -92,13 +102,13 @@
               <app-text-shell animation="bouncing" lines="1" [data]="rank"></app-text-shell>
             </ion-col>
             <ion-col size-md="2" size-xs="2" style="text-align: right;">
-              <button *ngIf="editMode" class="delete-icon" mat-icon-button
+              <button *ngIf="editInfo.ranks" class="delete-icon" mat-icon-button
                 aria-label="Example icon-button with a heart icon" (click)="deleteRank(rank)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="editMode">
+          <ion-row *ngIf="editInfo.ranks">
             <ion-col>
               <ion-input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition"></ion-input>
               <ion-button class="mt-5" [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()"
@@ -106,6 +116,10 @@
                 </ion-spinner>
               </ion-button>
             </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-button *ngIf="!editInfo.ranks" (click)="editToggle('ranks',client)">Edit</ion-button>
+            <ion-button *ngIf="editInfo.ranks" (click)="editToggle('ranks',client)">Back</ion-button>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -117,7 +131,7 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.assignments.length||editMode" id="client-assingment" [disabled]="editMode&&client.assignments.length!=0">
+    <mat-expansion-panel  *ngIf="editInfo.assignments||showOtherSections" id="client-assingment">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Assingments
@@ -130,13 +144,13 @@
               <app-text-shell animation="bouncing" lines="1" [data]="data"></app-text-shell>
             </ion-col>
             <ion-col size-md="2" size-xs="2" style="text-align: right;">
-              <button *ngIf="editMode" class="delete-icon" mat-icon-button
+              <button *ngIf="editInfo.assignments" class="delete-icon" mat-icon-button
                 aria-label="Example icon-button with a heart icon" (click)="deleteAssignment(data)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="editMode">
+          <ion-row *ngIf="editInfo.assignments">
             <ion-col>
               <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
               <ion-button class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()"
@@ -144,6 +158,10 @@
                   *ngIf="addingAssingment"></ion-spinner>
               </ion-button>
             </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-button *ngIf="!editInfo.assignments" (click)="editToggle('assignments',client)">Edit</ion-button>
+            <ion-button *ngIf="editInfo.assignments" (click)="editToggle('assignments',client)">Back</ion-button>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -155,46 +173,64 @@
         </ion-grid>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.billingInfo._id||this.editMode" [disabled]="editMode&&client.billingInfo._id">
+    <mat-expansion-panel  *ngIf="editInfo.billingInfo||showOtherSections">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Billing
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-billing-details [data]="client.billingInfo" [edit]="editMode" [id]="client._id">
+      <app-client-billing-details [data]="client.billingInfo" [edit]="editInfo.billingInfo" [id]="client._id" >
       </app-client-billing-details>
+      <ion-row>
+        <ion-button *ngIf="!editInfo.billingInfo" (click)="editToggle('billingInfo',client)">Edit</ion-button>
+        <!-- <ion-button *ngIf="editInfo.billingInfo">Save</ion-button> -->
+        <ion-button *ngIf="editInfo.billingInfo" (click)="cancelToggle('billingInfo',client)">Cancel</ion-button>
+      </ion-row>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="client.contacts.length||editMode" [disabled]="editMode&&client.contacts.length!=0">
+    <mat-expansion-panel  *ngIf="editInfo.contacts||showOtherSections">
       <mat-expansion-panel-header>
         <mat-panel-title>Contacts</mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editMode" [id]="client._id">
+      <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editInfo.contacts" [id]="client._id">
       </app-client-contact-details>
+      <ion-row>
+        <ion-button (click)="editToggle('contacts',client)">{{editInfo.contacts?'Back':'Edit'}}</ion-button>
+        <!-- <ion-button>Cancel</ion-button> -->
+      </ion-row>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="(gotRoleResponse&&!noRoleData)||editMode" [disabled]="editMode&&!noRoleData">
+    <mat-expansion-panel  *ngIf="editInfo.roles||showOtherSections">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Roles
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editMode"
+      <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editInfo.roles"
         (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-roles>
+      <ion-row>
+        <ion-button (click)="editToggle('roles',client)">{{editInfo.roles?'Back':'Edit'}}</ion-button>
+        <!-- <ion-button>Cancel</ion-button> -->
+      </ion-row>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="(gotGroupResponse&&!noGroupData)||editMode" [disabled]="editMode&&!noGroupData">
+    <mat-expansion-panel  *ngIf="editInfo.groups||showOtherSections">
       <mat-expansion-panel-header>
         <mat-panel-title>
           User Groups
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editMode"
+      <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editInfo.groups"
         (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-groups>
+      <ion-row>
+        <!-- <ion-button (click)="editToggle('groups')">Edit</ion-button> -->
+        <ion-button (click)="editToggle('groups',client)">{{editInfo.groups?'Back':'Edit'}}</ion-button>
+        <!-- <ion-button>Cancel</ion-button> -->
+      </ion-row>
     </mat-expansion-panel>
   </mat-accordion>
-  <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
+  <!-- <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
   </ion-card>
   <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="editMode">
     <ion-button style="width: 100%;" (click)="editToggle()">Save</ion-button>
-  </ion-card>
+  </ion-card> -->
 
 </ion-content>
