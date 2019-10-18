@@ -55,7 +55,7 @@ export class ClientBillingDetailsComponent implements OnInit {
       header: title,
       message: msg,
       buttons: [{
-        text: 'Okay'
+        text: 'Ok'
       }]
     });
     await alert.present();
