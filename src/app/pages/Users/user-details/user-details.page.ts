@@ -12,7 +12,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 })
 export class UserDetailsPage implements OnInit {
 
-  public editMode: boolean;
+  // public editMode: boolean;
   public userId: string;
   public user: any;
   public loader: boolean;
@@ -23,6 +23,13 @@ export class UserDetailsPage implements OnInit {
   public clientId: string;
   public deviceWidth: any;
   public mobileMode: boolean;
+
+  public userInfoEditMode: boolean;
+  public editModeuserRoles: boolean;
+  public editModeClientLinks: boolean;
+  
+
+
 
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -60,7 +67,9 @@ export class UserDetailsPage implements OnInit {
     };
 
 
-    this.editMode = false;
+    this.userInfoEditMode = false;
+    this.editModeuserRoles = false;
+    this.editModeClientLinks = false;
     this.viewUserDetails(this.user);
 
     // this.deviceWidth = window.innerWidth
@@ -126,56 +135,56 @@ export class UserDetailsPage implements OnInit {
 
 
 
-  async updateUserDetail(user) {
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-    });
-    const alert = await this.alertController.create({
-      header: "Are you sure ?",
-      message: "Are you sure you want to update this user information ?",
-      buttons: [{
-        text: 'Yes',
-        handler: (blah) => {
-          loading.present();
+  // async updateUserInfo(user) {
+  //   const loading = await this.loadingController.create({
+  //     message: 'Please wait...',
+  //   });
+  //   const alert = await this.alertController.create({
+  //     header: "Are you sure ?",
+  //     message: "Are you sure you want to update this user information ?",
+  //     buttons: [{
+  //       text: 'Yes',
+  //       handler: (blah) => {
+  //         loading.present();
 
-          // this.addingGroup = true;
-          let userId = user._id;
-          let postBody = {
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            mobilePhoneNumber: user.mobilePhoneNumber,
-          }
-          return this.postDetailService.updateUser(userId, postBody)
-            .subscribe(res => {
-              console.log('Update user info response', res);
-              loading.dismiss();
-              this.alertPopup("Updated", 'Client User Group updated successfully');
-              this.viewUserDetails(user);
-              this.editMode = false;
-            }, err => {
-              console.log(err);
-              loading.dismiss();
-              this.alertPopup("Error", JSON.stringify(err.error.message));
-            })
-        }
-      }, {
-        text: 'No',
-        role: 'cancel',
-        handler: () => {
-          // this.openSearchClient();
-        }
-      }]
-    });
-    alert.present()
-  }
+  //         // this.addingGroup = true;
+  //         let userId = user._id;
+  //         let postBody = {
+  //           email: user.email,
+  //           firstName: user.firstName,
+  //           lastName: user.lastName,
+  //           mobilePhoneNumber: user.mobilePhoneNumber,
+  //         }
+  //         return this.postDetailService.updateUser(userId, postBody)
+  //           .subscribe(res => {
+  //             console.log('Update user info response', res);
+  //             loading.dismiss();
+  //             this.alertPopup("Updated", 'Client User Group updated successfully');
+  //             this.viewUserDetails(user);
+  //             this.editMode = false;
+  //           }, err => {
+  //             console.log(err);
+  //             loading.dismiss();
+  //             this.alertPopup("Error", JSON.stringify(err.error.message));
+  //           })
+  //       }
+  //     }, {
+  //       text: 'No',
+  //       role: 'cancel',
+  //       handler: () => {
+  //       }
+  //     }]
+  //   });
+  //   alert.present()
+  // }
+
+
 
   // cancel user update
-  cancelUserUpdate() {
-    this.editMode = false;
-    this.viewUserDetails(this.user);
-
-  }
+  // cancelUserUpdate() {
+  //   this.editMode = false;
+  //   this.viewUserDetails(this.user);
+  // }
 
   // add ranks
   addRank(rank) {
@@ -225,18 +234,190 @@ export class UserDetailsPage implements OnInit {
   }
 
 
-  async editToggle() {
+
+  // user info
+  async saveUserInfo(user){
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alertController.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to update this user information ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+          let userId = user._id;
+          let postBody = {
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            mobilePhoneNumber: user.mobilePhoneNumber,
+          }
+          return this.postDetailService.updateUser(userId, postBody)
+            .subscribe(res => {
+              console.log('Update user info response', res);
+              loading.dismiss();
+              this.alertPopup("Updated", 'User information updated successfully');
+              this.viewUserDetails(user);
+              this.userInfoEditMode = false;
+            }, err => {
+              console.log(err);
+              loading.dismiss();
+              this.alertPopup("Error", JSON.stringify(err.error.message));
+            })
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+        }
+      }]
+    });
+    alert.present()
+  }
+  cancelUserInfo(){
+    this.viewUserDetails(this.user);
+    this.userInfoEditMode = false;
+  }
+
+// user roles
+async saveUserRoles(user){
+  const loading = await this.loadingController.create({
+    message: 'Please wait...',
+  });
+  const alert = await this.alertController.create({
+    header: "Are you sure ?",
+    message: "Are you sure you want to update User roles ?",
+    buttons: [{
+      text: 'Yes',
+      handler: (blah) => {
+        loading.present();
+        let userId = user._id;
+        let postBody = {
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          mobilePhoneNumber: user.mobilePhoneNumber,
+        }
+        return this.postDetailService.updateUser(userId, postBody)
+          .subscribe(res => {
+            console.log('Update user roles response', res);
+            loading.dismiss();
+            this.alertPopup("Updated", 'User roles updated successfully');
+            this.viewUserDetails(user);
+            this.editModeuserRoles = false;
+          }, err => {
+            console.log(err);
+            loading.dismiss();
+            this.alertPopup("Error", JSON.stringify(err.error.message));
+          })
+      }
+    }, {
+      text: 'No',
+      role: 'cancel',
+      handler: () => {
+      }
+    }]
+  });
+  alert.present()
+}
+
+cancelUserRoles(){
+  this.viewUserDetails(this.user);
+   this.editModeuserRoles = false;
+ }
+
+// user client links
+async saveClientLinks(user){
+  const loading = await this.loadingController.create({
+    message: 'Please wait...',
+  });
+  const alert = await this.alertController.create({
+    header: "Are you sure ?",
+    message: "Are you sure you want to update User client links ?",
+    buttons: [{
+      text: 'Yes',
+      handler: (blah) => {
+        loading.present();
+        let userId = user._id;
+        let postBody = {
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          mobilePhoneNumber: user.mobilePhoneNumber,
+        }
+        return this.postDetailService.updateUser(userId, postBody)
+          .subscribe(res => {
+            console.log('Update user roles response', res);
+            loading.dismiss();
+            this.alertPopup("Updated", 'User client links updated successfully');
+            this.viewUserDetails(user);
+            this.editModeClientLinks = false;
+          }, err => {
+            console.log(err);
+            loading.dismiss();
+            this.alertPopup("Error", JSON.stringify(err.error.message));
+          })
+      }
+    }, {
+      text: 'No',
+      role: 'cancel',
+      handler: () => {
+      }
+    }]
+  });
+  alert.present()
+}
+
+cancelClientLinks(){
+  this.viewUserDetails(this.user);
+ this.editModeClientLinks = false;
+}
+
+
+
+  async editToggleUserInfo() {
 
     this.zone.run(() => {
       let flag = true;
-      if (this.editMode) {
+      if (this.userInfoEditMode) {
         if (flag) {
-          this.editMode = false;
+          this.userInfoEditMode = false;
         }
       } else {
-        this.editMode = true;
+        this.userInfoEditMode = true;
       }
     })
 
-  }
+  };
+
+  async editToggleRoles() {
+
+    this.zone.run(() => {
+      let flag = true;
+      if (this.editModeuserRoles) {
+        if (flag) {
+          this.editModeuserRoles = false;
+        }
+      } else {
+        this.editModeuserRoles = true;
+      }
+    })
+
+  };
+  async editToggleClientLinks() {
+    this.zone.run(() => {
+      let flag = true;
+      if (this.editModeClientLinks) {
+        if (flag) {
+          this.editModeClientLinks = false;
+        }
+      } else {
+        this.editModeClientLinks = true;
+      }
+    })
+
+  };
+
 }

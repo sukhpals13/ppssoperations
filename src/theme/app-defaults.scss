@@ -20,3 +20,9 @@ ion-button{
       font-size: 12px;
   }
 }
+
+.ion-color-success {
+  --ion-color-base: var(--ion-color-success, #10dc60) !important;
+  --ion-color-base-rgb: var(--ion-color-success-rgb, 16, 220, 96) !important;
+  --ion-color-contrast: #ffffff !important;
+}
