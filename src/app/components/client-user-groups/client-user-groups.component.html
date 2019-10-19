@@ -18,51 +18,55 @@
           <h6>Groups Name</h6>
         </ion-col>
       </ion-row> -->
-      <ion-row *ngFor="let group of clientUserGroup" class="groupUserRow">
+      <ion-row *ngFor="let group of clientUserGroup; let i = index;" class="groupUserRow">
+        <div *ngIf="i==editIndex||!editing">
           <ion-col size-md="6" size-xs="12">
               <strong>Group name</strong>
             </ion-col>
-        <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+        <ion-col size-md="6" size-xs="12" *ngIf="!group.edit">
           {{group.name}}
         </ion-col>
-        <ion-col *ngIf="edit" size-md="6" size-xs="12">
+        <ion-col *ngIf="group.edit" size-md="6" size-xs="12">
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
-        <ion-col size-md="12" size-xs="12" class="ion-no-padding" *ngIf="edit||group.description">
+        <ion-col size-md="12" size-xs="12" class="ion-no-padding" *ngIf="group.edit||group.description">
             <ion-row>
               <ion-col size-md="6" size-xs="12"><strong>Description</strong></ion-col>
-              <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+              <ion-col size-md="6" size-xs="12" *ngIf="!group.edit">
                 {{group.description}}
               </ion-col>
-              <ion-col *ngIf="edit" size-md="6" size-xs="12">
+              <ion-col *ngIf="group.edit" size-md="6" size-xs="12">
                 <ion-input [(ngModel)]="group.description"></ion-input>
               </ion-col>
             </ion-row>
           </ion-col>
-        <ion-col size-md="12" size-xs="12" class="ion-text-right ion-no-padding">
-          <ion-button *ngIf="!group._id && edit" (click)="addUserGroup(group)"
+        <ion-col *ngIf="edit&&!group.edit">
+          <ion-button (click)="editGroup(group,i)">Edit</ion-button>
+        </ion-col>
+        <ion-col *ngIf="group.edit" size-md="12" size-xs="12" class="ion-text-right ion-no-padding">
+          <ion-button *ngIf="!group._id && group.edit" (click)="addUserGroup(group)"
             [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
-            <!-- <mat-icon title="Add new Group">add_circle_outline</mat-icon> -->
             Add
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
           </ion-button>
-          <ion-button mat-icon-button *ngIf="group._id && edit" (click)="editUserGroup(group)"
-            [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
-            <!-- {{loader?'':'Update'}} -->
-            <!-- <mat-icon title="Update">check</mat-icon> -->
-            Update
+          <ion-button mat-icon-button *ngIf="group._id && group.edit" (click)="editUserGroup(group)" [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
+            Save
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
           </ion-button>
-          <ion-button *ngIf="group._id && edit" mat-icon-button aria-label="Example icon-button with a heart icon"
-            (click)="deleteUserGroup(group)">
-            <!-- <mat-icon>delete</mat-icon> --> Delete
+          <ion-button *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+            Delete
+          </ion-button>
+          <ion-button *ngIf="group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
+            Cancel
           </ion-button>
         </ion-col>
+      </div>
       </ion-row>
       <ion-row *ngIf="!add">
         <ion-col>
           <ion-button class="addgroup" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add Group
           </ion-button>
+          
         </ion-col>
       </ion-row>
     </ion-grid>

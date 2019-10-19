@@ -16,16 +16,17 @@
          <mat-expansion-panel class="ml-0" *ngFor=" let contact of clientContactDetails">
             <mat-expansion-panel-header>
                <mat-panel-title>{{contact.contactName}}</mat-panel-title>
-               <mat-icon *ngIf="edit && actionVisible" (click)="deleteContact(contact)">delete</mat-icon>
+               <!-- <mat-icon *ngIf="edit && actionVisible" (click)="deleteContact(contact)">delete</mat-icon> -->
             </mat-expansion-panel-header>
+            <!-- <mat-icon *ngIf="edit && actionVisible" (click)="editContact(contact)">edit</mat-icon> -->
             <ion-row>
                <ion-col size-md="6" size-xs="12">
                   <h6>Contact Type </h6>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="!contact.edit">
                   <div class="info">{{contact.contactType}}</div>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="contact.edit">
                   <ion-input [(ngModel)]="contact.contactType"></ion-input>
                </ion-col>
             </ion-row>
@@ -33,10 +34,10 @@
                <ion-col size-md="6" size-xs="12">
                   <h6>Contact Name </h6>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="!contact.edit">
                   <div class="info">{{contact.contactName}}</div>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="contact.edit">
                   <ion-input [(ngModel)]="contact.contactName"></ion-input>
                </ion-col>
             </ion-row>
@@ -44,10 +45,10 @@
                <ion-col size-md="6" size-xs="12">
                   <h6>Contact Phone </h6>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="!contact.edit">
                   <div class="info">{{contact.contactPhone}}</div>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="contact.edit">
                   <input [(ngModel)]="contact.contactPhone" class="phoneInput" type = "text" [textMask]="{mask: phoneNumberMask}"/>
                </ion-col>
             </ion-row>
@@ -55,10 +56,10 @@
                <ion-col size-md="6" size-xs="12">
                   <h6>Contact Email </h6>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="!contact.edit">
                   <div class="info">{{contact.contactEmail}}</div>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="contact.edit">
                   <ion-input [(ngModel)]="contact.contactEmail"></ion-input>
                </ion-col>
             </ion-row>
@@ -66,18 +67,22 @@
                <ion-col size-md="6" size-xs="12">
                   <h6>Contact Notes </h6>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="!edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="!contact.edit">
                   <div class="info">{{contact.contactNotes}}</div>
                </ion-col>
-               <ion-col size-md="6" size-xs="12" *ngIf="edit">
+               <ion-col size-md="6" size-xs="12" *ngIf="contact.edit">
                   <ion-input [(ngModel)]="contact.contactNotes"></ion-input>
                </ion-col>
             </ion-row>
-            <ion-button *ngIf="!contact._id && edit" (click)="addContactsInfo(contact)" [disabled]="loader">
+            <!-- <mat-icon *ngIf="edit && actionVisible" (click)="editContact(contact)">edit</mat-icon> -->
+            <ion-button *ngIf="edit && actionVisible" (click)="editContact(contact)">
+                  Edit Contact
+            </ion-button>
+            <ion-button *ngIf="!contact._id && contact.edit" (click)="addContactsInfo(contact)" [disabled]="loader">
                {{loader?'':'Submit'}}
                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
             </ion-button>
-            <ion-button *ngIf="contact._id && edit" (click)="editContactsInfo(contact)" [disabled]="loader">
+            <ion-button *ngIf="contact._id && contact.edit" (click)="editContactsInfo(contact)" [disabled]="loader">
                {{loader?'':'Update Contacts Info'}}
                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
             </ion-button>

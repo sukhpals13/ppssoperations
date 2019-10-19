@@ -16,6 +16,7 @@ export class ClientUserGroupsComponent implements OnInit {
 
   @Output() gotResponseSend = new EventEmitter();
   @Output() noDataSend = new EventEmitter();
+  @Output() editingPage = new EventEmitter();
   
   add: boolean;
   private addGroupName: string;
@@ -25,7 +26,9 @@ export class ClientUserGroupsComponent implements OnInit {
   public loader: boolean;
   public gotResponse: boolean;
   public noData: boolean;
-
+  public tempGroup: any;
+  public editIndex: any;
+  public editing: boolean;
 
 
   constructor(
@@ -43,6 +46,7 @@ export class ClientUserGroupsComponent implements OnInit {
     this.add = false;
     this.gotResponse = false;
     this.noData = true;
+    this.editing = false;
   }
 
 
@@ -62,7 +66,11 @@ export class ClientUserGroupsComponent implements OnInit {
     return this.getDetailService.getClientUserGroups(this.id)
       .subscribe(res => {
         console.log('get user groups', res);
-        this.clientUserGroup = res.groups;
+        this.clientUserGroup = res.groups.map(val=>{
+          let obj = {...val,edit:false};
+          return obj
+        });
+        this.tempGroup = {...this.clientUserGroup}
         this.gotResponse = true;
         this.gotResponseSend.emit({gotGroupResponse:true})
         if (this.clientUserGroup.length == 0) {
@@ -92,7 +100,7 @@ export class ClientUserGroupsComponent implements OnInit {
       .subscribe(res => {
         console.log('add group response', res);
         console.log('res group', res.group)
-        this.clientUserGroup[this.clientUserGroup.length - 1] = res.group;
+        this.clientUserGroup[this.clientUserGroup.length - 1] = {...res.group,edit:false};
         this.add = false;
         if(this.clientUserGroup.length>0){
           this.noDataSend.emit({noGroupData:false})
@@ -136,6 +144,9 @@ export class ClientUserGroupsComponent implements OnInit {
               // this.getuserGroups();
               loading.dismiss();
               this.alertPopup("Updated", 'Client User Group updated successfully');
+              this.editIndex = null;
+              this.editing = false;
+              this.editingPage.emit()
             }, err => {
               console.log(err);
               loading.dismiss();
@@ -177,6 +188,9 @@ export class ClientUserGroupsComponent implements OnInit {
               if(this.clientUserGroup.length==0){
                 this.noDataSend.emit({noGroupData:true})
               }
+              this.editIndex = null;
+              this.editing = false;
+              this.editingPage.emit()
             }, err => {
               console.log(err);
               loading.dismiss();
@@ -196,8 +210,52 @@ export class ClientUserGroupsComponent implements OnInit {
 
   // add group user row
   addContactRow() {
+    if(this.editIndex==null){
+      this.editIndex = this.clientUserGroup.length
+      this.editing = true;
+      this.editingPage.emit()
+    }else{
+      this.editIndex = null;
+      this.editing = false;
+      this.editingPage.emit()
+    }
     this.add = true;
-    this.clientUserGroup.push({ name: '', description: '' });
+    this.clientUserGroup.push({ name: '', description: '', edit: true });
   }
+
+  editGroup(group,i){
+    if(this.editIndex==null){
+      this.editIndex = i
+      this.editing = true;
+      this.editingPage.emit()
+    }else{
+      this.editIndex = null;
+      this.editing = false;
+      this.editingPage.emit()
+    }
+    if(this.add==true){
+      // this.clientUserGroup = this.clientUserGroup.splice(-1,1)
+      // delete this.clientUserGroup[this.clientUserGroup.length-1]
+      this.clientUserGroup.pop()
+    }
+    group.edit = !group.edit;
+    if(group.edit==true){
+      this.tempGroup = JSON.parse(JSON.stringify(this.clientUserGroup));
+    }else{
+      group = Object.assign(group,this.tempGroup[i]);
+      group.edit = false;
+    }
+  }
+  // cancelAdd(){
+  //   if(this.editIndex==null){
+  //     this.editIndex = this.clientUserGroup.length
+  //     this.editing = true;
+  //     this.editingPage.emit()
+  //   }else{
+  //     this.editIndex = null;
+  //     this.editing = false;
+  //     this.editingPage.emit()
+  //   }
+  // }
 
 }

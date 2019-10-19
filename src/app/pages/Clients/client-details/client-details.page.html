@@ -63,7 +63,7 @@
                 <div>
                   {{client.parentClientId?client.parentClientId:"No parent client Id"}}
                 </div>
-                <ion-button (click)="openSearchClient()">Edit</ion-button>
+                <ion-button (click)="openSearchClient()">Edit Parent Client Id</ion-button>
               </div>
             </ion-col>
           </ion-row>
@@ -179,12 +179,12 @@
           Billing
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-billing-details [data]="client.billingInfo" [edit]="editInfo.billingInfo" [id]="client._id" >
+      <app-client-billing-details [data]="client.billingInfo" [edit]="editInfo.billingInfo" [id]="client._id" (updateClicked)="editToggle('billingInfo',client)" (cancelClicked)="cancelToggle('billingInfo')">
       </app-client-billing-details>
       <ion-row>
         <ion-button *ngIf="!editInfo.billingInfo" (click)="editToggle('billingInfo',client)">Edit</ion-button>
         <!-- <ion-button *ngIf="editInfo.billingInfo">Save</ion-button> -->
-        <ion-button *ngIf="editInfo.billingInfo" (click)="cancelToggle('billingInfo',client)">Cancel</ion-button>
+        <!-- <ion-button *ngIf="editInfo.billingInfo" (click)="cancelToggle('billingInfo')">Back</ion-button> -->
       </ion-row>
     </mat-expansion-panel>
     <mat-expansion-panel  *ngIf="editInfo.contacts||showOtherSections">
@@ -204,10 +204,10 @@
           Roles
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-user-roles *ngIf="client._id" [id]="client._id" [edit]="editInfo.roles"
+      <app-client-user-roles *ngIf="client._id" [id]="client._id" (editingPage)="editToggle('roles',client)"
         (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-roles>
       <ion-row>
-        <ion-button (click)="editToggle('roles',client)">{{editInfo.roles?'Back':'Edit'}}</ion-button>
+        <!-- <ion-button (click)="editToggle('roles',client)">{{editInfo.roles?'Back':'Edit'}}</ion-button> -->
         <!-- <ion-button>Cancel</ion-button> -->
       </ion-row>
     </mat-expansion-panel>
@@ -217,20 +217,13 @@
           User Groups
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="editInfo.groups"
-        (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-groups>
+      <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="true"
+        (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)" (editingPage)="editToggle('groups',client)"></app-client-user-groups>
       <ion-row>
         <!-- <ion-button (click)="editToggle('groups')">Edit</ion-button> -->
-        <ion-button (click)="editToggle('groups',client)">{{editInfo.groups?'Back':'Edit'}}</ion-button>
+        <!-- <ion-button (click)="editToggle('groups',client)">{{editInfo.groups?'Back':'Edit'}}</ion-button> -->
         <!-- <ion-button>Cancel</ion-button> -->
       </ion-row>
     </mat-expansion-panel>
   </mat-accordion>
-  <!-- <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="!editMode">
-    <ion-button style="width: 100%;" (click)="editToggle()">Edit</ion-button>
-  </ion-card>
-  <ion-card style="background: transparent;box-shadow: 0px 0px 0px;" *ngIf="editMode">
-    <ion-button style="width: 100%;" (click)="editToggle()">Save</ion-button>
-  </ion-card> -->
-
 </ion-content>

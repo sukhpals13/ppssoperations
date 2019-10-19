@@ -27,9 +27,14 @@ export class ClientUserRolesComponent implements OnInit {
   public adding: boolean;
   public roleToAdd: object;
   public noData: boolean;
+  public storedRoles: any;
+  public tempRole:any;
+  public editIndex: any;
+  public editing: boolean;
 
   @Output() gotResponseSend = new EventEmitter();
   @Output() noDataSend = new EventEmitter();
+  @Output() editingPage = new EventEmitter();
 
   constructor(
     private getDetailService: GetDetailsService,
@@ -52,6 +57,7 @@ export class ClientUserRolesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.editIndex = null;
     this.getuserroles();
     this.gotResponse = false;
     this.noData = false;
@@ -124,7 +130,11 @@ export class ClientUserRolesComponent implements OnInit {
           }
         })
         this.zone.run(()=>{
-          this.roles = roles;
+          this.roles = roles.map(val=>{
+            let obj = {...val,edit:false};
+            return obj
+          });
+          this.tempRole=JSON.parse(JSON.stringify(this.roles));
           this.gotResponse = true;
           this.gotResponseSend.emit({gotRoleResponse:true})
           if(this.roles.length==0){
@@ -156,6 +166,15 @@ export class ClientUserRolesComponent implements OnInit {
 
   addRole(){
     this.adding = !this.adding;
+    if(this.editIndex==null){
+      this.editIndex = 'abcd'
+      this.editing = true;
+      this.editingPage.emit()
+    }else{
+      this.editIndex = null;
+      this.editing = false;
+      this.editingPage.emit()
+    }
   }
   changeAccessRights(cat,type) {
     let accessType = 'accessRights'
@@ -211,6 +230,15 @@ export class ClientUserRolesComponent implements OnInit {
       this.adding = false;
       this.getuserroles();
       loading.dismiss();
+      // if(this.editIndex==null){
+      //   this.editIndex = 'abcd;'
+      //   this.editing = true;
+      //   this.editingPage.emit()
+      // }else{
+        this.editIndex = null;
+        this.editing = false;
+        this.editingPage.emit()
+      // }
     },err=>{
       console.log(err);
       this.alertPopup('Errpr',JSON.stringify(err.error));
@@ -235,6 +263,9 @@ export class ClientUserRolesComponent implements OnInit {
           .subscribe(res=>{
             console.log(res);
             this.getuserroles();
+            this.editIndex = null;
+            this.editing = false;
+            this.editingPage.emit()
             loading.dismiss();
           },err=>{
             console.log(err);
@@ -280,9 +311,15 @@ export class ClientUserRolesComponent implements OnInit {
             console.log(res);
             this.getuserroles();
             loading.dismiss()
+            this.editIndex = null;
+            this.editing = false;
+            this.editingPage.emit();
           },err=>{
             console.log(err);
             loading.dismiss();
+            this.editIndex = null;
+            this.editing = false;
+            this.editingPage.emit();
           })
         }
       }, {
@@ -296,4 +333,20 @@ export class ClientUserRolesComponent implements OnInit {
     await alert.present();
   }
 
+  enableEditRole(role,i){
+    if(this.editIndex==null){
+      this.editIndex = i
+      this.editing = true;
+      this.editingPage.emit()
+    }else{
+      this.editIndex = null;
+      this.editing = false;
+      this.editingPage.emit()
+    }
+    role.edit = !role.edit;
+    if(role.edit==false){
+      role = Object.assign(role,this.tempRole[i]);
+      role.edit = false;
+    }
+  }
 }

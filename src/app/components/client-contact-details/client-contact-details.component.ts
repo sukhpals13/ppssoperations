@@ -17,7 +17,8 @@ export class ClientContactDetailsComponent implements OnInit {
   public contacts = [];
   public actionVisible: boolean;
   public add: boolean;
-  public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  // public editCon: boolean;
 
   constructor(
     public PoseDetailService: PostDetailsService,
@@ -44,7 +45,10 @@ export class ClientContactDetailsComponent implements OnInit {
      .subscribe(res => {
       this.add = true;
       console.log('Client add detail responseres', res);
-      this.clientContactDetails = res.client.contacts;
+      this.clientContactDetails = res.client.contacts.map(val=>{
+        let obj = {...val};
+        obj.edit = false;
+      });
       // this.actionVisible = true;
     }, err => {
       this.add = false;
@@ -68,7 +72,11 @@ export class ClientContactDetailsComponent implements OnInit {
     .subscribe(res => {
       this.add = true;
      console.log('Client add detail responseres', res);
-     this.clientContactDetails = res.client.contacts;
+     this.clientContactDetails = res.client.contacts.map(val=>{
+       let obj = {...val}
+       obj.edit = false;
+       return obj;
+     });
    }, err => {
     this.add = false;
      console.log(err);
@@ -80,7 +88,7 @@ export class ClientContactDetailsComponent implements OnInit {
     this.add = false;
     // console.log('function call');
     //  this.contacts
-    this.clientContactDetails.push({contactType: '', contactName: '', contactPhone: '', contactEmail: '', contactNotes: '' })
+    this.clientContactDetails.push({contactType: '', contactName: '', contactPhone: '', contactEmail: '', contactNotes: '', edit: true })
      
   }
 
@@ -95,6 +103,11 @@ export class ClientContactDetailsComponent implements OnInit {
       }, err => {
         console.log(err);
       })
+    }
+
+    editContact(contact){
+      contact.edit = !contact.edit;
+      // this.storedContact
     }
 
 }

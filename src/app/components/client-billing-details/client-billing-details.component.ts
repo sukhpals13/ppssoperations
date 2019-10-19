@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { PostDetailsService } from '../../services/postDetails/post-details.service'
 import { AlertController } from '@ionic/angular';
 import { stringify } from '@angular/compiler/src/util';
@@ -17,6 +17,8 @@ export class ClientBillingDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() edit: boolean;
   @Input() id: boolean;
+  @Output() cancelClicked = new EventEmitter();
+  @Output() updateClicked = new EventEmitter();
   public loader: boolean;
   public billingMethods: Array<string>;
   public addressCheck: Array<address>;
@@ -92,6 +94,7 @@ export class ClientBillingDetailsComponent implements OnInit {
           console.log(res);
           this.loader = false;
           this.alertPopup("Updated", 'Billing details updated successfully');
+          this.updateClicked.emit({updated: true});
           // this.data = res.client.billingInfo;
           // console.log(this.data);
         }, err => {
@@ -150,6 +153,9 @@ export class ClientBillingDetailsComponent implements OnInit {
         this.validationErrors[name] = false;
       }
     }, 200);
+  }
+  goBack(){
+    this.cancelClicked.emit({cancelClicked: true});
   }
 
 }

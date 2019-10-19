@@ -158,7 +158,7 @@ export class ClientDetailsPage implements OnInit {
     this.storedClientInfo = {...prevData};
     this.storedCustomizationInfo = {...prevData.customizations};
     this.storedBillingInfo = {...prevData.billingInfo};
-    console.log(this.storedCustomizationInfo,'this.storedCustomizationInfo');
+    // console.log(this.storedCustomizationInfo,'this.storedCustomizationInfo');
 
     if((type=="clientInfo"||type=="clientCustomization")&&!this.editInfo[type]){
       loading.present();
@@ -200,7 +200,7 @@ export class ClientDetailsPage implements OnInit {
   cancelToggle(type){
     this.editInfo[type]=!this.editInfo[type]
     this.showOtherSections = !this.showOtherSections;
-    console.log(this.storedCustomizationInfo,'this.storedCustomizationInfo');
+    // console.log(this.storedCustomizationInfo,'this.storedCustomizationInfo');
     this.client = {...this.storedClientInfo};
     this.client.customizations = {...this.storedCustomizationInfo};
     this.client.billingInfo = {...this.storedBillingInfo};

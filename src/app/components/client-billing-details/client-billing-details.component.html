@@ -182,6 +182,9 @@
                   {{loader?'':'Update Billing Info'}}
                   <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
                </ion-button>
+               <ion-button *ngIf="edit" (click)="goBack()">
+                  Back
+               </ion-button>
             </ion-col>
          </ion-row>
       </ion-grid>
