@@ -22,10 +22,10 @@
                   <ion-col size="12">
                     <h6>First Name</h6>
                     <div *ngIf="!userInfoEditMode">
-                      <app-text-shell animation="bouncing" lines="1" [data]="user.user.firstName"></app-text-shell>
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.firstName"></app-text-shell>
                     </div>
                     <div *ngIf="userInfoEditMode">
-                      <ion-input [(ngModel)]="user.user.firstName"></ion-input>
+                      <ion-input [(ngModel)]="user.firstName"></ion-input>
                     </div>
                   </ion-col>
                 </ion-row>
@@ -33,10 +33,10 @@
                   <ion-col size="12">
                     <h6>Last Name</h6>
                     <div *ngIf="!userInfoEditMode">
-                      <app-text-shell animation="bouncing" lines="1" [data]="user.user.lastName"></app-text-shell>
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.lastName"></app-text-shell>
                     </div>
                     <div *ngIf="userInfoEditMode">
-                      <ion-input [(ngModel)]="user.user.lastName"></ion-input>
+                      <ion-input [(ngModel)]="user.lastName"></ion-input>
                     </div>
                   </ion-col>
                 </ion-row>
@@ -44,10 +44,10 @@
                   <ion-col size="12">
                     <h6>Email</h6>
                     <div *ngIf="!userInfoEditMode">
-                      <app-text-shell animation="bouncing" lines="1" [data]="user.user.email"></app-text-shell>
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.email"></app-text-shell>
                     </div>
                     <div *ngIf="userInfoEditMode">
-                      <ion-input [(ngModel)]="user.user.email"></ion-input>
+                      <ion-input [(ngModel)]="user.email"></ion-input>
                     </div>
                   </ion-col>
                 </ion-row>
@@ -55,10 +55,10 @@
                   <ion-col size="12">
                     <h6>Username</h6>
                     <div *ngIf="!userInfoEditMode">
-                      <app-text-shell animation="bouncing" lines="1" [data]="user.user.username"></app-text-shell>
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.username"></app-text-shell>
                     </div>
                     <div *ngIf="userInfoEditMode">
-                      <ion-input [(ngModel)]="user.user.username"></ion-input>
+                      <ion-input [(ngModel)]="user.username"></ion-input>
                     </div>
                   </ion-col>
                 </ion-row>
@@ -66,11 +66,11 @@
                   <ion-col size="12">
                     <h6>Mobile Phone</h6>
                     <div *ngIf="!userInfoEditMode">
-                      <app-text-shell animation="bouncing" lines="1" [data]="user.user.mobilePhoneNumber">
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.mobilePhoneNumber">
                       </app-text-shell>
                     </div>
                     <div *ngIf="userInfoEditMode">
-                      <input [(ngModel)]="user.user.mobilePhoneNumber" class="phoneInput" type="text"
+                      <input [(ngModel)]="user.mobilePhoneNumber" class="phoneInput" type="text"
                         [textMask]="{mask: phoneNumberMask}" />
                     </div>
                   </ion-col>
@@ -78,14 +78,56 @@
                 <ion-row>
                   <ion-col size="12">
                     <h6>Last Updated</h6>
+                    <div *ngIf="user.updated">
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.updated"></app-text-shell>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-md="12">
+                    <h6>Last Login</h6>
+                    <div *ngIf="user.lastLogin">
+                      <app-text-shell animation="bouncing" lines="1" [data]="user?.lastLogin"></app-text-shell>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-md="12">
+                    <h6>Login Count</h6>
+                    <div *ngIf="user.loginCount">
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.loginCount"></app-text-shell>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-md="12">
+                    <h6>Last Browser</h6>
+                    <div *ngIf="user.lastBrowser">
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.lastBrowser"></app-text-shell>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="user.lastIsMobile">
+                  <ion-col size-md="12">
+                    <h6>Last Was Mobile?</h6>
                     <div>
-                      <app-text-shell animation="bouncing" lines="1" [data]="user.user.updated"></app-text-shell>
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.lastIsMobile"></app-text-shell>
+                      <!-- {{user.lastIsMobile=='true' ? "Yes":"No"}} -->
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="user.lastIsTablet">
+                  <ion-col size-md="12">
+                    <h6>Last Was Tablet?</h6>
+                    <div>
+                      <app-text-shell animation="bouncing" lines="1" [data]="user.lastIsTablet"></app-text-shell>
+                      <!-- {{user.lastIsTablet==true ? "Yes":"No"}} -->
                     </div>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col *ngIf="!userInfoEditMode">
-                    <ion-button (click)="editToggleUserInfo()">Edit</ion-button>
+                    <ion-button color="tertiary" (click)="editToggleUserInfo()">Edit</ion-button>
                   </ion-col>
                   <ion-col *ngIf="userInfoEditMode" class="ion-text-center outer-buttons">
                       <ion-button color="success" (click)="saveUserInfo(user.user)">Save</ion-button>
@@ -96,16 +138,16 @@
             </mat-expansion-panel>
 
             <!-- User roles section start -->
-            <mat-expansion-panel class="ml-0" [expanded]="!mobileMode" *ngIf="user.user.userRoles?.length">
+            <mat-expansion-panel class="ml-0" [expanded]="!mobileMode">
               <mat-expansion-panel-header>
                 <mat-panel-title>User Roles</mat-panel-title>
               </mat-expansion-panel-header>
-              <div *ngFor="let userRoles of user.user.userRoles">
+              <div>
                 <ion-row>
                   <ion-col size="12">
                     <h6>Role ID</h6>
                     <div class="row-info">
-                      <ion-row>
+                      <ion-row *ngFor="let userRoles of user.userRoles">
                         <ion-col size="10" class="ion-no-padding">
                           <app-text-shell animation="bouncing" lines="1" [data]="userRoles.roleId"></app-text-shell>
                         </ion-col>
@@ -119,13 +161,13 @@
                   </ion-col>
                 </ion-row>
               </div>
-              <div *ngIf="editModeuserRoles">
+              <div class="addRoles" *ngIf="editModeuserRoles">
                 <ion-input [(ngModel)]="addRoleValue" placeholder="Add Role"></ion-input>
-                <ion-button (click)="addNewRoles(addRoleValue)">Add</ion-button>
+                <ion-button color="success" (click)="addNewRoles(addRoleValue)">Add</ion-button>
               </div>
               <ion-row>
                 <ion-col *ngIf="!editModeuserRoles">
-                  <ion-button (click)="editToggleRoles()">Edit</ion-button>
+                  <ion-button color="tertiary" (click)="editToggleRoles()">Edit</ion-button>
                 </ion-col>
                 <ion-col *ngIf="editModeuserRoles" class="ion-text-center outer-buttons">
                   <ion-button color="success" (click)="saveUserRoles(user.user)">Save</ion-button>
@@ -139,15 +181,15 @@
               <mat-expansion-panel-header>
                 <mat-panel-title>Client Links</mat-panel-title>
               </mat-expansion-panel-header>
-              <div *ngFor="let clientinfo of user.user.clientLinks">
+              <div *ngFor="let clientinfo of user.clientLinks">
                 <ion-row>
                   <ion-col size="12">
                     <h6>Organization Name</h6>
-                    <div *ngIf="!editModeClientLinks">
+                    <div>
                       <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.orgName"></app-text-shell>
                     </div>
-                    <div *ngIf="editModeClientLinks">
-                      <ion-input [(ngModel)]="clientinfo.orgName"></ion-input>
+                    <div>
+                      <!-- <ion-input [(ngModel)]="clientinfo.orgName"></ion-input> -->
                     </div>
                   </ion-col>
                 </ion-row>
@@ -242,7 +284,7 @@
               </div>
               <ion-row>
                 <ion-col *ngIf="!editModeClientLinks">
-                  <ion-button (click)="editToggleClientLinks()">Edit</ion-button>
+                  <ion-button color="tertiary" (click)="editToggleClientLinks()">Edit</ion-button>
                 </ion-col>
                 <ion-col *ngIf="editModeClientLinks" class="ion-text-center outer-buttons">
                   <ion-button color="success" (click)="saveClientLinks(user.user)">Save</ion-button>

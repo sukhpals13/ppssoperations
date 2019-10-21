@@ -41,25 +41,25 @@
             </ion-row>
           </ion-col>
         <ion-col *ngIf="edit&&!group.edit">
-          <ion-button (click)="editGroup(group,i)">Edit</ion-button>
+          <ion-button color="tertiary" (click)="editGroup(group,i)">Edit</ion-button>
         </ion-col>
         <ion-col *ngIf="group.edit" size-md="12" size-xs="12" class="ion-text-right ion-no-padding">
-          <ion-button *ngIf="!group._id && group.edit" (click)="addUserGroup(group)"
+          <ion-button color="success" *ngIf="!group._id && group.edit" (click)="addUserGroup(group)"
             [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
             Add
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
           </ion-button>
-          <ion-button mat-icon-button *ngIf="group._id && group.edit" (click)="editUserGroup(group)" [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
+          <ion-button color="success" mat-icon-button *ngIf="group._id && group.edit" (click)="editUserGroup(group)" [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
             Save
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
           </ion-button>
-          <ion-button *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+          <button  *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
             Delete
-          </ion-button>
-          <ion-button *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
+          </button>
+          <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
             Cancel Edit
           </ion-button>
-          <ion-button *ngIf="!group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="addRemoveContactRow('remove')">
+          <ion-button color="danger" *ngIf="!group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="addRemoveContactRow('remove')">
             Cancel Add
           </ion-button>
         </ion-col>
@@ -67,7 +67,7 @@
       </ion-row>
       <ion-row *ngIf="!add">
         <ion-col>
-          <ion-button class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')" [disabled]="loader">Add Group
+          <ion-button color="success" class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')" [disabled]="loader">Add Group
           </ion-button>
           
         </ion-col>

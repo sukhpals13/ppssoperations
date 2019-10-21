@@ -338,7 +338,7 @@
     </mat-accordion>
   </ion-card>
   <div class="ion-text-center ion-padding-bottom group-btns" *ngIf="showPickInfo && editOrderCheck">
-    <ion-button color="" (click)="completeStatus(order, products)"> 
+    <ion-button color="success" (click)="completeStatus(order, products)"> 
       <!-- <ion-spinner *ngIf="completeClicked" name="dots"></ion-spinner> -->
       {{completeClicked?'':'Complete'}}<ion-spinner *ngIf="completeClicked" name="dots"></ion-spinner>
     </ion-button>

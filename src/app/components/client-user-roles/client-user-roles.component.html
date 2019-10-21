@@ -70,18 +70,18 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <ion-button [disabled]="!(select.category&&select.name)" (click)="addAccessRight(select,role)">Add Access Right
+        <ion-button color="success" [disabled]="!(select.category&&select.name)" (click)="addAccessRight(select,role)">Add Access Right
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!role.edit">
-        <ion-button (click)="enableEditRole(role,i)">Edit</ion-button>
+        <ion-button color="tertiary" (click)="enableEditRole(role,i)">Edit</ion-button>
     </ion-row>
     <ion-row *ngIf="role.edit">
       <ion-col>
-        <ion-button (click)="updateRole(role)">Update Role</ion-button>
-        <ion-button (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
-        <ion-button (click)="enableEditRole(role,i)">Cancel</ion-button>
+        <ion-button color="success" (click)="updateRole(role)">Update Role</ion-button>
+        <ion-button color="danger" (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
+        <ion-button color="danger" (click)="enableEditRole(role,i)">Cancel</ion-button>
       </ion-col>
     </ion-row>
     <mat-divider></mat-divider>
@@ -148,7 +148,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <ion-button [disabled]="!(selectRoleToAdd.category&&selectRoleToAdd.name)"
+      <ion-button color="success" [disabled]="!(selectRoleToAdd.category&&selectRoleToAdd.name)"
         (click)="addSelectedRoleAddAccessRight(selectRoleToAdd,roleToAdd)">Add Access Right</ion-button>
     </ion-col>
   </ion-row>

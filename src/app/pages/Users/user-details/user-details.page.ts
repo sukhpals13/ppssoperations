@@ -112,7 +112,7 @@ export class UserDetailsPage implements OnInit {
     })
     return this.getDetailsService.getUser(userId)
       .subscribe(res => {
-        this.user = res;
+        this.user = res.user;
         console.log('response user', res.user.clientLinks[0].clientId);
         this.clientId = res.user.clientLinks[0].clientId;
         this.getClientData();

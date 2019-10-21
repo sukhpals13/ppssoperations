@@ -80,7 +80,7 @@
                         <ion-input matInput placeholder="Add Pickup Locations" [(ngModel)]="pickupLocationAddition">
                         </ion-input>
                         <!-- <ion-button [attr.disabled]="pickupLocationAddition ? null : '' " (click)="addPickLocations()" [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank"></ion-spinner></ion-button> -->
-                        <ion-button class="mt-5" [attr.disabled]="pickupLocationAddition ? null : '' "
+                        <ion-button color="success" class="mt-5" [attr.disabled]="pickupLocationAddition ? null : '' "
                            (click)="addPickLocations()" [disabled]="addingPickup">{{addingPickup?'':'Add'}}<ion-spinner
                               name="dots" *ngIf="addingPickup"></ion-spinner>
                         </ion-button>
@@ -111,7 +111,7 @@
                            </mat-form-field> -->
                         <ion-input matInput placeholder="Add Delivery Locations" [(ngModel)]="deliveryLocationAddition">
                         </ion-input>
-                        <ion-button class="mt-5" [attr.disabled]="deliveryLocationAddition ? null : '' "
+                        <ion-button color="success" class="mt-5" [attr.disabled]="deliveryLocationAddition ? null : '' "
                            (click)="addDeliveryLocations()" [disabled]="addingDelivery">{{addingDelivery?'':'Add'}}
                            <ion-spinner name="dots" *ngIf="addingDelivery"></ion-spinner>
                         </ion-button>

@@ -178,7 +178,7 @@
          </ion-row>
          <ion-row>
             <ion-col>
-               <ion-button *ngIf="edit" (click)="editInfoCalled()" [disabled]="loader">
+               <ion-button color="success" *ngIf="edit" (click)="editInfoCalled()" [disabled]="loader">
                   {{loader?'':'Update Billing Info'}}
                   <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
                </ion-button>
