@@ -143,7 +143,7 @@
     <mat-expansion-panel  *ngIf="editInfo.assignments||showOtherSections" id="client-assingment">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Assingments
+          Assignments
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div>
@@ -164,7 +164,7 @@
             </ion-row>
           <ion-row *ngIf="editInfo.assignments">
             <ion-col>
-              <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
+              <ion-input matInput placeholder="Add Assignments" [(ngModel)]="assingmentAddition"></ion-input>
               <ion-button color="success" class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()"
                 [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots"
                   *ngIf="addingAssingment"></ion-spinner>
