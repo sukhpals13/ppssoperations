@@ -29,3 +29,8 @@ ion-button{
 .ion-color-tertiary{
   --ion-color-contrast: #ffffff !important;
 }
+ion-button{
+  @media(max-width:767px){
+      width:100%;
+  }
+}
