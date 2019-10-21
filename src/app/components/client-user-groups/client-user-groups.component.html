@@ -53,9 +53,9 @@
             Save
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
           </ion-button>
-          <button  *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+          <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
             Delete
-          </button>
+          </ion-button>
           <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
             Cancel Edit
           </ion-button>

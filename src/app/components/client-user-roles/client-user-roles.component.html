@@ -157,7 +157,7 @@
   <ion-row>
     <ion-col>
       <ion-button *ngIf="adding" (click)="sendAddRoleRequest(roleToAdd)">Submit</ion-button>
-      <ion-button *ngIf="editIndex==null||editIndex=='abcd'" (click)="addRole()">{{adding?"Cancel":"Add Role"}}</ion-button>
+      <ion-button [color]="adding?'tertiary':'danger'" *ngIf="editIndex==null||editIndex=='abcd'" (click)="addRole()">{{adding?"Cancel":"Add Role"}}</ion-button>
     </ion-col>
   </ion-row>
 </ion-grid>
