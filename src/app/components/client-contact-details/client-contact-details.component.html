@@ -77,11 +77,10 @@
                      {{loader?'':'Update Contact Info'}}
                      <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
                   </ion-button>
-                  
                   <ion-button *ngIf="!contact._id && contact.edit" (click)="addRemoveContactRow()">
                      Back
                   </ion-button>
-                  <ion-button color="danger" *ngIf="edit && actionVisible && contact.edit && add" (click)="deleteContact(contact)">
+                  <ion-button color="danger" *ngIf="edit && actionVisible && !contact.edit && add" (click)="deleteContact(contact)">
                      Delete Contact
                   </ion-button>
                </ion-col>

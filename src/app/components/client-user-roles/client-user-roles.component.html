@@ -76,11 +76,11 @@
     </ion-row>
     <ion-row *ngIf="!role.edit">
         <ion-button color="tertiary" (click)="enableEditRole(role,i)">Edit</ion-button>
+        <ion-button color="danger" (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
     </ion-row>
     <ion-row *ngIf="role.edit">
       <ion-col>
         <ion-button color="success" (click)="updateRole(role)">Update Role</ion-button>
-        <ion-button color="danger" (click)="confirmDeleteRole(role._id)">Delete Role</ion-button>
         <ion-button color="danger" (click)="enableEditRole(role,i)">Cancel</ion-button>
       </ion-col>
     </ion-row>

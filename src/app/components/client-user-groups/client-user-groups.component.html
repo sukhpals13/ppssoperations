@@ -42,6 +42,9 @@
           </ion-col>
         <ion-col *ngIf="edit&&!group.edit">
           <ion-button color="tertiary" (click)="editGroup(group,i)">Edit</ion-button>
+          <ion-button color="danger" *ngIf="group._id && !group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+            Delete
+          </ion-button>
         </ion-col>
         <ion-col *ngIf="group.edit" size-md="12" size-xs="12" class="ion-text-right ion-no-padding">
           <ion-button color="success" *ngIf="!group._id && group.edit" (click)="addUserGroup(group)"
@@ -53,14 +56,14 @@
             Save
             <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
           </ion-button>
-          <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+          <ion-button color="danger" *ngIf="group._id && !group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
             Delete
           </ion-button>
           <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
-            Cancel Edit
+            Cancel
           </ion-button>
           <ion-button color="danger" *ngIf="!group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="addRemoveContactRow('remove')">
-            Cancel Add
+            Cancel
           </ion-button>
         </ion-col>
       </div>
@@ -72,7 +75,7 @@
             </ion-col>
           </ion-row>
       <!-- </ion-grid> -->
-      <ion-row *ngIf="!add">
+      <ion-row *ngIf="!add&&!editing">
         <ion-col>
           <ion-button color="success" class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')" [disabled]="loader">Add Group
           </ion-button>
