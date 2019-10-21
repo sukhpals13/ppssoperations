@@ -31,3 +31,8 @@ ion-col{
 .ml-0{
     margin-left:0px;
 }
+ion-button{
+    @media(max-width:767px){
+        width:100%;
+    }
+}

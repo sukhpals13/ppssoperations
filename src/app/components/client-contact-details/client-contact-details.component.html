@@ -1,7 +1,7 @@
 <ion-grid>
    <mat-accordion>
       <div *ngFor=" let contact of clientContactDetails; let i = index;">
-         <mat-expansion-panel class="ml-0" *ngIf="i==editIndex||!editing">
+         <mat-expansion-panel *ngIf="i==editIndex||!editing">
             <mat-expansion-panel-header>
                <mat-panel-title>{{contact.contactName}}</mat-panel-title>
                <!-- <mat-icon *ngIf="edit && actionVisible" (click)="deleteContact(contact)">delete</mat-icon> -->
