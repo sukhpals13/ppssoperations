@@ -1,19 +1,7 @@
-<!-- <ion-card>
-   <ion-card-header color="primary">
-      <ion-card-subtitle>Contacts</ion-card-subtitle>
-   </ion-card-header>
-   <ion-card-content> -->
-<!-- {{clientContactDetails|json}} -->
-<!-- <mat-accordion> -->
-
-<!-- <mat-expansion-panel>
-   <mat-expansion-panel-header>
-      <mat-panel-title>Contacts</mat-panel-title>
-   </mat-expansion-panel-header> -->
-   <ion-grid>
-      <mat-accordion>
-
-         <mat-expansion-panel class="ml-0" *ngFor=" let contact of clientContactDetails">
+<ion-grid>
+   <mat-accordion>
+      <div *ngFor=" let contact of clientContactDetails; let i = index;">
+         <mat-expansion-panel class="ml-0" *ngIf="i==editIndex||!editing">
             <mat-expansion-panel-header>
                <mat-panel-title>{{contact.contactName}}</mat-panel-title>
                <!-- <mat-icon *ngIf="edit && actionVisible" (click)="deleteContact(contact)">delete</mat-icon> -->
@@ -49,7 +37,8 @@
                   <div class="info">{{contact.contactPhone}}</div>
                </ion-col>
                <ion-col size-md="6" size-xs="12" *ngIf="contact.edit">
-                  <input [(ngModel)]="contact.contactPhone" class="phoneInput" type = "text" [textMask]="{mask: phoneNumberMask}"/>
+                  <input [(ngModel)]="contact.contactPhone" class="phoneInput" type="text"
+                     [textMask]="{mask: phoneNumberMask}" />
                </ion-col>
             </ion-row>
             <ion-row>
@@ -75,23 +64,26 @@
                </ion-col>
             </ion-row>
             <!-- <mat-icon *ngIf="edit && actionVisible" (click)="editContact(contact)">edit</mat-icon> -->
-            <ion-button *ngIf="edit && actionVisible" (click)="editContact(contact)">
-                  Edit Contact
-            </ion-button>
             <ion-button *ngIf="!contact._id && contact.edit" (click)="addContactsInfo(contact)" [disabled]="loader">
                {{loader?'':'Submit'}}
                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
             </ion-button>
             <ion-button *ngIf="contact._id && contact.edit" (click)="editContactsInfo(contact)" [disabled]="loader">
-               {{loader?'':'Update Contacts Info'}}
+               {{loader?'':'Update Contact Info'}}
                <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
             </ion-button>
+            <ion-button *ngIf="edit && actionVisible && contact._id" (click)="editContact(contact,i)">
+               {{contact.edit?'Cancel':'Edit Contact'}}
+            </ion-button>
+            <ion-button *ngIf="!contact._id && contact.edit" (click)="addRemoveContactRow()">
+               Back
+            </ion-button>
+            <ion-button *ngIf="edit && actionVisible && contact.edit && add" (click)="deleteContact(contact)">
+               Delete Contact
+            </ion-button>
          </mat-expansion-panel>
-         <ion-button class="addcontact" *ngIf="edit && add" (click)="addContactRow()" [disabled]="loader">Add contact
-         </ion-button>
-      </mat-accordion>
-   </ion-grid>
-   <!-- </mat-expansion-panel> -->
-   <!-- </mat-accordion> -->
-   <!-- </ion-card-content>
-</ion-card> -->
+      </div>
+      <ion-button class="addcontact" *ngIf="edit && add && !editing" (click)="addRemoveContactRow()" [disabled]="loader">Add contact
+      </ion-button>
+   </mat-accordion>
+</ion-grid>

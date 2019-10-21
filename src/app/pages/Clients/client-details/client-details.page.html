@@ -191,12 +191,12 @@
       <mat-expansion-panel-header>
         <mat-panel-title>Contacts</mat-panel-title>
       </mat-expansion-panel-header>
-      <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="editInfo.contacts" [id]="client._id">
+      <app-client-contact-details [clientContactDetails]="client.contacts" [edit]="true" [id]="client._id" (editingPage)="editToggle('contacts',client)">
       </app-client-contact-details>
-      <ion-row>
-        <ion-button (click)="editToggle('contacts',client)">{{editInfo.contacts?'Back':'Edit'}}</ion-button>
+      <!-- <ion-row> -->
+        <!-- <ion-button (click)="editToggle('contacts',client)">{{editInfo.contacts?'Back':'Edit'}}</ion-button> -->
         <!-- <ion-button>Cancel</ion-button> -->
-      </ion-row>
+      <!-- </ion-row> -->
     </mat-expansion-panel>
     <mat-expansion-panel  *ngIf="editInfo.roles||showOtherSections">
       <mat-expansion-panel-header>
@@ -206,10 +206,10 @@
       </mat-expansion-panel-header>
       <app-client-user-roles *ngIf="client._id" [id]="client._id" (editingPage)="editToggle('roles',client)"
         (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)"></app-client-user-roles>
-      <ion-row>
+      <!-- <ion-row> -->
         <!-- <ion-button (click)="editToggle('roles',client)">{{editInfo.roles?'Back':'Edit'}}</ion-button> -->
         <!-- <ion-button>Cancel</ion-button> -->
-      </ion-row>
+      <!-- </ion-row> -->
     </mat-expansion-panel>
     <mat-expansion-panel  *ngIf="editInfo.groups||showOtherSections">
       <mat-expansion-panel-header>
@@ -219,11 +219,11 @@
       </mat-expansion-panel-header>
       <app-client-user-groups *ngIf="client._id" [id]="client._id" [edit]="true"
         (gotResponseSend)="gotResponse($event)" (noDataSend)="gotResponse($event)" (editingPage)="editToggle('groups',client)"></app-client-user-groups>
-      <ion-row>
+      <!-- <ion-row> -->
         <!-- <ion-button (click)="editToggle('groups')">Edit</ion-button> -->
         <!-- <ion-button (click)="editToggle('groups',client)">{{editInfo.groups?'Back':'Edit'}}</ion-button> -->
         <!-- <ion-button>Cancel</ion-button> -->
-      </ion-row>
+      <!-- </ion-row> -->
     </mat-expansion-panel>
   </mat-accordion>
 </ion-content>
