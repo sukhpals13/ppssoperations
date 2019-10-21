@@ -88,6 +88,9 @@
             </ion-row>
          </mat-expansion-panel>
       </div>
+      <div *ngIf="clientContactDetails.length==0">
+            There are no client Contacts. Click on the button below to add.
+      </div>
       <ion-button color="success" class="addcontact" *ngIf="edit && add && !editing" (click)="addRemoveContactRow()" [disabled]="loader">Add contact
       </ion-button>
    </mat-accordion>

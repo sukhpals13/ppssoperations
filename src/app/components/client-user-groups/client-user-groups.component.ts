@@ -47,6 +47,7 @@ export class ClientUserGroupsComponent implements OnInit {
     this.gotResponse = false;
     this.noData = true;
     this.editing = false;
+    this.clientUserGroup = [];
   }
 
 

@@ -65,6 +65,13 @@
         </ion-col>
       </div>
       </ion-row>
+      <!-- <ion-grid> -->
+          <ion-row *ngIf="clientUserGroup.length==0">
+            <ion-col>
+              There are no client Groups. Click on the button below to add.
+            </ion-col>
+          </ion-row>
+      <!-- </ion-grid> -->
       <ion-row *ngIf="!add">
         <ion-col>
           <ion-button color="success" class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')" [disabled]="loader">Add Group

@@ -87,6 +87,13 @@
     <mat-divider></mat-divider>
   </div>
 </ion-grid>
+<ion-grid *ngIf="roles.length==0">
+  <ion-row>
+    <ion-col>
+      There are no client Roles. Click on the button below to add.
+    </ion-col>
+  </ion-row>
+</ion-grid>
 <ion-grid *ngIf="adding">
   <ion-row>
     <ion-col size="12">

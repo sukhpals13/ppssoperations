@@ -112,6 +112,9 @@
               </button>
             </ion-col>
           </ion-row>
+          <ion-row *ngIf="client.ranksOrTitles.length==0&&!editInfo.ranks">
+            There are no client Ranks or Titles. Click on the button below to add.
+          </ion-row>
           <ion-row *ngIf="editInfo.ranks">
             <ion-col>
               <ion-input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition"></ion-input>
@@ -156,6 +159,9 @@
               </button>
             </ion-col>
           </ion-row>
+          <ion-row *ngIf="client.assignments.length==0&&!editInfo.assignments">
+              There are no client Ranks or Titles. Click on the button below to add.
+            </ion-row>
           <ion-row *ngIf="editInfo.assignments">
             <ion-col>
               <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
