@@ -64,23 +64,28 @@
                </ion-col>
             </ion-row>
             <!-- <mat-icon *ngIf="edit && actionVisible" (click)="editContact(contact)">edit</mat-icon> -->
-            <ion-button  *ngIf="!contact._id && contact.edit" (click)="addContactsInfo(contact)" [disabled]="loader">
-               {{loader?'':'Submit'}}
-               <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-            </ion-button>
-            <ion-button color="success" *ngIf="contact._id && contact.edit" (click)="editContactsInfo(contact)" [disabled]="loader">
-               {{loader?'':'Update Contact Info'}}
-               <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-            </ion-button>
-            <ion-button *ngIf="edit && actionVisible && contact._id" (click)="editContact(contact,i)">
-               {{contact.edit?'Cancel':'Edit Contact'}}
-            </ion-button>
-            <ion-button *ngIf="!contact._id && contact.edit" (click)="addRemoveContactRow()">
-               Back
-            </ion-button>
-            <ion-button color="danger" *ngIf="edit && actionVisible && contact.edit && add" (click)="deleteContact(contact)">
-               Delete Contact
-            </ion-button>
+            <ion-row>
+               <ion-col>
+                  <ion-button  *ngIf="!contact._id && contact.edit" (click)="addContactsInfo(contact)" [disabled]="loader">
+                     {{loader?'':'Submit'}}
+                     <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+                  </ion-button>
+                  <ion-button [color]="contact.edit?'danger':'tertiary'" *ngIf="edit && actionVisible && contact._id" (click)="editContact(contact,i)">
+                     {{contact.edit?'Cancel':'Edit Contact'}}
+                  </ion-button>
+                  <ion-button color="success" *ngIf="contact._id && contact.edit" (click)="editContactsInfo(contact)" [disabled]="loader">
+                     {{loader?'':'Update Contact Info'}}
+                     <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+                  </ion-button>
+                  
+                  <ion-button *ngIf="!contact._id && contact.edit" (click)="addRemoveContactRow()">
+                     Back
+                  </ion-button>
+                  <ion-button color="danger" *ngIf="edit && actionVisible && contact.edit && add" (click)="deleteContact(contact)">
+                     Delete Contact
+                  </ion-button>
+               </ion-col>
+            </ion-row>
          </mat-expansion-panel>
       </div>
       <ion-button color="success" class="addcontact" *ngIf="edit && add && !editing" (click)="addRemoveContactRow()" [disabled]="loader">Add contact

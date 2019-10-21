@@ -63,14 +63,16 @@
                 <div>
                   {{client.parentClientId?client.parentClientId:"No parent client Id"}}
                 </div>
-                <ion-button (click)="openSearchClient()">Edit Parent Client Id</ion-button>
+                <ion-button color="tertiary" (click)="openSearchClient()">Edit Parent Client Id</ion-button>
               </div>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-button *ngIf="!editInfo.clientInfo" (click)="editToggle('clientInfo',client)">Edit</ion-button>
-            <ion-button *ngIf="editInfo.clientInfo" (click)="editToggle('clientInfo',client)">Save</ion-button>
-            <ion-button *ngIf="editInfo.clientInfo" (click)="cancelToggle('clientInfo')">Cancel</ion-button>
+            <ion-col>
+              <ion-button color="tertiary" *ngIf="!editInfo.clientInfo" (click)="editToggle('clientInfo',client)">Edit</ion-button>
+              <ion-button color="success" *ngIf="editInfo.clientInfo" (click)="editToggle('clientInfo',client)">Save</ion-button>
+              <ion-button color="danger" *ngIf="editInfo.clientInfo" (click)="cancelToggle('clientInfo')">Cancel</ion-button>
+              </ion-col>
           </ion-row>
         </ion-grid>
       </div>
@@ -84,9 +86,11 @@
       <app-client-customizations [clientCustomizations]="client.customizations" [edit]="editInfo.clientCustomization" [id]="client._id">
       </app-client-customizations>
       <ion-row>
-        <ion-button *ngIf="!editInfo.clientCustomization" (click)="editToggle('clientCustomization',client)">Edit</ion-button>
-        <ion-button *ngIf="editInfo.clientCustomization" (click)="editToggle('clientCustomization',client)">Save</ion-button>
-        <ion-button *ngIf="editInfo.clientCustomization" (click)="cancelToggle('clientCustomization')">Cancel</ion-button>
+        <ion-col>
+          <ion-button color="tertiary" *ngIf="!editInfo.clientCustomization" (click)="editToggle('clientCustomization',client)">Edit</ion-button>
+          <ion-button color="success" *ngIf="editInfo.clientCustomization" (click)="editToggle('clientCustomization',client)">Save</ion-button>
+          <ion-button color="danger" *ngIf="editInfo.clientCustomization" (click)="cancelToggle('clientCustomization')">Cancel</ion-button>
+        </ion-col>
       </ion-row>
     </mat-expansion-panel>
     <mat-expansion-panel  *ngIf="editInfo.ranks||showOtherSections" id="client-ranks">
@@ -111,15 +115,17 @@
           <ion-row *ngIf="editInfo.ranks">
             <ion-col>
               <ion-input matInput placeholder="Add Rank or Title" [(ngModel)]="rankAddition"></ion-input>
-              <ion-button class="mt-5" [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()"
+              <ion-button color="success"  class="mt-5" [attr.disabled]="rankAddition ? null : '' " (click)="addRanks()"
                 [disabled]="addingRank">{{addingRank?'':'Add'}}<ion-spinner name="dots" *ngIf="addingRank">
                 </ion-spinner>
               </ion-button>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-button *ngIf="!editInfo.ranks" (click)="editToggle('ranks',client)">Edit</ion-button>
-            <ion-button *ngIf="editInfo.ranks" (click)="editToggle('ranks',client)">Back</ion-button>
+            <ion-col>
+              <ion-button color="tertiary" *ngIf="!editInfo.ranks" (click)="editToggle('ranks',client)">Edit</ion-button>
+              <ion-button *ngIf="editInfo.ranks" (click)="editToggle('ranks',client)">Back</ion-button>
+            </ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -153,15 +159,17 @@
           <ion-row *ngIf="editInfo.assignments">
             <ion-col>
               <ion-input matInput placeholder="Add Assingments" [(ngModel)]="assingmentAddition"></ion-input>
-              <ion-button class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()"
+              <ion-button color="success" class="mt-5" [attr.disabled]="assingmentAddition ? null : '' " (click)="addAssingment()"
                 [disabled]="addingAssingment">{{addingAssingment?'':'Add'}}<ion-spinner name="dots"
                   *ngIf="addingAssingment"></ion-spinner>
               </ion-button>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-button *ngIf="!editInfo.assignments" (click)="editToggle('assignments',client)">Edit</ion-button>
-            <ion-button *ngIf="editInfo.assignments" (click)="editToggle('assignments',client)">Back</ion-button>
+            <ion-col>
+              <ion-button color="tertiary" *ngIf="!editInfo.assignments" (click)="editToggle('assignments',client)">Edit</ion-button>
+              <ion-button *ngIf="editInfo.assignments" (click)="editToggle('assignments',client)">Back</ion-button>
+            </ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="!client.name">
@@ -182,7 +190,7 @@
       <app-client-billing-details [data]="client.billingInfo" [edit]="editInfo.billingInfo" [id]="client._id" (updateClicked)="editToggle('billingInfo',client)" (cancelClicked)="cancelToggle('billingInfo')">
       </app-client-billing-details>
       <ion-row>
-        <ion-button *ngIf="!editInfo.billingInfo" (click)="editToggle('billingInfo',client)">Edit</ion-button>
+        <ion-button color="tertiary" *ngIf="!editInfo.billingInfo" (click)="editToggle('billingInfo',client)">Edit</ion-button>
         <!-- <ion-button *ngIf="editInfo.billingInfo">Save</ion-button> -->
         <!-- <ion-button *ngIf="editInfo.billingInfo" (click)="cancelToggle('billingInfo')">Back</ion-button> -->
       </ion-row>
