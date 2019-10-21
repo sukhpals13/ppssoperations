@@ -106,6 +106,11 @@ export class ClientUserGroupsComponent implements OnInit {
           this.noDataSend.emit({noGroupData:false})
         }
         this.addingGroup = true;
+        group.edit = false;
+        this.editIndex = null;
+        this.editing = false;
+        this.editingPage.emit()
+        this.add = false;
       }, err => {
         console.log(err);
         this.addingGroup = true;
@@ -144,6 +149,7 @@ export class ClientUserGroupsComponent implements OnInit {
               // this.getuserGroups();
               loading.dismiss();
               this.alertPopup("Updated", 'Client User Group updated successfully');
+              group.edit = false;
               this.editIndex = null;
               this.editing = false;
               this.editingPage.emit()
@@ -209,7 +215,7 @@ export class ClientUserGroupsComponent implements OnInit {
 
 
   // add group user row
-  addContactRow() {
+  addRemoveContactRow(type) {
     if(this.editIndex==null){
       this.editIndex = this.clientUserGroup.length
       this.editing = true;
@@ -219,8 +225,11 @@ export class ClientUserGroupsComponent implements OnInit {
       this.editing = false;
       this.editingPage.emit()
     }
-    this.add = true;
-    this.clientUserGroup.push({ name: '', description: '', edit: true });
+    this.add = !this.add;
+    if(type=='add')
+      this.clientUserGroup.push({ name: '', description: '', edit: true });
+    else
+    this.clientUserGroup.pop();
   }
 
   editGroup(group,i){
@@ -233,11 +242,11 @@ export class ClientUserGroupsComponent implements OnInit {
       this.editing = false;
       this.editingPage.emit()
     }
-    if(this.add==true){
-      // this.clientUserGroup = this.clientUserGroup.splice(-1,1)
-      // delete this.clientUserGroup[this.clientUserGroup.length-1]
-      this.clientUserGroup.pop()
-    }
+    // if(this.add==true){
+    //   // this.clientUserGroup = this.clientUserGroup.splice(-1,1)
+    //   // delete this.clientUserGroup[this.clientUserGroup.length-1]
+    //   this.clientUserGroup.pop()
+    // }
     group.edit = !group.edit;
     if(group.edit==true){
       this.tempGroup = JSON.parse(JSON.stringify(this.clientUserGroup));

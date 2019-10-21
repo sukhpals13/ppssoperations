@@ -56,15 +56,18 @@
           <ion-button *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
             Delete
           </ion-button>
-          <ion-button *ngIf="group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
-            Cancel
+          <ion-button *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
+            Cancel Edit
+          </ion-button>
+          <ion-button *ngIf="!group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="addRemoveContactRow('remove')">
+            Cancel Add
           </ion-button>
         </ion-col>
       </div>
       </ion-row>
       <ion-row *ngIf="!add">
         <ion-col>
-          <ion-button class="addgroup" *ngIf="edit" (click)="addContactRow()" [disabled]="loader">Add Group
+          <ion-button class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')" [disabled]="loader">Add Group
           </ion-button>
           
         </ion-col>
