@@ -12,7 +12,6 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 })
 export class UserDetailsPage implements OnInit {
 
-  // public editMode: boolean;
   public userId: string;
   public user: any;
   public loader: boolean;
@@ -23,10 +22,7 @@ export class UserDetailsPage implements OnInit {
   public clientId: string;
   public deviceWidth: any;
   public mobileMode: boolean;
-
   public userInfoEditMode: boolean;
-  public editModeuserRoles: boolean;
-  // public editModeClientLinks: boolean;
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   @HostBinding('class.is-shell') get isShell() {
@@ -65,10 +61,8 @@ export class UserDetailsPage implements OnInit {
 
 
     this.userInfoEditMode = false;
-    this.editModeuserRoles = false;
     this.viewUserDetails(this.user);
 
-    // this.deviceWidth = window.innerWidth
     this.mobileMode = false;
     this.breakpointObserver.observe([
       '(max-width: 768px)'
@@ -130,93 +124,6 @@ export class UserDetailsPage implements OnInit {
     await alert.present();
   }
 
-
-
-  // async updateUserInfo(user) {
-  //   const loading = await this.loadingController.create({
-  //     message: 'Please wait...',
-  //   });
-  //   const alert = await this.alertController.create({
-  //     header: "Are you sure ?",
-  //     message: "Are you sure you want to update this user information ?",
-  //     buttons: [{
-  //       text: 'Yes',
-  //       handler: (blah) => {
-  //         loading.present();
-
-  //         // this.addingGroup = true;
-  //         let userId = user._id;
-  //         let postBody = {
-  //           email: user.email,
-  //           firstName: user.firstName,
-  //           lastName: user.lastName,
-  //           mobilePhoneNumber: user.mobilePhoneNumber,
-  //         }
-  //         return this.postDetailService.updateUser(userId, postBody)
-  //           .subscribe(res => {
-  //             console.log('Update user info response', res);
-  //             loading.dismiss();
-  //             this.alertPopup("Updated", 'Client User Group updated successfully');
-  //             this.viewUserDetails(user);
-  //             this.editMode = false;
-  //           }, err => {
-  //             console.log(err);
-  //             loading.dismiss();
-  //             this.alertPopup("Error", JSON.stringify(err.error.message));
-  //           })
-  //       }
-  //     }, {
-  //       text: 'No',
-  //       role: 'cancel',
-  //       handler: () => {
-  //       }
-  //     }]
-  //   });
-  //   alert.present()
-  // }
-
-
-
-  // cancel user update
-  // cancelUserUpdate() {
-  //   this.editMode = false;
-  //   this.viewUserDetails(this.user);
-  // }
-
-  // add ranks
-  addRank(rank) {
-    this.user.user.clientLinks[0].ranks.push(rank);
-    this.addRankValue = "";
-  }
-
-  // delete rank
-  deleteRank(index) {
-    this.user.user.clientLinks[0].ranks.splice(index, 1);
-  }
-
-  // add assignments
-  addAssignments(assignment) {
-    this.user.user.clientLinks[0].assignments.push(assignment);
-    this.addAssignmentValue = "";
-  }
-
-  // delete assignments
-  deleteAssignment(index) {
-    this.user.user.clientLinks[0].assignments.splice(index, 1);
-  }
-
-  //add Roles
-  addNewRoles(role) {
-    this.user.user.userRoles.push({ roleId: role });
-    this.addRoleValue = "";
-  }
-
-  //delete Roles
-  deleteRoles(index) {
-    this.user.user.userRoles.splice(index, 1);
-  }
-
-
   // get client 
   getClientData() {
     return this.getDetailsService.getClient(this.clientId)
@@ -229,8 +136,6 @@ export class UserDetailsPage implements OnInit {
 
       )
   }
-
-
 
   // user info
   async saveUserInfo(user){
@@ -279,54 +184,7 @@ export class UserDetailsPage implements OnInit {
     this.userInfoEditMode = false;
   }
 
-// user roles
-async saveUserRoles(user){
-  const loading = await this.loadingController.create({
-    message: 'Please wait...',
-  });
-  const alert = await this.alertController.create({
-    header: "Are you sure ?",
-    message: "Are you sure you want to update User roles ?",
-    buttons: [{
-      text: 'Yes',
-      handler: (blah) => {
-        loading.present();
-        let userId = user._id;
-        let postBody = {
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          mobilePhoneNumber: user.mobilePhoneNumber,
-        }
-        return this.postDetailService.updateUser(userId, postBody)
-          .subscribe(res => {
-            console.log('Update user roles response', res);
-            loading.dismiss();
-            this.alertPopup("Updated", 'User roles updated successfully');
-            this.viewUserDetails(user);
-            this.editModeuserRoles = false;
-          }, err => {
-            console.log(err);
-            loading.dismiss();
-            this.alertPopup("Error", JSON.stringify(err.error.message));
-          })
-      }
-    }, {
-      text: 'No',
-      role: 'cancel',
-      handler: () => {
-      }
-    }]
-  });
-  alert.present()
-}
-
-cancelUserRoles(){
-  this.viewUserDetails(this.user);
-   this.editModeuserRoles = false;
- }
-
-  async editToggleUserInfo() {
+async editToggleUserInfo() {
 
     this.zone.run(() => {
       let flag = true;
@@ -340,21 +198,4 @@ cancelUserRoles(){
     })
 
   };
-
-  async editToggleRoles() {
-
-    this.zone.run(() => {
-      let flag = true;
-      if (this.editModeuserRoles) {
-        if (flag) {
-          this.editModeuserRoles = false;
-        }
-      } else {
-        this.editModeuserRoles = true;
-      }
-    })
-
-  };
-
-
 }

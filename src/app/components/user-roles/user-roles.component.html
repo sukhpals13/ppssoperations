@@ -1,78 +1,70 @@
 <ion-grid *ngFor="let expandedRoles of user.expandedUserRoles">
-    <ion-row>
-      <ion-col size="12">
-        <h6>Client Name</h6>
-        <div class="row-info">
-          <ion-row>
-            <ion-col size="10" class="ion-no-padding">
-              <app-text-shell animation="bouncing" lines="1" [data]="expandedRoles.clientName"></app-text-shell>
-            </ion-col>
-            <!-- <ion-col *ngIf="editModeuserRoles && userRoles" size="2" class="ion-text-right ion-no-padding">
+  <ion-row>
+    <ion-col size="12">
+      <h6>Client Name</h6>
+      <div class="row-info">
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <app-text-shell animation="bouncing" lines="1" [data]="expandedRoles.clientName"></app-text-shell>
+          </ion-col>
+          <!-- <ion-col *ngIf="editModeuserRoles && userRoles" size="2" class="ion-text-right ion-no-padding">
               <button class="delete" (click)="deleteRoles(i)">
                 <mat-icon>delete</mat-icon>
               </button>
             </ion-col> -->
-          </ion-row>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col size="12">
-          <h6>Role Name</h6>
-          <div class="row-info">
-            <ion-row>
-              <ion-col size="10" class="ion-no-padding">
-                <app-text-shell animation="bouncing" lines="1" [data]="expandedRoles.roleName"></app-text-shell>
-              </ion-col>
-            </ion-row>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col size="12">
-            <h6>Group Names</h6>
-            <div class="row-info">
-              <ion-row *ngFor="let groupName of expandedRoles.groupNames">
-                <ion-col size="10" class="ion-no-padding">
-                  <app-text-shell animation="bouncing" lines="1" [data]="groupName"></app-text-shell>
-                </ion-col>
-              </ion-row>
-            </div>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h6>Role Name</h6>
+      <div class="row-info">
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <app-text-shell animation="bouncing" lines="1" [data]="expandedRoles.roleName"></app-text-shell>
           </ion-col>
         </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h6>Group Names</h6>
+      <div class="row-info">
+        <ion-row *ngFor="let groupName of expandedRoles.groupNames">
+          <ion-col size="10" class="ion-no-padding">
+            <app-text-shell animation="bouncing" lines="1" [data]="groupName"></app-text-shell>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h6>Access Rights</h6>
+      <div class="row-info">
         <ion-row>
-            <ion-col size="12">
-              <h6>Access Rights</h6>
-              <div class="row-info">
-                <ion-row>
-                    <ion-col size-md="12">
-                        Category
-                    </ion-col>
-                    <ion-col size-md="12" class="ion-no-padding">
-                      <ul>
-                        <li *ngFor="let accessrights of expandedRoles.accessRights">
-                            <app-text-shell animation="bouncing" lines="1" [data]="accessrights.category"></app-text-shell>
-                        </li>
-                      </ul>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col size-md="12">
-                        Name
-                    </ion-col>
-                    <ion-col size-md="12" class="ion-no-padding">
-                      <ul>
-                        <li *ngFor="let accessrights of expandedRoles.accessRights">
-                            <app-text-shell animation="bouncing" lines="1" [data]="accessrights.name"></app-text-shell>
-                        </li>
-                      </ul>
-                    </ion-col>
-                </ion-row>
-              </div>
-            </ion-col>
-          </ion-row>
-          <mat-divider></mat-divider>
-  <!-- <div class="addRoles" *ngIf="editModeuserRoles">
+          <ion-col size-md="6"> Category</ion-col>
+          <ion-col size-md="6">Name</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let access of expandedRoles.accessRights; let i = index" align-items-center>
+          <ion-col size="5" style="text-transform: capitalize;">
+            {{access.category}}
+          </ion-col>
+          <ion-col size="6" style="text-transform: capitalize;">
+            {{access.name}}
+          </ion-col>
+          <ion-col size="1" *ngIf="editModeuserRoles">
+            <button (click)="deleteRoles(access)" mat-icon-button aria-label="Example icon-button with a heart icon">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <div class="addRoles" *ngIf="editModeuserRoles">
     <ion-input [(ngModel)]="addRoleValue" placeholder="Add Role"></ion-input>
     <ion-button color="success" (click)="addNewRoles(addRoleValue)">Add</ion-button>
   </div>
@@ -81,8 +73,9 @@
       <ion-button color="tertiary" (click)="editToggleRoles()">Edit</ion-button>
     </ion-col>
     <ion-col *ngIf="editModeuserRoles" class="ion-text-center outer-buttons">
-      <ion-button color="success" (click)="saveUserRoles(user.user)">Save</ion-button>
-      <ion-button color="danger" (click)="cancelUserRoles(user.user)">Cancel</ion-button>
+      <ion-button color="success" (click)="saveUserRoles(user)">Save</ion-button>
+      <ion-button color="danger" (click)="cancelUserRoles()">Cancel</ion-button>
     </ion-col>
-  </ion-row> -->
+  </ion-row>
+  <mat-divider></mat-divider>
 </ion-grid>
