@@ -16,6 +16,7 @@ export class UserRolesComponent implements OnInit {
 
   public editModeuserRoles: boolean;
   public addRoleValue: string;
+  public select: object;
 
   constructor(
     public alertController: AlertController,
@@ -45,6 +46,11 @@ export class UserRolesComponent implements OnInit {
         }],
       },
     };
+
+    this.select = {
+      category: undefined,
+      name: undefined
+    }
   }
 
   async alertPopup(title, msg) {

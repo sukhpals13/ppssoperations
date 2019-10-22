@@ -64,10 +64,26 @@
       </div>
     </ion-col>
   </ion-row>
-  <div class="addRoles" *ngIf="editModeuserRoles">
-    <ion-input [(ngModel)]="addRoleValue" placeholder="Add Role"></ion-input>
-    <ion-button color="success" (click)="addNewRoles(addRoleValue)">Add</ion-button>
-  </div>
+  <ion-row *ngIf="editModeuserRoles">
+      <ion-col size="12">
+        <mat-form-field style="width: 100%;">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="select.category">
+            <mat-option>Cat 1</mat-option>
+            <mat-option>Cat 2</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Name</mat-label>
+          <mat-select [(ngModel)]="select.name">
+              <mat-option>Name 1</mat-option>
+              <mat-option>name 2</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <ion-button color="success" [disabled]="!(select.category && select.name)" (click)="addAccessRight(select)">Add Access Right
+        </ion-button>
+      </ion-col>
+    </ion-row>
   <ion-row>
     <ion-col *ngIf="!editModeuserRoles">
       <ion-button color="tertiary" (click)="editToggleRoles()">Edit</ion-button>
