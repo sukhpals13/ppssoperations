@@ -45,19 +45,27 @@
               <h6>Access Rights</h6>
               <div class="row-info">
                 <ion-row>
-                    <ion-col size-md="6" size-xs="12">
+                    <ion-col size-md="12">
                         Category
                     </ion-col>
-                    <ion-col size-md="6" size-xs="12" class="ion-no-padding">
-                      <app-text-shell *ngFor="let accessrights of expandedRoles.accessRights" animation="bouncing" lines="1" [data]="accessrights.category"></app-text-shell>
+                    <ion-col size-md="12" class="ion-no-padding">
+                      <ul>
+                        <li *ngFor="let accessrights of expandedRoles.accessRights">
+                            <app-text-shell animation="bouncing" lines="1" [data]="accessrights.category"></app-text-shell>
+                        </li>
+                      </ul>
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col size-md="6" size-xs="12">
+                    <ion-col size-md="12">
                         Name
                     </ion-col>
-                    <ion-col size-md="6" size-xs="12" class="ion-no-padding">
-                      <app-text-shell *ngFor="let accessrights of expandedRoles.accessRights" animation="bouncing" lines="1" [data]="accessrights.name"></app-text-shell>
+                    <ion-col size-md="12" class="ion-no-padding">
+                      <ul>
+                        <li *ngFor="let accessrights of expandedRoles.accessRights">
+                            <app-text-shell animation="bouncing" lines="1" [data]="accessrights.name"></app-text-shell>
+                        </li>
+                      </ul>
                     </ion-col>
                 </ion-row>
               </div>
