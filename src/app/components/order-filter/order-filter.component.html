@@ -9,7 +9,7 @@
         </mat-select>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>SubStatus</mat-label>
+        <mat-label>Sub Status</mat-label>
         <mat-select [(ngModel)]="object.substatus" [(value)]="data.subStatus">
             <mat-option *ngFor="let stat of subStatusTypeArray" [value]="stat">
                 {{stat}}
