@@ -26,11 +26,7 @@ export class UserDetailsPage implements OnInit {
 
   public userInfoEditMode: boolean;
   public editModeuserRoles: boolean;
-  public editModeClientLinks: boolean;
-  
-
-
-
+  // public editModeClientLinks: boolean;
   public phoneNumberMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   @HostBinding('class.is-shell') get isShell() {
@@ -58,6 +54,7 @@ export class UserDetailsPage implements OnInit {
 
       user: {
         name: null,
+        orgName: null,
         UserNumber: null,
         isShell: true,
         clientLinks: [{
@@ -69,7 +66,6 @@ export class UserDetailsPage implements OnInit {
 
     this.userInfoEditMode = false;
     this.editModeuserRoles = false;
-    this.editModeClientLinks = false;
     this.viewUserDetails(this.user);
 
     // this.deviceWidth = window.innerWidth
@@ -93,6 +89,7 @@ export class UserDetailsPage implements OnInit {
       var obj = {
         name: null,
         UserNumber: null,
+        orgName: null,
         clientLinks: [{
           ranks: []
         }],
@@ -247,6 +244,7 @@ export class UserDetailsPage implements OnInit {
         text: 'Yes',
         handler: (blah) => {
           loading.present();
+          console.log('userrrrrrrrrrrrrrrr',user);
           let userId = user._id;
           let postBody = {
             email: user.email,
@@ -328,55 +326,6 @@ cancelUserRoles(){
    this.editModeuserRoles = false;
  }
 
-// user client links
-async saveClientLinks(user){
-  const loading = await this.loadingController.create({
-    message: 'Please wait...',
-  });
-  const alert = await this.alertController.create({
-    header: "Are you sure ?",
-    message: "Are you sure you want to update User client links ?",
-    buttons: [{
-      text: 'Yes',
-      handler: (blah) => {
-        loading.present();
-        let userId = user._id;
-        let postBody = {
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          mobilePhoneNumber: user.mobilePhoneNumber,
-        }
-        return this.postDetailService.updateUser(userId, postBody)
-          .subscribe(res => {
-            console.log('Update user roles response', res);
-            loading.dismiss();
-            this.alertPopup("Updated", 'User client links updated successfully');
-            this.viewUserDetails(user);
-            this.editModeClientLinks = false;
-          }, err => {
-            console.log(err);
-            loading.dismiss();
-            this.alertPopup("Error", JSON.stringify(err.error.message));
-          })
-      }
-    }, {
-      text: 'No',
-      role: 'cancel',
-      handler: () => {
-      }
-    }]
-  });
-  alert.present()
-}
-
-cancelClientLinks(){
-  this.viewUserDetails(this.user);
- this.editModeClientLinks = false;
-}
-
-
-
   async editToggleUserInfo() {
 
     this.zone.run(() => {
@@ -406,18 +355,6 @@ cancelClientLinks(){
     })
 
   };
-  async editToggleClientLinks() {
-    this.zone.run(() => {
-      let flag = true;
-      if (this.editModeClientLinks) {
-        if (flag) {
-          this.editModeClientLinks = false;
-        }
-      } else {
-        this.editModeClientLinks = true;
-      }
-    })
 
-  };
 
 }

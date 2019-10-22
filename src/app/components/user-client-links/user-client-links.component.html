@@ -1,0 +1,87 @@
+<ion-grid *ngFor="let clientinfo of user.clientLinks">
+  <ion-row>
+    <ion-col size="12">
+      <h6>Organization Name</h6>
+      <div>
+        <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.orgName"></app-text-shell>
+      </div>
+      <div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h6>Client Id</h6>
+      <div>
+        <app-text-shell animation="bouncing" lines="1" [data]="clientinfo.clientId"></app-text-shell>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h5>Ranks</h5>
+      <div *ngFor="let ranks of clientData?.ranksOrTitles; let i =index;">
+        <div class="row-info">
+          <ion-row *ngIf="clientinfo.ranks.includes(ranks) && !editModeClientLinks">
+            <ion-col size="12">
+              <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="editModeClientLinks">
+            <ion-col size="9">
+              <app-text-shell animation="bouncing" lines="1" [data]="ranks"></app-text-shell>
+            </ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <ion-checkbox color="dark" [checked]="clientinfo.ranks.includes(ranks)"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h5>Assignments</h5>
+      <div *ngFor="let assignments of clientData?.assignments;let i = index">
+        <div class="row-info">
+          <ion-row *ngIf="clientinfo.assignments.includes(assignments) && !editModeClientLinks">
+            <ion-col size="9">
+              <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="editModeClientLinks">
+            <ion-col size="9">
+              <app-text-shell animation="bouncing" lines="1" [data]="assignments"></app-text-shell>
+            </ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <ion-checkbox color="dark" [checked]="clientinfo.assignments.includes(assignments)"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h5>User Group</h5>
+      <div *ngFor="let userGroups of clientinfo.userGroups;let i = index">
+        <div class="row-info">
+          <ion-row>
+            <ion-col size="9">
+              <app-text-shell animation="bouncing" lines="1" [data]="userGroups.groupName"></app-text-shell>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col *ngIf="!editModeClientLinks">
+        <ion-button color="tertiary" (click)="editToggleClientLinks()">Edit</ion-button>
+      </ion-col>
+      <ion-col *ngIf="editModeClientLinks" class="ion-text-center outer-buttons">
+        <ion-button color="success" (click)="saveClientLinks(user)">Save</ion-button>
+        <ion-button color="danger" (click)="cancelClientLinks()">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+</ion-grid>
