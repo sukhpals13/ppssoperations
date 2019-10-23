@@ -1,18 +1,24 @@
-ion-col{
-    ion-card {
-        margin: 0;
-        h6{
-            margin: 5px 0px;
-            font-size:12px;
+ion-row{
+    ion-col {
+        ion-card {
+            margin: 0;
+    
+            h6 {
+                margin: 5px 0px;
+                font-weight: 500;
+    
+            }
         }
     }
 }
-form{
-    width:100%;
+
+form {
+    width: 100%;
 }
-ion-item{
-    .item-native{
-        padding-left:0px !important;
+
+ion-item {
+    .item-native {
+        padding-left: 0px !important;
     }
 } 
 ion-grid > ion-card{

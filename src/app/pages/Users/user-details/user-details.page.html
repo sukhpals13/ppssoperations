@@ -129,7 +129,7 @@
                   <ion-col *ngIf="!userInfoEditMode">
                     <ion-button color="tertiary" (click)="editToggleUserInfo()">Edit</ion-button>
                   </ion-col>
-                  <ion-col *ngIf="userInfoEditMode" class="ion-text-center outer-buttons">
+                  <ion-col *ngIf="userInfoEditMode" class="ion-text-center">
                       <ion-button color="success" (click)="saveUserInfo(user)">Save</ion-button>
                       <ion-button color="danger" (click)="cancelUserInfo(user)">Cancel</ion-button>
                     </ion-col>
