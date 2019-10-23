@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input, NgZone, Output, EventEmitter } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { PostDetailsService } from '../../services/postDetails/post-details.service';
 
@@ -13,6 +13,8 @@ export class UserClientLinksComponent implements OnInit {
   @Input() clientData: any;
   @Input() edit: any;
   @Input() id: any;
+  @Input() clientGroups: any;
+  @Output() editClicked = new EventEmitter;
 
   public editModeClientLinks: boolean;
   public initialClientLinks: any;
@@ -48,9 +50,11 @@ export class UserClientLinksComponent implements OnInit {
       if (this.editModeClientLinks) {
         if (flag) {
           this.editModeClientLinks = false;
+          this.editClicked.emit()
         }
       } else {
         this.editModeClientLinks = true;
+        this.editClicked.emit()
       }
     })
 
@@ -83,6 +87,7 @@ async saveClientLinks(user){
             this.alertPopup("Updated", 'User client links updated successfully');
             // this.viewUserDetails(user);
             this.editModeClientLinks = false;
+            this.editClicked.emit()
           }, err => {
             console.log(err);
             loading.dismiss();
@@ -102,6 +107,7 @@ async saveClientLinks(user){
 cancelClientLinks(){
   // this.viewUserDetails(this.user);
   this.editModeClientLinks = false;
+  this.editClicked.emit()
 }
 
 }

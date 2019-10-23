@@ -42,7 +42,7 @@ export class UserRolesComponent implements OnInit {
         }],
         expandedUserRoles: [{
           accessRights: [],
-          
+
         }],
       },
     };
@@ -51,6 +51,10 @@ export class UserRolesComponent implements OnInit {
       category: undefined,
       name: undefined
     }
+    // console.log(this)
+  }
+  ionViewDidEnter(){
+    // console.log(this)
   }
 
   async alertPopup(title, msg) {
@@ -64,51 +68,51 @@ export class UserRolesComponent implements OnInit {
     await alert.present();
   }
 
-   // user roles
-async saveUserRoles(user){
-  const loading = await this.loadingController.create({
-    message: 'Please wait...',
-  });
-  const alert = await this.alertController.create({
-    header: "Are you sure ?",
-    message: "Are you sure you want to update User roles ?",
-    buttons: [{
-      text: 'Yes',
-      handler: (blah) => {
-        loading.present();
-        let userId = user._id;
-        let postBody = {
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          mobilePhoneNumber: user.mobilePhoneNumber,
+  // user roles
+  async saveUserRoles(user) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    const alert = await this.alertController.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to update User roles ?",
+      buttons: [{
+        text: 'Yes',
+        handler: (blah) => {
+          loading.present();
+          let userId = user._id;
+          let postBody = {
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            mobilePhoneNumber: user.mobilePhoneNumber,
+          }
+          return this.postDetailService.updateUser(userId, postBody)
+            .subscribe(res => {
+              console.log('Update user roles response', res);
+              loading.dismiss();
+              this.alertPopup("Updated", 'User roles updated successfully');
+              // this.viewUserDetails(user);
+              this.editModeuserRoles = false;
+            }, err => {
+              console.log(err);
+              loading.dismiss();
+              this.alertPopup("Error", JSON.stringify(err.error.message));
+            })
         }
-        return this.postDetailService.updateUser(userId, postBody)
-          .subscribe(res => {
-            console.log('Update user roles response', res);
-            loading.dismiss();
-            this.alertPopup("Updated", 'User roles updated successfully');
-            // this.viewUserDetails(user);
-            this.editModeuserRoles = false;
-          }, err => {
-            console.log(err);
-            loading.dismiss();
-            this.alertPopup("Error", JSON.stringify(err.error.message));
-          })
-      }
-    }, {
-      text: 'No',
-      role: 'cancel',
-      handler: () => {
-      }
-    }]
-  });
-  alert.present()
-}
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+        }
+      }]
+    });
+    alert.present()
+  }
 
-cancelUserRoles(){
-   this.editModeuserRoles = false;
- }
+  cancelUserRoles() {
+    this.editModeuserRoles = false;
+  }
 
   async editToggleRoles() {
 
@@ -124,5 +128,25 @@ cancelUserRoles(){
     })
 
   };
+
+  async deleteRole(i){
+    console.log(this.user.expandedUserRoles,i)
+    const alert = await this.alertController.create({
+      header: "Are you sure ?",
+      message: "Are you sure you want to update User roles ?",
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.user.expandedUserRoles.splice(i,1);
+        }
+      }, {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+        }
+      }]
+    })
+    alert.present();
+  }
 
 }

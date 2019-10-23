@@ -1,4 +1,4 @@
-<ion-grid *ngFor="let expandedRoles of user.expandedUserRoles">
+<ion-grid *ngFor="let expandedRoles of user.expandedUserRoles;let i = index;">
   <ion-row>
     <ion-col size="12">
       <h6>Client Name</h6>
@@ -7,11 +7,6 @@
           <ion-col size="10" class="ion-no-padding">
             <app-text-shell animation="bouncing" lines="1" [data]="expandedRoles.clientName"></app-text-shell>
           </ion-col>
-          <!-- <ion-col *ngIf="editModeuserRoles && userRoles" size="2" class="ion-text-right ion-no-padding">
-              <button class="delete" (click)="deleteRoles(i)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </ion-col> -->
         </ion-row>
       </div>
     </ion-col>
@@ -42,56 +37,40 @@
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <h6>Access Rights</h6>
+      <!-- <h6>Access Rights</h6> -->
       <div class="row-info">
         <ion-row>
-          <ion-col size-md="6"> Category</ion-col>
-          <ion-col size-md="6">Name</ion-col>
+          <ion-col size-md="6">
+            <h6>Category</h6>
+          </ion-col>
+          <ion-col size-md="6">
+            <h6>Access Rights</h6>
+          </ion-col>
         </ion-row>
         <ion-row *ngFor="let access of expandedRoles.accessRights; let i = index" align-items-center>
-          <ion-col size="5" style="text-transform: capitalize;">
+          <ion-col size="6" style="text-transform: capitalize;">
             {{access.category}}
           </ion-col>
           <ion-col size="6" style="text-transform: capitalize;">
-            {{access.name}}
-          </ion-col>
-          <ion-col size="1" *ngIf="editModeuserRoles">
-            <button (click)="deleteRoles(access)" mat-icon-button aria-label="Example icon-button with a heart icon">
-              <mat-icon>delete</mat-icon>
-            </button>
+            {{access.name.split('_').join(' ')}}
           </ion-col>
         </ion-row>
       </div>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="editModeuserRoles">
-      <ion-col size="12">
-        <mat-form-field style="width: 100%;">
-          <mat-label>Category</mat-label>
-          <mat-select [(ngModel)]="select.category">
-            <mat-option>Cat 1</mat-option>
-            <mat-option>Cat 2</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field style="width: 100%;">
-          <mat-label>Name</mat-label>
-          <mat-select [(ngModel)]="select.name">
-              <mat-option>Name 1</mat-option>
-              <mat-option>name 2</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <ion-button color="success" [disabled]="!(select.category && select.name)" (click)="addAccessRight(select)">Add Access Right
-        </ion-button>
-      </ion-col>
-    </ion-row>
   <ion-row>
-    <ion-col *ngIf="!editModeuserRoles">
-      <ion-button color="tertiary" (click)="editToggleRoles()">Edit</ion-button>
-    </ion-col>
-    <ion-col *ngIf="editModeuserRoles" class="ion-text-center outer-buttons">
-      <ion-button color="success" (click)="saveUserRoles(user)">Save</ion-button>
-      <ion-button color="danger" (click)="cancelUserRoles()">Cancel</ion-button>
+    <ion-col class="ion-text-center outer-buttons">
+      <ion-button color="danger" (click)="deleteRole(i)">Delete Role</ion-button>
     </ion-col>
   </ion-row>
   <mat-divider></mat-divider>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <!-- <ion-button *ngIf="!editModeuserRoles" color="tertiary" (click)="editToggleRoles()">Edit</ion-button> -->
+      <ion-button color="success" (click)="cancelUserRoles()">Add Role</ion-button>
+      <!-- <ion-button color="danger" (click)="cancelUserRoles()">Cancel</ion-button> -->
+    </ion-col>
+  </ion-row>
 </ion-grid>

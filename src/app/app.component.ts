@@ -222,9 +222,10 @@ export class AppComponent {
 
   // functions after the loading screen loads in the app
   initializeApp() {
+    this.statusBar.styleLightContent()
     this.platform.ready().then(() => {
       // this.statusBar.overlaysWebView(true);
-      this.statusBar.styleLightContent()
+      // this.statusBar.styleLightContent()
       this.splashScreen.hide();
     });
   }
