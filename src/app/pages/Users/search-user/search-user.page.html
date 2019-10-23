@@ -16,7 +16,8 @@
         <form (onSubmit)="getUsersList(searchText)">
           <ion-col>
             <ion-item class="input-item" no-padding>
-              <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search User"></ion-input>
+              <ion-input type="text" name="search" [(ngModel)]="searchText" required placeholder="Search User">
+              </ion-input>
               <button mat-icon-button style="color: black;" color="primary" (click)="getUsersList(searchText)"
                 aria-label="Example icon-button with a search icon" [disabled]="searchText==''||searchText==undefined">
                 <mat-icon>search</mat-icon>
@@ -28,7 +29,7 @@
     </ion-row>
   </ion-grid>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="users.users.length!=0; else noUser">
       <ion-col size-md="4" size-xs="12" *ngFor="let user of users.users" (click)="viewUserDetails(user)">
         <ion-card>
           <ion-grid>
@@ -52,13 +53,24 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <ng-template #noUser>
+      <!-- <ion-row> -->
+      <ion-card *ngIf="searchedOnce">
+        <ion-card-content>
+          <h3>
+            No Users with searched key phrase
+          </h3>
+        </ion-card-content>
+      </ion-card>
+      <!-- </ion-row> -->
+    </ng-template>
   </ion-grid>
   <ion-card *ngIf="searchText!=undefined&&users.users.length==0&&searchSubmitted">
-      <ion-card-content>
-        <h3>
-          No users with searched key phrase 
-        </h3>
-      </ion-card-content>
-    </ion-card>
+    <ion-card-content>
+      <h3>
+        No users with searched key phrase
+      </h3>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
