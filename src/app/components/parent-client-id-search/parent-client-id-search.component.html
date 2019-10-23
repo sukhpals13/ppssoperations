@@ -3,7 +3,7 @@
 <!-- <ion-row> -->
 <form (onSubmit)="getClientList(searchParam)">
   <!-- <ion-col> -->
-    <ion-item class="input-item">
+    <ion-item class="input-item" no-margin no-padding>
       <ion-input type="text" name="search" [(ngModel)]="searchParam" required placeholder="Search Parent Client here">
       </ion-input>
       <button mat-icon-button style="color: black;" color="primary" (click)="getClientList(searchParam)"

@@ -6,23 +6,24 @@
 <!-- {{clientUserGroup|json}} -->
 <!-- {{clientUserGroup}} -->
 <!-- <mat-accordion> -->
-  <!-- <mat-expansion-panel *ngIf="(gotResponse&&!noData)||edit">
+<!-- <mat-expansion-panel *ngIf="(gotResponse&&!noData)||edit">
     <mat-expansion-panel-header>
       <mat-panel-title>
           User Groups
       </mat-panel-title>
     </mat-expansion-panel-header> -->
-    <ion-grid>
-      <!-- <ion-row>
+<ion-grid>
+  <!-- <ion-row>
         <ion-col size-md="6" size-xs="12">
           <h6>Groups Name</h6>
         </ion-col>
       </ion-row> -->
-      <ion-row *ngFor="let group of clientUserGroup; let i = index;" class="groupUserRow">
-        <div *ngIf="i==editIndex||!editing">
-          <ion-col size-md="6" size-xs="12">
-              <strong>Group name</strong>
-            </ion-col>
+  <ion-row *ngFor="let group of clientUserGroup; let i = index;" class="groupUserRow">
+    <ion-col *ngIf="i==editIndex||!editing">
+      <ion-row>
+        <ion-col size-md="6" size-xs="12">
+          <strong>Group name</strong>
+        </ion-col>
         <ion-col size-md="6" size-xs="12" *ngIf="!group.edit">
           {{group.name}}
         </ion-col>
@@ -30,60 +31,69 @@
           <ion-input [(ngModel)]="group.name"></ion-input>
         </ion-col>
         <ion-col size-md="12" size-xs="12" class="ion-no-padding" *ngIf="group.edit||group.description">
-            <ion-row>
-              <ion-col size-md="6" size-xs="12"><strong>Description</strong></ion-col>
-              <ion-col size-md="6" size-xs="12" *ngIf="!group.edit">
-                {{group.description}}
-              </ion-col>
-              <ion-col *ngIf="group.edit" size-md="6" size-xs="12">
-                <ion-input [(ngModel)]="group.description"></ion-input>
-              </ion-col>
-            </ion-row>
-          </ion-col>
+          <ion-row>
+            <ion-col size-md="6" size-xs="12"><strong>Description</strong></ion-col>
+            <ion-col size-md="6" size-xs="12" *ngIf="!group.edit">
+              {{group.description}}
+            </ion-col>
+            <ion-col *ngIf="group.edit" size-md="6" size-xs="12">
+              <ion-input [(ngModel)]="group.description"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-col>
         <ion-col *ngIf="edit&&!group.edit">
           <ion-button color="tertiary" (click)="editGroup(group,i)">Edit</ion-button>
-          <ion-button color="danger" *ngIf="group._id && !group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+          <ion-button color="danger" *ngIf="group._id && !group.edit" mat-icon-button
+            aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
             Delete
           </ion-button>
         </ion-col>
         <ion-col *ngIf="group.edit" size-md="12" size-xs="12" class="ion-text-right ion-no-padding">
-          <ion-button color="success" *ngIf="!group._id && group.edit" (click)="addUserGroup(group)"
-            [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
-            Add
-            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-          </ion-button>
-          <ion-button color="success" mat-icon-button *ngIf="group._id && group.edit" (click)="editUserGroup(group)" [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
-            Save
-            <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
-          </ion-button>
-          <ion-button color="danger" *ngIf="group._id && !group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
-            Delete
-          </ion-button>
-          <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
-            Cancel
-          </ion-button>
-          <ion-button color="danger" *ngIf="!group._id && group.edit" mat-icon-button aria-label="Example icon-button with a heart icon" (click)="addRemoveContactRow('remove')">
-            Cancel
-          </ion-button>
-        </ion-col>
-      </div>
-      </ion-row>
-      <!-- <ion-grid> -->
-          <ion-row *ngIf="clientUserGroup.length==0">
-            <ion-col>
-              There are no client Groups. Click on the button below to add.
-            </ion-col>
-          </ion-row>
-      <!-- </ion-grid> -->
-      <ion-row *ngIf="!add&&!editing">
-        <ion-col>
-          <ion-button color="success" class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')" [disabled]="loader">Add Group
-          </ion-button>
-          
+          <ion-grid>
+              <ion-button color="success" *ngIf="!group._id && group.edit" (click)="addUserGroup(group)"
+              [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
+              Add
+              <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+            </ion-button>
+            <ion-button color="success" mat-icon-button *ngIf="group._id && group.edit" (click)="editUserGroup(group)"
+              [attr.disabled]="group.name ? null : '' " [disabled]="!addingGroup">
+              Save
+              <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
+            </ion-button>
+            <ion-button color="danger" *ngIf="group._id && !group.edit" mat-icon-button
+              aria-label="Example icon-button with a heart icon" (click)="deleteUserGroup(group)">
+              Delete
+            </ion-button>
+            <ion-button color="danger" *ngIf="group._id && group.edit" mat-icon-button
+              aria-label="Example icon-button with a heart icon" (click)="editGroup(group,i)">
+              Cancel
+            </ion-button>
+            <ion-button color="danger" *ngIf="!group._id && group.edit" mat-icon-button
+              aria-label="Example icon-button with a heart icon" (click)="addRemoveContactRow('remove')">
+              Cancel
+            </ion-button>
+          </ion-grid>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  <!-- </mat-expansion-panel> -->
+    </ion-col>
+  </ion-row>
+  <!-- <ion-grid> -->
+  <ion-row *ngIf="clientUserGroup.length==0">
+    <ion-col>
+      There are no client Groups. Click on the button below to add.
+    </ion-col>
+  </ion-row>
+  <!-- </ion-grid> -->
+  <ion-row *ngIf="!add&&!editing">
+    <ion-col>
+      <ion-button color="success" class="addgroup" *ngIf="edit" (click)="addRemoveContactRow('add')"
+        [disabled]="loader">Add Group
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- </mat-expansion-panel> -->
 <!-- </mat-accordion> -->
 <!-- </ion-card-content>
 </ion-card> -->

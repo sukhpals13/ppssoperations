@@ -1,13 +1,10 @@
- ion-col{
-     h6{
-        margin: 5px 0px;
-        font-size: 12px;
-        font-weight: 500;
-     }
-     app-text-shell{
-         padding:10px 0px;
-     }
- }
+//  ion-col{
+//      h6{
+//         margin: 5px 0px;
+//         font-size: 12px;
+//         font-weight: 500;
+//      }
+//  }
  ion-input{
     padding: 0px 5px !important;
     border: 1px solid #cccccc;
@@ -26,33 +23,13 @@
       right:-3px;
     }
  }
- 
-// mat-expansion-panel {
-//     margin: 16px;
-//     mat-expansion-panel-header {
-//         background: #1c1c1c !important;
-//         mat-panel-title{
-//             color: #fff !important;
-//         }
-//         .mat-expansion-indicator{
-//             ::after{
-//                 color: #fff;
-//             }
-//         }
-//     }
-// }
-// .mat-expansion-indicator::after{
-//     color: #fff;
-// }
 :host ::ng-deep {
-    // app-client-customizations,app-client-billing-details,app-client-contact-details,app-client-user-roles,app-client-user-groups{
         mat-expansion-panel {
             margin-left:16px;
             margin-right:16px;
             margin-top: 5px;
             margin-bottom: 5px;
             mat-expansion-panel-header {
-                // background: #1c1c1c;
                 background: #1c1c1c !important;
                 max-height:48px !important;
                 mat-panel-title{
@@ -73,20 +50,12 @@
             color: #fff;
             padding: 5px;
         }
-    // }
-    
-    // @media (hover: none){
-    //     .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover{
-    //         background: #1c1c1c;
-    //     }
-    //     .mat-expansion-panel:not(.mat-expanded)[aria-disabled=true] .mat-expansion-panel-header:hover{
-    //         background: grey;
-    //     }
-    // }
-    // .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover{
-    //     background: #1c1c1c;
-    // }
-    // .mat-expansion-panel-header[aria-disabled=true] {
-    //     background-color: grey;
-    // }
+}
+
+
+ion-button{
+    @media(max-width:767px){
+        margin-left:0px;
+        margin-right:0px;
+    }
 }

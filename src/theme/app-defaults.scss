@@ -33,4 +33,25 @@ ion-button{
   @media(max-width:767px){
       width:100%;
   }
-}    
+}   
+
+/** Global css for all listig and detail pages **/
+.pl-0{padding-left:0px;}
+.pr-0{padding-right:0px;}
+.ml-0{margin-left:0px;}
+.mr-0{margin-right:0px;}
+ion-row{
+  align-items:center;
+  -webkit-align-items:center;
+  ion-col{
+    app-text-shell{
+      padding: 2px 0px;
+    } 
+    h6{
+      margin: 5px 0px;
+      font-size:14px;
+      font-weight:bold;
+      color:#666;
+    }
+  }
+}

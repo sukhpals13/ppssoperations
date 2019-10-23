@@ -66,21 +66,21 @@
             <!-- <mat-icon *ngIf="edit && actionVisible" (click)="editContact(contact)">edit</mat-icon> -->
             <ion-row>
                <ion-col>
-                  <ion-button  *ngIf="!contact._id && contact.edit" (click)="addContactsInfo(contact)" [disabled]="loader">
-                     {{loader?'':'Submit'}}
+                  <ion-button  class="no-margin" color="success"  *ngIf="!contact._id && contact.edit" (click)="addContactsInfo(contact)" [disabled]="loader">
+                     {{loader?'':'Save'}}
                      <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
                   </ion-button>
-                  <ion-button [color]="contact.edit?'danger':'tertiary'" *ngIf="edit && actionVisible && contact._id" (click)="editContact(contact,i)">
+                  <ion-button class="no-margin" [color]="contact.edit?'danger':'tertiary'" *ngIf="edit && actionVisible && contact._id" (click)="editContact(contact,i)">
                      {{contact.edit?'Cancel':'Edit Contact'}}
                   </ion-button>
-                  <ion-button color="success" *ngIf="contact._id && contact.edit" (click)="editContactsInfo(contact)" [disabled]="loader">
+                  <ion-button class="no-margin" color="success" *ngIf="contact._id && contact.edit" (click)="editContactsInfo(contact)" [disabled]="loader">
                      {{loader?'':'Update Contact Info'}}
                      <ion-spinner name="dots" *ngIf="loader"></ion-spinner>
                   </ion-button>
-                  <ion-button *ngIf="!contact._id && contact.edit" (click)="addRemoveContactRow()">
+                  <ion-button  class="no-margin" *ngIf="!contact._id && contact.edit" (click)="addRemoveContactRow()">
                      Back
                   </ion-button>
-                  <ion-button color="danger" *ngIf="edit && actionVisible && !contact.edit && add" (click)="deleteContact(contact)">
+                  <ion-button  class="no-margin" color="danger" *ngIf="edit && actionVisible && !contact.edit && add" (click)="deleteContact(contact)">
                      Delete Contact
                   </ion-button>
                </ion-col>
@@ -90,7 +90,13 @@
       <div *ngIf="clientContactDetails.length==0">
             There are no client Contacts. Click on the button below to add.
       </div>
-      <ion-button color="success" class="addcontact" *ngIf="edit && add && !editing" (click)="addRemoveContactRow()" [disabled]="loader">Add contact
-      </ion-button>
+      <ion-grid>
+         <ion-row>
+            <ion-col class="paddingwrap">
+               <ion-button color="success" class="addcontact" *ngIf="edit && add && !editing" (click)="addRemoveContactRow()" [disabled]="loader">Add contact
+               </ion-button>
+            </ion-col>
+         </ion-row>
+      </ion-grid>
    </mat-accordion>
 </ion-grid>

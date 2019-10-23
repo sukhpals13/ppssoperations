@@ -1,9 +1,4 @@
 ion-col{
-    h6{
-        margin: 5px 0px;
-        font-size: 12px;
-        font-weight: bold;
-    }
     ion-input{
         padding: 0px 5px !important;
         border: 1px solid #cccccc;
@@ -20,7 +15,11 @@ ion-col{
         right:30px;
     }
 }
-.addcontact{margin-top:15px;}
+.paddingwrap{
+    padding:5px 11px;
+}
+.addcontact{margin-top:15px;
+margin-left:0px;margin-right:0px;}
 .phoneInput{
     padding: 9px 5px !important;
     border: 1px solid #cccccc;
@@ -34,5 +33,11 @@ ion-col{
 ion-button{
     @media(max-width:767px){
         width:100%;
+    }
+}
+.no-margin{
+    @media(max-width:767px){
+        margin-left:0px;
+        margin-right:0px;
     }
 }
