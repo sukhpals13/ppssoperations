@@ -14,6 +14,7 @@ export class SearchUserPage implements OnInit {
   users: UsersListModel;
   searchText: string;
   searchSubmitted: boolean;
+  searchedOnce: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +38,7 @@ export class SearchUserPage implements OnInit {
       
     };
     this.searchSubmitted = false;
+    this.searchedOnce = false;
     // this.initializeData();
     // this.getClientList();
   }
@@ -59,8 +61,9 @@ export class SearchUserPage implements OnInit {
   getUsersList(phrase){
     this.searchSubmitted = true;
     this.initializeData();
+    this.searchedOnce = true;
     this.getDetailsService.getAllUsers(phrase).subscribe(res =>
-      {
+    {
         this.searchSubmitted = false;
         this.users = res;
         // this.users.users = this.users.users.map(el=>{
